@@ -1,0 +1,41 @@
+types:
+  - kind: Object
+    name: Screen
+    external: ScreenExternal
+  - kind: Struct
+    name: ScreenExternal
+    properties:
+      - name: journey
+        type: string
+      - name: identifier
+        type: string
+      - name: edges
+        type: "[]Edge"
+      - name: image
+        type: string
+      - name: isEntryPoint
+        type: bool
+  - kind: Struct
+    name: Edge
+    properties:
+      - name: targetScreenIdentifier
+        type: string
+      - name: component
+        type: Component
+  - kind: Struct
+    name: Component
+    properties:
+      - name: identifier
+        type: string
+      - name: rectX
+        type: int
+      - name: rectY
+        type: int
+      - name: rectW
+        type: int
+      - name: rectH
+        type: int
+      - name: centerX
+        type: int
+      - name: centerY
+        type: int
