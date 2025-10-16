@@ -1,10 +1,10 @@
-from config import config
+from . import config
 
 from pystorz.sql.sqlite import SqliteStoreFactory
 from pystorz.mongo.mongo import MongoStoreFactory 
 from pystorz.meta.store import MetaStore
 from functools import lru_cache
-from generated import model
+from .generated import model
 
 
 @lru_cache(maxsize=1)
