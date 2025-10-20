@@ -22,6 +22,8 @@ types:
         type: string
       - name: component
         type: Component
+      - name: steps
+        type: "[]int"
   - kind: Struct
     name: Component
     properties:

@@ -184,11 +184,18 @@ class Edge:
     def SetComponent(self, val: Component):
         raise Exception("not implemented")
 
+    def Steps(self) -> list:
+        raise Exception("not implemented")
+
+    def SetSteps(self, val: list):
+        raise Exception("not implemented")
+
 
 def EdgeFactory() -> Edge:
     ret = _Edge()
     ret.targetScreenIdentifier_ = ""
     ret.component_ = ComponentFactory()
+    ret.steps_ = list()
     return ret
 
 
@@ -196,6 +203,7 @@ class _Edge(Edge):
     def __init__(self):
         self.targetScreenIdentifier_ = ""
         self.component_ = ComponentFactory()
+        self.steps_ = list()
 
     def SetTargetScreenIdentifier(self, val):
         self.targetScreenIdentifier_ = str(val)
@@ -209,6 +217,12 @@ class _Edge(Edge):
     def Component(self):
         return self.component_
 
+    def SetSteps(self, val):
+        self.steps_ = val
+
+    def Steps(self):
+        return self.steps_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -221,6 +235,10 @@ class _Edge(Edge):
         data["targetScreenIdentifier"] = self.targetScreenIdentifier_
         # if self.component_ is not None:
         data["component"] = self.component_.ToDict()
+        rawList = []
+        for v in self.steps_:
+            rawList.append(v)
+        data["steps"] = rawList
         return data
 
     def FromDict(self, data):
@@ -231,6 +249,13 @@ class _Edge(Edge):
                 self.targetScreenIdentifier_ = rawValue
             if key == "component":
                 self.component_.FromDict(rawValue)
+            if key == "steps":
+                res = list()
+                for rw in rawValue:
+                    ud = 0
+                    ud = rw
+                    res.append(ud)
+                self.steps_ = res
 
 
 class ScreenExternal:

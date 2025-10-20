@@ -314,6 +314,9 @@ class Edge {
     Component() { throw new Error("not implemented"); }
     SetComponent(val) { throw new Error("not implemented"); }
     
+    Steps() { throw new Error("not implemented"); }
+    SetSteps(val) { throw new Error("not implemented"); }
+    
 }
 
 function EdgeFactory() {
@@ -322,6 +325,8 @@ function EdgeFactory() {
     ret.targetScreenIdentifier_ = "";
     
     ret.component_ = ComponentFactory();
+    
+    ret.steps_ = list();
     
     return ret;
 }
@@ -333,6 +338,8 @@ class _Edge extends Edge {
         this.targetScreenIdentifier_ = "";
         
         this.component_ = ComponentFactory();
+        
+        this.steps_ = list();
         
     }
 
@@ -363,6 +370,19 @@ class _Edge extends Edge {
     }
 
     
+    SetSteps(val) {
+        
+        this.steps_ = val;
+        
+    }
+
+    Steps() {
+        
+        return this.steps_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -386,6 +406,16 @@ class _Edge extends Edge {
         
         data["component"] = this.component_ ? this.component_.ToDict() : null;
         
+        
+        
+        
+        const rawListsteps = [];
+        for (const v of (this.steps_ || [])) {
+            
+            rawListsteps.push(v);
+            
+        }
+        data["steps"] = rawListsteps;
         
         
         return data;
@@ -412,6 +442,22 @@ class _Edge extends Edge {
                 this.component_.FromDict(rawValue);
                 
 
+                
+            }
+            
+            if (key === "steps") {
+                
+                const res = list();
+
+                for (const rw of rawValue) {
+                    let ud = 0;
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.steps_ = res;
                 
             }
             
