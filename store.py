@@ -1,3 +1,5 @@
+import os
+
 from . import config
 
 from pystorz.sql.sqlite import SqliteStoreFactory
@@ -13,6 +15,8 @@ def Store():
 
 @lru_cache(maxsize=1)
 def LocalSqliteStore():
+    os.makedirs(os.path.dirname(config.LOCAL_SQLITE_DB), exist_ok=True)
+
     return MetaStore(
         SqliteStoreFactory(model.Schema(), config.LOCAL_SQLITE_DB),
     )
