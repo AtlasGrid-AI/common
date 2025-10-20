@@ -7,6 +7,67 @@ from datetime import datetime
 from typing import Type
 
 
+class ScreenMetadata:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Content(self) -> list:
+        raise Exception("not implemented")
+
+    def SetContent(self, val: list):
+        raise Exception("not implemented")
+
+
+def ScreenMetadataFactory() -> ScreenMetadata:
+    ret = _ScreenMetadata()
+    ret.content_ = list()
+    return ret
+
+
+class _ScreenMetadata(ScreenMetadata):
+    def __init__(self):
+        self.content_ = list()
+
+    def SetContent(self, val):
+        self.content_ = val
+
+    def Content(self):
+        return self.content_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawList = []
+        for v in self.content_:
+            rawList.append(v)
+        data["content"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "content":
+                res = list()
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.content_ = res
+
+
 class Component:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -298,6 +359,12 @@ class ScreenExternal:
     def SetIsEntryPoint(self, val: bool):
         raise Exception("not implemented")
 
+    def Metadata(self) -> ScreenMetadata:
+        raise Exception("not implemented")
+
+    def SetMetadata(self, val: ScreenMetadata):
+        raise Exception("not implemented")
+
 
 def ScreenExternalFactory() -> ScreenExternal:
     ret = _ScreenExternal()
@@ -306,6 +373,7 @@ def ScreenExternalFactory() -> ScreenExternal:
     ret.edges_ = list()
     ret.image_ = ""
     ret.isEntryPoint_ = False
+    ret.metadata_ = ScreenMetadataFactory()
     return ret
 
 
@@ -316,6 +384,7 @@ class _ScreenExternal(ScreenExternal):
         self.edges_ = list()
         self.image_ = ""
         self.isEntryPoint_ = False
+        self.metadata_ = ScreenMetadataFactory()
 
     def SetJourney(self, val):
         self.journey_ = str(val)
@@ -347,6 +416,12 @@ class _ScreenExternal(ScreenExternal):
     def IsEntryPoint(self):
         return self.isEntryPoint_
 
+    def SetMetadata(self, val):
+        self.metadata_ = val
+
+    def Metadata(self):
+        return self.metadata_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -364,6 +439,8 @@ class _ScreenExternal(ScreenExternal):
         data["edges"] = rawList
         data["image"] = self.image_
         data["isEntryPoint"] = self.isEntryPoint_
+        # if self.metadata_ is not None:
+        data["metadata"] = self.metadata_.ToDict()
         return data
 
     def FromDict(self, data):
@@ -385,6 +462,8 @@ class _ScreenExternal(ScreenExternal):
                 self.image_ = rawValue
             if key == "isEntryPoint":
                 self.isEntryPoint_ = rawValue
+            if key == "metadata":
+                self.metadata_.FromDict(rawValue)
 
 
 class Screen(store.ExternalHolder):

@@ -2,6 +2,104 @@ const store = require("pystorz/store");
 
 
 
+class ScreenMetadata {
+    constructor() {
+        throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Content() { throw new Error("not implemented"); }
+    SetContent(val) { throw new Error("not implemented"); }
+    
+}
+
+function ScreenMetadataFactory() {
+    const ret = new _ScreenMetadata();
+    
+    ret.content_ = list();
+    
+    return ret;
+}
+
+class _ScreenMetadata extends ScreenMetadata {
+    constructor() {
+        super();
+        
+        this.content_ = list();
+        
+    }
+
+    
+    SetContent(val) {
+        
+        this.content_ = val;
+        
+    }
+
+    Content() {
+        
+        return this.content_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawListcontent = [];
+        for (const v of (this.content_ || [])) {
+            
+            rawListcontent.push(v);
+            
+        }
+        data["content"] = rawListcontent;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "content") {
+                
+                const res = list();
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.content_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Component {
     constructor() {
         throw new Error("cannot initialize like this. use the factory method");
@@ -491,6 +589,9 @@ class ScreenExternal {
     IsEntryPoint() { throw new Error("not implemented"); }
     SetIsEntryPoint(val) { throw new Error("not implemented"); }
     
+    Metadata() { throw new Error("not implemented"); }
+    SetMetadata(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenExternalFactory() {
@@ -505,6 +606,8 @@ function ScreenExternalFactory() {
     ret.image_ = "";
     
     ret.isEntryPoint_ = False;
+    
+    ret.metadata_ = ScreenMetadataFactory();
     
     return ret;
 }
@@ -522,6 +625,8 @@ class _ScreenExternal extends ScreenExternal {
         this.image_ = "";
         
         this.isEntryPoint_ = False;
+        
+        this.metadata_ = ScreenMetadataFactory();
         
     }
 
@@ -591,6 +696,19 @@ class _ScreenExternal extends ScreenExternal {
     }
 
     
+    SetMetadata(val) {
+        
+        this.metadata_ = val;
+        
+    }
+
+    Metadata() {
+        
+        return this.metadata_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -635,6 +753,12 @@ class _ScreenExternal extends ScreenExternal {
         
         
         data["isEntryPoint"] = this.isEntryPoint_;
+        
+        
+        
+        
+        
+        data["metadata"] = this.metadata_ ? this.metadata_.ToDict() : null;
         
         
         
@@ -694,6 +818,15 @@ class _ScreenExternal extends ScreenExternal {
                 
                 
                 this.isEntryPoint_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "metadata") {
+                
+                
+                this.metadata_.FromDict(rawValue);
                 
 
                 
