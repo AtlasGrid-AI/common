@@ -586,6 +586,9 @@ class ScreenExternal {
     Image() { throw new Error("not implemented"); }
     SetImage(val) { throw new Error("not implemented"); }
     
+    ImageLowRes() { throw new Error("not implemented"); }
+    SetImageLowRes(val) { throw new Error("not implemented"); }
+    
     IsEntryPoint() { throw new Error("not implemented"); }
     SetIsEntryPoint(val) { throw new Error("not implemented"); }
     
@@ -605,6 +608,8 @@ function ScreenExternalFactory() {
     
     ret.image_ = "";
     
+    ret.imageLowRes_ = "";
+    
     ret.isEntryPoint_ = False;
     
     ret.metadata_ = ScreenMetadataFactory();
@@ -623,6 +628,8 @@ class _ScreenExternal extends ScreenExternal {
         this.edges_ = list();
         
         this.image_ = "";
+        
+        this.imageLowRes_ = "";
         
         this.isEntryPoint_ = False;
         
@@ -679,6 +686,19 @@ class _ScreenExternal extends ScreenExternal {
     Image() {
         
         return this.image_;
+        
+    }
+
+    
+    SetImageLowRes(val) {
+        
+        this.imageLowRes_ = String(val);
+        
+    }
+
+    ImageLowRes() {
+        
+        return this.imageLowRes_;
         
     }
 
@@ -752,6 +772,12 @@ class _ScreenExternal extends ScreenExternal {
         
         
         
+        data["imageLowRes"] = this.imageLowRes_;
+        
+        
+        
+        
+        
         data["isEntryPoint"] = this.isEntryPoint_;
         
         
@@ -809,6 +835,15 @@ class _ScreenExternal extends ScreenExternal {
                 
                 
                 this.image_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "imageLowRes") {
+                
+                
+                this.imageLowRes_ = rawValue;
                 
 
                 

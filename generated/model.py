@@ -353,6 +353,12 @@ class ScreenExternal:
     def SetImage(self, val: str):
         raise Exception("not implemented")
 
+    def ImageLowRes(self) -> str:
+        raise Exception("not implemented")
+
+    def SetImageLowRes(self, val: str):
+        raise Exception("not implemented")
+
     def IsEntryPoint(self) -> bool:
         raise Exception("not implemented")
 
@@ -372,6 +378,7 @@ def ScreenExternalFactory() -> ScreenExternal:
     ret.identifier_ = ""
     ret.edges_ = list()
     ret.image_ = ""
+    ret.imageLowRes_ = ""
     ret.isEntryPoint_ = False
     ret.metadata_ = ScreenMetadataFactory()
     return ret
@@ -383,6 +390,7 @@ class _ScreenExternal(ScreenExternal):
         self.identifier_ = ""
         self.edges_ = list()
         self.image_ = ""
+        self.imageLowRes_ = ""
         self.isEntryPoint_ = False
         self.metadata_ = ScreenMetadataFactory()
 
@@ -409,6 +417,12 @@ class _ScreenExternal(ScreenExternal):
 
     def Image(self):
         return self.image_
+
+    def SetImageLowRes(self, val):
+        self.imageLowRes_ = str(val)
+
+    def ImageLowRes(self):
+        return self.imageLowRes_
 
     def SetIsEntryPoint(self, val):
         self.isEntryPoint_ = bool(val)
@@ -438,6 +452,7 @@ class _ScreenExternal(ScreenExternal):
             rawList.append(v.ToDict())
         data["edges"] = rawList
         data["image"] = self.image_
+        data["imageLowRes"] = self.imageLowRes_
         data["isEntryPoint"] = self.isEntryPoint_
         # if self.metadata_ is not None:
         data["metadata"] = self.metadata_.ToDict()
@@ -460,6 +475,8 @@ class _ScreenExternal(ScreenExternal):
                 self.edges_ = res
             if key == "image":
                 self.image_ = rawValue
+            if key == "imageLowRes":
+                self.imageLowRes_ = rawValue
             if key == "isEntryPoint":
                 self.isEntryPoint_ = rawValue
             if key == "metadata":

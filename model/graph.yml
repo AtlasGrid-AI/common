@@ -13,6 +13,8 @@ types:
         type: "[]Edge"
       - name: image
         type: string
+      - name: imageLowRes
+        type: string
       - name: isEntryPoint
         type: bool
       - name: metadata
