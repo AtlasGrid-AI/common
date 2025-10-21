@@ -17,7 +17,7 @@ class ScreenMetadata {
 function ScreenMetadataFactory() {
     const ret = new _ScreenMetadata();
     
-    ret.content_ = list();
+    ret.content_ = [];
     
     return ret;
 }
@@ -26,7 +26,7 @@ class _ScreenMetadata extends ScreenMetadata {
     constructor() {
         super();
         
-        this.content_ = list();
+        this.content_ = [];
         
     }
 
@@ -78,7 +78,7 @@ class _ScreenMetadata extends ScreenMetadata {
             
             if (key === "content") {
                 
-                const res = list();
+                const res = [];
 
                 for (const rw of rawValue) {
                     let ud = "";
@@ -422,7 +422,7 @@ function EdgeFactory() {
     
     ret.component_ = ComponentFactory();
     
-    ret.steps_ = list();
+    ret.steps_ = [];
     
     return ret;
 }
@@ -435,7 +435,7 @@ class _Edge extends Edge {
         
         this.component_ = ComponentFactory();
         
-        this.steps_ = list();
+        this.steps_ = [];
         
     }
 
@@ -543,7 +543,7 @@ class _Edge extends Edge {
             
             if (key === "steps") {
                 
-                const res = list();
+                const res = [];
 
                 for (const rw of rawValue) {
                     let ud = 0;
@@ -602,13 +602,13 @@ function ScreenExternalFactory() {
     
     ret.identifier_ = "";
     
-    ret.edges_ = list();
+    ret.edges_ = [];
     
     ret.image_ = "";
     
     ret.imageLowRes_ = "";
     
-    ret.isEntryPoint_ = False;
+    ret.isEntryPoint_ = false;
     
     ret.metadata_ = ScreenMetadataFactory();
     
@@ -623,13 +623,13 @@ class _ScreenExternal extends ScreenExternal {
         
         this.identifier_ = "";
         
-        this.edges_ = list();
+        this.edges_ = [];
         
         this.image_ = "";
         
         this.imageLowRes_ = "";
         
-        this.isEntryPoint_ = False;
+        this.isEntryPoint_ = false;
         
         this.metadata_ = ScreenMetadataFactory();
         
@@ -815,7 +815,7 @@ class _ScreenExternal extends ScreenExternal {
             
             if (key === "edges") {
                 
-                const res = list();
+                const res = [];
 
                 for (const rw of rawValue) {
                     let ud = EdgeFactory();

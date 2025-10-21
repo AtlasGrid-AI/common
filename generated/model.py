@@ -26,13 +26,13 @@ class ScreenMetadata:
 
 def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
-    ret.content_ = list()
+    ret.content_ = []
     return ret
 
 
 class _ScreenMetadata(ScreenMetadata):
     def __init__(self):
-        self.content_ = list()
+        self.content_ = []
 
     def SetContent(self, val):
         self.content_ = val
@@ -60,7 +60,7 @@ class _ScreenMetadata(ScreenMetadata):
             if rawValue is None:
                 continue
             if key == "content":
-                res = list()
+                res = []
                 for rw in rawValue:
                     ud = ""
                     ud = rw
@@ -256,7 +256,7 @@ def EdgeFactory() -> Edge:
     ret = _Edge()
     ret.targetScreenIdentifier_ = ""
     ret.component_ = ComponentFactory()
-    ret.steps_ = list()
+    ret.steps_ = []
     return ret
 
 
@@ -264,7 +264,7 @@ class _Edge(Edge):
     def __init__(self):
         self.targetScreenIdentifier_ = ""
         self.component_ = ComponentFactory()
-        self.steps_ = list()
+        self.steps_ = []
 
     def SetTargetScreenIdentifier(self, val):
         self.targetScreenIdentifier_ = str(val)
@@ -311,7 +311,7 @@ class _Edge(Edge):
             if key == "component":
                 self.component_.FromDict(rawValue)
             if key == "steps":
-                res = list()
+                res = []
                 for rw in rawValue:
                     ud = 0
                     ud = rw
@@ -376,7 +376,7 @@ def ScreenExternalFactory() -> ScreenExternal:
     ret = _ScreenExternal()
     ret.journey_ = ""
     ret.identifier_ = ""
-    ret.edges_ = list()
+    ret.edges_ = []
     ret.image_ = ""
     ret.imageLowRes_ = ""
     ret.isEntryPoint_ = False
@@ -388,7 +388,7 @@ class _ScreenExternal(ScreenExternal):
     def __init__(self):
         self.journey_ = ""
         self.identifier_ = ""
-        self.edges_ = list()
+        self.edges_ = []
         self.image_ = ""
         self.imageLowRes_ = ""
         self.isEntryPoint_ = False
@@ -467,7 +467,7 @@ class _ScreenExternal(ScreenExternal):
             if key == "identifier":
                 self.identifier_ = rawValue
             if key == "edges":
-                res = list()
+                res = []
                 for rw in rawValue:
                     ud = EdgeFactory()
                     ud.FromDict(rw)
