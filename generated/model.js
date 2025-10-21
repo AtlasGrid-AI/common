@@ -24,7 +24,6 @@ function ScreenMetadataFactory() {
 
 class _ScreenMetadata extends ScreenMetadata {
     constructor() {
-        super();
         
         this.content_ = list();
         
@@ -152,7 +151,6 @@ function ComponentFactory() {
 
 class _Component extends Component {
     constructor() {
-        super();
         
         this.identifier_ = "";
         
@@ -429,7 +427,6 @@ function EdgeFactory() {
 
 class _Edge extends Edge {
     constructor() {
-        super();
         
         this.targetScreenIdentifier_ = "";
         
@@ -617,7 +614,6 @@ function ScreenExternalFactory() {
 
 class _ScreenExternal extends ScreenExternal {
     constructor() {
-        super();
         
         this.journey_ = "";
         
@@ -907,7 +903,6 @@ function ScreenFactory() {
 
 class _Screen extends Screen {
     constructor() {
-        super();
         this.meta_ = [];
         this.meta_["kind"] = "Screen";
         this.external_ = null;
