@@ -1,5 +1,3 @@
-const store = require("pystorz/store");
-
 
 
 class ScreenMetadata {
@@ -877,10 +875,9 @@ class _ScreenExternal extends ScreenExternal {
 
 
 
-class Screen extends store.ExternalHolder {
+class Screen {
 
     constructor() {
-        super();
         throw new Error("cannot initialize like this. use the factory method");
     }
 
@@ -911,7 +908,8 @@ function ScreenFactory() {
 class _Screen extends Screen {
     constructor() {
         super();
-        this.meta_ = store.MetaFactory("Screen");
+        this.meta_ = [];
+        this.meta_["kind"] = "Screen";
         this.external_ = null;
         this.internal_ = null;
     }
@@ -928,7 +926,7 @@ class _Screen extends Screen {
 
     ToDict() {
         const data = {};
-        data["metadata"] = this.meta_.ToDict();
+        data["metadata"] = this.meta_;
         data["external"] = this.external_.ToDict(); 
         
         return data;
@@ -940,7 +938,7 @@ class _Screen extends Screen {
             if (rawValue === null || rawValue === undefined) continue;
 
             if (key === "metadata") {
-                this.meta_.FromDict(rawValue);
+                this.meta_ = rawValue;
             }
 
             
@@ -966,10 +964,10 @@ class _Screen extends Screen {
 }
 
 function ScreenIdentity(pkey) {
-    return store.ObjectIdentity("screen/" + pkey);
+    return "screen/" + pkey;
 }
 
-const ScreenKindIdentity = store.ObjectIdentity("screen/");
+const ScreenKindIdentity = "screen/";
 
 const ScreenKind = "Screen";
 
@@ -977,9 +975,8 @@ const ScreenKind = "Screen";
 
 
 
-class _Schema extends store.SchemaHolder {
+class _Schema {
     constructor(objects) {
-        super();
         this.objects = objects;
     }
 
