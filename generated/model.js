@@ -2,7 +2,7 @@
 
 class ScreenMetadata {
     constructor() {
-        throw new Error("cannot initialize like this. use the factory method");
+        // throw new Error("cannot initialize like this. use the factory method");
     }
 
     ToDict() { throw new Error("not implemented"); }
@@ -24,6 +24,7 @@ function ScreenMetadataFactory() {
 
 class _ScreenMetadata extends ScreenMetadata {
     constructor() {
+        super();
         
         this.content_ = list();
         
@@ -99,7 +100,7 @@ class _ScreenMetadata extends ScreenMetadata {
 
 class Component {
     constructor() {
-        throw new Error("cannot initialize like this. use the factory method");
+        // throw new Error("cannot initialize like this. use the factory method");
     }
 
     ToDict() { throw new Error("not implemented"); }
@@ -151,6 +152,7 @@ function ComponentFactory() {
 
 class _Component extends Component {
     constructor() {
+        super();
         
         this.identifier_ = "";
         
@@ -395,7 +397,7 @@ class _Component extends Component {
 
 class Edge {
     constructor() {
-        throw new Error("cannot initialize like this. use the factory method");
+        // throw new Error("cannot initialize like this. use the factory method");
     }
 
     ToDict() { throw new Error("not implemented"); }
@@ -427,6 +429,7 @@ function EdgeFactory() {
 
 class _Edge extends Edge {
     constructor() {
+        super();
         
         this.targetScreenIdentifier_ = "";
         
@@ -562,7 +565,7 @@ class _Edge extends Edge {
 
 class ScreenExternal {
     constructor() {
-        throw new Error("cannot initialize like this. use the factory method");
+        // throw new Error("cannot initialize like this. use the factory method");
     }
 
     ToDict() { throw new Error("not implemented"); }
@@ -614,6 +617,7 @@ function ScreenExternalFactory() {
 
 class _ScreenExternal extends ScreenExternal {
     constructor() {
+        super();
         
         this.journey_ = "";
         
@@ -874,7 +878,7 @@ class _ScreenExternal extends ScreenExternal {
 class Screen {
 
     constructor() {
-        throw new Error("cannot initialize like this. use the factory method");
+        // throw new Error("cannot initialize like this. use the factory method");
     }
 
     ToDict() { throw new Error("not implemented"); }
@@ -903,6 +907,7 @@ function ScreenFactory() {
 
 class _Screen extends Screen {
     constructor() {
+        super();
         this.meta_ = [];
         this.meta_["kind"] = "Screen";
         this.external_ = null;
