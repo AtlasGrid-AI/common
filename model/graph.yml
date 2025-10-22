@@ -33,6 +33,10 @@ types:
     properties:
       - name: content
         type: "[]string"
+      - name: title
+        type: string
+      - name: tags
+        type: "[]string"
   - kind: Struct
     name: Component
     properties:

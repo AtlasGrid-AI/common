@@ -23,22 +23,50 @@ class ScreenMetadata:
     def SetContent(self, val: list):
         raise Exception("not implemented")
 
+    def Title(self) -> str:
+        raise Exception("not implemented")
+
+    def SetTitle(self, val: str):
+        raise Exception("not implemented")
+
+    def Tags(self) -> list:
+        raise Exception("not implemented")
+
+    def SetTags(self, val: list):
+        raise Exception("not implemented")
+
 
 def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
     ret.content_ = []
+    ret.title_ = ""
+    ret.tags_ = []
     return ret
 
 
 class _ScreenMetadata(ScreenMetadata):
     def __init__(self):
         self.content_ = []
+        self.title_ = ""
+        self.tags_ = []
 
     def SetContent(self, val):
         self.content_ = val
 
     def Content(self):
         return self.content_
+
+    def SetTitle(self, val):
+        self.title_ = str(val)
+
+    def Title(self):
+        return self.title_
+
+    def SetTags(self, val):
+        self.tags_ = val
+
+    def Tags(self):
+        return self.tags_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -53,6 +81,11 @@ class _ScreenMetadata(ScreenMetadata):
         for v in self.content_:
             rawList.append(v)
         data["content"] = rawList
+        data["title"] = self.title_
+        rawList = []
+        for v in self.tags_:
+            rawList.append(v)
+        data["tags"] = rawList
         return data
 
     def FromDict(self, data):
@@ -66,6 +99,15 @@ class _ScreenMetadata(ScreenMetadata):
                     ud = rw
                     res.append(ud)
                 self.content_ = res
+            if key == "title":
+                self.title_ = rawValue
+            if key == "tags":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.tags_ = res
 
 
 class Component:

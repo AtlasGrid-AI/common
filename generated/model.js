@@ -12,12 +12,22 @@ class ScreenMetadata {
     Content() { throw new Error("not implemented"); }
     SetContent(val) { throw new Error("not implemented"); }
     
+    Title() { throw new Error("not implemented"); }
+    SetTitle(val) { throw new Error("not implemented"); }
+    
+    Tags() { throw new Error("not implemented"); }
+    SetTags(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenMetadataFactory() {
     const ret = new _ScreenMetadata();
     
     ret.content_ = [];
+    
+    ret.title_ = "";
+    
+    ret.tags_ = [];
     
     return ret;
 }
@@ -27,6 +37,10 @@ class _ScreenMetadata extends ScreenMetadata {
         super();
         
         this.content_ = [];
+        
+        this.title_ = "";
+        
+        this.tags_ = [];
         
     }
 
@@ -40,6 +54,32 @@ class _ScreenMetadata extends ScreenMetadata {
     Content() {
         
         return this.content_;
+        
+    }
+
+    
+    SetTitle(val) {
+        
+        this.title_ = String(val);
+        
+    }
+
+    Title() {
+        
+        return this.title_;
+        
+    }
+
+    
+    SetTags(val) {
+        
+        this.tags_ = val;
+        
+    }
+
+    Tags() {
+        
+        return this.tags_;
         
     }
 
@@ -67,6 +107,22 @@ class _ScreenMetadata extends ScreenMetadata {
         data["content"] = rawListcontent;
         
         
+        
+        
+        data["title"] = this.title_;
+        
+        
+        
+        
+        const rawListtags = [];
+        for (const v of (this.tags_ || [])) {
+            
+            rawListtags.push(v);
+            
+        }
+        data["tags"] = rawListtags;
+        
+        
         return data;
     }
 
@@ -89,6 +145,31 @@ class _ScreenMetadata extends ScreenMetadata {
                 }
 
                 this.content_ = res;
+                
+            }
+            
+            if (key === "title") {
+                
+                
+                this.title_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "tags") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.tags_ = res;
                 
             }
             
