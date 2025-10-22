@@ -1,0 +1,62 @@
+types:
+  - kind: Object
+    name: Journey
+    external: JourneyExternal
+    internal: JourneyInternal
+  - kind: Struct
+    name: JourneyExternal
+    properties:
+      - name: name
+        type: string
+      - name: atlas
+        type: string
+      - name: owner
+        type: string
+      - name: description
+        type: string
+      - name: targetPlatform
+        type: string
+      - name: operSt
+        type: string
+      - name: config
+        type: JourneyConfiguration
+      - name: deleted
+        type: bool
+  - kind: Struct
+    name: JourneyConfiguration
+    properties:
+      - name: textFields
+        type: "map[string]string"
+      - name: avoidComponents
+        type: "[]string"
+      - name: depriorizeComponents
+        type: "[]string"
+      - name: stepIntervalMs
+        type: int
+      - name: maxStepCount
+        type: int
+  - kind: Struct
+    name: JourneyInternal
+    properties:
+      - name: operationalStatus
+        type: string
+      - name: errorMessage
+        type: string
+      - name: lastRunAt
+        type: datetime
+      - name: lastActionAt
+        type: datetime
+      - name: finishedAt
+        type: datetime
+      - name: screenCount
+        type: int
+      - name: edgeCount
+        type: int
+      - name: stepsTaken
+        type: int
+      - name: stepsPlanned
+        type: int
+      - name: actionsPerformed
+        type: "[]string"
+      - name: actionsAvoided
+        type: "[]string"

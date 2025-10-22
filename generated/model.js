@@ -511,6 +511,727 @@ class _Component extends Component {
 
 
 
+class JourneyConfiguration {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    TextFields() { throw new Error("not implemented"); }
+    SetTextFields(val) { throw new Error("not implemented"); }
+    
+    AvoidComponents() { throw new Error("not implemented"); }
+    SetAvoidComponents(val) { throw new Error("not implemented"); }
+    
+    DepriorizeComponents() { throw new Error("not implemented"); }
+    SetDepriorizeComponents(val) { throw new Error("not implemented"); }
+    
+    StepIntervalMs() { throw new Error("not implemented"); }
+    SetStepIntervalMs(val) { throw new Error("not implemented"); }
+    
+    MaxStepCount() { throw new Error("not implemented"); }
+    SetMaxStepCount(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyConfigurationFactory() {
+    const ret = new _JourneyConfiguration();
+    
+    ret.textFields_ = {};
+    
+    ret.avoidComponents_ = [];
+    
+    ret.depriorizeComponents_ = [];
+    
+    ret.stepIntervalMs_ = 0;
+    
+    ret.maxStepCount_ = 0;
+    
+    return ret;
+}
+
+class _JourneyConfiguration extends JourneyConfiguration {
+    constructor() {
+        super();
+        
+        this.textFields_ = {};
+        
+        this.avoidComponents_ = [];
+        
+        this.depriorizeComponents_ = [];
+        
+        this.stepIntervalMs_ = 0;
+        
+        this.maxStepCount_ = 0;
+        
+    }
+
+    
+    SetTextFields(val) {
+        
+        this.textFields_ = val;
+        
+    }
+
+    TextFields() {
+        
+        return this.textFields_;
+        
+    }
+
+    
+    SetAvoidComponents(val) {
+        
+        this.avoidComponents_ = val;
+        
+    }
+
+    AvoidComponents() {
+        
+        return this.avoidComponents_;
+        
+    }
+
+    
+    SetDepriorizeComponents(val) {
+        
+        this.depriorizeComponents_ = val;
+        
+    }
+
+    DepriorizeComponents() {
+        
+        return this.depriorizeComponents_;
+        
+    }
+
+    
+    SetStepIntervalMs(val) {
+        
+        this.stepIntervalMs_ = Number.parseInt(val);
+        
+    }
+
+    StepIntervalMs() {
+        
+        return this.stepIntervalMs_;
+        
+    }
+
+    
+    SetMaxStepCount(val) {
+        
+        this.maxStepCount_ = Number.parseInt(val);
+        
+    }
+
+    MaxStepCount() {
+        
+        return this.maxStepCount_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawSubmap = {};
+        for (const k in (this.textFields_ || {})) {
+            const v = this.textFields_[k];
+            
+            rawSubmap[k] = v;
+            
+        }
+        data["textFields"] = rawSubmap;
+        
+        
+        
+        const rawListavoidComponents = [];
+        for (const v of (this.avoidComponents_ || [])) {
+            
+            rawListavoidComponents.push(v);
+            
+        }
+        data["avoidComponents"] = rawListavoidComponents;
+        
+        
+        
+        const rawListdepriorizeComponents = [];
+        for (const v of (this.depriorizeComponents_ || [])) {
+            
+            rawListdepriorizeComponents.push(v);
+            
+        }
+        data["depriorizeComponents"] = rawListdepriorizeComponents;
+        
+        
+        
+        
+        data["stepIntervalMs"] = this.stepIntervalMs_;
+        
+        
+        
+        
+        
+        data["maxStepCount"] = this.maxStepCount_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "textFields") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.textFields_ = res;
+                
+            }
+            
+            if (key === "avoidComponents") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.avoidComponents_ = res;
+                
+            }
+            
+            if (key === "depriorizeComponents") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.depriorizeComponents_ = res;
+                
+            }
+            
+            if (key === "stepIntervalMs") {
+                
+                
+                this.stepIntervalMs_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "maxStepCount") {
+                
+                
+                this.maxStepCount_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    OperationalStatus() { throw new Error("not implemented"); }
+    SetOperationalStatus(val) { throw new Error("not implemented"); }
+    
+    ErrorMessage() { throw new Error("not implemented"); }
+    SetErrorMessage(val) { throw new Error("not implemented"); }
+    
+    LastRunAt() { throw new Error("not implemented"); }
+    SetLastRunAt(val) { throw new Error("not implemented"); }
+    
+    LastActionAt() { throw new Error("not implemented"); }
+    SetLastActionAt(val) { throw new Error("not implemented"); }
+    
+    FinishedAt() { throw new Error("not implemented"); }
+    SetFinishedAt(val) { throw new Error("not implemented"); }
+    
+    ScreenCount() { throw new Error("not implemented"); }
+    SetScreenCount(val) { throw new Error("not implemented"); }
+    
+    EdgeCount() { throw new Error("not implemented"); }
+    SetEdgeCount(val) { throw new Error("not implemented"); }
+    
+    StepsTaken() { throw new Error("not implemented"); }
+    SetStepsTaken(val) { throw new Error("not implemented"); }
+    
+    StepsPlanned() { throw new Error("not implemented"); }
+    SetStepsPlanned(val) { throw new Error("not implemented"); }
+    
+    ActionsPerformed() { throw new Error("not implemented"); }
+    SetActionsPerformed(val) { throw new Error("not implemented"); }
+    
+    ActionsAvoided() { throw new Error("not implemented"); }
+    SetActionsAvoided(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyInternalFactory() {
+    const ret = new _JourneyInternal();
+    
+    ret.operationalStatus_ = "";
+    
+    ret.errorMessage_ = "";
+    
+    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.screenCount_ = 0;
+    
+    ret.edgeCount_ = 0;
+    
+    ret.stepsTaken_ = 0;
+    
+    ret.stepsPlanned_ = 0;
+    
+    ret.actionsPerformed_ = [];
+    
+    ret.actionsAvoided_ = [];
+    
+    return ret;
+}
+
+class _JourneyInternal extends JourneyInternal {
+    constructor() {
+        super();
+        
+        this.operationalStatus_ = "";
+        
+        this.errorMessage_ = "";
+        
+        this.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.finishedAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.screenCount_ = 0;
+        
+        this.edgeCount_ = 0;
+        
+        this.stepsTaken_ = 0;
+        
+        this.stepsPlanned_ = 0;
+        
+        this.actionsPerformed_ = [];
+        
+        this.actionsAvoided_ = [];
+        
+    }
+
+    
+    SetOperationalStatus(val) {
+        
+        this.operationalStatus_ = String(val);
+        
+    }
+
+    OperationalStatus() {
+        
+        return this.operationalStatus_;
+        
+    }
+
+    
+    SetErrorMessage(val) {
+        
+        this.errorMessage_ = String(val);
+        
+    }
+
+    ErrorMessage() {
+        
+        return this.errorMessage_;
+        
+    }
+
+    
+    SetLastRunAt(val) {
+        
+        this.lastRunAt_ = val.ToString();
+        
+    }
+
+    LastRunAt() {
+        
+        return Date.parse(this.lastRunAt_);
+        
+    }
+
+    
+    SetLastActionAt(val) {
+        
+        this.lastActionAt_ = val.ToString();
+        
+    }
+
+    LastActionAt() {
+        
+        return Date.parse(this.lastActionAt_);
+        
+    }
+
+    
+    SetFinishedAt(val) {
+        
+        this.finishedAt_ = val.ToString();
+        
+    }
+
+    FinishedAt() {
+        
+        return Date.parse(this.finishedAt_);
+        
+    }
+
+    
+    SetScreenCount(val) {
+        
+        this.screenCount_ = Number.parseInt(val);
+        
+    }
+
+    ScreenCount() {
+        
+        return this.screenCount_;
+        
+    }
+
+    
+    SetEdgeCount(val) {
+        
+        this.edgeCount_ = Number.parseInt(val);
+        
+    }
+
+    EdgeCount() {
+        
+        return this.edgeCount_;
+        
+    }
+
+    
+    SetStepsTaken(val) {
+        
+        this.stepsTaken_ = Number.parseInt(val);
+        
+    }
+
+    StepsTaken() {
+        
+        return this.stepsTaken_;
+        
+    }
+
+    
+    SetStepsPlanned(val) {
+        
+        this.stepsPlanned_ = Number.parseInt(val);
+        
+    }
+
+    StepsPlanned() {
+        
+        return this.stepsPlanned_;
+        
+    }
+
+    
+    SetActionsPerformed(val) {
+        
+        this.actionsPerformed_ = val;
+        
+    }
+
+    ActionsPerformed() {
+        
+        return this.actionsPerformed_;
+        
+    }
+
+    
+    SetActionsAvoided(val) {
+        
+        this.actionsAvoided_ = val;
+        
+    }
+
+    ActionsAvoided() {
+        
+        return this.actionsAvoided_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["operationalStatus"] = this.operationalStatus_;
+        
+        
+        
+        
+        
+        data["errorMessage"] = this.errorMessage_;
+        
+        
+        
+        
+        
+        data["lastRunAt"] = this.lastRunAt_;
+        
+        
+        
+        
+        
+        data["lastActionAt"] = this.lastActionAt_;
+        
+        
+        
+        
+        
+        data["finishedAt"] = this.finishedAt_;
+        
+        
+        
+        
+        
+        data["screenCount"] = this.screenCount_;
+        
+        
+        
+        
+        
+        data["edgeCount"] = this.edgeCount_;
+        
+        
+        
+        
+        
+        data["stepsTaken"] = this.stepsTaken_;
+        
+        
+        
+        
+        
+        data["stepsPlanned"] = this.stepsPlanned_;
+        
+        
+        
+        
+        const rawListactionsPerformed = [];
+        for (const v of (this.actionsPerformed_ || [])) {
+            
+            rawListactionsPerformed.push(v);
+            
+        }
+        data["actionsPerformed"] = rawListactionsPerformed;
+        
+        
+        
+        const rawListactionsAvoided = [];
+        for (const v of (this.actionsAvoided_ || [])) {
+            
+            rawListactionsAvoided.push(v);
+            
+        }
+        data["actionsAvoided"] = rawListactionsAvoided;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "operationalStatus") {
+                
+                
+                this.operationalStatus_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "errorMessage") {
+                
+                
+                this.errorMessage_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "lastRunAt") {
+                
+                
+                this.lastRunAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "lastActionAt") {
+                
+                
+                this.lastActionAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "finishedAt") {
+                
+                
+                this.finishedAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screenCount") {
+                
+                
+                this.screenCount_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "edgeCount") {
+                
+                
+                this.edgeCount_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "stepsTaken") {
+                
+                
+                this.stepsTaken_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "stepsPlanned") {
+                
+                
+                this.stepsPlanned_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "actionsPerformed") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.actionsPerformed_ = res;
+                
+            }
+            
+            if (key === "actionsAvoided") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.actionsAvoided_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Edge {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -670,6 +1391,338 @@ class _Edge extends Edge {
                 }
 
                 this.steps_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyExternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Name() { throw new Error("not implemented"); }
+    SetName(val) { throw new Error("not implemented"); }
+    
+    Atlas() { throw new Error("not implemented"); }
+    SetAtlas(val) { throw new Error("not implemented"); }
+    
+    Owner() { throw new Error("not implemented"); }
+    SetOwner(val) { throw new Error("not implemented"); }
+    
+    Description() { throw new Error("not implemented"); }
+    SetDescription(val) { throw new Error("not implemented"); }
+    
+    TargetPlatform() { throw new Error("not implemented"); }
+    SetTargetPlatform(val) { throw new Error("not implemented"); }
+    
+    OperSt() { throw new Error("not implemented"); }
+    SetOperSt(val) { throw new Error("not implemented"); }
+    
+    Config() { throw new Error("not implemented"); }
+    SetConfig(val) { throw new Error("not implemented"); }
+    
+    Deleted() { throw new Error("not implemented"); }
+    SetDeleted(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyExternalFactory() {
+    const ret = new _JourneyExternal();
+    
+    ret.name_ = "";
+    
+    ret.atlas_ = "";
+    
+    ret.owner_ = "";
+    
+    ret.description_ = "";
+    
+    ret.targetPlatform_ = "";
+    
+    ret.operSt_ = "";
+    
+    ret.config_ = JourneyConfigurationFactory();
+    
+    ret.deleted_ = false;
+    
+    return ret;
+}
+
+class _JourneyExternal extends JourneyExternal {
+    constructor() {
+        super();
+        
+        this.name_ = "";
+        
+        this.atlas_ = "";
+        
+        this.owner_ = "";
+        
+        this.description_ = "";
+        
+        this.targetPlatform_ = "";
+        
+        this.operSt_ = "";
+        
+        this.config_ = JourneyConfigurationFactory();
+        
+        this.deleted_ = false;
+        
+    }
+
+    
+    SetName(val) {
+        
+        this.name_ = String(val);
+        
+    }
+
+    Name() {
+        
+        return this.name_;
+        
+    }
+
+    
+    SetAtlas(val) {
+        
+        this.atlas_ = String(val);
+        
+    }
+
+    Atlas() {
+        
+        return this.atlas_;
+        
+    }
+
+    
+    SetOwner(val) {
+        
+        this.owner_ = String(val);
+        
+    }
+
+    Owner() {
+        
+        return this.owner_;
+        
+    }
+
+    
+    SetDescription(val) {
+        
+        this.description_ = String(val);
+        
+    }
+
+    Description() {
+        
+        return this.description_;
+        
+    }
+
+    
+    SetTargetPlatform(val) {
+        
+        this.targetPlatform_ = String(val);
+        
+    }
+
+    TargetPlatform() {
+        
+        return this.targetPlatform_;
+        
+    }
+
+    
+    SetOperSt(val) {
+        
+        this.operSt_ = String(val);
+        
+    }
+
+    OperSt() {
+        
+        return this.operSt_;
+        
+    }
+
+    
+    SetConfig(val) {
+        
+        this.config_ = val;
+        
+    }
+
+    Config() {
+        
+        return this.config_;
+        
+    }
+
+    
+    SetDeleted(val) {
+        
+        this.deleted_ = Boolean(val);
+        
+    }
+
+    Deleted() {
+        
+        return this.deleted_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["name"] = this.name_;
+        
+        
+        
+        
+        
+        data["atlas"] = this.atlas_;
+        
+        
+        
+        
+        
+        data["owner"] = this.owner_;
+        
+        
+        
+        
+        
+        data["description"] = this.description_;
+        
+        
+        
+        
+        
+        data["targetPlatform"] = this.targetPlatform_;
+        
+        
+        
+        
+        
+        data["operSt"] = this.operSt_;
+        
+        
+        
+        
+        
+        data["config"] = this.config_ ? this.config_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["deleted"] = this.deleted_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "name") {
+                
+                
+                this.name_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "atlas") {
+                
+                
+                this.atlas_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "owner") {
+                
+                
+                this.owner_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "description") {
+                
+                
+                this.description_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "targetPlatform") {
+                
+                
+                this.targetPlatform_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "operSt") {
+                
+                
+                this.operSt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "config") {
+                
+                
+                this.config_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "deleted") {
+                
+                
+                this.deleted_ = rawValue;
+                
+
                 
             }
             
@@ -1090,6 +2143,114 @@ const ScreenKind = "Screen";
 
 
 
+class Journey {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+    External() { throw new Error("not implemented"); }
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function JourneyFactory() {
+    const ret = new _Journey();
+
+    
+    ret.external_ = JourneyExternalFactory();
+    
+    
+    ret.internal_ = JourneyInternalFactory();
+    
+
+    return ret;
+}
+
+class _Journey extends Journey {
+    constructor() {
+        super();
+        this.meta_ = [];
+        this.meta_["kind"] = "Journey";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+    SetExternal(val) { this.external_ = val; }
+    External() { return this.external_; }
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        data["external"] = this.external_.ToDict(); 
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+            if (key === "external") { this.external_.FromDict(rawValue); }
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = JourneyFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function JourneyIdentity(pkey) {
+    return "journey/" + pkey;
+}
+
+const JourneyKindIdentity = "journey/";
+
+const JourneyKind = "Journey";
+
+
+
+
 
 class _Schema {
     constructor(objects) {
@@ -1101,6 +2262,9 @@ class _Schema {
         if (kind === "Screen") return ScreenFactory();
         else if (kind === "screen") return ScreenFactory();
         
+        if (kind === "Journey") return JourneyFactory();
+        else if (kind === "journey") return JourneyFactory();
+        
         throw new Error("object does not exist");
     }
 
@@ -1111,6 +2275,8 @@ function Schema() {
     const objects = [
         
         "Screen",
+        
+        "Journey",
         
     ];
     return new _Schema(objects);

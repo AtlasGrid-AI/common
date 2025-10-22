@@ -282,6 +282,390 @@ class _Component(Component):
                 self.centerY_ = rawValue
 
 
+class JourneyConfiguration:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def TextFields(self) -> dict:
+        raise Exception("not implemented")
+
+    def SetTextFields(self, val: dict):
+        raise Exception("not implemented")
+
+    def AvoidComponents(self) -> list:
+        raise Exception("not implemented")
+
+    def SetAvoidComponents(self, val: list):
+        raise Exception("not implemented")
+
+    def DepriorizeComponents(self) -> list:
+        raise Exception("not implemented")
+
+    def SetDepriorizeComponents(self, val: list):
+        raise Exception("not implemented")
+
+    def StepIntervalMs(self) -> int:
+        raise Exception("not implemented")
+
+    def SetStepIntervalMs(self, val: int):
+        raise Exception("not implemented")
+
+    def MaxStepCount(self) -> int:
+        raise Exception("not implemented")
+
+    def SetMaxStepCount(self, val: int):
+        raise Exception("not implemented")
+
+
+def JourneyConfigurationFactory() -> JourneyConfiguration:
+    ret = _JourneyConfiguration()
+    ret.textFields_ = {}
+    ret.avoidComponents_ = []
+    ret.depriorizeComponents_ = []
+    ret.stepIntervalMs_ = 0
+    ret.maxStepCount_ = 0
+    return ret
+
+
+class _JourneyConfiguration(JourneyConfiguration):
+    def __init__(self):
+        self.textFields_ = {}
+        self.avoidComponents_ = []
+        self.depriorizeComponents_ = []
+        self.stepIntervalMs_ = 0
+        self.maxStepCount_ = 0
+
+    def SetTextFields(self, val):
+        self.textFields_ = val
+
+    def TextFields(self):
+        return self.textFields_
+
+    def SetAvoidComponents(self, val):
+        self.avoidComponents_ = val
+
+    def AvoidComponents(self):
+        return self.avoidComponents_
+
+    def SetDepriorizeComponents(self, val):
+        self.depriorizeComponents_ = val
+
+    def DepriorizeComponents(self):
+        return self.depriorizeComponents_
+
+    def SetStepIntervalMs(self, val):
+        self.stepIntervalMs_ = int(val)
+
+    def StepIntervalMs(self):
+        return self.stepIntervalMs_
+
+    def SetMaxStepCount(self, val):
+        self.maxStepCount_ = int(val)
+
+    def MaxStepCount(self):
+        return self.maxStepCount_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawSubmap = {}
+        for k, v in self.textFields_.items():
+            rawSubmap[k] = v
+        data["textFields"] = rawSubmap
+        rawList = []
+        for v in self.avoidComponents_:
+            rawList.append(v)
+        data["avoidComponents"] = rawList
+        rawList = []
+        for v in self.depriorizeComponents_:
+            rawList.append(v)
+        data["depriorizeComponents"] = rawList
+        data["stepIntervalMs"] = self.stepIntervalMs_
+        data["maxStepCount"] = self.maxStepCount_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "textFields":
+                res = {}
+                for rk, rw in rawValue.items():
+                    ud = ""
+                    ud = rw
+                    res[rk] = ud
+                self.textFields_ = res
+            if key == "avoidComponents":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.avoidComponents_ = res
+            if key == "depriorizeComponents":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.depriorizeComponents_ = res
+            if key == "stepIntervalMs":
+                self.stepIntervalMs_ = rawValue
+            if key == "maxStepCount":
+                self.maxStepCount_ = rawValue
+
+
+class JourneyInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def OperationalStatus(self) -> str:
+        raise Exception("not implemented")
+
+    def SetOperationalStatus(self, val: str):
+        raise Exception("not implemented")
+
+    def ErrorMessage(self) -> str:
+        raise Exception("not implemented")
+
+    def SetErrorMessage(self, val: str):
+        raise Exception("not implemented")
+
+    def LastRunAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetLastRunAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def LastActionAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetLastActionAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def FinishedAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetFinishedAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def ScreenCount(self) -> int:
+        raise Exception("not implemented")
+
+    def SetScreenCount(self, val: int):
+        raise Exception("not implemented")
+
+    def EdgeCount(self) -> int:
+        raise Exception("not implemented")
+
+    def SetEdgeCount(self, val: int):
+        raise Exception("not implemented")
+
+    def StepsTaken(self) -> int:
+        raise Exception("not implemented")
+
+    def SetStepsTaken(self, val: int):
+        raise Exception("not implemented")
+
+    def StepsPlanned(self) -> int:
+        raise Exception("not implemented")
+
+    def SetStepsPlanned(self, val: int):
+        raise Exception("not implemented")
+
+    def ActionsPerformed(self) -> list:
+        raise Exception("not implemented")
+
+    def SetActionsPerformed(self, val: list):
+        raise Exception("not implemented")
+
+    def ActionsAvoided(self) -> list:
+        raise Exception("not implemented")
+
+    def SetActionsAvoided(self, val: list):
+        raise Exception("not implemented")
+
+
+def JourneyInternalFactory() -> JourneyInternal:
+    ret = _JourneyInternal()
+    ret.operationalStatus_ = ""
+    ret.errorMessage_ = ""
+    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.screenCount_ = 0
+    ret.edgeCount_ = 0
+    ret.stepsTaken_ = 0
+    ret.stepsPlanned_ = 0
+    ret.actionsPerformed_ = []
+    ret.actionsAvoided_ = []
+    return ret
+
+
+class _JourneyInternal(JourneyInternal):
+    def __init__(self):
+        self.operationalStatus_ = ""
+        self.errorMessage_ = ""
+        self.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
+        self.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
+        self.finishedAt_ = "0001-01-01T00:00:00.000000Z"
+        self.screenCount_ = 0
+        self.edgeCount_ = 0
+        self.stepsTaken_ = 0
+        self.stepsPlanned_ = 0
+        self.actionsPerformed_ = []
+        self.actionsAvoided_ = []
+
+    def SetOperationalStatus(self, val):
+        self.operationalStatus_ = str(val)
+
+    def OperationalStatus(self):
+        return self.operationalStatus_
+
+    def SetErrorMessage(self, val):
+        self.errorMessage_ = str(val)
+
+    def ErrorMessage(self):
+        return self.errorMessage_
+
+    def SetLastRunAt(self, val):
+        self.lastRunAt_ = store.datetime_string(val)
+
+    def LastRunAt(self):
+        return store.datetime_parse(self.lastRunAt_)
+
+    def SetLastActionAt(self, val):
+        self.lastActionAt_ = store.datetime_string(val)
+
+    def LastActionAt(self):
+        return store.datetime_parse(self.lastActionAt_)
+
+    def SetFinishedAt(self, val):
+        self.finishedAt_ = store.datetime_string(val)
+
+    def FinishedAt(self):
+        return store.datetime_parse(self.finishedAt_)
+
+    def SetScreenCount(self, val):
+        self.screenCount_ = int(val)
+
+    def ScreenCount(self):
+        return self.screenCount_
+
+    def SetEdgeCount(self, val):
+        self.edgeCount_ = int(val)
+
+    def EdgeCount(self):
+        return self.edgeCount_
+
+    def SetStepsTaken(self, val):
+        self.stepsTaken_ = int(val)
+
+    def StepsTaken(self):
+        return self.stepsTaken_
+
+    def SetStepsPlanned(self, val):
+        self.stepsPlanned_ = int(val)
+
+    def StepsPlanned(self):
+        return self.stepsPlanned_
+
+    def SetActionsPerformed(self, val):
+        self.actionsPerformed_ = val
+
+    def ActionsPerformed(self):
+        return self.actionsPerformed_
+
+    def SetActionsAvoided(self, val):
+        self.actionsAvoided_ = val
+
+    def ActionsAvoided(self):
+        return self.actionsAvoided_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["operationalStatus"] = self.operationalStatus_
+        data["errorMessage"] = self.errorMessage_
+        data["lastRunAt"] = self.lastRunAt_
+        data["lastActionAt"] = self.lastActionAt_
+        data["finishedAt"] = self.finishedAt_
+        data["screenCount"] = self.screenCount_
+        data["edgeCount"] = self.edgeCount_
+        data["stepsTaken"] = self.stepsTaken_
+        data["stepsPlanned"] = self.stepsPlanned_
+        rawList = []
+        for v in self.actionsPerformed_:
+            rawList.append(v)
+        data["actionsPerformed"] = rawList
+        rawList = []
+        for v in self.actionsAvoided_:
+            rawList.append(v)
+        data["actionsAvoided"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "operationalStatus":
+                self.operationalStatus_ = rawValue
+            if key == "errorMessage":
+                self.errorMessage_ = rawValue
+            if key == "lastRunAt":
+                self.lastRunAt_ = rawValue
+            if key == "lastActionAt":
+                self.lastActionAt_ = rawValue
+            if key == "finishedAt":
+                self.finishedAt_ = rawValue
+            if key == "screenCount":
+                self.screenCount_ = rawValue
+            if key == "edgeCount":
+                self.edgeCount_ = rawValue
+            if key == "stepsTaken":
+                self.stepsTaken_ = rawValue
+            if key == "stepsPlanned":
+                self.stepsPlanned_ = rawValue
+            if key == "actionsPerformed":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.actionsPerformed_ = res
+            if key == "actionsAvoided":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.actionsAvoided_ = res
+
+
 class Edge:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -376,6 +760,179 @@ class _Edge(Edge):
                     ud = rw
                     res.append(ud)
                 self.steps_ = res
+
+
+class JourneyExternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Name(self) -> str:
+        raise Exception("not implemented")
+
+    def SetName(self, val: str):
+        raise Exception("not implemented")
+
+    def Atlas(self) -> str:
+        raise Exception("not implemented")
+
+    def SetAtlas(self, val: str):
+        raise Exception("not implemented")
+
+    def Owner(self) -> str:
+        raise Exception("not implemented")
+
+    def SetOwner(self, val: str):
+        raise Exception("not implemented")
+
+    def Description(self) -> str:
+        raise Exception("not implemented")
+
+    def SetDescription(self, val: str):
+        raise Exception("not implemented")
+
+    def TargetPlatform(self) -> str:
+        raise Exception("not implemented")
+
+    def SetTargetPlatform(self, val: str):
+        raise Exception("not implemented")
+
+    def OperSt(self) -> str:
+        raise Exception("not implemented")
+
+    def SetOperSt(self, val: str):
+        raise Exception("not implemented")
+
+    def Config(self) -> JourneyConfiguration:
+        raise Exception("not implemented")
+
+    def SetConfig(self, val: JourneyConfiguration):
+        raise Exception("not implemented")
+
+    def Deleted(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetDeleted(self, val: bool):
+        raise Exception("not implemented")
+
+
+def JourneyExternalFactory() -> JourneyExternal:
+    ret = _JourneyExternal()
+    ret.name_ = ""
+    ret.atlas_ = ""
+    ret.owner_ = ""
+    ret.description_ = ""
+    ret.targetPlatform_ = ""
+    ret.operSt_ = ""
+    ret.config_ = JourneyConfigurationFactory()
+    ret.deleted_ = False
+    return ret
+
+
+class _JourneyExternal(JourneyExternal):
+    def __init__(self):
+        self.name_ = ""
+        self.atlas_ = ""
+        self.owner_ = ""
+        self.description_ = ""
+        self.targetPlatform_ = ""
+        self.operSt_ = ""
+        self.config_ = JourneyConfigurationFactory()
+        self.deleted_ = False
+
+    def SetName(self, val):
+        self.name_ = str(val)
+
+    def Name(self):
+        return self.name_
+
+    def SetAtlas(self, val):
+        self.atlas_ = str(val)
+
+    def Atlas(self):
+        return self.atlas_
+
+    def SetOwner(self, val):
+        self.owner_ = str(val)
+
+    def Owner(self):
+        return self.owner_
+
+    def SetDescription(self, val):
+        self.description_ = str(val)
+
+    def Description(self):
+        return self.description_
+
+    def SetTargetPlatform(self, val):
+        self.targetPlatform_ = str(val)
+
+    def TargetPlatform(self):
+        return self.targetPlatform_
+
+    def SetOperSt(self, val):
+        self.operSt_ = str(val)
+
+    def OperSt(self):
+        return self.operSt_
+
+    def SetConfig(self, val):
+        self.config_ = val
+
+    def Config(self):
+        return self.config_
+
+    def SetDeleted(self, val):
+        self.deleted_ = bool(val)
+
+    def Deleted(self):
+        return self.deleted_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["name"] = self.name_
+        data["atlas"] = self.atlas_
+        data["owner"] = self.owner_
+        data["description"] = self.description_
+        data["targetPlatform"] = self.targetPlatform_
+        data["operSt"] = self.operSt_
+        # if self.config_ is not None:
+        data["config"] = self.config_.ToDict()
+        data["deleted"] = self.deleted_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "name":
+                self.name_ = rawValue
+            if key == "atlas":
+                self.atlas_ = rawValue
+            if key == "owner":
+                self.owner_ = rawValue
+            if key == "description":
+                self.description_ = rawValue
+            if key == "targetPlatform":
+                self.targetPlatform_ = rawValue
+            if key == "operSt":
+                self.operSt_ = rawValue
+            if key == "config":
+                self.config_.FromDict(rawValue)
+            if key == "deleted":
+                self.deleted_ = rawValue
 
 
 class ScreenExternal:
@@ -625,6 +1182,102 @@ ScreenKindIdentity = store.ObjectIdentity("screen/")
 ScreenKind = "Screen"
 
 
+class Journey(store.ExternalHolder):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> Type["Journey"]:
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def External() -> JourneyExternal:
+        raise Exception("not implemented")
+
+    def Internal(self) -> JourneyInternal:
+        raise Exception("not implemented")
+
+
+def JourneyFactory() -> Journey:
+    ret = _Journey()
+    ret.external_ = JourneyExternalFactory()
+    ret.internal_ = JourneyInternalFactory()
+    return ret
+
+
+class _Journey(Journey):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("Journey")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetExternal(self, val):
+        self.external_ = val
+
+    def External(self) -> JourneyExternal:
+        return self.external_
+
+    def SetInternal(self, val):
+        self.internal_ = val
+
+    def Internal(self) -> JourneyInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["external"] = self.external_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "external":
+                self.external_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> Journey:
+        ret = JourneyFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def JourneyIdentity(pkey):
+    return store.ObjectIdentity("journey/" + pkey)
+
+
+JourneyKindIdentity = store.ObjectIdentity("journey/")
+JourneyKind = "Journey"
+
+
 class _Schema(store.SchemaHolder):
     def __init__(self, objects):
         self.objects = objects
@@ -634,6 +1287,10 @@ class _Schema(store.SchemaHolder):
             return ScreenFactory()
         elif kind == "screen":
             return ScreenFactory()
+        if kind == "Journey":
+            return JourneyFactory()
+        elif kind == "journey":
+            return JourneyFactory()
         raise Exception(constants.ErrNoSuchObject)
 
     def Types(self):
@@ -643,5 +1300,6 @@ class _Schema(store.SchemaHolder):
 def Schema():
     objects = [
         "Screen",
+        "Journey",
     ]
     return _Schema(objects)
