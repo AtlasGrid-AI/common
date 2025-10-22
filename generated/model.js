@@ -15,6 +15,9 @@ class ScreenMetadata {
     Title() { throw new Error("not implemented"); }
     SetTitle(val) { throw new Error("not implemented"); }
     
+    Description() { throw new Error("not implemented"); }
+    SetDescription(val) { throw new Error("not implemented"); }
+    
     Tags() { throw new Error("not implemented"); }
     SetTags(val) { throw new Error("not implemented"); }
     
@@ -26,6 +29,8 @@ function ScreenMetadataFactory() {
     ret.content_ = [];
     
     ret.title_ = "";
+    
+    ret.description_ = "";
     
     ret.tags_ = [];
     
@@ -39,6 +44,8 @@ class _ScreenMetadata extends ScreenMetadata {
         this.content_ = [];
         
         this.title_ = "";
+        
+        this.description_ = "";
         
         this.tags_ = [];
         
@@ -67,6 +74,19 @@ class _ScreenMetadata extends ScreenMetadata {
     Title() {
         
         return this.title_;
+        
+    }
+
+    
+    SetDescription(val) {
+        
+        this.description_ = String(val);
+        
+    }
+
+    Description() {
+        
+        return this.description_;
         
     }
 
@@ -114,6 +134,12 @@ class _ScreenMetadata extends ScreenMetadata {
         
         
         
+        
+        data["description"] = this.description_;
+        
+        
+        
+        
         const rawListtags = [];
         for (const v of (this.tags_ || [])) {
             
@@ -152,6 +178,15 @@ class _ScreenMetadata extends ScreenMetadata {
                 
                 
                 this.title_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "description") {
+                
+                
+                this.description_ = rawValue;
                 
 
                 

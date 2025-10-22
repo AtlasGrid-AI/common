@@ -35,6 +35,8 @@ types:
         type: "[]string"
       - name: title
         type: string
+      - name: description
+        type: string
       - name: tags
         type: "[]string"
   - kind: Struct

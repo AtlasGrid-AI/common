@@ -29,6 +29,12 @@ class ScreenMetadata:
     def SetTitle(self, val: str):
         raise Exception("not implemented")
 
+    def Description(self) -> str:
+        raise Exception("not implemented")
+
+    def SetDescription(self, val: str):
+        raise Exception("not implemented")
+
     def Tags(self) -> list:
         raise Exception("not implemented")
 
@@ -40,6 +46,7 @@ def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
     ret.content_ = []
     ret.title_ = ""
+    ret.description_ = ""
     ret.tags_ = []
     return ret
 
@@ -48,6 +55,7 @@ class _ScreenMetadata(ScreenMetadata):
     def __init__(self):
         self.content_ = []
         self.title_ = ""
+        self.description_ = ""
         self.tags_ = []
 
     def SetContent(self, val):
@@ -61,6 +69,12 @@ class _ScreenMetadata(ScreenMetadata):
 
     def Title(self):
         return self.title_
+
+    def SetDescription(self, val):
+        self.description_ = str(val)
+
+    def Description(self):
+        return self.description_
 
     def SetTags(self, val):
         self.tags_ = val
@@ -82,6 +96,7 @@ class _ScreenMetadata(ScreenMetadata):
             rawList.append(v)
         data["content"] = rawList
         data["title"] = self.title_
+        data["description"] = self.description_
         rawList = []
         for v in self.tags_:
             rawList.append(v)
@@ -101,6 +116,8 @@ class _ScreenMetadata(ScreenMetadata):
                 self.content_ = res
             if key == "title":
                 self.title_ = rawValue
+            if key == "description":
+                self.description_ = rawValue
             if key == "tags":
                 res = []
                 for rw in rawValue:
