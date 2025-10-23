@@ -12,8 +12,6 @@ types:
         type: string
       - name: owner
         type: string
-      - name: crawler
-        type: string 
       - name: description
         type: string
       - name: targetPlatform
@@ -37,6 +35,23 @@ types:
         type: int
       - name: maxStepCount
         type: int
+      - name: crawler
+        type: CrawlerConfiguration
+  - kind: Struct
+    name: CrawlerConfiguration
+    properties:
+      - name: serverUrl
+        type: string
+      - name: direct_connection
+        type: bool
+      - name: keepAlive
+        type: bool
+      - name: ignoreCertificates
+        type: bool
+      - name: platformVersion
+        type: string
+      - name: deviceId
+        type: string
   - kind: Struct
     name: JourneyInternal
     properties:
