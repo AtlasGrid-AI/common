@@ -523,8 +523,8 @@ class CrawlerConfiguration {
     ServerUrl() { throw new Error("not implemented"); }
     SetServerUrl(val) { throw new Error("not implemented"); }
     
-    Direct_connection() { throw new Error("not implemented"); }
-    SetDirect_connection(val) { throw new Error("not implemented"); }
+    DirectConnection() { throw new Error("not implemented"); }
+    SetDirectConnection(val) { throw new Error("not implemented"); }
     
     KeepAlive() { throw new Error("not implemented"); }
     SetKeepAlive(val) { throw new Error("not implemented"); }
@@ -545,7 +545,7 @@ function CrawlerConfigurationFactory() {
     
     ret.serverUrl_ = "";
     
-    ret.direct_connection_ = false;
+    ret.directConnection_ = false;
     
     ret.keepAlive_ = false;
     
@@ -564,7 +564,7 @@ class _CrawlerConfiguration extends CrawlerConfiguration {
         
         this.serverUrl_ = "";
         
-        this.direct_connection_ = false;
+        this.directConnection_ = false;
         
         this.keepAlive_ = false;
         
@@ -590,15 +590,15 @@ class _CrawlerConfiguration extends CrawlerConfiguration {
     }
 
     
-    SetDirect_connection(val) {
+    SetDirectConnection(val) {
         
-        this.direct_connection_ = Boolean(val);
+        this.directConnection_ = Boolean(val);
         
     }
 
-    Direct_connection() {
+    DirectConnection() {
         
-        return this.direct_connection_;
+        return this.directConnection_;
         
     }
 
@@ -676,7 +676,7 @@ class _CrawlerConfiguration extends CrawlerConfiguration {
         
         
         
-        data["direct_connection"] = this.direct_connection_;
+        data["directConnection"] = this.directConnection_;
         
         
         
@@ -722,10 +722,10 @@ class _CrawlerConfiguration extends CrawlerConfiguration {
                 
             }
             
-            if (key === "direct_connection") {
+            if (key === "directConnection") {
                 
                 
-                this.direct_connection_ = rawValue;
+                this.directConnection_ = rawValue;
                 
 
                 

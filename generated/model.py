@@ -298,10 +298,10 @@ class CrawlerConfiguration:
     def SetServerUrl(self, val: str):
         raise Exception("not implemented")
 
-    def Direct_connection(self) -> bool:
+    def DirectConnection(self) -> bool:
         raise Exception("not implemented")
 
-    def SetDirect_connection(self, val: bool):
+    def SetDirectConnection(self, val: bool):
         raise Exception("not implemented")
 
     def KeepAlive(self) -> bool:
@@ -332,7 +332,7 @@ class CrawlerConfiguration:
 def CrawlerConfigurationFactory() -> CrawlerConfiguration:
     ret = _CrawlerConfiguration()
     ret.serverUrl_ = ""
-    ret.direct_connection_ = False
+    ret.directConnection_ = False
     ret.keepAlive_ = False
     ret.ignoreCertificates_ = False
     ret.platformVersion_ = ""
@@ -343,7 +343,7 @@ def CrawlerConfigurationFactory() -> CrawlerConfiguration:
 class _CrawlerConfiguration(CrawlerConfiguration):
     def __init__(self):
         self.serverUrl_ = ""
-        self.direct_connection_ = False
+        self.directConnection_ = False
         self.keepAlive_ = False
         self.ignoreCertificates_ = False
         self.platformVersion_ = ""
@@ -355,11 +355,11 @@ class _CrawlerConfiguration(CrawlerConfiguration):
     def ServerUrl(self):
         return self.serverUrl_
 
-    def SetDirect_connection(self, val):
-        self.direct_connection_ = bool(val)
+    def SetDirectConnection(self, val):
+        self.directConnection_ = bool(val)
 
-    def Direct_connection(self):
-        return self.direct_connection_
+    def DirectConnection(self):
+        return self.directConnection_
 
     def SetKeepAlive(self, val):
         self.keepAlive_ = bool(val)
@@ -395,7 +395,7 @@ class _CrawlerConfiguration(CrawlerConfiguration):
     def ToDict(self):
         data = {}
         data["serverUrl"] = self.serverUrl_
-        data["direct_connection"] = self.direct_connection_
+        data["directConnection"] = self.directConnection_
         data["keepAlive"] = self.keepAlive_
         data["ignoreCertificates"] = self.ignoreCertificates_
         data["platformVersion"] = self.platformVersion_
@@ -408,8 +408,8 @@ class _CrawlerConfiguration(CrawlerConfiguration):
                 continue
             if key == "serverUrl":
                 self.serverUrl_ = rawValue
-            if key == "direct_connection":
-                self.direct_connection_ = rawValue
+            if key == "directConnection":
+                self.directConnection_ = rawValue
             if key == "keepAlive":
                 self.keepAlive_ = rawValue
             if key == "ignoreCertificates":

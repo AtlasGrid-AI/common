@@ -42,7 +42,7 @@ types:
     properties:
       - name: serverUrl
         type: string
-      - name: direct_connection
+      - name: directConnection
         type: bool
       - name: keepAlive
         type: bool
