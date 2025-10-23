@@ -1116,10 +1116,10 @@ class JourneyExternal:
     def SetDescription(self, val: str):
         raise Exception("not implemented")
 
-    def TargetPlatform(self) -> str:
+    def Platform(self) -> str:
         raise Exception("not implemented")
 
-    def SetTargetPlatform(self, val: str):
+    def SetPlatform(self, val: str):
         raise Exception("not implemented")
 
     def OperSt(self) -> str:
@@ -1147,7 +1147,7 @@ def JourneyExternalFactory() -> JourneyExternal:
     ret.atlas_ = ""
     ret.owner_ = ""
     ret.description_ = ""
-    ret.targetPlatform_ = ""
+    ret.platform_ = ""
     ret.operSt_ = ""
     ret.config_ = JourneyConfigurationFactory()
     ret.deleted_ = False
@@ -1160,7 +1160,7 @@ class _JourneyExternal(JourneyExternal):
         self.atlas_ = ""
         self.owner_ = ""
         self.description_ = ""
-        self.targetPlatform_ = ""
+        self.platform_ = ""
         self.operSt_ = ""
         self.config_ = JourneyConfigurationFactory()
         self.deleted_ = False
@@ -1189,11 +1189,11 @@ class _JourneyExternal(JourneyExternal):
     def Description(self):
         return self.description_
 
-    def SetTargetPlatform(self, val):
-        self.targetPlatform_ = str(val)
+    def SetPlatform(self, val):
+        self.platform_ = str(val)
 
-    def TargetPlatform(self):
-        return self.targetPlatform_
+    def Platform(self):
+        return self.platform_
 
     def SetOperSt(self, val):
         self.operSt_ = str(val)
@@ -1226,7 +1226,7 @@ class _JourneyExternal(JourneyExternal):
         data["atlas"] = self.atlas_
         data["owner"] = self.owner_
         data["description"] = self.description_
-        data["targetPlatform"] = self.targetPlatform_
+        data["platform"] = self.platform_
         data["operSt"] = self.operSt_
         # if self.config_ is not None:
         data["config"] = self.config_.ToDict()
@@ -1245,8 +1245,8 @@ class _JourneyExternal(JourneyExternal):
                 self.owner_ = rawValue
             if key == "description":
                 self.description_ = rawValue
-            if key == "targetPlatform":
-                self.targetPlatform_ = rawValue
+            if key == "platform":
+                self.platform_ = rawValue
             if key == "operSt":
                 self.operSt_ = rawValue
             if key == "config":

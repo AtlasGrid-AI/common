@@ -2026,8 +2026,8 @@ class JourneyExternal {
     Description() { throw new Error("not implemented"); }
     SetDescription(val) { throw new Error("not implemented"); }
     
-    TargetPlatform() { throw new Error("not implemented"); }
-    SetTargetPlatform(val) { throw new Error("not implemented"); }
+    Platform() { throw new Error("not implemented"); }
+    SetPlatform(val) { throw new Error("not implemented"); }
     
     OperSt() { throw new Error("not implemented"); }
     SetOperSt(val) { throw new Error("not implemented"); }
@@ -2051,7 +2051,7 @@ function JourneyExternalFactory() {
     
     ret.description_ = "";
     
-    ret.targetPlatform_ = "";
+    ret.platform_ = "";
     
     ret.operSt_ = "";
     
@@ -2074,7 +2074,7 @@ class _JourneyExternal extends JourneyExternal {
         
         this.description_ = "";
         
-        this.targetPlatform_ = "";
+        this.platform_ = "";
         
         this.operSt_ = "";
         
@@ -2137,15 +2137,15 @@ class _JourneyExternal extends JourneyExternal {
     }
 
     
-    SetTargetPlatform(val) {
+    SetPlatform(val) {
         
-        this.targetPlatform_ = String(val);
+        this.platform_ = String(val);
         
     }
 
-    TargetPlatform() {
+    Platform() {
         
-        return this.targetPlatform_;
+        return this.platform_;
         
     }
 
@@ -2228,7 +2228,7 @@ class _JourneyExternal extends JourneyExternal {
         
         
         
-        data["targetPlatform"] = this.targetPlatform_;
+        data["platform"] = this.platform_;
         
         
         
@@ -2295,10 +2295,10 @@ class _JourneyExternal extends JourneyExternal {
                 
             }
             
-            if (key === "targetPlatform") {
+            if (key === "platform") {
                 
                 
-                this.targetPlatform_ = rawValue;
+                this.platform_ = rawValue;
                 
 
                 

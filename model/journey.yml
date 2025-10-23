@@ -14,7 +14,7 @@ types:
         type: string
       - name: description
         type: string
-      - name: targetPlatform
+      - name: platform
         type: string
       - name: operSt
         type: string
