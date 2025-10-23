@@ -790,6 +790,12 @@ class JourneyExternal:
     def SetOwner(self, val: str):
         raise Exception("not implemented")
 
+    def Crawler(self) -> str:
+        raise Exception("not implemented")
+
+    def SetCrawler(self, val: str):
+        raise Exception("not implemented")
+
     def Description(self) -> str:
         raise Exception("not implemented")
 
@@ -826,6 +832,7 @@ def JourneyExternalFactory() -> JourneyExternal:
     ret.name_ = ""
     ret.atlas_ = ""
     ret.owner_ = ""
+    ret.crawler_ = ""
     ret.description_ = ""
     ret.targetPlatform_ = ""
     ret.operSt_ = ""
@@ -839,6 +846,7 @@ class _JourneyExternal(JourneyExternal):
         self.name_ = ""
         self.atlas_ = ""
         self.owner_ = ""
+        self.crawler_ = ""
         self.description_ = ""
         self.targetPlatform_ = ""
         self.operSt_ = ""
@@ -862,6 +870,12 @@ class _JourneyExternal(JourneyExternal):
 
     def Owner(self):
         return self.owner_
+
+    def SetCrawler(self, val):
+        self.crawler_ = str(val)
+
+    def Crawler(self):
+        return self.crawler_
 
     def SetDescription(self, val):
         self.description_ = str(val)
@@ -905,6 +919,7 @@ class _JourneyExternal(JourneyExternal):
         data["name"] = self.name_
         data["atlas"] = self.atlas_
         data["owner"] = self.owner_
+        data["crawler"] = self.crawler_
         data["description"] = self.description_
         data["targetPlatform"] = self.targetPlatform_
         data["operSt"] = self.operSt_
@@ -923,6 +938,8 @@ class _JourneyExternal(JourneyExternal):
                 self.atlas_ = rawValue
             if key == "owner":
                 self.owner_ = rawValue
+            if key == "crawler":
+                self.crawler_ = rawValue
             if key == "description":
                 self.description_ = rawValue
             if key == "targetPlatform":

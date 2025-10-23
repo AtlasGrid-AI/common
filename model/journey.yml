@@ -12,6 +12,8 @@ types:
         type: string
       - name: owner
         type: string
+      - name: crawler
+        type: string 
       - name: description
         type: string
       - name: targetPlatform

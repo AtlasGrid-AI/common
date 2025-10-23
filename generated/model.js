@@ -1418,6 +1418,9 @@ class JourneyExternal {
     Owner() { throw new Error("not implemented"); }
     SetOwner(val) { throw new Error("not implemented"); }
     
+    Crawler() { throw new Error("not implemented"); }
+    SetCrawler(val) { throw new Error("not implemented"); }
+    
     Description() { throw new Error("not implemented"); }
     SetDescription(val) { throw new Error("not implemented"); }
     
@@ -1444,6 +1447,8 @@ function JourneyExternalFactory() {
     
     ret.owner_ = "";
     
+    ret.crawler_ = "";
+    
     ret.description_ = "";
     
     ret.targetPlatform_ = "";
@@ -1466,6 +1471,8 @@ class _JourneyExternal extends JourneyExternal {
         this.atlas_ = "";
         
         this.owner_ = "";
+        
+        this.crawler_ = "";
         
         this.description_ = "";
         
@@ -1515,6 +1522,19 @@ class _JourneyExternal extends JourneyExternal {
     Owner() {
         
         return this.owner_;
+        
+    }
+
+    
+    SetCrawler(val) {
+        
+        this.crawler_ = String(val);
+        
+    }
+
+    Crawler() {
+        
+        return this.crawler_;
         
     }
 
@@ -1617,6 +1637,12 @@ class _JourneyExternal extends JourneyExternal {
         
         
         
+        data["crawler"] = this.crawler_;
+        
+        
+        
+        
+        
         data["description"] = this.description_;
         
         
@@ -1676,6 +1702,15 @@ class _JourneyExternal extends JourneyExternal {
                 
                 
                 this.owner_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "crawler") {
+                
+                
+                this.crawler_ = rawValue;
                 
 
                 
