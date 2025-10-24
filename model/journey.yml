@@ -29,7 +29,7 @@ types:
         type: "map[string]string"
       - name: avoidComponents
         type: "[]string"
-      - name: depriorizeComponents
+      - name: deprioritizeComponents
         type: "[]string"
       - name: stepIntervalMs
         type: int

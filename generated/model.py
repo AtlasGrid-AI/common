@@ -777,10 +777,10 @@ class JourneyConfiguration:
     def SetAvoidComponents(self, val: list):
         raise Exception("not implemented")
 
-    def DepriorizeComponents(self) -> list:
+    def DeprioritizeComponents(self) -> list:
         raise Exception("not implemented")
 
-    def SetDepriorizeComponents(self, val: list):
+    def SetDeprioritizeComponents(self, val: list):
         raise Exception("not implemented")
 
     def StepIntervalMs(self) -> int:
@@ -806,7 +806,7 @@ def JourneyConfigurationFactory() -> JourneyConfiguration:
     ret = _JourneyConfiguration()
     ret.textFields_ = {}
     ret.avoidComponents_ = []
-    ret.depriorizeComponents_ = []
+    ret.deprioritizeComponents_ = []
     ret.stepIntervalMs_ = 0
     ret.maxStepCount_ = 0
     ret.crawler_ = CrawlerConfigurationFactory()
@@ -817,7 +817,7 @@ class _JourneyConfiguration(JourneyConfiguration):
     def __init__(self):
         self.textFields_ = {}
         self.avoidComponents_ = []
-        self.depriorizeComponents_ = []
+        self.deprioritizeComponents_ = []
         self.stepIntervalMs_ = 0
         self.maxStepCount_ = 0
         self.crawler_ = CrawlerConfigurationFactory()
@@ -834,11 +834,11 @@ class _JourneyConfiguration(JourneyConfiguration):
     def AvoidComponents(self):
         return self.avoidComponents_
 
-    def SetDepriorizeComponents(self, val):
-        self.depriorizeComponents_ = val
+    def SetDeprioritizeComponents(self, val):
+        self.deprioritizeComponents_ = val
 
-    def DepriorizeComponents(self):
-        return self.depriorizeComponents_
+    def DeprioritizeComponents(self):
+        return self.deprioritizeComponents_
 
     def SetStepIntervalMs(self, val):
         self.stepIntervalMs_ = int(val)
@@ -876,9 +876,9 @@ class _JourneyConfiguration(JourneyConfiguration):
             rawList.append(v)
         data["avoidComponents"] = rawList
         rawList = []
-        for v in self.depriorizeComponents_:
+        for v in self.deprioritizeComponents_:
             rawList.append(v)
-        data["depriorizeComponents"] = rawList
+        data["deprioritizeComponents"] = rawList
         data["stepIntervalMs"] = self.stepIntervalMs_
         data["maxStepCount"] = self.maxStepCount_
         # if self.crawler_ is not None:
@@ -903,13 +903,13 @@ class _JourneyConfiguration(JourneyConfiguration):
                     ud = rw
                     res.append(ud)
                 self.avoidComponents_ = res
-            if key == "depriorizeComponents":
+            if key == "deprioritizeComponents":
                 res = []
                 for rw in rawValue:
                     ud = ""
                     ud = rw
                     res.append(ud)
-                self.depriorizeComponents_ = res
+                self.deprioritizeComponents_ = res
             if key == "stepIntervalMs":
                 self.stepIntervalMs_ = rawValue
             if key == "maxStepCount":

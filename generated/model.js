@@ -1415,8 +1415,8 @@ class JourneyConfiguration {
     AvoidComponents() { throw new Error("not implemented"); }
     SetAvoidComponents(val) { throw new Error("not implemented"); }
     
-    DepriorizeComponents() { throw new Error("not implemented"); }
-    SetDepriorizeComponents(val) { throw new Error("not implemented"); }
+    DeprioritizeComponents() { throw new Error("not implemented"); }
+    SetDeprioritizeComponents(val) { throw new Error("not implemented"); }
     
     StepIntervalMs() { throw new Error("not implemented"); }
     SetStepIntervalMs(val) { throw new Error("not implemented"); }
@@ -1436,7 +1436,7 @@ function JourneyConfigurationFactory() {
     
     ret.avoidComponents_ = [];
     
-    ret.depriorizeComponents_ = [];
+    ret.deprioritizeComponents_ = [];
     
     ret.stepIntervalMs_ = 0;
     
@@ -1455,7 +1455,7 @@ class _JourneyConfiguration extends JourneyConfiguration {
         
         this.avoidComponents_ = [];
         
-        this.depriorizeComponents_ = [];
+        this.deprioritizeComponents_ = [];
         
         this.stepIntervalMs_ = 0;
         
@@ -1492,15 +1492,15 @@ class _JourneyConfiguration extends JourneyConfiguration {
     }
 
     
-    SetDepriorizeComponents(val) {
+    SetDeprioritizeComponents(val) {
         
-        this.depriorizeComponents_ = val;
+        this.deprioritizeComponents_ = val;
         
     }
 
-    DepriorizeComponents() {
+    DeprioritizeComponents() {
         
-        return this.depriorizeComponents_;
+        return this.deprioritizeComponents_;
         
     }
 
@@ -1579,13 +1579,13 @@ class _JourneyConfiguration extends JourneyConfiguration {
         
         
         
-        const rawListdepriorizeComponents = [];
-        for (const v of (this.depriorizeComponents_ || [])) {
+        const rawListdeprioritizeComponents = [];
+        for (const v of (this.deprioritizeComponents_ || [])) {
             
-            rawListdepriorizeComponents.push(v);
+            rawListdeprioritizeComponents.push(v);
             
         }
-        data["depriorizeComponents"] = rawListdepriorizeComponents;
+        data["deprioritizeComponents"] = rawListdeprioritizeComponents;
         
         
         
@@ -1648,7 +1648,7 @@ class _JourneyConfiguration extends JourneyConfiguration {
                 
             }
             
-            if (key === "depriorizeComponents") {
+            if (key === "deprioritizeComponents") {
                 
                 const res = [];
 
@@ -1660,7 +1660,7 @@ class _JourneyConfiguration extends JourneyConfiguration {
                     res.push(ud);
                 }
 
-                this.depriorizeComponents_ = res;
+                this.deprioritizeComponents_ = res;
                 
             }
             
