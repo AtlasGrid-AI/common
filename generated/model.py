@@ -430,10 +430,10 @@ class JourneyInternal:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def OperationalStatus(self) -> str:
+    def OperSt(self) -> str:
         raise Exception("not implemented")
 
-    def SetOperationalStatus(self, val: str):
+    def SetOperSt(self, val: str):
         raise Exception("not implemented")
 
     def ErrorMessage(self) -> str:
@@ -499,7 +499,7 @@ class JourneyInternal:
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
-    ret.operationalStatus_ = ""
+    ret.operSt_ = ""
     ret.errorMessage_ = ""
     ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
     ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
@@ -515,7 +515,7 @@ def JourneyInternalFactory() -> JourneyInternal:
 
 class _JourneyInternal(JourneyInternal):
     def __init__(self):
-        self.operationalStatus_ = ""
+        self.operSt_ = ""
         self.errorMessage_ = ""
         self.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
         self.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
@@ -527,11 +527,11 @@ class _JourneyInternal(JourneyInternal):
         self.actionsPerformed_ = []
         self.actionsAvoided_ = []
 
-    def SetOperationalStatus(self, val):
-        self.operationalStatus_ = str(val)
+    def SetOperSt(self, val):
+        self.operSt_ = str(val)
 
-    def OperationalStatus(self):
-        return self.operationalStatus_
+    def OperSt(self):
+        return self.operSt_
 
     def SetErrorMessage(self, val):
         self.errorMessage_ = str(val)
@@ -602,7 +602,7 @@ class _JourneyInternal(JourneyInternal):
 
     def ToDict(self):
         data = {}
-        data["operationalStatus"] = self.operationalStatus_
+        data["operSt"] = self.operSt_
         data["errorMessage"] = self.errorMessage_
         data["lastRunAt"] = self.lastRunAt_
         data["lastActionAt"] = self.lastActionAt_
@@ -625,8 +625,8 @@ class _JourneyInternal(JourneyInternal):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "operationalStatus":
-                self.operationalStatus_ = rawValue
+            if key == "operSt":
+                self.operSt_ = rawValue
             if key == "errorMessage":
                 self.errorMessage_ = rawValue
             if key == "lastRunAt":
@@ -1122,10 +1122,10 @@ class JourneyExternal:
     def SetPlatform(self, val: str):
         raise Exception("not implemented")
 
-    def OperSt(self) -> str:
+    def AdminSt(self) -> str:
         raise Exception("not implemented")
 
-    def SetOperSt(self, val: str):
+    def SetAdminSt(self, val: str):
         raise Exception("not implemented")
 
     def Config(self) -> JourneyConfiguration:
@@ -1148,7 +1148,7 @@ def JourneyExternalFactory() -> JourneyExternal:
     ret.owner_ = ""
     ret.description_ = ""
     ret.platform_ = ""
-    ret.operSt_ = ""
+    ret.adminSt_ = ""
     ret.config_ = JourneyConfigurationFactory()
     ret.deleted_ = False
     return ret
@@ -1161,7 +1161,7 @@ class _JourneyExternal(JourneyExternal):
         self.owner_ = ""
         self.description_ = ""
         self.platform_ = ""
-        self.operSt_ = ""
+        self.adminSt_ = ""
         self.config_ = JourneyConfigurationFactory()
         self.deleted_ = False
 
@@ -1195,11 +1195,11 @@ class _JourneyExternal(JourneyExternal):
     def Platform(self):
         return self.platform_
 
-    def SetOperSt(self, val):
-        self.operSt_ = str(val)
+    def SetAdminSt(self, val):
+        self.adminSt_ = str(val)
 
-    def OperSt(self):
-        return self.operSt_
+    def AdminSt(self):
+        return self.adminSt_
 
     def SetConfig(self, val):
         self.config_ = val
@@ -1227,7 +1227,7 @@ class _JourneyExternal(JourneyExternal):
         data["owner"] = self.owner_
         data["description"] = self.description_
         data["platform"] = self.platform_
-        data["operSt"] = self.operSt_
+        data["adminSt"] = self.adminSt_
         # if self.config_ is not None:
         data["config"] = self.config_.ToDict()
         data["deleted"] = self.deleted_
@@ -1247,8 +1247,8 @@ class _JourneyExternal(JourneyExternal):
                 self.description_ = rawValue
             if key == "platform":
                 self.platform_ = rawValue
-            if key == "operSt":
-                self.operSt_ = rawValue
+            if key == "adminSt":
+                self.adminSt_ = rawValue
             if key == "config":
                 self.config_.FromDict(rawValue)
             if key == "deleted":

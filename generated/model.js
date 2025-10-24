@@ -782,8 +782,8 @@ class JourneyInternal {
     FromDict(data) { throw new Error("not implemented"); }
 
     
-    OperationalStatus() { throw new Error("not implemented"); }
-    SetOperationalStatus(val) { throw new Error("not implemented"); }
+    OperSt() { throw new Error("not implemented"); }
+    SetOperSt(val) { throw new Error("not implemented"); }
     
     ErrorMessage() { throw new Error("not implemented"); }
     SetErrorMessage(val) { throw new Error("not implemented"); }
@@ -820,7 +820,7 @@ class JourneyInternal {
 function JourneyInternalFactory() {
     const ret = new _JourneyInternal();
     
-    ret.operationalStatus_ = "";
+    ret.operSt_ = "";
     
     ret.errorMessage_ = "";
     
@@ -849,7 +849,7 @@ class _JourneyInternal extends JourneyInternal {
     constructor() {
         super();
         
-        this.operationalStatus_ = "";
+        this.operSt_ = "";
         
         this.errorMessage_ = "";
         
@@ -874,15 +874,15 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
-    SetOperationalStatus(val) {
+    SetOperSt(val) {
         
-        this.operationalStatus_ = String(val);
+        this.operSt_ = String(val);
         
     }
 
-    OperationalStatus() {
+    OperSt() {
         
-        return this.operationalStatus_;
+        return this.operSt_;
         
     }
 
@@ -1032,7 +1032,7 @@ class _JourneyInternal extends JourneyInternal {
         
         
         
-        data["operationalStatus"] = this.operationalStatus_;
+        data["operSt"] = this.operSt_;
         
         
         
@@ -1113,10 +1113,10 @@ class _JourneyInternal extends JourneyInternal {
             if (rawValue === null || rawValue === undefined) continue;
 
             
-            if (key === "operationalStatus") {
+            if (key === "operSt") {
                 
                 
-                this.operationalStatus_ = rawValue;
+                this.operSt_ = rawValue;
                 
 
                 
@@ -2029,8 +2029,8 @@ class JourneyExternal {
     Platform() { throw new Error("not implemented"); }
     SetPlatform(val) { throw new Error("not implemented"); }
     
-    OperSt() { throw new Error("not implemented"); }
-    SetOperSt(val) { throw new Error("not implemented"); }
+    AdminSt() { throw new Error("not implemented"); }
+    SetAdminSt(val) { throw new Error("not implemented"); }
     
     Config() { throw new Error("not implemented"); }
     SetConfig(val) { throw new Error("not implemented"); }
@@ -2053,7 +2053,7 @@ function JourneyExternalFactory() {
     
     ret.platform_ = "";
     
-    ret.operSt_ = "";
+    ret.adminSt_ = "";
     
     ret.config_ = JourneyConfigurationFactory();
     
@@ -2076,7 +2076,7 @@ class _JourneyExternal extends JourneyExternal {
         
         this.platform_ = "";
         
-        this.operSt_ = "";
+        this.adminSt_ = "";
         
         this.config_ = JourneyConfigurationFactory();
         
@@ -2150,15 +2150,15 @@ class _JourneyExternal extends JourneyExternal {
     }
 
     
-    SetOperSt(val) {
+    SetAdminSt(val) {
         
-        this.operSt_ = String(val);
+        this.adminSt_ = String(val);
         
     }
 
-    OperSt() {
+    AdminSt() {
         
-        return this.operSt_;
+        return this.adminSt_;
         
     }
 
@@ -2234,7 +2234,7 @@ class _JourneyExternal extends JourneyExternal {
         
         
         
-        data["operSt"] = this.operSt_;
+        data["adminSt"] = this.adminSt_;
         
         
         
@@ -2304,10 +2304,10 @@ class _JourneyExternal extends JourneyExternal {
                 
             }
             
-            if (key === "operSt") {
+            if (key === "adminSt") {
                 
                 
-                this.operSt_ = rawValue;
+                this.adminSt_ = rawValue;
                 
 
                 

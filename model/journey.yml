@@ -16,7 +16,7 @@ types:
         type: string
       - name: platform
         type: string
-      - name: operSt
+      - name: adminSt
         type: string
       - name: config
         type: JourneyConfiguration
@@ -55,7 +55,7 @@ types:
   - kind: Struct
     name: JourneyInternal
     properties:
-      - name: operationalStatus
+      - name: operSt
         type: string
       - name: errorMessage
         type: string
