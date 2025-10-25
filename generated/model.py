@@ -127,6 +127,92 @@ class _ScreenMetadata(ScreenMetadata):
                 self.tags_ = res
 
 
+class ScreenContent:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def TextInputs(self) -> list:
+        raise Exception("not implemented")
+
+    def SetTextInputs(self, val: list):
+        raise Exception("not implemented")
+
+    def Buttons(self) -> list:
+        raise Exception("not implemented")
+
+    def SetButtons(self, val: list):
+        raise Exception("not implemented")
+
+
+def ScreenContentFactory() -> ScreenContent:
+    ret = _ScreenContent()
+    ret.textInputs_ = []
+    ret.buttons_ = []
+    return ret
+
+
+class _ScreenContent(ScreenContent):
+    def __init__(self):
+        self.textInputs_ = []
+        self.buttons_ = []
+
+    def SetTextInputs(self, val):
+        self.textInputs_ = val
+
+    def TextInputs(self):
+        return self.textInputs_
+
+    def SetButtons(self, val):
+        self.buttons_ = val
+
+    def Buttons(self):
+        return self.buttons_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawList = []
+        for v in self.textInputs_:
+            rawList.append(v)
+        data["textInputs"] = rawList
+        rawList = []
+        for v in self.buttons_:
+            rawList.append(v)
+        data["buttons"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "textInputs":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.textInputs_ = res
+            if key == "buttons":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.buttons_ = res
+
+
 class Component:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -964,6 +1050,12 @@ class ScreenExternal:
     def SetIsEntryPoint(self, val: bool):
         raise Exception("not implemented")
 
+    def Content(self) -> ScreenContent:
+        raise Exception("not implemented")
+
+    def SetContent(self, val: ScreenContent):
+        raise Exception("not implemented")
+
     def Metadata(self) -> ScreenMetadata:
         raise Exception("not implemented")
 
@@ -979,6 +1071,7 @@ def ScreenExternalFactory() -> ScreenExternal:
     ret.image_ = ""
     ret.imageLowRes_ = ""
     ret.isEntryPoint_ = False
+    ret.content_ = ScreenContentFactory()
     ret.metadata_ = ScreenMetadataFactory()
     return ret
 
@@ -991,6 +1084,7 @@ class _ScreenExternal(ScreenExternal):
         self.image_ = ""
         self.imageLowRes_ = ""
         self.isEntryPoint_ = False
+        self.content_ = ScreenContentFactory()
         self.metadata_ = ScreenMetadataFactory()
 
     def SetJourney(self, val):
@@ -1029,6 +1123,12 @@ class _ScreenExternal(ScreenExternal):
     def IsEntryPoint(self):
         return self.isEntryPoint_
 
+    def SetContent(self, val):
+        self.content_ = val
+
+    def Content(self):
+        return self.content_
+
     def SetMetadata(self, val):
         self.metadata_ = val
 
@@ -1053,6 +1153,8 @@ class _ScreenExternal(ScreenExternal):
         data["image"] = self.image_
         data["imageLowRes"] = self.imageLowRes_
         data["isEntryPoint"] = self.isEntryPoint_
+        # if self.content_ is not None:
+        data["content"] = self.content_.ToDict()
         # if self.metadata_ is not None:
         data["metadata"] = self.metadata_.ToDict()
         return data
@@ -1078,6 +1180,8 @@ class _ScreenExternal(ScreenExternal):
                 self.imageLowRes_ = rawValue
             if key == "isEntryPoint":
                 self.isEntryPoint_ = rawValue
+            if key == "content":
+                self.content_.FromDict(rawValue)
             if key == "metadata":
                 self.metadata_.FromDict(rawValue)
 

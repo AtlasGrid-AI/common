@@ -214,6 +214,150 @@ class _ScreenMetadata extends ScreenMetadata {
 
 
 
+class ScreenContent {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    TextInputs() { throw new Error("not implemented"); }
+    SetTextInputs(val) { throw new Error("not implemented"); }
+    
+    Buttons() { throw new Error("not implemented"); }
+    SetButtons(val) { throw new Error("not implemented"); }
+    
+}
+
+function ScreenContentFactory() {
+    const ret = new _ScreenContent();
+    
+    ret.textInputs_ = [];
+    
+    ret.buttons_ = [];
+    
+    return ret;
+}
+
+class _ScreenContent extends ScreenContent {
+    constructor() {
+        super();
+        
+        this.textInputs_ = [];
+        
+        this.buttons_ = [];
+        
+    }
+
+    
+    SetTextInputs(val) {
+        
+        this.textInputs_ = val;
+        
+    }
+
+    TextInputs() {
+        
+        return this.textInputs_;
+        
+    }
+
+    
+    SetButtons(val) {
+        
+        this.buttons_ = val;
+        
+    }
+
+    Buttons() {
+        
+        return this.buttons_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawListtextInputs = [];
+        for (const v of (this.textInputs_ || [])) {
+            
+            rawListtextInputs.push(v);
+            
+        }
+        data["textInputs"] = rawListtextInputs;
+        
+        
+        
+        const rawListbuttons = [];
+        for (const v of (this.buttons_ || [])) {
+            
+            rawListbuttons.push(v);
+            
+        }
+        data["buttons"] = rawListbuttons;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "textInputs") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.textInputs_ = res;
+                
+            }
+            
+            if (key === "buttons") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.buttons_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Component {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -1724,6 +1868,9 @@ class ScreenExternal {
     IsEntryPoint() { throw new Error("not implemented"); }
     SetIsEntryPoint(val) { throw new Error("not implemented"); }
     
+    Content() { throw new Error("not implemented"); }
+    SetContent(val) { throw new Error("not implemented"); }
+    
     Metadata() { throw new Error("not implemented"); }
     SetMetadata(val) { throw new Error("not implemented"); }
     
@@ -1743,6 +1890,8 @@ function ScreenExternalFactory() {
     ret.imageLowRes_ = "";
     
     ret.isEntryPoint_ = false;
+    
+    ret.content_ = ScreenContentFactory();
     
     ret.metadata_ = ScreenMetadataFactory();
     
@@ -1764,6 +1913,8 @@ class _ScreenExternal extends ScreenExternal {
         this.imageLowRes_ = "";
         
         this.isEntryPoint_ = false;
+        
+        this.content_ = ScreenContentFactory();
         
         this.metadata_ = ScreenMetadataFactory();
         
@@ -1848,6 +1999,19 @@ class _ScreenExternal extends ScreenExternal {
     }
 
     
+    SetContent(val) {
+        
+        this.content_ = val;
+        
+    }
+
+    Content() {
+        
+        return this.content_;
+        
+    }
+
+    
     SetMetadata(val) {
         
         this.metadata_ = val;
@@ -1911,6 +2075,12 @@ class _ScreenExternal extends ScreenExternal {
         
         
         data["isEntryPoint"] = this.isEntryPoint_;
+        
+        
+        
+        
+        
+        data["content"] = this.content_ ? this.content_.ToDict() : null;
         
         
         
@@ -1985,6 +2155,15 @@ class _ScreenExternal extends ScreenExternal {
                 
                 
                 this.isEntryPoint_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "content") {
+                
+                
+                this.content_.FromDict(rawValue);
                 
 
                 

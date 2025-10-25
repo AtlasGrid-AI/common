@@ -17,6 +17,8 @@ types:
         type: string
       - name: isEntryPoint
         type: bool
+      - name: content
+        type: ScreenContent
       - name: metadata
         type: ScreenMetadata
   - kind: Struct
@@ -38,6 +40,13 @@ types:
       - name: description
         type: string
       - name: tags
+        type: "[]string"
+  - kind: Struct
+    name: ScreenContent
+    properties:
+      - name: textInputs
+        type: "[]string"
+      - name: buttons
         type: "[]string"
   - kind: Struct
     name: Component
