@@ -9,6 +9,10 @@ types:
         type: string
       - name: identifier
         type: string
+      - name: groupIdentifier
+        type: string
+      - name: flowIdentifier
+        type: string
       - name: edges
         type: "[]Edge"
       - name: image
@@ -17,6 +21,8 @@ types:
         type: string
       - name: isEntryPoint
         type: bool
+      - name: components
+        type: "[]Component"
       - name: content
         type: ScreenContent
       - name: metadata
@@ -28,6 +34,8 @@ types:
         type: string
       - name: component
         type: Component
+      - name: action
+        type: string
       - name: steps
         type: "[]int"
   - kind: Struct
@@ -65,3 +73,7 @@ types:
         type: int
       - name: centerY
         type: int
+      - name: type
+        type: string
+      - name: text
+        type: string

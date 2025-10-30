@@ -388,6 +388,12 @@ class Component {
     CenterY() { throw new Error("not implemented"); }
     SetCenterY(val) { throw new Error("not implemented"); }
     
+    Type() { throw new Error("not implemented"); }
+    SetType(val) { throw new Error("not implemented"); }
+    
+    Text() { throw new Error("not implemented"); }
+    SetText(val) { throw new Error("not implemented"); }
+    
 }
 
 function ComponentFactory() {
@@ -406,6 +412,10 @@ function ComponentFactory() {
     ret.centerX_ = 0;
     
     ret.centerY_ = 0;
+    
+    ret.type_ = "";
+    
+    ret.text_ = "";
     
     return ret;
 }
@@ -427,6 +437,10 @@ class _Component extends Component {
         this.centerX_ = 0;
         
         this.centerY_ = 0;
+        
+        this.type_ = "";
+        
+        this.text_ = "";
         
     }
 
@@ -522,6 +536,32 @@ class _Component extends Component {
     }
 
     
+    SetType(val) {
+        
+        this.type_ = String(val);
+        
+    }
+
+    Type() {
+        
+        return this.type_;
+        
+    }
+
+    
+    SetText(val) {
+        
+        this.text_ = String(val);
+        
+    }
+
+    Text() {
+        
+        return this.text_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -574,6 +614,18 @@ class _Component extends Component {
         
         
         data["centerY"] = this.centerY_;
+        
+        
+        
+        
+        
+        data["type"] = this.type_;
+        
+        
+        
+        
+        
+        data["text"] = this.text_;
         
         
         
@@ -644,6 +696,24 @@ class _Component extends Component {
                 
                 
                 this.centerY_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "type") {
+                
+                
+                this.type_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "text") {
+                
+                
+                this.text_ = rawValue;
                 
 
                 
@@ -1391,6 +1461,9 @@ class Edge {
     Component() { throw new Error("not implemented"); }
     SetComponent(val) { throw new Error("not implemented"); }
     
+    Action() { throw new Error("not implemented"); }
+    SetAction(val) { throw new Error("not implemented"); }
+    
     Steps() { throw new Error("not implemented"); }
     SetSteps(val) { throw new Error("not implemented"); }
     
@@ -1402,6 +1475,8 @@ function EdgeFactory() {
     ret.targetScreenIdentifier_ = "";
     
     ret.component_ = ComponentFactory();
+    
+    ret.action_ = "";
     
     ret.steps_ = [];
     
@@ -1415,6 +1490,8 @@ class _Edge extends Edge {
         this.targetScreenIdentifier_ = "";
         
         this.component_ = ComponentFactory();
+        
+        this.action_ = "";
         
         this.steps_ = [];
         
@@ -1443,6 +1520,19 @@ class _Edge extends Edge {
     Component() {
         
         return this.component_;
+        
+    }
+
+    
+    SetAction(val) {
+        
+        this.action_ = String(val);
+        
+    }
+
+    Action() {
+        
+        return this.action_;
         
     }
 
@@ -1486,6 +1576,12 @@ class _Edge extends Edge {
         
         
         
+        
+        data["action"] = this.action_;
+        
+        
+        
+        
         const rawListsteps = [];
         for (const v of (this.steps_ || [])) {
             
@@ -1517,6 +1613,15 @@ class _Edge extends Edge {
                 
                 
                 this.component_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "action") {
+                
+                
+                this.action_ = rawValue;
                 
 
                 
@@ -1856,6 +1961,12 @@ class ScreenExternal {
     Identifier() { throw new Error("not implemented"); }
     SetIdentifier(val) { throw new Error("not implemented"); }
     
+    GroupIdentifier() { throw new Error("not implemented"); }
+    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    
+    FlowIdentifier() { throw new Error("not implemented"); }
+    SetFlowIdentifier(val) { throw new Error("not implemented"); }
+    
     Edges() { throw new Error("not implemented"); }
     SetEdges(val) { throw new Error("not implemented"); }
     
@@ -1867,6 +1978,9 @@ class ScreenExternal {
     
     IsEntryPoint() { throw new Error("not implemented"); }
     SetIsEntryPoint(val) { throw new Error("not implemented"); }
+    
+    Components() { throw new Error("not implemented"); }
+    SetComponents(val) { throw new Error("not implemented"); }
     
     Content() { throw new Error("not implemented"); }
     SetContent(val) { throw new Error("not implemented"); }
@@ -1883,6 +1997,10 @@ function ScreenExternalFactory() {
     
     ret.identifier_ = "";
     
+    ret.groupIdentifier_ = "";
+    
+    ret.flowIdentifier_ = "";
+    
     ret.edges_ = [];
     
     ret.image_ = "";
@@ -1890,6 +2008,8 @@ function ScreenExternalFactory() {
     ret.imageLowRes_ = "";
     
     ret.isEntryPoint_ = false;
+    
+    ret.components_ = [];
     
     ret.content_ = ScreenContentFactory();
     
@@ -1906,6 +2026,10 @@ class _ScreenExternal extends ScreenExternal {
         
         this.identifier_ = "";
         
+        this.groupIdentifier_ = "";
+        
+        this.flowIdentifier_ = "";
+        
         this.edges_ = [];
         
         this.image_ = "";
@@ -1913,6 +2037,8 @@ class _ScreenExternal extends ScreenExternal {
         this.imageLowRes_ = "";
         
         this.isEntryPoint_ = false;
+        
+        this.components_ = [];
         
         this.content_ = ScreenContentFactory();
         
@@ -1943,6 +2069,32 @@ class _ScreenExternal extends ScreenExternal {
     Identifier() {
         
         return this.identifier_;
+        
+    }
+
+    
+    SetGroupIdentifier(val) {
+        
+        this.groupIdentifier_ = String(val);
+        
+    }
+
+    GroupIdentifier() {
+        
+        return this.groupIdentifier_;
+        
+    }
+
+    
+    SetFlowIdentifier(val) {
+        
+        this.flowIdentifier_ = String(val);
+        
+    }
+
+    FlowIdentifier() {
+        
+        return this.flowIdentifier_;
         
     }
 
@@ -1999,6 +2151,19 @@ class _ScreenExternal extends ScreenExternal {
     }
 
     
+    SetComponents(val) {
+        
+        this.components_ = val;
+        
+    }
+
+    Components() {
+        
+        return this.components_;
+        
+    }
+
+    
     SetContent(val) {
         
         this.content_ = val;
@@ -2051,6 +2216,18 @@ class _ScreenExternal extends ScreenExternal {
         
         
         
+        
+        data["groupIdentifier"] = this.groupIdentifier_;
+        
+        
+        
+        
+        
+        data["flowIdentifier"] = this.flowIdentifier_;
+        
+        
+        
+        
         const rawListedges = [];
         for (const v of (this.edges_ || [])) {
             
@@ -2076,6 +2253,16 @@ class _ScreenExternal extends ScreenExternal {
         
         data["isEntryPoint"] = this.isEntryPoint_;
         
+        
+        
+        
+        const rawListcomponents = [];
+        for (const v of (this.components_ || [])) {
+            
+            rawListcomponents.push(v.ToDict());
+            
+        }
+        data["components"] = rawListcomponents;
         
         
         
@@ -2112,6 +2299,24 @@ class _ScreenExternal extends ScreenExternal {
                 
                 
                 this.identifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "groupIdentifier") {
+                
+                
+                this.groupIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "flowIdentifier") {
+                
+                
+                this.flowIdentifier_ = rawValue;
                 
 
                 
@@ -2157,6 +2362,22 @@ class _ScreenExternal extends ScreenExternal {
                 this.isEntryPoint_ = rawValue;
                 
 
+                
+            }
+            
+            if (key === "components") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = ComponentFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.components_ = res;
                 
             }
             

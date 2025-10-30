@@ -265,6 +265,18 @@ class Component:
     def SetCenterY(self, val: int):
         raise Exception("not implemented")
 
+    def Type(self) -> str:
+        raise Exception("not implemented")
+
+    def SetType(self, val: str):
+        raise Exception("not implemented")
+
+    def Text(self) -> str:
+        raise Exception("not implemented")
+
+    def SetText(self, val: str):
+        raise Exception("not implemented")
+
 
 def ComponentFactory() -> Component:
     ret = _Component()
@@ -275,6 +287,8 @@ def ComponentFactory() -> Component:
     ret.rectH_ = 0
     ret.centerX_ = 0
     ret.centerY_ = 0
+    ret.type_ = ""
+    ret.text_ = ""
     return ret
 
 
@@ -287,6 +301,8 @@ class _Component(Component):
         self.rectH_ = 0
         self.centerX_ = 0
         self.centerY_ = 0
+        self.type_ = ""
+        self.text_ = ""
 
     def SetIdentifier(self, val):
         self.identifier_ = str(val)
@@ -330,6 +346,18 @@ class _Component(Component):
     def CenterY(self):
         return self.centerY_
 
+    def SetType(self, val):
+        self.type_ = str(val)
+
+    def Type(self):
+        return self.type_
+
+    def SetText(self, val):
+        self.text_ = str(val)
+
+    def Text(self):
+        return self.text_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -346,6 +374,8 @@ class _Component(Component):
         data["rectH"] = self.rectH_
         data["centerX"] = self.centerX_
         data["centerY"] = self.centerY_
+        data["type"] = self.type_
+        data["text"] = self.text_
         return data
 
     def FromDict(self, data):
@@ -366,6 +396,10 @@ class _Component(Component):
                 self.centerX_ = rawValue
             if key == "centerY":
                 self.centerY_ = rawValue
+            if key == "type":
+                self.type_ = rawValue
+            if key == "text":
+                self.text_ = rawValue
 
 
 class CrawlerConfiguration:
@@ -767,6 +801,12 @@ class Edge:
     def SetComponent(self, val: Component):
         raise Exception("not implemented")
 
+    def Action(self) -> str:
+        raise Exception("not implemented")
+
+    def SetAction(self, val: str):
+        raise Exception("not implemented")
+
     def Steps(self) -> list:
         raise Exception("not implemented")
 
@@ -778,6 +818,7 @@ def EdgeFactory() -> Edge:
     ret = _Edge()
     ret.targetScreenIdentifier_ = ""
     ret.component_ = ComponentFactory()
+    ret.action_ = ""
     ret.steps_ = []
     return ret
 
@@ -786,6 +827,7 @@ class _Edge(Edge):
     def __init__(self):
         self.targetScreenIdentifier_ = ""
         self.component_ = ComponentFactory()
+        self.action_ = ""
         self.steps_ = []
 
     def SetTargetScreenIdentifier(self, val):
@@ -799,6 +841,12 @@ class _Edge(Edge):
 
     def Component(self):
         return self.component_
+
+    def SetAction(self, val):
+        self.action_ = str(val)
+
+    def Action(self):
+        return self.action_
 
     def SetSteps(self, val):
         self.steps_ = val
@@ -818,6 +866,7 @@ class _Edge(Edge):
         data["targetScreenIdentifier"] = self.targetScreenIdentifier_
         # if self.component_ is not None:
         data["component"] = self.component_.ToDict()
+        data["action"] = self.action_
         rawList = []
         for v in self.steps_:
             rawList.append(v)
@@ -832,6 +881,8 @@ class _Edge(Edge):
                 self.targetScreenIdentifier_ = rawValue
             if key == "component":
                 self.component_.FromDict(rawValue)
+            if key == "action":
+                self.action_ = rawValue
             if key == "steps":
                 res = []
                 for rw in rawValue:
@@ -1026,6 +1077,18 @@ class ScreenExternal:
     def SetIdentifier(self, val: str):
         raise Exception("not implemented")
 
+    def GroupIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetGroupIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def FlowIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetFlowIdentifier(self, val: str):
+        raise Exception("not implemented")
+
     def Edges(self) -> list:
         raise Exception("not implemented")
 
@@ -1050,6 +1113,12 @@ class ScreenExternal:
     def SetIsEntryPoint(self, val: bool):
         raise Exception("not implemented")
 
+    def Components(self) -> list:
+        raise Exception("not implemented")
+
+    def SetComponents(self, val: list):
+        raise Exception("not implemented")
+
     def Content(self) -> ScreenContent:
         raise Exception("not implemented")
 
@@ -1067,10 +1136,13 @@ def ScreenExternalFactory() -> ScreenExternal:
     ret = _ScreenExternal()
     ret.journey_ = ""
     ret.identifier_ = ""
+    ret.groupIdentifier_ = ""
+    ret.flowIdentifier_ = ""
     ret.edges_ = []
     ret.image_ = ""
     ret.imageLowRes_ = ""
     ret.isEntryPoint_ = False
+    ret.components_ = []
     ret.content_ = ScreenContentFactory()
     ret.metadata_ = ScreenMetadataFactory()
     return ret
@@ -1080,10 +1152,13 @@ class _ScreenExternal(ScreenExternal):
     def __init__(self):
         self.journey_ = ""
         self.identifier_ = ""
+        self.groupIdentifier_ = ""
+        self.flowIdentifier_ = ""
         self.edges_ = []
         self.image_ = ""
         self.imageLowRes_ = ""
         self.isEntryPoint_ = False
+        self.components_ = []
         self.content_ = ScreenContentFactory()
         self.metadata_ = ScreenMetadataFactory()
 
@@ -1098,6 +1173,18 @@ class _ScreenExternal(ScreenExternal):
 
     def Identifier(self):
         return self.identifier_
+
+    def SetGroupIdentifier(self, val):
+        self.groupIdentifier_ = str(val)
+
+    def GroupIdentifier(self):
+        return self.groupIdentifier_
+
+    def SetFlowIdentifier(self, val):
+        self.flowIdentifier_ = str(val)
+
+    def FlowIdentifier(self):
+        return self.flowIdentifier_
 
     def SetEdges(self, val):
         self.edges_ = val
@@ -1123,6 +1210,12 @@ class _ScreenExternal(ScreenExternal):
     def IsEntryPoint(self):
         return self.isEntryPoint_
 
+    def SetComponents(self, val):
+        self.components_ = val
+
+    def Components(self):
+        return self.components_
+
     def SetContent(self, val):
         self.content_ = val
 
@@ -1146,6 +1239,8 @@ class _ScreenExternal(ScreenExternal):
         data = {}
         data["journey"] = self.journey_
         data["identifier"] = self.identifier_
+        data["groupIdentifier"] = self.groupIdentifier_
+        data["flowIdentifier"] = self.flowIdentifier_
         rawList = []
         for v in self.edges_:
             rawList.append(v.ToDict())
@@ -1153,6 +1248,10 @@ class _ScreenExternal(ScreenExternal):
         data["image"] = self.image_
         data["imageLowRes"] = self.imageLowRes_
         data["isEntryPoint"] = self.isEntryPoint_
+        rawList = []
+        for v in self.components_:
+            rawList.append(v.ToDict())
+        data["components"] = rawList
         # if self.content_ is not None:
         data["content"] = self.content_.ToDict()
         # if self.metadata_ is not None:
@@ -1167,6 +1266,10 @@ class _ScreenExternal(ScreenExternal):
                 self.journey_ = rawValue
             if key == "identifier":
                 self.identifier_ = rawValue
+            if key == "groupIdentifier":
+                self.groupIdentifier_ = rawValue
+            if key == "flowIdentifier":
+                self.flowIdentifier_ = rawValue
             if key == "edges":
                 res = []
                 for rw in rawValue:
@@ -1180,6 +1283,13 @@ class _ScreenExternal(ScreenExternal):
                 self.imageLowRes_ = rawValue
             if key == "isEntryPoint":
                 self.isEntryPoint_ = rawValue
+            if key == "components":
+                res = []
+                for rw in rawValue:
+                    ud = ComponentFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.components_ = res
             if key == "content":
                 self.content_.FromDict(rawValue)
             if key == "metadata":
