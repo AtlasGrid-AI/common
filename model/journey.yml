@@ -31,6 +31,8 @@ types:
         type: "[]string"
       - name: deprioritizeComponents
         type: "[]string"
+      - name: additionalFlows
+        type: "map[string]string"
       - name: stepIntervalMs
         type: int
       - name: maxStepCount

@@ -920,6 +920,12 @@ class JourneyConfiguration:
     def SetDeprioritizeComponents(self, val: list):
         raise Exception("not implemented")
 
+    def AdditionalFlows(self) -> dict:
+        raise Exception("not implemented")
+
+    def SetAdditionalFlows(self, val: dict):
+        raise Exception("not implemented")
+
     def StepIntervalMs(self) -> int:
         raise Exception("not implemented")
 
@@ -944,6 +950,7 @@ def JourneyConfigurationFactory() -> JourneyConfiguration:
     ret.textFields_ = {}
     ret.avoidComponents_ = []
     ret.deprioritizeComponents_ = []
+    ret.additionalFlows_ = {}
     ret.stepIntervalMs_ = 0
     ret.maxStepCount_ = 0
     ret.crawler_ = CrawlerConfigurationFactory()
@@ -955,6 +962,7 @@ class _JourneyConfiguration(JourneyConfiguration):
         self.textFields_ = {}
         self.avoidComponents_ = []
         self.deprioritizeComponents_ = []
+        self.additionalFlows_ = {}
         self.stepIntervalMs_ = 0
         self.maxStepCount_ = 0
         self.crawler_ = CrawlerConfigurationFactory()
@@ -976,6 +984,12 @@ class _JourneyConfiguration(JourneyConfiguration):
 
     def DeprioritizeComponents(self):
         return self.deprioritizeComponents_
+
+    def SetAdditionalFlows(self, val):
+        self.additionalFlows_ = val
+
+    def AdditionalFlows(self):
+        return self.additionalFlows_
 
     def SetStepIntervalMs(self, val):
         self.stepIntervalMs_ = int(val)
@@ -1016,6 +1030,10 @@ class _JourneyConfiguration(JourneyConfiguration):
         for v in self.deprioritizeComponents_:
             rawList.append(v)
         data["deprioritizeComponents"] = rawList
+        rawSubmap = {}
+        for k, v in self.additionalFlows_.items():
+            rawSubmap[k] = v
+        data["additionalFlows"] = rawSubmap
         data["stepIntervalMs"] = self.stepIntervalMs_
         data["maxStepCount"] = self.maxStepCount_
         # if self.crawler_ is not None:
@@ -1047,6 +1065,13 @@ class _JourneyConfiguration(JourneyConfiguration):
                     ud = rw
                     res.append(ud)
                 self.deprioritizeComponents_ = res
+            if key == "additionalFlows":
+                res = {}
+                for rk, rw in rawValue.items():
+                    ud = ""
+                    ud = rw
+                    res[rk] = ud
+                self.additionalFlows_ = res
             if key == "stepIntervalMs":
                 self.stepIntervalMs_ = rawValue
             if key == "maxStepCount":

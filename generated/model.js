@@ -1667,6 +1667,9 @@ class JourneyConfiguration {
     DeprioritizeComponents() { throw new Error("not implemented"); }
     SetDeprioritizeComponents(val) { throw new Error("not implemented"); }
     
+    AdditionalFlows() { throw new Error("not implemented"); }
+    SetAdditionalFlows(val) { throw new Error("not implemented"); }
+    
     StepIntervalMs() { throw new Error("not implemented"); }
     SetStepIntervalMs(val) { throw new Error("not implemented"); }
     
@@ -1687,6 +1690,8 @@ function JourneyConfigurationFactory() {
     
     ret.deprioritizeComponents_ = [];
     
+    ret.additionalFlows_ = {};
+    
     ret.stepIntervalMs_ = 0;
     
     ret.maxStepCount_ = 0;
@@ -1705,6 +1710,8 @@ class _JourneyConfiguration extends JourneyConfiguration {
         this.avoidComponents_ = [];
         
         this.deprioritizeComponents_ = [];
+        
+        this.additionalFlows_ = {};
         
         this.stepIntervalMs_ = 0;
         
@@ -1750,6 +1757,19 @@ class _JourneyConfiguration extends JourneyConfiguration {
     DeprioritizeComponents() {
         
         return this.deprioritizeComponents_;
+        
+    }
+
+    
+    SetAdditionalFlows(val) {
+        
+        this.additionalFlows_ = val;
+        
+    }
+
+    AdditionalFlows() {
+        
+        return this.additionalFlows_;
         
     }
 
@@ -1838,6 +1858,17 @@ class _JourneyConfiguration extends JourneyConfiguration {
         
         
         
+        const rawSubmap = {};
+        for (const k in (this.additionalFlows_ || {})) {
+            const v = this.additionalFlows_[k];
+            
+            rawSubmap[k] = v;
+            
+        }
+        data["additionalFlows"] = rawSubmap;
+        
+        
+        
         
         data["stepIntervalMs"] = this.stepIntervalMs_;
         
@@ -1910,6 +1941,23 @@ class _JourneyConfiguration extends JourneyConfiguration {
                 }
 
                 this.deprioritizeComponents_ = res;
+                
+            }
+            
+            if (key === "additionalFlows") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.additionalFlows_ = res;
                 
             }
             
