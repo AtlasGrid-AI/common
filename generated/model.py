@@ -1298,6 +1298,12 @@ class Edge:
     def SetAction(self, val: str):
         raise Exception("not implemented")
 
+    def Expired(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetExpired(self, val: bool):
+        raise Exception("not implemented")
+
     def Steps(self) -> list:
         raise Exception("not implemented")
 
@@ -1310,6 +1316,7 @@ def EdgeFactory() -> Edge:
     ret.targetScreenIdentifier_ = ""
     ret.component_ = ComponentFactory()
     ret.action_ = ""
+    ret.expired_ = False
     ret.steps_ = []
     return ret
 
@@ -1319,6 +1326,7 @@ class _Edge(Edge):
         self.targetScreenIdentifier_ = ""
         self.component_ = ComponentFactory()
         self.action_ = ""
+        self.expired_ = False
         self.steps_ = []
 
     def SetTargetScreenIdentifier(self, val):
@@ -1339,6 +1347,12 @@ class _Edge(Edge):
     def Action(self):
         return self.action_
 
+    def SetExpired(self, val):
+        self.expired_ = bool(val)
+
+    def Expired(self):
+        return self.expired_
+
     def SetSteps(self, val):
         self.steps_ = val
 
@@ -1358,6 +1372,7 @@ class _Edge(Edge):
         # if self.component_ is not None:
         data["component"] = self.component_.ToDict()
         data["action"] = self.action_
+        data["expired"] = self.expired_
         rawList = []
         for v in self.steps_:
             rawList.append(v)
@@ -1374,6 +1389,8 @@ class _Edge(Edge):
                 self.component_.FromDict(rawValue)
             if key == "action":
                 self.action_ = rawValue
+            if key == "expired":
+                self.expired_ = rawValue
             if key == "steps":
                 res = []
                 for rw in rawValue:

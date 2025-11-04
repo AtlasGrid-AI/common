@@ -41,10 +41,16 @@ types:
     properties:
       - name: targetScreenIdentifier
         type: string
+        description: The identifier of the target screen
       - name: component
         type: Component
+        description: The component triggering the transition
       - name: action
         type: string
+        description: The action to be taken on the component
+      - name: expired
+        type: bool
+        description: the edge may expire if the target screen is no longer reachable via the component/action
       - name: steps
         type: "[]int"
   - kind: Struct
