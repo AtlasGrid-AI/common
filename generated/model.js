@@ -21,6 +21,9 @@ class ScreenMetadata {
     Tags() { throw new Error("not implemented"); }
     SetTags(val) { throw new Error("not implemented"); }
     
+    Flow() { throw new Error("not implemented"); }
+    SetFlow(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenMetadataFactory() {
@@ -33,6 +36,8 @@ function ScreenMetadataFactory() {
     ret.description_ = "";
     
     ret.tags_ = [];
+    
+    ret.flow_ = "";
     
     return ret;
 }
@@ -48,6 +53,8 @@ class _ScreenMetadata extends ScreenMetadata {
         this.description_ = "";
         
         this.tags_ = [];
+        
+        this.flow_ = "";
         
     }
 
@@ -104,6 +111,19 @@ class _ScreenMetadata extends ScreenMetadata {
     }
 
     
+    SetFlow(val) {
+        
+        this.flow_ = String(val);
+        
+    }
+
+    Flow() {
+        
+        return this.flow_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -147,6 +167,12 @@ class _ScreenMetadata extends ScreenMetadata {
             
         }
         data["tags"] = rawListtags;
+        
+        
+        
+        
+        data["flow"] = this.flow_;
+        
         
         
         return data;
@@ -205,6 +231,15 @@ class _ScreenMetadata extends ScreenMetadata {
                 }
 
                 this.tags_ = res;
+                
+            }
+            
+            if (key === "flow") {
+                
+                
+                this.flow_ = rawValue;
+                
+
                 
             }
             
@@ -358,7 +393,7 @@ class _ScreenContent extends ScreenContent {
 
 
 
-class Component {
+class Rectangle {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
     }
@@ -367,20 +402,17 @@ class Component {
     FromDict(data) { throw new Error("not implemented"); }
 
     
-    Identifier() { throw new Error("not implemented"); }
-    SetIdentifier(val) { throw new Error("not implemented"); }
+    X() { throw new Error("not implemented"); }
+    SetX(val) { throw new Error("not implemented"); }
     
-    RectX() { throw new Error("not implemented"); }
-    SetRectX(val) { throw new Error("not implemented"); }
+    Y() { throw new Error("not implemented"); }
+    SetY(val) { throw new Error("not implemented"); }
     
-    RectY() { throw new Error("not implemented"); }
-    SetRectY(val) { throw new Error("not implemented"); }
+    Width() { throw new Error("not implemented"); }
+    SetWidth(val) { throw new Error("not implemented"); }
     
-    RectW() { throw new Error("not implemented"); }
-    SetRectW(val) { throw new Error("not implemented"); }
-    
-    RectH() { throw new Error("not implemented"); }
-    SetRectH(val) { throw new Error("not implemented"); }
+    Height() { throw new Error("not implemented"); }
+    SetHeight(val) { throw new Error("not implemented"); }
     
     CenterX() { throw new Error("not implemented"); }
     SetCenterX(val) { throw new Error("not implemented"); }
@@ -388,124 +420,93 @@ class Component {
     CenterY() { throw new Error("not implemented"); }
     SetCenterY(val) { throw new Error("not implemented"); }
     
-    Type() { throw new Error("not implemented"); }
-    SetType(val) { throw new Error("not implemented"); }
-    
-    Text() { throw new Error("not implemented"); }
-    SetText(val) { throw new Error("not implemented"); }
-    
 }
 
-function ComponentFactory() {
-    const ret = new _Component();
+function RectangleFactory() {
+    const ret = new _Rectangle();
     
-    ret.identifier_ = "";
+    ret.x_ = 0;
     
-    ret.rectX_ = 0;
+    ret.y_ = 0;
     
-    ret.rectY_ = 0;
+    ret.width_ = 0;
     
-    ret.rectW_ = 0;
-    
-    ret.rectH_ = 0;
+    ret.height_ = 0;
     
     ret.centerX_ = 0;
     
     ret.centerY_ = 0;
     
-    ret.type_ = "";
-    
-    ret.text_ = "";
-    
     return ret;
 }
 
-class _Component extends Component {
+class _Rectangle extends Rectangle {
     constructor() {
         super();
         
-        this.identifier_ = "";
+        this.x_ = 0;
         
-        this.rectX_ = 0;
+        this.y_ = 0;
         
-        this.rectY_ = 0;
+        this.width_ = 0;
         
-        this.rectW_ = 0;
-        
-        this.rectH_ = 0;
+        this.height_ = 0;
         
         this.centerX_ = 0;
         
         this.centerY_ = 0;
         
-        this.type_ = "";
+    }
+
+    
+    SetX(val) {
         
-        this.text_ = "";
+        this.x_ = Number.parseInt(val);
+        
+    }
+
+    X() {
+        
+        return this.x_;
         
     }
 
     
-    SetIdentifier(val) {
+    SetY(val) {
         
-        this.identifier_ = String(val);
-        
-    }
-
-    Identifier() {
-        
-        return this.identifier_;
+        this.y_ = Number.parseInt(val);
         
     }
 
-    
-    SetRectX(val) {
+    Y() {
         
-        this.rectX_ = Number.parseInt(val);
-        
-    }
-
-    RectX() {
-        
-        return this.rectX_;
+        return this.y_;
         
     }
 
     
-    SetRectY(val) {
+    SetWidth(val) {
         
-        this.rectY_ = Number.parseInt(val);
-        
-    }
-
-    RectY() {
-        
-        return this.rectY_;
+        this.width_ = Number.parseInt(val);
         
     }
 
-    
-    SetRectW(val) {
+    Width() {
         
-        this.rectW_ = Number.parseInt(val);
-        
-    }
-
-    RectW() {
-        
-        return this.rectW_;
+        return this.width_;
         
     }
 
     
-    SetRectH(val) {
+    SetHeight(val) {
         
-        this.rectH_ = Number.parseInt(val);
+        this.height_ = Number.parseInt(val);
         
     }
 
-    RectH() {
+    Height() {
         
-        return this.rectH_;
+        return this.height_;
         
     }
 
@@ -536,32 +537,6 @@ class _Component extends Component {
     }
 
     
-    SetType(val) {
-        
-        this.type_ = String(val);
-        
-    }
-
-    Type() {
-        
-        return this.type_;
-        
-    }
-
-    
-    SetText(val) {
-        
-        this.text_ = String(val);
-        
-    }
-
-    Text() {
-        
-        return this.text_;
-        
-    }
-
-    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -577,31 +552,25 @@ class _Component extends Component {
         
         
         
-        data["identifier"] = this.identifier_;
+        data["x"] = this.x_;
         
         
         
         
         
-        data["rectX"] = this.rectX_;
+        data["y"] = this.y_;
         
         
         
         
         
-        data["rectY"] = this.rectY_;
+        data["width"] = this.width_;
         
         
         
         
         
-        data["rectW"] = this.rectW_;
-        
-        
-        
-        
-        
-        data["rectH"] = this.rectH_;
+        data["height"] = this.height_;
         
         
         
@@ -617,18 +586,6 @@ class _Component extends Component {
         
         
         
-        
-        
-        data["type"] = this.type_;
-        
-        
-        
-        
-        
-        data["text"] = this.text_;
-        
-        
-        
         return data;
     }
 
@@ -638,46 +595,37 @@ class _Component extends Component {
             if (rawValue === null || rawValue === undefined) continue;
 
             
-            if (key === "identifier") {
+            if (key === "x") {
                 
                 
-                this.identifier_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "rectX") {
-                
-                
-                this.rectX_ = rawValue;
+                this.x_ = rawValue;
                 
 
                 
             }
             
-            if (key === "rectY") {
+            if (key === "y") {
                 
                 
-                this.rectY_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "rectW") {
-                
-                
-                this.rectW_ = rawValue;
+                this.y_ = rawValue;
                 
 
                 
             }
             
-            if (key === "rectH") {
+            if (key === "width") {
                 
                 
-                this.rectH_ = rawValue;
+                this.width_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "height") {
+                
+                
+                this.height_ = rawValue;
                 
 
                 
@@ -701,10 +649,548 @@ class _Component extends Component {
                 
             }
             
-            if (key === "type") {
+        }
+    }
+}
+
+
+
+class PageNodeAttributes {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    ClassName() { throw new Error("not implemented"); }
+    SetClassName(val) { throw new Error("not implemented"); }
+    
+    ResourceId() { throw new Error("not implemented"); }
+    SetResourceId(val) { throw new Error("not implemented"); }
+    
+    Package() { throw new Error("not implemented"); }
+    SetPackage(val) { throw new Error("not implemented"); }
+    
+    Text() { throw new Error("not implemented"); }
+    SetText(val) { throw new Error("not implemented"); }
+    
+    Rectangle() { throw new Error("not implemented"); }
+    SetRectangle(val) { throw new Error("not implemented"); }
+    
+    Index() { throw new Error("not implemented"); }
+    SetIndex(val) { throw new Error("not implemented"); }
+    
+    IsDisplayed() { throw new Error("not implemented"); }
+    SetIsDisplayed(val) { throw new Error("not implemented"); }
+    
+    IsEnabled() { throw new Error("not implemented"); }
+    SetIsEnabled(val) { throw new Error("not implemented"); }
+    
+    IsCheckable() { throw new Error("not implemented"); }
+    SetIsCheckable(val) { throw new Error("not implemented"); }
+    
+    IsChecked() { throw new Error("not implemented"); }
+    SetIsChecked(val) { throw new Error("not implemented"); }
+    
+    IsDialog() { throw new Error("not implemented"); }
+    SetIsDialog(val) { throw new Error("not implemented"); }
+    
+    IsClickable() { throw new Error("not implemented"); }
+    SetIsClickable(val) { throw new Error("not implemented"); }
+    
+    IsFocusable() { throw new Error("not implemented"); }
+    SetIsFocusable(val) { throw new Error("not implemented"); }
+    
+    IsFocused() { throw new Error("not implemented"); }
+    SetIsFocused(val) { throw new Error("not implemented"); }
+    
+    IsLongClickable() { throw new Error("not implemented"); }
+    SetIsLongClickable(val) { throw new Error("not implemented"); }
+    
+    IsScrollable() { throw new Error("not implemented"); }
+    SetIsScrollable(val) { throw new Error("not implemented"); }
+    
+    IsSelected() { throw new Error("not implemented"); }
+    SetIsSelected(val) { throw new Error("not implemented"); }
+    
+    IsDismissable() { throw new Error("not implemented"); }
+    SetIsDismissable(val) { throw new Error("not implemented"); }
+    
+}
+
+function PageNodeAttributesFactory() {
+    const ret = new _PageNodeAttributes();
+    
+    ret.className_ = "";
+    
+    ret.resourceId_ = "";
+    
+    ret.package_ = "";
+    
+    ret.text_ = "";
+    
+    ret.rectangle_ = RectangleFactory();
+    
+    ret.index_ = 0;
+    
+    ret.isDisplayed_ = false;
+    
+    ret.isEnabled_ = false;
+    
+    ret.isCheckable_ = false;
+    
+    ret.isChecked_ = false;
+    
+    ret.isDialog_ = false;
+    
+    ret.isClickable_ = false;
+    
+    ret.isFocusable_ = false;
+    
+    ret.isFocused_ = false;
+    
+    ret.isLongClickable_ = false;
+    
+    ret.isScrollable_ = false;
+    
+    ret.isSelected_ = false;
+    
+    ret.isDismissable_ = false;
+    
+    return ret;
+}
+
+class _PageNodeAttributes extends PageNodeAttributes {
+    constructor() {
+        super();
+        
+        this.className_ = "";
+        
+        this.resourceId_ = "";
+        
+        this.package_ = "";
+        
+        this.text_ = "";
+        
+        this.rectangle_ = RectangleFactory();
+        
+        this.index_ = 0;
+        
+        this.isDisplayed_ = false;
+        
+        this.isEnabled_ = false;
+        
+        this.isCheckable_ = false;
+        
+        this.isChecked_ = false;
+        
+        this.isDialog_ = false;
+        
+        this.isClickable_ = false;
+        
+        this.isFocusable_ = false;
+        
+        this.isFocused_ = false;
+        
+        this.isLongClickable_ = false;
+        
+        this.isScrollable_ = false;
+        
+        this.isSelected_ = false;
+        
+        this.isDismissable_ = false;
+        
+    }
+
+    
+    SetClassName(val) {
+        
+        this.className_ = String(val);
+        
+    }
+
+    ClassName() {
+        
+        return this.className_;
+        
+    }
+
+    
+    SetResourceId(val) {
+        
+        this.resourceId_ = String(val);
+        
+    }
+
+    ResourceId() {
+        
+        return this.resourceId_;
+        
+    }
+
+    
+    SetPackage(val) {
+        
+        this.package_ = String(val);
+        
+    }
+
+    Package() {
+        
+        return this.package_;
+        
+    }
+
+    
+    SetText(val) {
+        
+        this.text_ = String(val);
+        
+    }
+
+    Text() {
+        
+        return this.text_;
+        
+    }
+
+    
+    SetRectangle(val) {
+        
+        this.rectangle_ = val;
+        
+    }
+
+    Rectangle() {
+        
+        return this.rectangle_;
+        
+    }
+
+    
+    SetIndex(val) {
+        
+        this.index_ = Number.parseInt(val);
+        
+    }
+
+    Index() {
+        
+        return this.index_;
+        
+    }
+
+    
+    SetIsDisplayed(val) {
+        
+        this.isDisplayed_ = Boolean(val);
+        
+    }
+
+    IsDisplayed() {
+        
+        return this.isDisplayed_;
+        
+    }
+
+    
+    SetIsEnabled(val) {
+        
+        this.isEnabled_ = Boolean(val);
+        
+    }
+
+    IsEnabled() {
+        
+        return this.isEnabled_;
+        
+    }
+
+    
+    SetIsCheckable(val) {
+        
+        this.isCheckable_ = Boolean(val);
+        
+    }
+
+    IsCheckable() {
+        
+        return this.isCheckable_;
+        
+    }
+
+    
+    SetIsChecked(val) {
+        
+        this.isChecked_ = Boolean(val);
+        
+    }
+
+    IsChecked() {
+        
+        return this.isChecked_;
+        
+    }
+
+    
+    SetIsDialog(val) {
+        
+        this.isDialog_ = Boolean(val);
+        
+    }
+
+    IsDialog() {
+        
+        return this.isDialog_;
+        
+    }
+
+    
+    SetIsClickable(val) {
+        
+        this.isClickable_ = Boolean(val);
+        
+    }
+
+    IsClickable() {
+        
+        return this.isClickable_;
+        
+    }
+
+    
+    SetIsFocusable(val) {
+        
+        this.isFocusable_ = Boolean(val);
+        
+    }
+
+    IsFocusable() {
+        
+        return this.isFocusable_;
+        
+    }
+
+    
+    SetIsFocused(val) {
+        
+        this.isFocused_ = Boolean(val);
+        
+    }
+
+    IsFocused() {
+        
+        return this.isFocused_;
+        
+    }
+
+    
+    SetIsLongClickable(val) {
+        
+        this.isLongClickable_ = Boolean(val);
+        
+    }
+
+    IsLongClickable() {
+        
+        return this.isLongClickable_;
+        
+    }
+
+    
+    SetIsScrollable(val) {
+        
+        this.isScrollable_ = Boolean(val);
+        
+    }
+
+    IsScrollable() {
+        
+        return this.isScrollable_;
+        
+    }
+
+    
+    SetIsSelected(val) {
+        
+        this.isSelected_ = Boolean(val);
+        
+    }
+
+    IsSelected() {
+        
+        return this.isSelected_;
+        
+    }
+
+    
+    SetIsDismissable(val) {
+        
+        this.isDismissable_ = Boolean(val);
+        
+    }
+
+    IsDismissable() {
+        
+        return this.isDismissable_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["className"] = this.className_;
+        
+        
+        
+        
+        
+        data["resourceId"] = this.resourceId_;
+        
+        
+        
+        
+        
+        data["package"] = this.package_;
+        
+        
+        
+        
+        
+        data["text"] = this.text_;
+        
+        
+        
+        
+        
+        data["rectangle"] = this.rectangle_ ? this.rectangle_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["index"] = this.index_;
+        
+        
+        
+        
+        
+        data["isDisplayed"] = this.isDisplayed_;
+        
+        
+        
+        
+        
+        data["isEnabled"] = this.isEnabled_;
+        
+        
+        
+        
+        
+        data["isCheckable"] = this.isCheckable_;
+        
+        
+        
+        
+        
+        data["isChecked"] = this.isChecked_;
+        
+        
+        
+        
+        
+        data["isDialog"] = this.isDialog_;
+        
+        
+        
+        
+        
+        data["isClickable"] = this.isClickable_;
+        
+        
+        
+        
+        
+        data["isFocusable"] = this.isFocusable_;
+        
+        
+        
+        
+        
+        data["isFocused"] = this.isFocused_;
+        
+        
+        
+        
+        
+        data["isLongClickable"] = this.isLongClickable_;
+        
+        
+        
+        
+        
+        data["isScrollable"] = this.isScrollable_;
+        
+        
+        
+        
+        
+        data["isSelected"] = this.isSelected_;
+        
+        
+        
+        
+        
+        data["isDismissable"] = this.isDismissable_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "className") {
                 
                 
-                this.type_ = rawValue;
+                this.className_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "resourceId") {
+                
+                
+                this.resourceId_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "package") {
+                
+                
+                this.package_ = rawValue;
                 
 
                 
@@ -714,6 +1200,132 @@ class _Component extends Component {
                 
                 
                 this.text_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "rectangle") {
+                
+                
+                this.rectangle_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "index") {
+                
+                
+                this.index_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isDisplayed") {
+                
+                
+                this.isDisplayed_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isEnabled") {
+                
+                
+                this.isEnabled_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isCheckable") {
+                
+                
+                this.isCheckable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isChecked") {
+                
+                
+                this.isChecked_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isDialog") {
+                
+                
+                this.isDialog_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isClickable") {
+                
+                
+                this.isClickable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isFocusable") {
+                
+                
+                this.isFocusable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isFocused") {
+                
+                
+                this.isFocused_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isLongClickable") {
+                
+                
+                this.isLongClickable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isScrollable") {
+                
+                
+                this.isScrollable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isSelected") {
+                
+                
+                this.isSelected_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isDismissable") {
+                
+                
+                this.isDismissable_ = rawValue;
                 
 
                 
@@ -1446,6 +2058,543 @@ class _JourneyInternal extends JourneyInternal {
 
 
 
+class Component {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Identifier() { throw new Error("not implemented"); }
+    SetIdentifier(val) { throw new Error("not implemented"); }
+    
+    Rectangle() { throw new Error("not implemented"); }
+    SetRectangle(val) { throw new Error("not implemented"); }
+    
+    Type() { throw new Error("not implemented"); }
+    SetType(val) { throw new Error("not implemented"); }
+    
+    Text() { throw new Error("not implemented"); }
+    SetText(val) { throw new Error("not implemented"); }
+    
+}
+
+function ComponentFactory() {
+    const ret = new _Component();
+    
+    ret.identifier_ = "";
+    
+    ret.rectangle_ = RectangleFactory();
+    
+    ret.type_ = "";
+    
+    ret.text_ = "";
+    
+    return ret;
+}
+
+class _Component extends Component {
+    constructor() {
+        super();
+        
+        this.identifier_ = "";
+        
+        this.rectangle_ = RectangleFactory();
+        
+        this.type_ = "";
+        
+        this.text_ = "";
+        
+    }
+
+    
+    SetIdentifier(val) {
+        
+        this.identifier_ = String(val);
+        
+    }
+
+    Identifier() {
+        
+        return this.identifier_;
+        
+    }
+
+    
+    SetRectangle(val) {
+        
+        this.rectangle_ = val;
+        
+    }
+
+    Rectangle() {
+        
+        return this.rectangle_;
+        
+    }
+
+    
+    SetType(val) {
+        
+        this.type_ = String(val);
+        
+    }
+
+    Type() {
+        
+        return this.type_;
+        
+    }
+
+    
+    SetText(val) {
+        
+        this.text_ = String(val);
+        
+    }
+
+    Text() {
+        
+        return this.text_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["identifier"] = this.identifier_;
+        
+        
+        
+        
+        
+        data["rectangle"] = this.rectangle_ ? this.rectangle_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["type"] = this.type_;
+        
+        
+        
+        
+        
+        data["text"] = this.text_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "identifier") {
+                
+                
+                this.identifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "rectangle") {
+                
+                
+                this.rectangle_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "type") {
+                
+                
+                this.type_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "text") {
+                
+                
+                this.text_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyConfiguration {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    TextFields() { throw new Error("not implemented"); }
+    SetTextFields(val) { throw new Error("not implemented"); }
+    
+    AvoidComponents() { throw new Error("not implemented"); }
+    SetAvoidComponents(val) { throw new Error("not implemented"); }
+    
+    DeprioritizeComponents() { throw new Error("not implemented"); }
+    SetDeprioritizeComponents(val) { throw new Error("not implemented"); }
+    
+    AdditionalFlows() { throw new Error("not implemented"); }
+    SetAdditionalFlows(val) { throw new Error("not implemented"); }
+    
+    StepIntervalMs() { throw new Error("not implemented"); }
+    SetStepIntervalMs(val) { throw new Error("not implemented"); }
+    
+    MaxStepCount() { throw new Error("not implemented"); }
+    SetMaxStepCount(val) { throw new Error("not implemented"); }
+    
+    Crawler() { throw new Error("not implemented"); }
+    SetCrawler(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyConfigurationFactory() {
+    const ret = new _JourneyConfiguration();
+    
+    ret.textFields_ = {};
+    
+    ret.avoidComponents_ = [];
+    
+    ret.deprioritizeComponents_ = [];
+    
+    ret.additionalFlows_ = {};
+    
+    ret.stepIntervalMs_ = 0;
+    
+    ret.maxStepCount_ = 0;
+    
+    ret.crawler_ = CrawlerConfigurationFactory();
+    
+    return ret;
+}
+
+class _JourneyConfiguration extends JourneyConfiguration {
+    constructor() {
+        super();
+        
+        this.textFields_ = {};
+        
+        this.avoidComponents_ = [];
+        
+        this.deprioritizeComponents_ = [];
+        
+        this.additionalFlows_ = {};
+        
+        this.stepIntervalMs_ = 0;
+        
+        this.maxStepCount_ = 0;
+        
+        this.crawler_ = CrawlerConfigurationFactory();
+        
+    }
+
+    
+    SetTextFields(val) {
+        
+        this.textFields_ = val;
+        
+    }
+
+    TextFields() {
+        
+        return this.textFields_;
+        
+    }
+
+    
+    SetAvoidComponents(val) {
+        
+        this.avoidComponents_ = val;
+        
+    }
+
+    AvoidComponents() {
+        
+        return this.avoidComponents_;
+        
+    }
+
+    
+    SetDeprioritizeComponents(val) {
+        
+        this.deprioritizeComponents_ = val;
+        
+    }
+
+    DeprioritizeComponents() {
+        
+        return this.deprioritizeComponents_;
+        
+    }
+
+    
+    SetAdditionalFlows(val) {
+        
+        this.additionalFlows_ = val;
+        
+    }
+
+    AdditionalFlows() {
+        
+        return this.additionalFlows_;
+        
+    }
+
+    
+    SetStepIntervalMs(val) {
+        
+        this.stepIntervalMs_ = Number.parseInt(val);
+        
+    }
+
+    StepIntervalMs() {
+        
+        return this.stepIntervalMs_;
+        
+    }
+
+    
+    SetMaxStepCount(val) {
+        
+        this.maxStepCount_ = Number.parseInt(val);
+        
+    }
+
+    MaxStepCount() {
+        
+        return this.maxStepCount_;
+        
+    }
+
+    
+    SetCrawler(val) {
+        
+        this.crawler_ = val;
+        
+    }
+
+    Crawler() {
+        
+        return this.crawler_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawSubmaptextFields = {};
+        for (const k in (this.textFields_ || {})) {
+            const v = this.textFields_[k];
+            
+            rawSubmaptextFields[k] = v;
+            
+        }
+        data["textFields"] = rawSubmaptextFields;
+        
+        
+        
+        const rawListavoidComponents = [];
+        for (const v of (this.avoidComponents_ || [])) {
+            
+            rawListavoidComponents.push(v);
+            
+        }
+        data["avoidComponents"] = rawListavoidComponents;
+        
+        
+        
+        const rawListdeprioritizeComponents = [];
+        for (const v of (this.deprioritizeComponents_ || [])) {
+            
+            rawListdeprioritizeComponents.push(v);
+            
+        }
+        data["deprioritizeComponents"] = rawListdeprioritizeComponents;
+        
+        
+        
+        const rawSubmapadditionalFlows = {};
+        for (const k in (this.additionalFlows_ || {})) {
+            const v = this.additionalFlows_[k];
+            
+            rawSubmapadditionalFlows[k] = v;
+            
+        }
+        data["additionalFlows"] = rawSubmapadditionalFlows;
+        
+        
+        
+        
+        data["stepIntervalMs"] = this.stepIntervalMs_;
+        
+        
+        
+        
+        
+        data["maxStepCount"] = this.maxStepCount_;
+        
+        
+        
+        
+        
+        data["crawler"] = this.crawler_ ? this.crawler_.ToDict() : null;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "textFields") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.textFields_ = res;
+                
+            }
+            
+            if (key === "avoidComponents") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.avoidComponents_ = res;
+                
+            }
+            
+            if (key === "deprioritizeComponents") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.deprioritizeComponents_ = res;
+                
+            }
+            
+            if (key === "additionalFlows") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.additionalFlows_ = res;
+                
+            }
+            
+            if (key === "stepIntervalMs") {
+                
+                
+                this.stepIntervalMs_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "maxStepCount") {
+                
+                
+                this.maxStepCount_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "crawler") {
+                
+                
+                this.crawler_.FromDict(rawValue);
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Edge {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -1649,7 +2798,7 @@ class _Edge extends Edge {
 
 
 
-class JourneyConfiguration {
+class PageNode {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
     }
@@ -1657,453 +2806,46 @@ class JourneyConfiguration {
     ToDict() { throw new Error("not implemented"); }
     FromDict(data) { throw new Error("not implemented"); }
 
-    
-    TextFields() { throw new Error("not implemented"); }
-    SetTextFields(val) { throw new Error("not implemented"); }
-    
-    AvoidComponents() { throw new Error("not implemented"); }
-    SetAvoidComponents(val) { throw new Error("not implemented"); }
-    
-    DeprioritizeComponents() { throw new Error("not implemented"); }
-    SetDeprioritizeComponents(val) { throw new Error("not implemented"); }
-    
-    AdditionalFlows() { throw new Error("not implemented"); }
-    SetAdditionalFlows(val) { throw new Error("not implemented"); }
-    
-    StepIntervalMs() { throw new Error("not implemented"); }
-    SetStepIntervalMs(val) { throw new Error("not implemented"); }
-    
-    MaxStepCount() { throw new Error("not implemented"); }
-    SetMaxStepCount(val) { throw new Error("not implemented"); }
-    
-    Crawler() { throw new Error("not implemented"); }
-    SetCrawler(val) { throw new Error("not implemented"); }
-    
-}
-
-function JourneyConfigurationFactory() {
-    const ret = new _JourneyConfiguration();
-    
-    ret.textFields_ = {};
-    
-    ret.avoidComponents_ = [];
-    
-    ret.deprioritizeComponents_ = [];
-    
-    ret.additionalFlows_ = {};
-    
-    ret.stepIntervalMs_ = 0;
-    
-    ret.maxStepCount_ = 0;
-    
-    ret.crawler_ = CrawlerConfigurationFactory();
-    
-    return ret;
-}
-
-class _JourneyConfiguration extends JourneyConfiguration {
-    constructor() {
-        super();
-        
-        this.textFields_ = {};
-        
-        this.avoidComponents_ = [];
-        
-        this.deprioritizeComponents_ = [];
-        
-        this.additionalFlows_ = {};
-        
-        this.stepIntervalMs_ = 0;
-        
-        this.maxStepCount_ = 0;
-        
-        this.crawler_ = CrawlerConfigurationFactory();
-        
-    }
-
-    
-    SetTextFields(val) {
-        
-        this.textFields_ = val;
-        
-    }
-
-    TextFields() {
-        
-        return this.textFields_;
-        
-    }
-
-    
-    SetAvoidComponents(val) {
-        
-        this.avoidComponents_ = val;
-        
-    }
-
-    AvoidComponents() {
-        
-        return this.avoidComponents_;
-        
-    }
-
-    
-    SetDeprioritizeComponents(val) {
-        
-        this.deprioritizeComponents_ = val;
-        
-    }
-
-    DeprioritizeComponents() {
-        
-        return this.deprioritizeComponents_;
-        
-    }
-
-    
-    SetAdditionalFlows(val) {
-        
-        this.additionalFlows_ = val;
-        
-    }
-
-    AdditionalFlows() {
-        
-        return this.additionalFlows_;
-        
-    }
-
-    
-    SetStepIntervalMs(val) {
-        
-        this.stepIntervalMs_ = Number.parseInt(val);
-        
-    }
-
-    StepIntervalMs() {
-        
-        return this.stepIntervalMs_;
-        
-    }
-
-    
-    SetMaxStepCount(val) {
-        
-        this.maxStepCount_ = Number.parseInt(val);
-        
-    }
-
-    MaxStepCount() {
-        
-        return this.maxStepCount_;
-        
-    }
-
-    
-    SetCrawler(val) {
-        
-        this.crawler_ = val;
-        
-    }
-
-    Crawler() {
-        
-        return this.crawler_;
-        
-    }
-
-    
-
-    FromJson(jstr) {
-        const data = JSON.parse(jstr);
-        return this.FromDict(data);
-    }
-
-    ToJson() {
-        return JSON.stringify(this.ToDict());
-    }
-
-    ToDict() {
-        const data = {};
-        
-        
-        const rawSubmap = {};
-        for (const k in (this.textFields_ || {})) {
-            const v = this.textFields_[k];
-            
-            rawSubmap[k] = v;
-            
-        }
-        data["textFields"] = rawSubmap;
-        
-        
-        
-        const rawListavoidComponents = [];
-        for (const v of (this.avoidComponents_ || [])) {
-            
-            rawListavoidComponents.push(v);
-            
-        }
-        data["avoidComponents"] = rawListavoidComponents;
-        
-        
-        
-        const rawListdeprioritizeComponents = [];
-        for (const v of (this.deprioritizeComponents_ || [])) {
-            
-            rawListdeprioritizeComponents.push(v);
-            
-        }
-        data["deprioritizeComponents"] = rawListdeprioritizeComponents;
-        
-        
-        
-        const rawSubmap = {};
-        for (const k in (this.additionalFlows_ || {})) {
-            const v = this.additionalFlows_[k];
-            
-            rawSubmap[k] = v;
-            
-        }
-        data["additionalFlows"] = rawSubmap;
-        
-        
-        
-        
-        data["stepIntervalMs"] = this.stepIntervalMs_;
-        
-        
-        
-        
-        
-        data["maxStepCount"] = this.maxStepCount_;
-        
-        
-        
-        
-        
-        data["crawler"] = this.crawler_ ? this.crawler_.ToDict() : null;
-        
-        
-        
-        return data;
-    }
-
-    FromDict(data) {
-        for (const key in data) {
-            const rawValue = data[key];
-            if (rawValue === null || rawValue === undefined) continue;
-
-            
-            if (key === "textFields") {
-                
-                const res = {};
-
-                for (const rk in rawValue) {
-                    const rw = rawValue[rk];
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res[rk] = ud;
-                }
-
-                this.textFields_ = res;
-                
-            }
-            
-            if (key === "avoidComponents") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.avoidComponents_ = res;
-                
-            }
-            
-            if (key === "deprioritizeComponents") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.deprioritizeComponents_ = res;
-                
-            }
-            
-            if (key === "additionalFlows") {
-                
-                const res = {};
-
-                for (const rk in rawValue) {
-                    const rw = rawValue[rk];
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res[rk] = ud;
-                }
-
-                this.additionalFlows_ = res;
-                
-            }
-            
-            if (key === "stepIntervalMs") {
-                
-                
-                this.stepIntervalMs_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "maxStepCount") {
-                
-                
-                this.maxStepCount_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "crawler") {
-                
-                
-                this.crawler_.FromDict(rawValue);
-                
-
-                
-            }
-            
-        }
-    }
-}
-
-
-
-class ScreenExternal {
-    constructor() {
-        // throw new Error("cannot initialize like this. use the factory method");
-    }
-
-    ToDict() { throw new Error("not implemented"); }
-    FromDict(data) { throw new Error("not implemented"); }
-
-    
-    Journey() { throw new Error("not implemented"); }
-    SetJourney(val) { throw new Error("not implemented"); }
     
     Identifier() { throw new Error("not implemented"); }
     SetIdentifier(val) { throw new Error("not implemented"); }
     
-    GroupIdentifier() { throw new Error("not implemented"); }
-    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    Parent() { throw new Error("not implemented"); }
+    SetParent(val) { throw new Error("not implemented"); }
     
-    FlowIdentifier() { throw new Error("not implemented"); }
-    SetFlowIdentifier(val) { throw new Error("not implemented"); }
+    Children() { throw new Error("not implemented"); }
+    SetChildren(val) { throw new Error("not implemented"); }
     
-    Edges() { throw new Error("not implemented"); }
-    SetEdges(val) { throw new Error("not implemented"); }
-    
-    Image() { throw new Error("not implemented"); }
-    SetImage(val) { throw new Error("not implemented"); }
-    
-    ImageLowRes() { throw new Error("not implemented"); }
-    SetImageLowRes(val) { throw new Error("not implemented"); }
-    
-    IsEntryPoint() { throw new Error("not implemented"); }
-    SetIsEntryPoint(val) { throw new Error("not implemented"); }
-    
-    Components() { throw new Error("not implemented"); }
-    SetComponents(val) { throw new Error("not implemented"); }
-    
-    Content() { throw new Error("not implemented"); }
-    SetContent(val) { throw new Error("not implemented"); }
-    
-    Metadata() { throw new Error("not implemented"); }
-    SetMetadata(val) { throw new Error("not implemented"); }
+    Attributes() { throw new Error("not implemented"); }
+    SetAttributes(val) { throw new Error("not implemented"); }
     
 }
 
-function ScreenExternalFactory() {
-    const ret = new _ScreenExternal();
-    
-    ret.journey_ = "";
+function PageNodeFactory() {
+    const ret = new _PageNode();
     
     ret.identifier_ = "";
     
-    ret.groupIdentifier_ = "";
+    ret.parent_ = "";
     
-    ret.flowIdentifier_ = "";
+    ret.children_ = [];
     
-    ret.edges_ = [];
-    
-    ret.image_ = "";
-    
-    ret.imageLowRes_ = "";
-    
-    ret.isEntryPoint_ = false;
-    
-    ret.components_ = [];
-    
-    ret.content_ = ScreenContentFactory();
-    
-    ret.metadata_ = ScreenMetadataFactory();
+    ret.attributes_ = PageNodeAttributesFactory();
     
     return ret;
 }
 
-class _ScreenExternal extends ScreenExternal {
+class _PageNode extends PageNode {
     constructor() {
         super();
         
-        this.journey_ = "";
-        
         this.identifier_ = "";
         
-        this.groupIdentifier_ = "";
+        this.parent_ = "";
         
-        this.flowIdentifier_ = "";
+        this.children_ = [];
         
-        this.edges_ = [];
-        
-        this.image_ = "";
-        
-        this.imageLowRes_ = "";
-        
-        this.isEntryPoint_ = false;
-        
-        this.components_ = [];
-        
-        this.content_ = ScreenContentFactory();
-        
-        this.metadata_ = ScreenMetadataFactory();
-        
-    }
-
-    
-    SetJourney(val) {
-        
-        this.journey_ = String(val);
-        
-    }
-
-    Journey() {
-        
-        return this.journey_;
+        this.attributes_ = PageNodeAttributesFactory();
         
     }
 
@@ -2121,119 +2863,41 @@ class _ScreenExternal extends ScreenExternal {
     }
 
     
-    SetGroupIdentifier(val) {
+    SetParent(val) {
         
-        this.groupIdentifier_ = String(val);
-        
-    }
-
-    GroupIdentifier() {
-        
-        return this.groupIdentifier_;
+        this.parent_ = String(val);
         
     }
 
-    
-    SetFlowIdentifier(val) {
+    Parent() {
         
-        this.flowIdentifier_ = String(val);
-        
-    }
-
-    FlowIdentifier() {
-        
-        return this.flowIdentifier_;
+        return this.parent_;
         
     }
 
     
-    SetEdges(val) {
+    SetChildren(val) {
         
-        this.edges_ = val;
-        
-    }
-
-    Edges() {
-        
-        return this.edges_;
+        this.children_ = val;
         
     }
 
-    
-    SetImage(val) {
+    Children() {
         
-        this.image_ = String(val);
-        
-    }
-
-    Image() {
-        
-        return this.image_;
+        return this.children_;
         
     }
 
     
-    SetImageLowRes(val) {
+    SetAttributes(val) {
         
-        this.imageLowRes_ = String(val);
-        
-    }
-
-    ImageLowRes() {
-        
-        return this.imageLowRes_;
+        this.attributes_ = val;
         
     }
 
-    
-    SetIsEntryPoint(val) {
+    Attributes() {
         
-        this.isEntryPoint_ = Boolean(val);
-        
-    }
-
-    IsEntryPoint() {
-        
-        return this.isEntryPoint_;
-        
-    }
-
-    
-    SetComponents(val) {
-        
-        this.components_ = val;
-        
-    }
-
-    Components() {
-        
-        return this.components_;
-        
-    }
-
-    
-    SetContent(val) {
-        
-        this.content_ = val;
-        
-    }
-
-    Content() {
-        
-        return this.content_;
-        
-    }
-
-    
-    SetMetadata(val) {
-        
-        this.metadata_ = val;
-        
-    }
-
-    Metadata() {
-        
-        return this.metadata_;
+        return this.attributes_;
         
     }
 
@@ -2253,75 +2917,29 @@ class _ScreenExternal extends ScreenExternal {
         
         
         
-        data["journey"] = this.journey_;
-        
-        
-        
-        
-        
         data["identifier"] = this.identifier_;
         
         
         
         
         
-        data["groupIdentifier"] = this.groupIdentifier_;
+        data["parent"] = this.parent_;
         
         
         
         
-        
-        data["flowIdentifier"] = this.flowIdentifier_;
-        
-        
-        
-        
-        const rawListedges = [];
-        for (const v of (this.edges_ || [])) {
+        const rawListchildren = [];
+        for (const v of (this.children_ || [])) {
             
-            rawListedges.push(v.ToDict());
+            rawListchildren.push(v.ToDict());
             
         }
-        data["edges"] = rawListedges;
+        data["children"] = rawListchildren;
         
         
         
         
-        data["image"] = this.image_;
-        
-        
-        
-        
-        
-        data["imageLowRes"] = this.imageLowRes_;
-        
-        
-        
-        
-        
-        data["isEntryPoint"] = this.isEntryPoint_;
-        
-        
-        
-        
-        const rawListcomponents = [];
-        for (const v of (this.components_ || [])) {
-            
-            rawListcomponents.push(v.ToDict());
-            
-        }
-        data["components"] = rawListcomponents;
-        
-        
-        
-        
-        data["content"] = this.content_ ? this.content_.ToDict() : null;
-        
-        
-        
-        
-        
-        data["metadata"] = this.metadata_ ? this.metadata_.ToDict() : null;
+        data["attributes"] = this.attributes_ ? this.attributes_.ToDict() : null;
         
         
         
@@ -2334,15 +2952,6 @@ class _ScreenExternal extends ScreenExternal {
             if (rawValue === null || rawValue === undefined) continue;
 
             
-            if (key === "journey") {
-                
-                
-                this.journey_ = rawValue;
-                
-
-                
-            }
-            
             if (key === "identifier") {
                 
                 
@@ -2352,96 +2961,35 @@ class _ScreenExternal extends ScreenExternal {
                 
             }
             
-            if (key === "groupIdentifier") {
+            if (key === "parent") {
                 
                 
-                this.groupIdentifier_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "flowIdentifier") {
-                
-                
-                this.flowIdentifier_ = rawValue;
+                this.parent_ = rawValue;
                 
 
                 
             }
             
-            if (key === "edges") {
+            if (key === "children") {
                 
                 const res = [];
 
                 for (const rw of rawValue) {
-                    let ud = EdgeFactory();
+                    let ud = PageNodeFactory();
                     
                     ud.FromDict(rw);
                     
                     res.push(ud);
                 }
 
-                this.edges_ = res;
+                this.children_ = res;
                 
             }
             
-            if (key === "image") {
+            if (key === "attributes") {
                 
                 
-                this.image_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "imageLowRes") {
-                
-                
-                this.imageLowRes_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "isEntryPoint") {
-                
-                
-                this.isEntryPoint_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "components") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = ComponentFactory();
-                    
-                    ud.FromDict(rw);
-                    
-                    res.push(ud);
-                }
-
-                this.components_ = res;
-                
-            }
-            
-            if (key === "content") {
-                
-                
-                this.content_.FromDict(rawValue);
-                
-
-                
-            }
-            
-            if (key === "metadata") {
-                
-                
-                this.metadata_.FromDict(rawValue);
+                this.attributes_.FromDict(rawValue);
                 
 
                 
@@ -2785,6 +3333,552 @@ class _JourneyExternal extends JourneyExternal {
 
 
 
+class ScreenInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Journey() { throw new Error("not implemented"); }
+    SetJourney(val) { throw new Error("not implemented"); }
+    
+    Identifier() { throw new Error("not implemented"); }
+    SetIdentifier(val) { throw new Error("not implemented"); }
+    
+    GroupIdentifier() { throw new Error("not implemented"); }
+    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    
+    Edges() { throw new Error("not implemented"); }
+    SetEdges(val) { throw new Error("not implemented"); }
+    
+    Image() { throw new Error("not implemented"); }
+    SetImage(val) { throw new Error("not implemented"); }
+    
+    ImageLowRes() { throw new Error("not implemented"); }
+    SetImageLowRes(val) { throw new Error("not implemented"); }
+    
+    IsEntryPoint() { throw new Error("not implemented"); }
+    SetIsEntryPoint(val) { throw new Error("not implemented"); }
+    
+    Components() { throw new Error("not implemented"); }
+    SetComponents(val) { throw new Error("not implemented"); }
+    
+    Content() { throw new Error("not implemented"); }
+    SetContent(val) { throw new Error("not implemented"); }
+    
+    Metadata() { throw new Error("not implemented"); }
+    SetMetadata(val) { throw new Error("not implemented"); }
+    
+}
+
+function ScreenInternalFactory() {
+    const ret = new _ScreenInternal();
+    
+    ret.journey_ = "";
+    
+    ret.identifier_ = "";
+    
+    ret.groupIdentifier_ = "";
+    
+    ret.edges_ = [];
+    
+    ret.image_ = "";
+    
+    ret.imageLowRes_ = "";
+    
+    ret.isEntryPoint_ = false;
+    
+    ret.components_ = [];
+    
+    ret.content_ = ScreenContentFactory();
+    
+    ret.metadata_ = ScreenMetadataFactory();
+    
+    return ret;
+}
+
+class _ScreenInternal extends ScreenInternal {
+    constructor() {
+        super();
+        
+        this.journey_ = "";
+        
+        this.identifier_ = "";
+        
+        this.groupIdentifier_ = "";
+        
+        this.edges_ = [];
+        
+        this.image_ = "";
+        
+        this.imageLowRes_ = "";
+        
+        this.isEntryPoint_ = false;
+        
+        this.components_ = [];
+        
+        this.content_ = ScreenContentFactory();
+        
+        this.metadata_ = ScreenMetadataFactory();
+        
+    }
+
+    
+    SetJourney(val) {
+        
+        this.journey_ = String(val);
+        
+    }
+
+    Journey() {
+        
+        return this.journey_;
+        
+    }
+
+    
+    SetIdentifier(val) {
+        
+        this.identifier_ = String(val);
+        
+    }
+
+    Identifier() {
+        
+        return this.identifier_;
+        
+    }
+
+    
+    SetGroupIdentifier(val) {
+        
+        this.groupIdentifier_ = String(val);
+        
+    }
+
+    GroupIdentifier() {
+        
+        return this.groupIdentifier_;
+        
+    }
+
+    
+    SetEdges(val) {
+        
+        this.edges_ = val;
+        
+    }
+
+    Edges() {
+        
+        return this.edges_;
+        
+    }
+
+    
+    SetImage(val) {
+        
+        this.image_ = String(val);
+        
+    }
+
+    Image() {
+        
+        return this.image_;
+        
+    }
+
+    
+    SetImageLowRes(val) {
+        
+        this.imageLowRes_ = String(val);
+        
+    }
+
+    ImageLowRes() {
+        
+        return this.imageLowRes_;
+        
+    }
+
+    
+    SetIsEntryPoint(val) {
+        
+        this.isEntryPoint_ = Boolean(val);
+        
+    }
+
+    IsEntryPoint() {
+        
+        return this.isEntryPoint_;
+        
+    }
+
+    
+    SetComponents(val) {
+        
+        this.components_ = val;
+        
+    }
+
+    Components() {
+        
+        return this.components_;
+        
+    }
+
+    
+    SetContent(val) {
+        
+        this.content_ = val;
+        
+    }
+
+    Content() {
+        
+        return this.content_;
+        
+    }
+
+    
+    SetMetadata(val) {
+        
+        this.metadata_ = val;
+        
+    }
+
+    Metadata() {
+        
+        return this.metadata_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["journey"] = this.journey_;
+        
+        
+        
+        
+        
+        data["identifier"] = this.identifier_;
+        
+        
+        
+        
+        
+        data["groupIdentifier"] = this.groupIdentifier_;
+        
+        
+        
+        
+        const rawListedges = [];
+        for (const v of (this.edges_ || [])) {
+            
+            rawListedges.push(v.ToDict());
+            
+        }
+        data["edges"] = rawListedges;
+        
+        
+        
+        
+        data["image"] = this.image_;
+        
+        
+        
+        
+        
+        data["imageLowRes"] = this.imageLowRes_;
+        
+        
+        
+        
+        
+        data["isEntryPoint"] = this.isEntryPoint_;
+        
+        
+        
+        
+        const rawListcomponents = [];
+        for (const v of (this.components_ || [])) {
+            
+            rawListcomponents.push(v.ToDict());
+            
+        }
+        data["components"] = rawListcomponents;
+        
+        
+        
+        
+        data["content"] = this.content_ ? this.content_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["metadata"] = this.metadata_ ? this.metadata_.ToDict() : null;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "journey") {
+                
+                
+                this.journey_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "identifier") {
+                
+                
+                this.identifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "groupIdentifier") {
+                
+                
+                this.groupIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "edges") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = EdgeFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.edges_ = res;
+                
+            }
+            
+            if (key === "image") {
+                
+                
+                this.image_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "imageLowRes") {
+                
+                
+                this.imageLowRes_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isEntryPoint") {
+                
+                
+                this.isEntryPoint_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "components") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = ComponentFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.components_ = res;
+                
+            }
+            
+            if (key === "content") {
+                
+                
+                this.content_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "metadata") {
+                
+                
+                this.metadata_.FromDict(rawValue);
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class PageInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Journey() { throw new Error("not implemented"); }
+    SetJourney(val) { throw new Error("not implemented"); }
+    
+    Root() { throw new Error("not implemented"); }
+    SetRoot(val) { throw new Error("not implemented"); }
+    
+}
+
+function PageInternalFactory() {
+    const ret = new _PageInternal();
+    
+    ret.journey_ = "";
+    
+    ret.root_ = PageNodeFactory();
+    
+    return ret;
+}
+
+class _PageInternal extends PageInternal {
+    constructor() {
+        super();
+        
+        this.journey_ = "";
+        
+        this.root_ = PageNodeFactory();
+        
+    }
+
+    
+    SetJourney(val) {
+        
+        this.journey_ = String(val);
+        
+    }
+
+    Journey() {
+        
+        return this.journey_;
+        
+    }
+
+    
+    SetRoot(val) {
+        
+        this.root_ = val;
+        
+    }
+
+    Root() {
+        
+        return this.root_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["journey"] = this.journey_;
+        
+        
+        
+        
+        
+        data["root"] = this.root_ ? this.root_.ToDict() : null;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "journey") {
+                
+                
+                this.journey_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "root") {
+                
+                
+                this.root_.FromDict(rawValue);
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 
 
 
@@ -2802,9 +3896,9 @@ class Screen {
     Meta() { throw new Error("not implemented"); }
 
     
-    External() { throw new Error("not implemented"); }
-    
 
+    
+    Internal() { throw new Error("not implemented"); }
     
 }
 
@@ -2812,8 +3906,8 @@ function ScreenFactory() {
     const ret = new _Screen();
 
     
-    ret.external_ = ScreenExternalFactory();
     
+    ret.internal_ = ScreenInternalFactory();
     
 
     return ret;
@@ -2829,10 +3923,10 @@ class _Screen extends Screen {
     }
 
     
-    SetExternal(val) { this.external_ = val; }
-    External() { return this.external_; }
-    
 
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
     
 
     FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
@@ -2841,8 +3935,8 @@ class _Screen extends Screen {
     ToDict() {
         const data = {};
         data["metadata"] = this.meta_;
-        data["external"] = this.external_.ToDict(); 
         
+        data["internal"] = this.internal_.ToDict(); 
         return data;
     }
 
@@ -2856,9 +3950,9 @@ class _Screen extends Screen {
             }
 
             
-            if (key === "external") { this.external_.FromDict(rawValue); }
-            
 
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
             
         }
     }
@@ -2884,6 +3978,105 @@ function ScreenIdentity(pkey) {
 const ScreenKindIdentity = "screen/";
 
 const ScreenKind = "Screen";
+
+
+
+
+class Page {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function PageFactory() {
+    const ret = new _Page();
+
+    
+    
+    ret.internal_ = PageInternalFactory();
+    
+
+    return ret;
+}
+
+class _Page extends Page {
+    constructor() {
+        super();
+        this.meta_ = [];
+        this.meta_["kind"] = "Page";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = PageFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function PageIdentity(pkey) {
+    return "page/" + pkey;
+}
+
+const PageKindIdentity = "page/";
+
+const PageKind = "Page";
 
 
 
@@ -3007,6 +4200,9 @@ class _Schema {
         if (kind === "Screen") return ScreenFactory();
         else if (kind === "screen") return ScreenFactory();
         
+        if (kind === "Page") return PageFactory();
+        else if (kind === "page") return PageFactory();
+        
         if (kind === "Journey") return JourneyFactory();
         else if (kind === "journey") return JourneyFactory();
         
@@ -3020,6 +4216,8 @@ function Schema() {
     const objects = [
         
         "Screen",
+        
+        "Page",
         
         "Journey",
         

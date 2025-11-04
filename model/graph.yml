@@ -1,17 +1,18 @@
 types:
   - kind: Object
     name: Screen
-    external: ScreenExternal
+    internal: ScreenInternal
+  - kind: Object
+    name: Page
+    internal: PageInternal
   - kind: Struct
-    name: ScreenExternal
+    name: ScreenInternal
     properties:
       - name: journey
         type: string
       - name: identifier
         type: string
       - name: groupIdentifier
-        type: string
-      - name: flowIdentifier
         type: string
       - name: edges
         type: "[]Edge"
@@ -49,6 +50,8 @@ types:
         type: string
       - name: tags
         type: "[]string"
+      - name: flow
+        type: string
   - kind: Struct
     name: ScreenContent
     properties:
@@ -61,19 +64,81 @@ types:
     properties:
       - name: identifier
         type: string
-      - name: rectX
+      - name: rectangle
+        type: Rectangle
+      - name: type
+        type: string
+      - name: text
+        type: string
+  - kind: Struct
+    name: Rectangle
+    properties:
+      - name: x
         type: int
-      - name: rectY
+      - name: y
         type: int
-      - name: rectW
+      - name: width
         type: int
-      - name: rectH
+      - name: height
         type: int
       - name: centerX
         type: int
       - name: centerY
         type: int
-      - name: type
+  - kind: Struct
+    name: PageInternal
+    properties:
+      - name: journey
+        type: string
+      - name: root
+        type: PageNode
+  - kind: Struct
+    name: PageNode
+    properties:
+      - name: identifier
+        type: string
+      - name: parent
+        type: string
+      - name: children
+        type: "[]PageNode"
+      - name: attributes
+        type: PageNodeAttributes
+  - kind: Struct
+    name: PageNodeAttributes
+    properties:
+      - name: className
+        type: string
+      - name: resourceId
+        type: string
+      - name: package
         type: string
       - name: text
         type: string
+      - name: rectangle
+        type: Rectangle
+      - name: index
+        type: int
+      - name: isDisplayed
+        type: bool
+      - name: isEnabled
+        type: bool
+      - name: isCheckable
+        type: bool
+      - name: isChecked
+        type: bool
+      - name: isDialog
+        type: bool
+      - name: isClickable
+        type: bool
+      - name: isFocusable
+        type: bool
+      - name: isFocused
+        type: bool
+      - name: isLongClickable
+        type: bool
+      - name: isScrollable
+        type: bool
+      - name: isSelected
+        type: bool
+      - name: isDismissable
+        type: bool

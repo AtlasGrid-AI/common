@@ -41,6 +41,12 @@ class ScreenMetadata:
     def SetTags(self, val: list):
         raise Exception("not implemented")
 
+    def Flow(self) -> str:
+        raise Exception("not implemented")
+
+    def SetFlow(self, val: str):
+        raise Exception("not implemented")
+
 
 def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
@@ -48,6 +54,7 @@ def ScreenMetadataFactory() -> ScreenMetadata:
     ret.title_ = ""
     ret.description_ = ""
     ret.tags_ = []
+    ret.flow_ = ""
     return ret
 
 
@@ -57,6 +64,7 @@ class _ScreenMetadata(ScreenMetadata):
         self.title_ = ""
         self.description_ = ""
         self.tags_ = []
+        self.flow_ = ""
 
     def SetContent(self, val):
         self.content_ = val
@@ -82,6 +90,12 @@ class _ScreenMetadata(ScreenMetadata):
     def Tags(self):
         return self.tags_
 
+    def SetFlow(self, val):
+        self.flow_ = str(val)
+
+    def Flow(self):
+        return self.flow_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -101,6 +115,7 @@ class _ScreenMetadata(ScreenMetadata):
         for v in self.tags_:
             rawList.append(v)
         data["tags"] = rawList
+        data["flow"] = self.flow_
         return data
 
     def FromDict(self, data):
@@ -125,6 +140,8 @@ class _ScreenMetadata(ScreenMetadata):
                     ud = rw
                     res.append(ud)
                 self.tags_ = res
+            if key == "flow":
+                self.flow_ = rawValue
 
 
 class ScreenContent:
@@ -213,7 +230,7 @@ class _ScreenContent(ScreenContent):
                 self.buttons_ = res
 
 
-class Component:
+class Rectangle:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
 
@@ -223,34 +240,28 @@ class Component:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Identifier(self) -> str:
+    def X(self) -> int:
         raise Exception("not implemented")
 
-    def SetIdentifier(self, val: str):
+    def SetX(self, val: int):
         raise Exception("not implemented")
 
-    def RectX(self) -> int:
+    def Y(self) -> int:
         raise Exception("not implemented")
 
-    def SetRectX(self, val: int):
+    def SetY(self, val: int):
         raise Exception("not implemented")
 
-    def RectY(self) -> int:
+    def Width(self) -> int:
         raise Exception("not implemented")
 
-    def SetRectY(self, val: int):
+    def SetWidth(self, val: int):
         raise Exception("not implemented")
 
-    def RectW(self) -> int:
+    def Height(self) -> int:
         raise Exception("not implemented")
 
-    def SetRectW(self, val: int):
-        raise Exception("not implemented")
-
-    def RectH(self) -> int:
-        raise Exception("not implemented")
-
-    def SetRectH(self, val: int):
+    def SetHeight(self, val: int):
         raise Exception("not implemented")
 
     def CenterX(self) -> int:
@@ -265,74 +276,50 @@ class Component:
     def SetCenterY(self, val: int):
         raise Exception("not implemented")
 
-    def Type(self) -> str:
-        raise Exception("not implemented")
 
-    def SetType(self, val: str):
-        raise Exception("not implemented")
-
-    def Text(self) -> str:
-        raise Exception("not implemented")
-
-    def SetText(self, val: str):
-        raise Exception("not implemented")
-
-
-def ComponentFactory() -> Component:
-    ret = _Component()
-    ret.identifier_ = ""
-    ret.rectX_ = 0
-    ret.rectY_ = 0
-    ret.rectW_ = 0
-    ret.rectH_ = 0
+def RectangleFactory() -> Rectangle:
+    ret = _Rectangle()
+    ret.x_ = 0
+    ret.y_ = 0
+    ret.width_ = 0
+    ret.height_ = 0
     ret.centerX_ = 0
     ret.centerY_ = 0
-    ret.type_ = ""
-    ret.text_ = ""
     return ret
 
 
-class _Component(Component):
+class _Rectangle(Rectangle):
     def __init__(self):
-        self.identifier_ = ""
-        self.rectX_ = 0
-        self.rectY_ = 0
-        self.rectW_ = 0
-        self.rectH_ = 0
+        self.x_ = 0
+        self.y_ = 0
+        self.width_ = 0
+        self.height_ = 0
         self.centerX_ = 0
         self.centerY_ = 0
-        self.type_ = ""
-        self.text_ = ""
 
-    def SetIdentifier(self, val):
-        self.identifier_ = str(val)
+    def SetX(self, val):
+        self.x_ = int(val)
 
-    def Identifier(self):
-        return self.identifier_
+    def X(self):
+        return self.x_
 
-    def SetRectX(self, val):
-        self.rectX_ = int(val)
+    def SetY(self, val):
+        self.y_ = int(val)
 
-    def RectX(self):
-        return self.rectX_
+    def Y(self):
+        return self.y_
 
-    def SetRectY(self, val):
-        self.rectY_ = int(val)
+    def SetWidth(self, val):
+        self.width_ = int(val)
 
-    def RectY(self):
-        return self.rectY_
+    def Width(self):
+        return self.width_
 
-    def SetRectW(self, val):
-        self.rectW_ = int(val)
+    def SetHeight(self, val):
+        self.height_ = int(val)
 
-    def RectW(self):
-        return self.rectW_
-
-    def SetRectH(self, val):
-        self.rectH_ = int(val)
-
-    def RectH(self):
-        return self.rectH_
+    def Height(self):
+        return self.height_
 
     def SetCenterX(self, val):
         self.centerX_ = int(val)
@@ -346,17 +333,311 @@ class _Component(Component):
     def CenterY(self):
         return self.centerY_
 
-    def SetType(self, val):
-        self.type_ = str(val)
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
 
-    def Type(self):
-        return self.type_
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["x"] = self.x_
+        data["y"] = self.y_
+        data["width"] = self.width_
+        data["height"] = self.height_
+        data["centerX"] = self.centerX_
+        data["centerY"] = self.centerY_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "x":
+                self.x_ = rawValue
+            if key == "y":
+                self.y_ = rawValue
+            if key == "width":
+                self.width_ = rawValue
+            if key == "height":
+                self.height_ = rawValue
+            if key == "centerX":
+                self.centerX_ = rawValue
+            if key == "centerY":
+                self.centerY_ = rawValue
+
+
+class PageNodeAttributes:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def ClassName(self) -> str:
+        raise Exception("not implemented")
+
+    def SetClassName(self, val: str):
+        raise Exception("not implemented")
+
+    def ResourceId(self) -> str:
+        raise Exception("not implemented")
+
+    def SetResourceId(self, val: str):
+        raise Exception("not implemented")
+
+    def Package(self) -> str:
+        raise Exception("not implemented")
+
+    def SetPackage(self, val: str):
+        raise Exception("not implemented")
+
+    def Text(self) -> str:
+        raise Exception("not implemented")
+
+    def SetText(self, val: str):
+        raise Exception("not implemented")
+
+    def Rectangle(self) -> Rectangle:
+        raise Exception("not implemented")
+
+    def SetRectangle(self, val: Rectangle):
+        raise Exception("not implemented")
+
+    def Index(self) -> int:
+        raise Exception("not implemented")
+
+    def SetIndex(self, val: int):
+        raise Exception("not implemented")
+
+    def IsDisplayed(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsDisplayed(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsEnabled(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsEnabled(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsCheckable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsCheckable(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsChecked(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsChecked(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsDialog(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsDialog(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsClickable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsClickable(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsFocusable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsFocusable(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsFocused(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsFocused(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsLongClickable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsLongClickable(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsScrollable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsScrollable(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsSelected(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsSelected(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsDismissable(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsDismissable(self, val: bool):
+        raise Exception("not implemented")
+
+
+def PageNodeAttributesFactory() -> PageNodeAttributes:
+    ret = _PageNodeAttributes()
+    ret.className_ = ""
+    ret.resourceId_ = ""
+    ret.package_ = ""
+    ret.text_ = ""
+    ret.rectangle_ = RectangleFactory()
+    ret.index_ = 0
+    ret.isDisplayed_ = False
+    ret.isEnabled_ = False
+    ret.isCheckable_ = False
+    ret.isChecked_ = False
+    ret.isDialog_ = False
+    ret.isClickable_ = False
+    ret.isFocusable_ = False
+    ret.isFocused_ = False
+    ret.isLongClickable_ = False
+    ret.isScrollable_ = False
+    ret.isSelected_ = False
+    ret.isDismissable_ = False
+    return ret
+
+
+class _PageNodeAttributes(PageNodeAttributes):
+    def __init__(self):
+        self.className_ = ""
+        self.resourceId_ = ""
+        self.package_ = ""
+        self.text_ = ""
+        self.rectangle_ = RectangleFactory()
+        self.index_ = 0
+        self.isDisplayed_ = False
+        self.isEnabled_ = False
+        self.isCheckable_ = False
+        self.isChecked_ = False
+        self.isDialog_ = False
+        self.isClickable_ = False
+        self.isFocusable_ = False
+        self.isFocused_ = False
+        self.isLongClickable_ = False
+        self.isScrollable_ = False
+        self.isSelected_ = False
+        self.isDismissable_ = False
+
+    def SetClassName(self, val):
+        self.className_ = str(val)
+
+    def ClassName(self):
+        return self.className_
+
+    def SetResourceId(self, val):
+        self.resourceId_ = str(val)
+
+    def ResourceId(self):
+        return self.resourceId_
+
+    def SetPackage(self, val):
+        self.package_ = str(val)
+
+    def Package(self):
+        return self.package_
 
     def SetText(self, val):
         self.text_ = str(val)
 
     def Text(self):
         return self.text_
+
+    def SetRectangle(self, val):
+        self.rectangle_ = val
+
+    def Rectangle(self):
+        return self.rectangle_
+
+    def SetIndex(self, val):
+        self.index_ = int(val)
+
+    def Index(self):
+        return self.index_
+
+    def SetIsDisplayed(self, val):
+        self.isDisplayed_ = bool(val)
+
+    def IsDisplayed(self):
+        return self.isDisplayed_
+
+    def SetIsEnabled(self, val):
+        self.isEnabled_ = bool(val)
+
+    def IsEnabled(self):
+        return self.isEnabled_
+
+    def SetIsCheckable(self, val):
+        self.isCheckable_ = bool(val)
+
+    def IsCheckable(self):
+        return self.isCheckable_
+
+    def SetIsChecked(self, val):
+        self.isChecked_ = bool(val)
+
+    def IsChecked(self):
+        return self.isChecked_
+
+    def SetIsDialog(self, val):
+        self.isDialog_ = bool(val)
+
+    def IsDialog(self):
+        return self.isDialog_
+
+    def SetIsClickable(self, val):
+        self.isClickable_ = bool(val)
+
+    def IsClickable(self):
+        return self.isClickable_
+
+    def SetIsFocusable(self, val):
+        self.isFocusable_ = bool(val)
+
+    def IsFocusable(self):
+        return self.isFocusable_
+
+    def SetIsFocused(self, val):
+        self.isFocused_ = bool(val)
+
+    def IsFocused(self):
+        return self.isFocused_
+
+    def SetIsLongClickable(self, val):
+        self.isLongClickable_ = bool(val)
+
+    def IsLongClickable(self):
+        return self.isLongClickable_
+
+    def SetIsScrollable(self, val):
+        self.isScrollable_ = bool(val)
+
+    def IsScrollable(self):
+        return self.isScrollable_
+
+    def SetIsSelected(self, val):
+        self.isSelected_ = bool(val)
+
+    def IsSelected(self):
+        return self.isSelected_
+
+    def SetIsDismissable(self, val):
+        self.isDismissable_ = bool(val)
+
+    def IsDismissable(self):
+        return self.isDismissable_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -367,39 +648,67 @@ class _Component(Component):
 
     def ToDict(self):
         data = {}
-        data["identifier"] = self.identifier_
-        data["rectX"] = self.rectX_
-        data["rectY"] = self.rectY_
-        data["rectW"] = self.rectW_
-        data["rectH"] = self.rectH_
-        data["centerX"] = self.centerX_
-        data["centerY"] = self.centerY_
-        data["type"] = self.type_
+        data["className"] = self.className_
+        data["resourceId"] = self.resourceId_
+        data["package"] = self.package_
         data["text"] = self.text_
+        # if self.rectangle_ is not None:
+        data["rectangle"] = self.rectangle_.ToDict()
+        data["index"] = self.index_
+        data["isDisplayed"] = self.isDisplayed_
+        data["isEnabled"] = self.isEnabled_
+        data["isCheckable"] = self.isCheckable_
+        data["isChecked"] = self.isChecked_
+        data["isDialog"] = self.isDialog_
+        data["isClickable"] = self.isClickable_
+        data["isFocusable"] = self.isFocusable_
+        data["isFocused"] = self.isFocused_
+        data["isLongClickable"] = self.isLongClickable_
+        data["isScrollable"] = self.isScrollable_
+        data["isSelected"] = self.isSelected_
+        data["isDismissable"] = self.isDismissable_
         return data
 
     def FromDict(self, data):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "identifier":
-                self.identifier_ = rawValue
-            if key == "rectX":
-                self.rectX_ = rawValue
-            if key == "rectY":
-                self.rectY_ = rawValue
-            if key == "rectW":
-                self.rectW_ = rawValue
-            if key == "rectH":
-                self.rectH_ = rawValue
-            if key == "centerX":
-                self.centerX_ = rawValue
-            if key == "centerY":
-                self.centerY_ = rawValue
-            if key == "type":
-                self.type_ = rawValue
+            if key == "className":
+                self.className_ = rawValue
+            if key == "resourceId":
+                self.resourceId_ = rawValue
+            if key == "package":
+                self.package_ = rawValue
             if key == "text":
                 self.text_ = rawValue
+            if key == "rectangle":
+                self.rectangle_.FromDict(rawValue)
+            if key == "index":
+                self.index_ = rawValue
+            if key == "isDisplayed":
+                self.isDisplayed_ = rawValue
+            if key == "isEnabled":
+                self.isEnabled_ = rawValue
+            if key == "isCheckable":
+                self.isCheckable_ = rawValue
+            if key == "isChecked":
+                self.isChecked_ = rawValue
+            if key == "isDialog":
+                self.isDialog_ = rawValue
+            if key == "isClickable":
+                self.isClickable_ = rawValue
+            if key == "isFocusable":
+                self.isFocusable_ = rawValue
+            if key == "isFocused":
+                self.isFocused_ = rawValue
+            if key == "isLongClickable":
+                self.isLongClickable_ = rawValue
+            if key == "isScrollable":
+                self.isScrollable_ = rawValue
+            if key == "isSelected":
+                self.isSelected_ = rawValue
+            if key == "isDismissable":
+                self.isDismissable_ = rawValue
 
 
 class CrawlerConfiguration:
@@ -779,7 +1088,7 @@ class _JourneyInternal(JourneyInternal):
                 self.actionsAvoided_ = res
 
 
-class Edge:
+class Component:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
 
@@ -789,70 +1098,70 @@ class Edge:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def TargetScreenIdentifier(self) -> str:
+    def Identifier(self) -> str:
         raise Exception("not implemented")
 
-    def SetTargetScreenIdentifier(self, val: str):
+    def SetIdentifier(self, val: str):
         raise Exception("not implemented")
 
-    def Component(self) -> Component:
+    def Rectangle(self) -> Rectangle:
         raise Exception("not implemented")
 
-    def SetComponent(self, val: Component):
+    def SetRectangle(self, val: Rectangle):
         raise Exception("not implemented")
 
-    def Action(self) -> str:
+    def Type(self) -> str:
         raise Exception("not implemented")
 
-    def SetAction(self, val: str):
+    def SetType(self, val: str):
         raise Exception("not implemented")
 
-    def Steps(self) -> list:
+    def Text(self) -> str:
         raise Exception("not implemented")
 
-    def SetSteps(self, val: list):
+    def SetText(self, val: str):
         raise Exception("not implemented")
 
 
-def EdgeFactory() -> Edge:
-    ret = _Edge()
-    ret.targetScreenIdentifier_ = ""
-    ret.component_ = ComponentFactory()
-    ret.action_ = ""
-    ret.steps_ = []
+def ComponentFactory() -> Component:
+    ret = _Component()
+    ret.identifier_ = ""
+    ret.rectangle_ = RectangleFactory()
+    ret.type_ = ""
+    ret.text_ = ""
     return ret
 
 
-class _Edge(Edge):
+class _Component(Component):
     def __init__(self):
-        self.targetScreenIdentifier_ = ""
-        self.component_ = ComponentFactory()
-        self.action_ = ""
-        self.steps_ = []
+        self.identifier_ = ""
+        self.rectangle_ = RectangleFactory()
+        self.type_ = ""
+        self.text_ = ""
 
-    def SetTargetScreenIdentifier(self, val):
-        self.targetScreenIdentifier_ = str(val)
+    def SetIdentifier(self, val):
+        self.identifier_ = str(val)
 
-    def TargetScreenIdentifier(self):
-        return self.targetScreenIdentifier_
+    def Identifier(self):
+        return self.identifier_
 
-    def SetComponent(self, val):
-        self.component_ = val
+    def SetRectangle(self, val):
+        self.rectangle_ = val
 
-    def Component(self):
-        return self.component_
+    def Rectangle(self):
+        return self.rectangle_
 
-    def SetAction(self, val):
-        self.action_ = str(val)
+    def SetType(self, val):
+        self.type_ = str(val)
 
-    def Action(self):
-        return self.action_
+    def Type(self):
+        return self.type_
 
-    def SetSteps(self, val):
-        self.steps_ = val
+    def SetText(self, val):
+        self.text_ = str(val)
 
-    def Steps(self):
-        return self.steps_
+    def Text(self):
+        return self.text_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -863,33 +1172,25 @@ class _Edge(Edge):
 
     def ToDict(self):
         data = {}
-        data["targetScreenIdentifier"] = self.targetScreenIdentifier_
-        # if self.component_ is not None:
-        data["component"] = self.component_.ToDict()
-        data["action"] = self.action_
-        rawList = []
-        for v in self.steps_:
-            rawList.append(v)
-        data["steps"] = rawList
+        data["identifier"] = self.identifier_
+        # if self.rectangle_ is not None:
+        data["rectangle"] = self.rectangle_.ToDict()
+        data["type"] = self.type_
+        data["text"] = self.text_
         return data
 
     def FromDict(self, data):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "targetScreenIdentifier":
-                self.targetScreenIdentifier_ = rawValue
-            if key == "component":
-                self.component_.FromDict(rawValue)
-            if key == "action":
-                self.action_ = rawValue
-            if key == "steps":
-                res = []
-                for rw in rawValue:
-                    ud = 0
-                    ud = rw
-                    res.append(ud)
-                self.steps_ = res
+            if key == "identifier":
+                self.identifier_ = rawValue
+            if key == "rectangle":
+                self.rectangle_.FromDict(rawValue)
+            if key == "type":
+                self.type_ = rawValue
+            if key == "text":
+                self.text_ = rawValue
 
 
 class JourneyConfiguration:
@@ -1080,7 +1381,7 @@ class _JourneyConfiguration(JourneyConfiguration):
                 self.crawler_.FromDict(rawValue)
 
 
-class ScreenExternal:
+class Edge:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
 
@@ -1090,168 +1391,70 @@ class ScreenExternal:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Journey(self) -> str:
+    def TargetScreenIdentifier(self) -> str:
         raise Exception("not implemented")
 
-    def SetJourney(self, val: str):
+    def SetTargetScreenIdentifier(self, val: str):
         raise Exception("not implemented")
 
-    def Identifier(self) -> str:
+    def Component(self) -> Component:
         raise Exception("not implemented")
 
-    def SetIdentifier(self, val: str):
+    def SetComponent(self, val: Component):
         raise Exception("not implemented")
 
-    def GroupIdentifier(self) -> str:
+    def Action(self) -> str:
         raise Exception("not implemented")
 
-    def SetGroupIdentifier(self, val: str):
+    def SetAction(self, val: str):
         raise Exception("not implemented")
 
-    def FlowIdentifier(self) -> str:
+    def Steps(self) -> list:
         raise Exception("not implemented")
 
-    def SetFlowIdentifier(self, val: str):
-        raise Exception("not implemented")
-
-    def Edges(self) -> list:
-        raise Exception("not implemented")
-
-    def SetEdges(self, val: list):
-        raise Exception("not implemented")
-
-    def Image(self) -> str:
-        raise Exception("not implemented")
-
-    def SetImage(self, val: str):
-        raise Exception("not implemented")
-
-    def ImageLowRes(self) -> str:
-        raise Exception("not implemented")
-
-    def SetImageLowRes(self, val: str):
-        raise Exception("not implemented")
-
-    def IsEntryPoint(self) -> bool:
-        raise Exception("not implemented")
-
-    def SetIsEntryPoint(self, val: bool):
-        raise Exception("not implemented")
-
-    def Components(self) -> list:
-        raise Exception("not implemented")
-
-    def SetComponents(self, val: list):
-        raise Exception("not implemented")
-
-    def Content(self) -> ScreenContent:
-        raise Exception("not implemented")
-
-    def SetContent(self, val: ScreenContent):
-        raise Exception("not implemented")
-
-    def Metadata(self) -> ScreenMetadata:
-        raise Exception("not implemented")
-
-    def SetMetadata(self, val: ScreenMetadata):
+    def SetSteps(self, val: list):
         raise Exception("not implemented")
 
 
-def ScreenExternalFactory() -> ScreenExternal:
-    ret = _ScreenExternal()
-    ret.journey_ = ""
-    ret.identifier_ = ""
-    ret.groupIdentifier_ = ""
-    ret.flowIdentifier_ = ""
-    ret.edges_ = []
-    ret.image_ = ""
-    ret.imageLowRes_ = ""
-    ret.isEntryPoint_ = False
-    ret.components_ = []
-    ret.content_ = ScreenContentFactory()
-    ret.metadata_ = ScreenMetadataFactory()
+def EdgeFactory() -> Edge:
+    ret = _Edge()
+    ret.targetScreenIdentifier_ = ""
+    ret.component_ = ComponentFactory()
+    ret.action_ = ""
+    ret.steps_ = []
     return ret
 
 
-class _ScreenExternal(ScreenExternal):
+class _Edge(Edge):
     def __init__(self):
-        self.journey_ = ""
-        self.identifier_ = ""
-        self.groupIdentifier_ = ""
-        self.flowIdentifier_ = ""
-        self.edges_ = []
-        self.image_ = ""
-        self.imageLowRes_ = ""
-        self.isEntryPoint_ = False
-        self.components_ = []
-        self.content_ = ScreenContentFactory()
-        self.metadata_ = ScreenMetadataFactory()
+        self.targetScreenIdentifier_ = ""
+        self.component_ = ComponentFactory()
+        self.action_ = ""
+        self.steps_ = []
 
-    def SetJourney(self, val):
-        self.journey_ = str(val)
+    def SetTargetScreenIdentifier(self, val):
+        self.targetScreenIdentifier_ = str(val)
 
-    def Journey(self):
-        return self.journey_
+    def TargetScreenIdentifier(self):
+        return self.targetScreenIdentifier_
 
-    def SetIdentifier(self, val):
-        self.identifier_ = str(val)
+    def SetComponent(self, val):
+        self.component_ = val
 
-    def Identifier(self):
-        return self.identifier_
+    def Component(self):
+        return self.component_
 
-    def SetGroupIdentifier(self, val):
-        self.groupIdentifier_ = str(val)
+    def SetAction(self, val):
+        self.action_ = str(val)
 
-    def GroupIdentifier(self):
-        return self.groupIdentifier_
+    def Action(self):
+        return self.action_
 
-    def SetFlowIdentifier(self, val):
-        self.flowIdentifier_ = str(val)
+    def SetSteps(self, val):
+        self.steps_ = val
 
-    def FlowIdentifier(self):
-        return self.flowIdentifier_
-
-    def SetEdges(self, val):
-        self.edges_ = val
-
-    def Edges(self):
-        return self.edges_
-
-    def SetImage(self, val):
-        self.image_ = str(val)
-
-    def Image(self):
-        return self.image_
-
-    def SetImageLowRes(self, val):
-        self.imageLowRes_ = str(val)
-
-    def ImageLowRes(self):
-        return self.imageLowRes_
-
-    def SetIsEntryPoint(self, val):
-        self.isEntryPoint_ = bool(val)
-
-    def IsEntryPoint(self):
-        return self.isEntryPoint_
-
-    def SetComponents(self, val):
-        self.components_ = val
-
-    def Components(self):
-        return self.components_
-
-    def SetContent(self, val):
-        self.content_ = val
-
-    def Content(self):
-        return self.content_
-
-    def SetMetadata(self, val):
-        self.metadata_ = val
-
-    def Metadata(self):
-        return self.metadata_
+    def Steps(self):
+        return self.steps_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -1262,63 +1465,146 @@ class _ScreenExternal(ScreenExternal):
 
     def ToDict(self):
         data = {}
-        data["journey"] = self.journey_
-        data["identifier"] = self.identifier_
-        data["groupIdentifier"] = self.groupIdentifier_
-        data["flowIdentifier"] = self.flowIdentifier_
+        data["targetScreenIdentifier"] = self.targetScreenIdentifier_
+        # if self.component_ is not None:
+        data["component"] = self.component_.ToDict()
+        data["action"] = self.action_
         rawList = []
-        for v in self.edges_:
-            rawList.append(v.ToDict())
-        data["edges"] = rawList
-        data["image"] = self.image_
-        data["imageLowRes"] = self.imageLowRes_
-        data["isEntryPoint"] = self.isEntryPoint_
-        rawList = []
-        for v in self.components_:
-            rawList.append(v.ToDict())
-        data["components"] = rawList
-        # if self.content_ is not None:
-        data["content"] = self.content_.ToDict()
-        # if self.metadata_ is not None:
-        data["metadata"] = self.metadata_.ToDict()
+        for v in self.steps_:
+            rawList.append(v)
+        data["steps"] = rawList
         return data
 
     def FromDict(self, data):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "journey":
-                self.journey_ = rawValue
+            if key == "targetScreenIdentifier":
+                self.targetScreenIdentifier_ = rawValue
+            if key == "component":
+                self.component_.FromDict(rawValue)
+            if key == "action":
+                self.action_ = rawValue
+            if key == "steps":
+                res = []
+                for rw in rawValue:
+                    ud = 0
+                    ud = rw
+                    res.append(ud)
+                self.steps_ = res
+
+
+class PageNode:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Identifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def Parent(self) -> str:
+        raise Exception("not implemented")
+
+    def SetParent(self, val: str):
+        raise Exception("not implemented")
+
+    def Children(self) -> list:
+        raise Exception("not implemented")
+
+    def SetChildren(self, val: list):
+        raise Exception("not implemented")
+
+    def Attributes(self) -> PageNodeAttributes:
+        raise Exception("not implemented")
+
+    def SetAttributes(self, val: PageNodeAttributes):
+        raise Exception("not implemented")
+
+
+def PageNodeFactory() -> PageNode:
+    ret = _PageNode()
+    ret.identifier_ = ""
+    ret.parent_ = ""
+    ret.children_ = []
+    ret.attributes_ = PageNodeAttributesFactory()
+    return ret
+
+
+class _PageNode(PageNode):
+    def __init__(self):
+        self.identifier_ = ""
+        self.parent_ = ""
+        self.children_ = []
+        self.attributes_ = PageNodeAttributesFactory()
+
+    def SetIdentifier(self, val):
+        self.identifier_ = str(val)
+
+    def Identifier(self):
+        return self.identifier_
+
+    def SetParent(self, val):
+        self.parent_ = str(val)
+
+    def Parent(self):
+        return self.parent_
+
+    def SetChildren(self, val):
+        self.children_ = val
+
+    def Children(self):
+        return self.children_
+
+    def SetAttributes(self, val):
+        self.attributes_ = val
+
+    def Attributes(self):
+        return self.attributes_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["identifier"] = self.identifier_
+        data["parent"] = self.parent_
+        rawList = []
+        for v in self.children_:
+            rawList.append(v.ToDict())
+        data["children"] = rawList
+        # if self.attributes_ is not None:
+        data["attributes"] = self.attributes_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
             if key == "identifier":
                 self.identifier_ = rawValue
-            if key == "groupIdentifier":
-                self.groupIdentifier_ = rawValue
-            if key == "flowIdentifier":
-                self.flowIdentifier_ = rawValue
-            if key == "edges":
+            if key == "parent":
+                self.parent_ = rawValue
+            if key == "children":
                 res = []
                 for rw in rawValue:
-                    ud = EdgeFactory()
+                    ud = PageNodeFactory()
                     ud.FromDict(rw)
                     res.append(ud)
-                self.edges_ = res
-            if key == "image":
-                self.image_ = rawValue
-            if key == "imageLowRes":
-                self.imageLowRes_ = rawValue
-            if key == "isEntryPoint":
-                self.isEntryPoint_ = rawValue
-            if key == "components":
-                res = []
-                for rw in rawValue:
-                    ud = ComponentFactory()
-                    ud.FromDict(rw)
-                    res.append(ud)
-                self.components_ = res
-            if key == "content":
-                self.content_.FromDict(rawValue)
-            if key == "metadata":
-                self.metadata_.FromDict(rawValue)
+                self.children_ = res
+            if key == "attributes":
+                self.attributes_.FromDict(rawValue)
 
 
 class JourneyExternal:
@@ -1494,7 +1780,302 @@ class _JourneyExternal(JourneyExternal):
                 self.deleted_ = rawValue
 
 
-class Screen(store.ExternalHolder):
+class ScreenInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Journey(self) -> str:
+        raise Exception("not implemented")
+
+    def SetJourney(self, val: str):
+        raise Exception("not implemented")
+
+    def Identifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def GroupIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetGroupIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def Edges(self) -> list:
+        raise Exception("not implemented")
+
+    def SetEdges(self, val: list):
+        raise Exception("not implemented")
+
+    def Image(self) -> str:
+        raise Exception("not implemented")
+
+    def SetImage(self, val: str):
+        raise Exception("not implemented")
+
+    def ImageLowRes(self) -> str:
+        raise Exception("not implemented")
+
+    def SetImageLowRes(self, val: str):
+        raise Exception("not implemented")
+
+    def IsEntryPoint(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsEntryPoint(self, val: bool):
+        raise Exception("not implemented")
+
+    def Components(self) -> list:
+        raise Exception("not implemented")
+
+    def SetComponents(self, val: list):
+        raise Exception("not implemented")
+
+    def Content(self) -> ScreenContent:
+        raise Exception("not implemented")
+
+    def SetContent(self, val: ScreenContent):
+        raise Exception("not implemented")
+
+    def Metadata(self) -> ScreenMetadata:
+        raise Exception("not implemented")
+
+    def SetMetadata(self, val: ScreenMetadata):
+        raise Exception("not implemented")
+
+
+def ScreenInternalFactory() -> ScreenInternal:
+    ret = _ScreenInternal()
+    ret.journey_ = ""
+    ret.identifier_ = ""
+    ret.groupIdentifier_ = ""
+    ret.edges_ = []
+    ret.image_ = ""
+    ret.imageLowRes_ = ""
+    ret.isEntryPoint_ = False
+    ret.components_ = []
+    ret.content_ = ScreenContentFactory()
+    ret.metadata_ = ScreenMetadataFactory()
+    return ret
+
+
+class _ScreenInternal(ScreenInternal):
+    def __init__(self):
+        self.journey_ = ""
+        self.identifier_ = ""
+        self.groupIdentifier_ = ""
+        self.edges_ = []
+        self.image_ = ""
+        self.imageLowRes_ = ""
+        self.isEntryPoint_ = False
+        self.components_ = []
+        self.content_ = ScreenContentFactory()
+        self.metadata_ = ScreenMetadataFactory()
+
+    def SetJourney(self, val):
+        self.journey_ = str(val)
+
+    def Journey(self):
+        return self.journey_
+
+    def SetIdentifier(self, val):
+        self.identifier_ = str(val)
+
+    def Identifier(self):
+        return self.identifier_
+
+    def SetGroupIdentifier(self, val):
+        self.groupIdentifier_ = str(val)
+
+    def GroupIdentifier(self):
+        return self.groupIdentifier_
+
+    def SetEdges(self, val):
+        self.edges_ = val
+
+    def Edges(self):
+        return self.edges_
+
+    def SetImage(self, val):
+        self.image_ = str(val)
+
+    def Image(self):
+        return self.image_
+
+    def SetImageLowRes(self, val):
+        self.imageLowRes_ = str(val)
+
+    def ImageLowRes(self):
+        return self.imageLowRes_
+
+    def SetIsEntryPoint(self, val):
+        self.isEntryPoint_ = bool(val)
+
+    def IsEntryPoint(self):
+        return self.isEntryPoint_
+
+    def SetComponents(self, val):
+        self.components_ = val
+
+    def Components(self):
+        return self.components_
+
+    def SetContent(self, val):
+        self.content_ = val
+
+    def Content(self):
+        return self.content_
+
+    def SetMetadata(self, val):
+        self.metadata_ = val
+
+    def Metadata(self):
+        return self.metadata_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["journey"] = self.journey_
+        data["identifier"] = self.identifier_
+        data["groupIdentifier"] = self.groupIdentifier_
+        rawList = []
+        for v in self.edges_:
+            rawList.append(v.ToDict())
+        data["edges"] = rawList
+        data["image"] = self.image_
+        data["imageLowRes"] = self.imageLowRes_
+        data["isEntryPoint"] = self.isEntryPoint_
+        rawList = []
+        for v in self.components_:
+            rawList.append(v.ToDict())
+        data["components"] = rawList
+        # if self.content_ is not None:
+        data["content"] = self.content_.ToDict()
+        # if self.metadata_ is not None:
+        data["metadata"] = self.metadata_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "journey":
+                self.journey_ = rawValue
+            if key == "identifier":
+                self.identifier_ = rawValue
+            if key == "groupIdentifier":
+                self.groupIdentifier_ = rawValue
+            if key == "edges":
+                res = []
+                for rw in rawValue:
+                    ud = EdgeFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.edges_ = res
+            if key == "image":
+                self.image_ = rawValue
+            if key == "imageLowRes":
+                self.imageLowRes_ = rawValue
+            if key == "isEntryPoint":
+                self.isEntryPoint_ = rawValue
+            if key == "components":
+                res = []
+                for rw in rawValue:
+                    ud = ComponentFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.components_ = res
+            if key == "content":
+                self.content_.FromDict(rawValue)
+            if key == "metadata":
+                self.metadata_.FromDict(rawValue)
+
+
+class PageInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Journey(self) -> str:
+        raise Exception("not implemented")
+
+    def SetJourney(self, val: str):
+        raise Exception("not implemented")
+
+    def Root(self) -> PageNode:
+        raise Exception("not implemented")
+
+    def SetRoot(self, val: PageNode):
+        raise Exception("not implemented")
+
+
+def PageInternalFactory() -> PageInternal:
+    ret = _PageInternal()
+    ret.journey_ = ""
+    ret.root_ = PageNodeFactory()
+    return ret
+
+
+class _PageInternal(PageInternal):
+    def __init__(self):
+        self.journey_ = ""
+        self.root_ = PageNodeFactory()
+
+    def SetJourney(self, val):
+        self.journey_ = str(val)
+
+    def Journey(self):
+        return self.journey_
+
+    def SetRoot(self, val):
+        self.root_ = val
+
+    def Root(self):
+        return self.root_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["journey"] = self.journey_
+        # if self.root_ is not None:
+        data["root"] = self.root_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "journey":
+                self.journey_ = rawValue
+            if key == "root":
+                self.root_.FromDict(rawValue)
+
+
+class Screen(store.Object):
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
 
@@ -1510,13 +2091,13 @@ class Screen(store.ExternalHolder):
     def Meta(self) -> store.Meta:
         raise Exception("not implemented")
 
-    def External() -> ScreenExternal:
+    def Internal(self) -> ScreenInternal:
         raise Exception("not implemented")
 
 
 def ScreenFactory() -> Screen:
     ret = _Screen()
-    ret.external_ = ScreenExternalFactory()
+    ret.internal_ = ScreenInternalFactory()
     return ret
 
 
@@ -1526,11 +2107,11 @@ class _Screen(Screen):
         self.external_ = None
         self.internal_ = None
 
-    def SetExternal(self, val):
-        self.external_ = val
+    def SetInternal(self, val):
+        self.internal_ = val
 
-    def External(self) -> ScreenExternal:
-        return self.external_
+    def Internal(self) -> ScreenInternal:
+        return self.internal_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -1542,7 +2123,7 @@ class _Screen(Screen):
     def ToDict(self):
         data = {}
         data["metadata"] = self.meta_.ToDict()
-        data["external"] = self.external_.ToDict()
+        data["internal"] = self.internal_.ToDict()
         return data
 
     def FromDict(self, data):
@@ -1551,8 +2132,8 @@ class _Screen(Screen):
                 continue
             if key == "metadata":
                 self.meta_.FromDict(rawValue)
-            if key == "external":
-                self.external_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
 
     def Clone(self) -> Screen:
         ret = ScreenFactory()
@@ -1575,6 +2156,89 @@ def ScreenIdentity(pkey):
 
 ScreenKindIdentity = store.ObjectIdentity("screen/")
 ScreenKind = "Screen"
+
+
+class Page(store.Object):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> Type["Page"]:
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def Internal(self) -> PageInternal:
+        raise Exception("not implemented")
+
+
+def PageFactory() -> Page:
+    ret = _Page()
+    ret.internal_ = PageInternalFactory()
+    return ret
+
+
+class _Page(Page):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("Page")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetInternal(self, val):
+        self.internal_ = val
+
+    def Internal(self) -> PageInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> Page:
+        ret = PageFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def PageIdentity(pkey):
+    return store.ObjectIdentity("page/" + pkey)
+
+
+PageKindIdentity = store.ObjectIdentity("page/")
+PageKind = "Page"
 
 
 class Journey(store.ExternalHolder):
@@ -1682,6 +2346,10 @@ class _Schema(store.SchemaHolder):
             return ScreenFactory()
         elif kind == "screen":
             return ScreenFactory()
+        if kind == "Page":
+            return PageFactory()
+        elif kind == "page":
+            return PageFactory()
         if kind == "Journey":
             return JourneyFactory()
         elif kind == "journey":
@@ -1695,6 +2363,7 @@ class _Schema(store.SchemaHolder):
 def Schema():
     objects = [
         "Screen",
+        "Page",
         "Journey",
     ]
     return _Schema(objects)
