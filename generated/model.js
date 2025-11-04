@@ -9,9 +9,6 @@ class ScreenMetadata {
     FromDict(data) { throw new Error("not implemented"); }
 
     
-    Content() { throw new Error("not implemented"); }
-    SetContent(val) { throw new Error("not implemented"); }
-    
     Title() { throw new Error("not implemented"); }
     SetTitle(val) { throw new Error("not implemented"); }
     
@@ -29,8 +26,6 @@ class ScreenMetadata {
 function ScreenMetadataFactory() {
     const ret = new _ScreenMetadata();
     
-    ret.content_ = [];
-    
     ret.title_ = "";
     
     ret.description_ = "";
@@ -46,8 +41,6 @@ class _ScreenMetadata extends ScreenMetadata {
     constructor() {
         super();
         
-        this.content_ = [];
-        
         this.title_ = "";
         
         this.description_ = "";
@@ -55,19 +48,6 @@ class _ScreenMetadata extends ScreenMetadata {
         this.tags_ = [];
         
         this.flow_ = "";
-        
-    }
-
-    
-    SetContent(val) {
-        
-        this.content_ = val;
-        
-    }
-
-    Content() {
-        
-        return this.content_;
         
     }
 
@@ -138,16 +118,6 @@ class _ScreenMetadata extends ScreenMetadata {
         const data = {};
         
         
-        const rawListcontent = [];
-        for (const v of (this.content_ || [])) {
-            
-            rawListcontent.push(v);
-            
-        }
-        data["content"] = rawListcontent;
-        
-        
-        
         
         data["title"] = this.title_;
         
@@ -183,22 +153,6 @@ class _ScreenMetadata extends ScreenMetadata {
             const rawValue = data[key];
             if (rawValue === null || rawValue === undefined) continue;
 
-            
-            if (key === "content") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.content_ = res;
-                
-            }
             
             if (key === "title") {
                 
@@ -240,150 +194,6 @@ class _ScreenMetadata extends ScreenMetadata {
                 this.flow_ = rawValue;
                 
 
-                
-            }
-            
-        }
-    }
-}
-
-
-
-class ScreenContent {
-    constructor() {
-        // throw new Error("cannot initialize like this. use the factory method");
-    }
-
-    ToDict() { throw new Error("not implemented"); }
-    FromDict(data) { throw new Error("not implemented"); }
-
-    
-    TextInputs() { throw new Error("not implemented"); }
-    SetTextInputs(val) { throw new Error("not implemented"); }
-    
-    Buttons() { throw new Error("not implemented"); }
-    SetButtons(val) { throw new Error("not implemented"); }
-    
-}
-
-function ScreenContentFactory() {
-    const ret = new _ScreenContent();
-    
-    ret.textInputs_ = [];
-    
-    ret.buttons_ = [];
-    
-    return ret;
-}
-
-class _ScreenContent extends ScreenContent {
-    constructor() {
-        super();
-        
-        this.textInputs_ = [];
-        
-        this.buttons_ = [];
-        
-    }
-
-    
-    SetTextInputs(val) {
-        
-        this.textInputs_ = val;
-        
-    }
-
-    TextInputs() {
-        
-        return this.textInputs_;
-        
-    }
-
-    
-    SetButtons(val) {
-        
-        this.buttons_ = val;
-        
-    }
-
-    Buttons() {
-        
-        return this.buttons_;
-        
-    }
-
-    
-
-    FromJson(jstr) {
-        const data = JSON.parse(jstr);
-        return this.FromDict(data);
-    }
-
-    ToJson() {
-        return JSON.stringify(this.ToDict());
-    }
-
-    ToDict() {
-        const data = {};
-        
-        
-        const rawListtextInputs = [];
-        for (const v of (this.textInputs_ || [])) {
-            
-            rawListtextInputs.push(v);
-            
-        }
-        data["textInputs"] = rawListtextInputs;
-        
-        
-        
-        const rawListbuttons = [];
-        for (const v of (this.buttons_ || [])) {
-            
-            rawListbuttons.push(v);
-            
-        }
-        data["buttons"] = rawListbuttons;
-        
-        
-        return data;
-    }
-
-    FromDict(data) {
-        for (const key in data) {
-            const rawValue = data[key];
-            if (rawValue === null || rawValue === undefined) continue;
-
-            
-            if (key === "textInputs") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.textInputs_ = res;
-                
-            }
-            
-            if (key === "buttons") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.buttons_ = res;
                 
             }
             
@@ -2798,6 +2608,150 @@ class _Edge extends Edge {
 
 
 
+class ScreenContent {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Components() { throw new Error("not implemented"); }
+    SetComponents(val) { throw new Error("not implemented"); }
+    
+    Text() { throw new Error("not implemented"); }
+    SetText(val) { throw new Error("not implemented"); }
+    
+}
+
+function ScreenContentFactory() {
+    const ret = new _ScreenContent();
+    
+    ret.components_ = [];
+    
+    ret.text_ = [];
+    
+    return ret;
+}
+
+class _ScreenContent extends ScreenContent {
+    constructor() {
+        super();
+        
+        this.components_ = [];
+        
+        this.text_ = [];
+        
+    }
+
+    
+    SetComponents(val) {
+        
+        this.components_ = val;
+        
+    }
+
+    Components() {
+        
+        return this.components_;
+        
+    }
+
+    
+    SetText(val) {
+        
+        this.text_ = val;
+        
+    }
+
+    Text() {
+        
+        return this.text_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawListcomponents = [];
+        for (const v of (this.components_ || [])) {
+            
+            rawListcomponents.push(v.ToDict());
+            
+        }
+        data["components"] = rawListcomponents;
+        
+        
+        
+        const rawListtext = [];
+        for (const v of (this.text_ || [])) {
+            
+            rawListtext.push(v);
+            
+        }
+        data["text"] = rawListtext;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "components") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = ComponentFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.components_ = res;
+                
+            }
+            
+            if (key === "text") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.text_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class PageNode {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -3363,9 +3317,6 @@ class ScreenInternal {
     IsEntryPoint() { throw new Error("not implemented"); }
     SetIsEntryPoint(val) { throw new Error("not implemented"); }
     
-    Components() { throw new Error("not implemented"); }
-    SetComponents(val) { throw new Error("not implemented"); }
-    
     Content() { throw new Error("not implemented"); }
     SetContent(val) { throw new Error("not implemented"); }
     
@@ -3391,8 +3342,6 @@ function ScreenInternalFactory() {
     
     ret.isEntryPoint_ = false;
     
-    ret.components_ = [];
-    
     ret.content_ = ScreenContentFactory();
     
     ret.metadata_ = ScreenMetadataFactory();
@@ -3417,8 +3366,6 @@ class _ScreenInternal extends ScreenInternal {
         this.imageLowRes_ = "";
         
         this.isEntryPoint_ = false;
-        
-        this.components_ = [];
         
         this.content_ = ScreenContentFactory();
         
@@ -3518,19 +3465,6 @@ class _ScreenInternal extends ScreenInternal {
     }
 
     
-    SetComponents(val) {
-        
-        this.components_ = val;
-        
-    }
-
-    Components() {
-        
-        return this.components_;
-        
-    }
-
-    
     SetContent(val) {
         
         this.content_ = val;
@@ -3614,16 +3548,6 @@ class _ScreenInternal extends ScreenInternal {
         
         data["isEntryPoint"] = this.isEntryPoint_;
         
-        
-        
-        
-        const rawListcomponents = [];
-        for (const v of (this.components_ || [])) {
-            
-            rawListcomponents.push(v.ToDict());
-            
-        }
-        data["components"] = rawListcomponents;
         
         
         
@@ -3714,22 +3638,6 @@ class _ScreenInternal extends ScreenInternal {
                 this.isEntryPoint_ = rawValue;
                 
 
-                
-            }
-            
-            if (key === "components") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = ComponentFactory();
-                    
-                    ud.FromDict(rw);
-                    
-                    res.push(ud);
-                }
-
-                this.components_ = res;
                 
             }
             

@@ -10,26 +10,34 @@ types:
     properties:
       - name: journey
         type: string
+        description: The journey this screen belongs to
       - name: identifier
         type: string
+        description: The unique identifier for this screen
       - name: groupIdentifier
         type: string
+        description: The group identifier this screen belongs to
       - name: edges
         type: "[]Edge"
+        description: The edges connecting this screen to others
       - name: image
         type: string
+        description: The image representing this screen
       - name: imageLowRes
         type: string
+        description: The low resolution image representing this screen
       - name: isEntryPoint
         type: bool
-      - name: components
-        type: "[]Component"
+        description: Whether this screen is the entry point of the journey
       - name: content
         type: ScreenContent
+        description: The content of the screen
       - name: metadata
         type: ScreenMetadata
+        description: AI generated metadata about the screen
   - kind: Struct
     name: Edge
+    description: An edge representing a transition from one screen to another via a component and action.
     properties:
       - name: targetScreenIdentifier
         type: string
@@ -41,9 +49,8 @@ types:
         type: "[]int"
   - kind: Struct
     name: ScreenMetadata
+    description: AI generated metadata about the screen
     properties:
-      - name: content
-        type: "[]string"
       - name: title
         type: string
       - name: description
@@ -55,9 +62,9 @@ types:
   - kind: Struct
     name: ScreenContent
     properties:
-      - name: textInputs
-        type: "[]string"
-      - name: buttons
+      - name: components
+        type: "[]Component"
+      - name: text
         type: "[]string"
   - kind: Struct
     name: Component
@@ -90,17 +97,23 @@ types:
     properties:
       - name: journey
         type: string
+        description: The journey this page belongs to
       - name: root
         type: PageNode
+        description: The root node of the page's hierarchical structure
   - kind: Struct
     name: PageNode
+    description: A node in the hierarchical structure of a page
     properties:
       - name: identifier
         type: string
+        description: The unique identifier for this node
       - name: parent
         type: string
+        description: The identifier of the parent node
       - name: children
         type: "[]PageNode"
+        description: The child nodes of this node
       - name: attributes
         type: PageNodeAttributes
   - kind: Struct

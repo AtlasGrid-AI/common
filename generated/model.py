@@ -17,12 +17,6 @@ class ScreenMetadata:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Content(self) -> list:
-        raise Exception("not implemented")
-
-    def SetContent(self, val: list):
-        raise Exception("not implemented")
-
     def Title(self) -> str:
         raise Exception("not implemented")
 
@@ -50,7 +44,6 @@ class ScreenMetadata:
 
 def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
-    ret.content_ = []
     ret.title_ = ""
     ret.description_ = ""
     ret.tags_ = []
@@ -60,17 +53,10 @@ def ScreenMetadataFactory() -> ScreenMetadata:
 
 class _ScreenMetadata(ScreenMetadata):
     def __init__(self):
-        self.content_ = []
         self.title_ = ""
         self.description_ = ""
         self.tags_ = []
         self.flow_ = ""
-
-    def SetContent(self, val):
-        self.content_ = val
-
-    def Content(self):
-        return self.content_
 
     def SetTitle(self, val):
         self.title_ = str(val)
@@ -105,10 +91,6 @@ class _ScreenMetadata(ScreenMetadata):
 
     def ToDict(self):
         data = {}
-        rawList = []
-        for v in self.content_:
-            rawList.append(v)
-        data["content"] = rawList
         data["title"] = self.title_
         data["description"] = self.description_
         rawList = []
@@ -122,13 +104,6 @@ class _ScreenMetadata(ScreenMetadata):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "content":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.content_ = res
             if key == "title":
                 self.title_ = rawValue
             if key == "description":
@@ -142,92 +117,6 @@ class _ScreenMetadata(ScreenMetadata):
                 self.tags_ = res
             if key == "flow":
                 self.flow_ = rawValue
-
-
-class ScreenContent:
-    def __init__(self):
-        raise Exception("cannot initialize like this. use the factory method")
-
-    def ToDict(self):
-        raise Exception("not implemented")
-
-    def FromDict(self, data):
-        raise Exception("not implemented")
-
-    def TextInputs(self) -> list:
-        raise Exception("not implemented")
-
-    def SetTextInputs(self, val: list):
-        raise Exception("not implemented")
-
-    def Buttons(self) -> list:
-        raise Exception("not implemented")
-
-    def SetButtons(self, val: list):
-        raise Exception("not implemented")
-
-
-def ScreenContentFactory() -> ScreenContent:
-    ret = _ScreenContent()
-    ret.textInputs_ = []
-    ret.buttons_ = []
-    return ret
-
-
-class _ScreenContent(ScreenContent):
-    def __init__(self):
-        self.textInputs_ = []
-        self.buttons_ = []
-
-    def SetTextInputs(self, val):
-        self.textInputs_ = val
-
-    def TextInputs(self):
-        return self.textInputs_
-
-    def SetButtons(self, val):
-        self.buttons_ = val
-
-    def Buttons(self):
-        return self.buttons_
-
-    def FromJson(self, jstr):
-        data = json.loads(jstr)
-        return self.FromDict(data)
-
-    def ToJson(self):
-        return json.dumps(self.ToDict())
-
-    def ToDict(self):
-        data = {}
-        rawList = []
-        for v in self.textInputs_:
-            rawList.append(v)
-        data["textInputs"] = rawList
-        rawList = []
-        for v in self.buttons_:
-            rawList.append(v)
-        data["buttons"] = rawList
-        return data
-
-    def FromDict(self, data):
-        for key, rawValue in data.items():
-            if rawValue is None:
-                continue
-            if key == "textInputs":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.textInputs_ = res
-            if key == "buttons":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.buttons_ = res
 
 
 class Rectangle:
@@ -1494,6 +1383,92 @@ class _Edge(Edge):
                 self.steps_ = res
 
 
+class ScreenContent:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Components(self) -> list:
+        raise Exception("not implemented")
+
+    def SetComponents(self, val: list):
+        raise Exception("not implemented")
+
+    def Text(self) -> list:
+        raise Exception("not implemented")
+
+    def SetText(self, val: list):
+        raise Exception("not implemented")
+
+
+def ScreenContentFactory() -> ScreenContent:
+    ret = _ScreenContent()
+    ret.components_ = []
+    ret.text_ = []
+    return ret
+
+
+class _ScreenContent(ScreenContent):
+    def __init__(self):
+        self.components_ = []
+        self.text_ = []
+
+    def SetComponents(self, val):
+        self.components_ = val
+
+    def Components(self):
+        return self.components_
+
+    def SetText(self, val):
+        self.text_ = val
+
+    def Text(self):
+        return self.text_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawList = []
+        for v in self.components_:
+            rawList.append(v.ToDict())
+        data["components"] = rawList
+        rawList = []
+        for v in self.text_:
+            rawList.append(v)
+        data["text"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "components":
+                res = []
+                for rw in rawValue:
+                    ud = ComponentFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.components_ = res
+            if key == "text":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.text_ = res
+
+
 class PageNode:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -1832,12 +1807,6 @@ class ScreenInternal:
     def SetIsEntryPoint(self, val: bool):
         raise Exception("not implemented")
 
-    def Components(self) -> list:
-        raise Exception("not implemented")
-
-    def SetComponents(self, val: list):
-        raise Exception("not implemented")
-
     def Content(self) -> ScreenContent:
         raise Exception("not implemented")
 
@@ -1860,7 +1829,6 @@ def ScreenInternalFactory() -> ScreenInternal:
     ret.image_ = ""
     ret.imageLowRes_ = ""
     ret.isEntryPoint_ = False
-    ret.components_ = []
     ret.content_ = ScreenContentFactory()
     ret.metadata_ = ScreenMetadataFactory()
     return ret
@@ -1875,7 +1843,6 @@ class _ScreenInternal(ScreenInternal):
         self.image_ = ""
         self.imageLowRes_ = ""
         self.isEntryPoint_ = False
-        self.components_ = []
         self.content_ = ScreenContentFactory()
         self.metadata_ = ScreenMetadataFactory()
 
@@ -1921,12 +1888,6 @@ class _ScreenInternal(ScreenInternal):
     def IsEntryPoint(self):
         return self.isEntryPoint_
 
-    def SetComponents(self, val):
-        self.components_ = val
-
-    def Components(self):
-        return self.components_
-
     def SetContent(self, val):
         self.content_ = val
 
@@ -1958,10 +1919,6 @@ class _ScreenInternal(ScreenInternal):
         data["image"] = self.image_
         data["imageLowRes"] = self.imageLowRes_
         data["isEntryPoint"] = self.isEntryPoint_
-        rawList = []
-        for v in self.components_:
-            rawList.append(v.ToDict())
-        data["components"] = rawList
         # if self.content_ is not None:
         data["content"] = self.content_.ToDict()
         # if self.metadata_ is not None:
@@ -1991,13 +1948,6 @@ class _ScreenInternal(ScreenInternal):
                 self.imageLowRes_ = rawValue
             if key == "isEntryPoint":
                 self.isEntryPoint_ = rawValue
-            if key == "components":
-                res = []
-                for rw in rawValue:
-                    ud = ComponentFactory()
-                    ud.FromDict(rw)
-                    res.append(ud)
-                self.components_ = res
             if key == "content":
                 self.content_.FromDict(rawValue)
             if key == "metadata":
