@@ -1,23 +1,19 @@
+from enum import Enum
 
-ADMIN_ST_RUN = "run"
-ADMIN_ST_STOP = "stop"
-ADMIN_ST_RESTART = "restart"
 
-OPER_ST_RUNNING = "running"
-OPER_ST_IDLE = "idle"
-OPER_ST_ERROR = "error"
+class AdminState(Enum):
+    RUN = "run"
+    STOP = "stop"
+    RESTART = "restart"
 
-PLATFORM_ANDROID = "Android"
-PLATFORM_IOS = "iOS"
-PLATFORM_WEB = "Web"
 
-COMPONENT_TYPE_BUTTON = "button"
-COMPONENT_TYPE_TEXTBOX = "textbox"
+class OperState(Enum):
+    RUNNING = "running"
+    IDLE = "idle"
+    ERROR = "error"
 
-COMPONENT_ACTION_CLICK = "click"
-COMPONENT_ACTION_TEXT_INPUT = "input"
-COMPONENT_ACTION_SWIPE_UP = "swipe_up"
-COMPONENT_ACTION_SWIPE_DOWN = "swipe_down"
-COMPONENT_ACTION_SWIPE_LEFT = "swipe_left"
-COMPONENT_ACTION_SWIPE_RIGHT = "swipe_right"
 
+class Platform(Enum):
+    ANDROID = "Android"
+    IOS = "iOS"
+    WEB = "Web"
