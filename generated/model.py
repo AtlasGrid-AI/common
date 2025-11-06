@@ -814,6 +814,12 @@ class JourneyInternal:
     def SetActionsAvoided(self, val: list):
         raise Exception("not implemented")
 
+    def CrawlerVersion(self) -> str:
+        raise Exception("not implemented")
+
+    def SetCrawlerVersion(self, val: str):
+        raise Exception("not implemented")
+
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
@@ -828,6 +834,7 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.stepsPlanned_ = 0
     ret.actionsPerformed_ = []
     ret.actionsAvoided_ = []
+    ret.crawlerVersion_ = ""
     return ret
 
 
@@ -844,6 +851,7 @@ class _JourneyInternal(JourneyInternal):
         self.stepsPlanned_ = 0
         self.actionsPerformed_ = []
         self.actionsAvoided_ = []
+        self.crawlerVersion_ = ""
 
     def SetOperSt(self, val):
         self.operSt_ = str(val)
@@ -911,6 +919,12 @@ class _JourneyInternal(JourneyInternal):
     def ActionsAvoided(self):
         return self.actionsAvoided_
 
+    def SetCrawlerVersion(self, val):
+        self.crawlerVersion_ = str(val)
+
+    def CrawlerVersion(self):
+        return self.crawlerVersion_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -937,6 +951,7 @@ class _JourneyInternal(JourneyInternal):
         for v in self.actionsAvoided_:
             rawList.append(v)
         data["actionsAvoided"] = rawList
+        data["crawlerVersion"] = self.crawlerVersion_
         return data
 
     def FromDict(self, data):
@@ -975,6 +990,8 @@ class _JourneyInternal(JourneyInternal):
                     ud = rw
                     res.append(ud)
                 self.actionsAvoided_ = res
+            if key == "crawlerVersion":
+                self.crawlerVersion_ = rawValue
 
 
 class Component:

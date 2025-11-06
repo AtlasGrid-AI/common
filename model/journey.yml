@@ -79,3 +79,5 @@ types:
         type: "[]string"
       - name: actionsAvoided
         type: "[]string"
+      - name: crawlerVersion
+        type: string

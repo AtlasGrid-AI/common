@@ -1451,6 +1451,9 @@ class JourneyInternal {
     ActionsAvoided() { throw new Error("not implemented"); }
     SetActionsAvoided(val) { throw new Error("not implemented"); }
     
+    CrawlerVersion() { throw new Error("not implemented"); }
+    SetCrawlerVersion(val) { throw new Error("not implemented"); }
+    
 }
 
 function JourneyInternalFactory() {
@@ -1477,6 +1480,8 @@ function JourneyInternalFactory() {
     ret.actionsPerformed_ = [];
     
     ret.actionsAvoided_ = [];
+    
+    ret.crawlerVersion_ = "";
     
     return ret;
 }
@@ -1506,6 +1511,8 @@ class _JourneyInternal extends JourneyInternal {
         this.actionsPerformed_ = [];
         
         this.actionsAvoided_ = [];
+        
+        this.crawlerVersion_ = "";
         
     }
 
@@ -1653,6 +1660,19 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
+    SetCrawlerVersion(val) {
+        
+        this.crawlerVersion_ = String(val);
+        
+    }
+
+    CrawlerVersion() {
+        
+        return this.crawlerVersion_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -1738,6 +1758,12 @@ class _JourneyInternal extends JourneyInternal {
             
         }
         data["actionsAvoided"] = rawListactionsAvoided;
+        
+        
+        
+        
+        data["crawlerVersion"] = this.crawlerVersion_;
+        
         
         
         return data;
@@ -1859,6 +1885,15 @@ class _JourneyInternal extends JourneyInternal {
                 }
 
                 this.actionsAvoided_ = res;
+                
+            }
+            
+            if (key === "crawlerVersion") {
+                
+                
+                this.crawlerVersion_ = rawValue;
+                
+
                 
             }
             
