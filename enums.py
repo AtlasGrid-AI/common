@@ -1,25 +1,35 @@
 from enum import Enum
 
 
-class AdminState(Enum):
+class CaseInsensitiveStringEnum(Enum):
+    def __eq__(self, other):
+        if isinstance(other, str):
+            return self.value.lower() == other.lower()
+        return super().__eq__(other)  # Default comparison for Enum
+
+    def __str__(self):
+        return self.value
+
+
+class AdminState(CaseInsensitiveStringEnum):
     RUN = "run"
     STOP = "stop"
     RESTART = "restart"
 
 
-class OperState(Enum):
+class OperState(CaseInsensitiveStringEnum):
     RUNNING = "running"
     IDLE = "idle"
     ERROR = "error"
 
 
-class Platform(Enum):
+class Platform(CaseInsensitiveStringEnum):
     ANDROID = "Android"
     IOS = "iOS"
     WEB = "Web"
 
 
-class ComponentType(Enum):
+class ComponentType(CaseInsensitiveStringEnum):
     BUTTON = "button"
     CELL = "cell"
     LINK = "link"
@@ -49,7 +59,7 @@ class ComponentType(Enum):
     KEYBOARD = "keyboard"
 
 
-class ActionType(Enum):
+class ActionType(CaseInsensitiveStringEnum):
     TAP = "tap"
     SCROLL_VERTICAL = "vertical scroll"
     SCROLL_HORIZONTAL = "horizontal scroll"
