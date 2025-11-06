@@ -375,6 +375,12 @@ class PageNodeAttributes:
     def SetIsDismissable(self, val: bool):
         raise Exception("not implemented")
 
+    def HasClickables(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetHasClickables(self, val: bool):
+        raise Exception("not implemented")
+
 
 def PageNodeAttributesFactory() -> PageNodeAttributes:
     ret = _PageNodeAttributes()
@@ -396,6 +402,7 @@ def PageNodeAttributesFactory() -> PageNodeAttributes:
     ret.isScrollable_ = False
     ret.isSelected_ = False
     ret.isDismissable_ = False
+    ret.hasClickables_ = False
     return ret
 
 
@@ -419,6 +426,7 @@ class _PageNodeAttributes(PageNodeAttributes):
         self.isScrollable_ = False
         self.isSelected_ = False
         self.isDismissable_ = False
+        self.hasClickables_ = False
 
     def SetClassName(self, val):
         self.className_ = str(val)
@@ -528,6 +536,12 @@ class _PageNodeAttributes(PageNodeAttributes):
     def IsDismissable(self):
         return self.isDismissable_
 
+    def SetHasClickables(self, val):
+        self.hasClickables_ = bool(val)
+
+    def HasClickables(self):
+        return self.hasClickables_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -556,6 +570,7 @@ class _PageNodeAttributes(PageNodeAttributes):
         data["isScrollable"] = self.isScrollable_
         data["isSelected"] = self.isSelected_
         data["isDismissable"] = self.isDismissable_
+        data["hasClickables"] = self.hasClickables_
         return data
 
     def FromDict(self, data):
@@ -598,6 +613,8 @@ class _PageNodeAttributes(PageNodeAttributes):
                 self.isSelected_ = rawValue
             if key == "isDismissable":
                 self.isDismissable_ = rawValue
+            if key == "hasClickables":
+                self.hasClickables_ = rawValue
 
 
 class CrawlerConfiguration:

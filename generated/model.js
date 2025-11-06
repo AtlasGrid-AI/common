@@ -528,6 +528,9 @@ class PageNodeAttributes {
     IsDismissable() { throw new Error("not implemented"); }
     SetIsDismissable(val) { throw new Error("not implemented"); }
     
+    HasClickables() { throw new Error("not implemented"); }
+    SetHasClickables(val) { throw new Error("not implemented"); }
+    
 }
 
 function PageNodeAttributesFactory() {
@@ -568,6 +571,8 @@ function PageNodeAttributesFactory() {
     ret.isSelected_ = false;
     
     ret.isDismissable_ = false;
+    
+    ret.hasClickables_ = false;
     
     return ret;
 }
@@ -611,6 +616,8 @@ class _PageNodeAttributes extends PageNodeAttributes {
         this.isSelected_ = false;
         
         this.isDismissable_ = false;
+        
+        this.hasClickables_ = false;
         
     }
 
@@ -849,6 +856,19 @@ class _PageNodeAttributes extends PageNodeAttributes {
     }
 
     
+    SetHasClickables(val) {
+        
+        this.hasClickables_ = Boolean(val);
+        
+    }
+
+    HasClickables() {
+        
+        return this.hasClickables_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -967,6 +987,12 @@ class _PageNodeAttributes extends PageNodeAttributes {
         
         
         data["isDismissable"] = this.isDismissable_;
+        
+        
+        
+        
+        
+        data["hasClickables"] = this.hasClickables_;
         
         
         
@@ -1136,6 +1162,15 @@ class _PageNodeAttributes extends PageNodeAttributes {
                 
                 
                 this.isDismissable_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "hasClickables") {
+                
+                
+                this.hasClickables_ = rawValue;
                 
 
                 

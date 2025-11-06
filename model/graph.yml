@@ -164,3 +164,6 @@ types:
         type: bool
       - name: isDismissable
         type: bool
+      - name: hasClickables
+        type: bool
+        description: true if itself or any of its descendants are clickable
