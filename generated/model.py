@@ -1537,6 +1537,12 @@ class PageNode:
     def SetAttributes(self, val: PageNodeAttributes):
         raise Exception("not implemented")
 
+    def Hash(self) -> str:
+        raise Exception("not implemented")
+
+    def SetHash(self, val: str):
+        raise Exception("not implemented")
+
 
 def PageNodeFactory() -> PageNode:
     ret = _PageNode()
@@ -1544,6 +1550,7 @@ def PageNodeFactory() -> PageNode:
     ret.parent_ = ""
     ret.children_ = []
     ret.attributes_ = PageNodeAttributesFactory()
+    ret.hash_ = ""
     return ret
 
 
@@ -1553,6 +1560,7 @@ class _PageNode(PageNode):
         self.parent_ = ""
         self.children_ = []
         self.attributes_ = PageNodeAttributesFactory()
+        self.hash_ = ""
 
     def SetIdentifier(self, val):
         self.identifier_ = str(val)
@@ -1578,6 +1586,12 @@ class _PageNode(PageNode):
     def Attributes(self):
         return self.attributes_
 
+    def SetHash(self, val):
+        self.hash_ = str(val)
+
+    def Hash(self):
+        return self.hash_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -1595,6 +1609,7 @@ class _PageNode(PageNode):
         data["children"] = rawList
         # if self.attributes_ is not None:
         data["attributes"] = self.attributes_.ToDict()
+        data["hash"] = self.hash_
         return data
 
     def FromDict(self, data):
@@ -1614,6 +1629,8 @@ class _PageNode(PageNode):
                 self.children_ = res
             if key == "attributes":
                 self.attributes_.FromDict(rawValue)
+            if key == "hash":
+                self.hash_ = rawValue
 
 
 class JourneyExternal:

@@ -122,6 +122,9 @@ types:
         description: The child nodes of this node
       - name: attributes
         type: PageNodeAttributes
+      - name: hash
+        type: string
+        description: The hash of the node used for comparison and grouping of similar nodes
   - kind: Struct
     name: PageNodeAttributes
     properties:

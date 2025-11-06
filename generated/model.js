@@ -2843,6 +2843,9 @@ class PageNode {
     Attributes() { throw new Error("not implemented"); }
     SetAttributes(val) { throw new Error("not implemented"); }
     
+    Hash() { throw new Error("not implemented"); }
+    SetHash(val) { throw new Error("not implemented"); }
+    
 }
 
 function PageNodeFactory() {
@@ -2855,6 +2858,8 @@ function PageNodeFactory() {
     ret.children_ = [];
     
     ret.attributes_ = PageNodeAttributesFactory();
+    
+    ret.hash_ = "";
     
     return ret;
 }
@@ -2870,6 +2875,8 @@ class _PageNode extends PageNode {
         this.children_ = [];
         
         this.attributes_ = PageNodeAttributesFactory();
+        
+        this.hash_ = "";
         
     }
 
@@ -2926,6 +2933,19 @@ class _PageNode extends PageNode {
     }
 
     
+    SetHash(val) {
+        
+        this.hash_ = String(val);
+        
+    }
+
+    Hash() {
+        
+        return this.hash_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -2964,6 +2984,12 @@ class _PageNode extends PageNode {
         
         
         data["attributes"] = this.attributes_ ? this.attributes_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["hash"] = this.hash_;
         
         
         
@@ -3014,6 +3040,15 @@ class _PageNode extends PageNode {
                 
                 
                 this.attributes_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "hash") {
+                
+                
+                this.hash_ = rawValue;
                 
 
                 
