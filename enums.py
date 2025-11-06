@@ -10,6 +10,9 @@ class CaseInsensitiveStringEnum(Enum):
     def __str__(self):
         return self.value
 
+    def __hash__(self):
+        return hash(self.value.lower())
+
 
 class AdminState(CaseInsensitiveStringEnum):
     RUN = "run"
