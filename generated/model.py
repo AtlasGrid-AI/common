@@ -2057,6 +2057,12 @@ class PageInternal:
     def FromDict(self, data):
         raise Exception("not implemented")
 
+    def Identifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetIdentifier(self, val: str):
+        raise Exception("not implemented")
+
     def Journey(self) -> str:
         raise Exception("not implemented")
 
@@ -2072,6 +2078,7 @@ class PageInternal:
 
 def PageInternalFactory() -> PageInternal:
     ret = _PageInternal()
+    ret.identifier_ = ""
     ret.journey_ = ""
     ret.root_ = PageNodeFactory()
     return ret
@@ -2079,8 +2086,15 @@ def PageInternalFactory() -> PageInternal:
 
 class _PageInternal(PageInternal):
     def __init__(self):
+        self.identifier_ = ""
         self.journey_ = ""
         self.root_ = PageNodeFactory()
+
+    def SetIdentifier(self, val):
+        self.identifier_ = str(val)
+
+    def Identifier(self):
+        return self.identifier_
 
     def SetJourney(self, val):
         self.journey_ = str(val)
@@ -2103,6 +2117,7 @@ class _PageInternal(PageInternal):
 
     def ToDict(self):
         data = {}
+        data["identifier"] = self.identifier_
         data["journey"] = self.journey_
         # if self.root_ is not None:
         data["root"] = self.root_.ToDict()
@@ -2112,6 +2127,8 @@ class _PageInternal(PageInternal):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
+            if key == "identifier":
+                self.identifier_ = rawValue
             if key == "journey":
                 self.journey_ = rawValue
             if key == "root":

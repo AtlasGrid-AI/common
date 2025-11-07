@@ -3860,6 +3860,9 @@ class PageInternal {
     FromDict(data) { throw new Error("not implemented"); }
 
     
+    Identifier() { throw new Error("not implemented"); }
+    SetIdentifier(val) { throw new Error("not implemented"); }
+    
     Journey() { throw new Error("not implemented"); }
     SetJourney(val) { throw new Error("not implemented"); }
     
@@ -3870,6 +3873,8 @@ class PageInternal {
 
 function PageInternalFactory() {
     const ret = new _PageInternal();
+    
+    ret.identifier_ = "";
     
     ret.journey_ = "";
     
@@ -3882,9 +3887,24 @@ class _PageInternal extends PageInternal {
     constructor() {
         super();
         
+        this.identifier_ = "";
+        
         this.journey_ = "";
         
         this.root_ = PageNodeFactory();
+        
+    }
+
+    
+    SetIdentifier(val) {
+        
+        this.identifier_ = String(val);
+        
+    }
+
+    Identifier() {
+        
+        return this.identifier_;
         
     }
 
@@ -3930,6 +3950,12 @@ class _PageInternal extends PageInternal {
         
         
         
+        data["identifier"] = this.identifier_;
+        
+        
+        
+        
+        
         data["journey"] = this.journey_;
         
         
@@ -3948,6 +3974,15 @@ class _PageInternal extends PageInternal {
             const rawValue = data[key];
             if (rawValue === null || rawValue === undefined) continue;
 
+            
+            if (key === "identifier") {
+                
+                
+                this.identifier_ = rawValue;
+                
+
+                
+            }
             
             if (key === "journey") {
                 

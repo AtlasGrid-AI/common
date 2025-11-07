@@ -101,6 +101,9 @@ types:
   - kind: Struct
     name: PageInternal
     properties:
+      - name: identifier
+        type: string
+        description: The unique identifier for this page
       - name: journey
         type: string
         description: The journey this page belongs to
