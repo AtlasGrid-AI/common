@@ -477,6 +477,9 @@ class PageNodeAttributes {
     ClassName() { throw new Error("not implemented"); }
     SetClassName(val) { throw new Error("not implemented"); }
     
+    Classifiers() { throw new Error("not implemented"); }
+    SetClassifiers(val) { throw new Error("not implemented"); }
+    
     ResourceId() { throw new Error("not implemented"); }
     SetResourceId(val) { throw new Error("not implemented"); }
     
@@ -538,6 +541,8 @@ function PageNodeAttributesFactory() {
     
     ret.className_ = "";
     
+    ret.classifiers_ = [];
+    
     ret.resourceId_ = "";
     
     ret.package_ = "";
@@ -582,6 +587,8 @@ class _PageNodeAttributes extends PageNodeAttributes {
         super();
         
         this.className_ = "";
+        
+        this.classifiers_ = [];
         
         this.resourceId_ = "";
         
@@ -631,6 +638,19 @@ class _PageNodeAttributes extends PageNodeAttributes {
     ClassName() {
         
         return this.className_;
+        
+    }
+
+    
+    SetClassifiers(val) {
+        
+        this.classifiers_ = val;
+        
+    }
+
+    Classifiers() {
+        
+        return this.classifiers_;
         
     }
 
@@ -889,6 +909,16 @@ class _PageNodeAttributes extends PageNodeAttributes {
         
         
         
+        const rawListclassifiers = [];
+        for (const v of (this.classifiers_ || [])) {
+            
+            rawListclassifiers.push(v);
+            
+        }
+        data["classifiers"] = rawListclassifiers;
+        
+        
+        
         
         data["resourceId"] = this.resourceId_;
         
@@ -1011,6 +1041,22 @@ class _PageNodeAttributes extends PageNodeAttributes {
                 this.className_ = rawValue;
                 
 
+                
+            }
+            
+            if (key === "classifiers") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.classifiers_ = res;
                 
             }
             

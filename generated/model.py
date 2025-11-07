@@ -273,6 +273,12 @@ class PageNodeAttributes:
     def SetClassName(self, val: str):
         raise Exception("not implemented")
 
+    def Classifiers(self) -> list:
+        raise Exception("not implemented")
+
+    def SetClassifiers(self, val: list):
+        raise Exception("not implemented")
+
     def ResourceId(self) -> str:
         raise Exception("not implemented")
 
@@ -385,6 +391,7 @@ class PageNodeAttributes:
 def PageNodeAttributesFactory() -> PageNodeAttributes:
     ret = _PageNodeAttributes()
     ret.className_ = ""
+    ret.classifiers_ = []
     ret.resourceId_ = ""
     ret.package_ = ""
     ret.text_ = ""
@@ -409,6 +416,7 @@ def PageNodeAttributesFactory() -> PageNodeAttributes:
 class _PageNodeAttributes(PageNodeAttributes):
     def __init__(self):
         self.className_ = ""
+        self.classifiers_ = []
         self.resourceId_ = ""
         self.package_ = ""
         self.text_ = ""
@@ -433,6 +441,12 @@ class _PageNodeAttributes(PageNodeAttributes):
 
     def ClassName(self):
         return self.className_
+
+    def SetClassifiers(self, val):
+        self.classifiers_ = val
+
+    def Classifiers(self):
+        return self.classifiers_
 
     def SetResourceId(self, val):
         self.resourceId_ = str(val)
@@ -552,6 +566,10 @@ class _PageNodeAttributes(PageNodeAttributes):
     def ToDict(self):
         data = {}
         data["className"] = self.className_
+        rawList = []
+        for v in self.classifiers_:
+            rawList.append(v)
+        data["classifiers"] = rawList
         data["resourceId"] = self.resourceId_
         data["package"] = self.package_
         data["text"] = self.text_
@@ -579,6 +597,13 @@ class _PageNodeAttributes(PageNodeAttributes):
                 continue
             if key == "className":
                 self.className_ = rawValue
+            if key == "classifiers":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.classifiers_ = res
             if key == "resourceId":
                 self.resourceId_ = rawValue
             if key == "package":

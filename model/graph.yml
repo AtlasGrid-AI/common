@@ -130,6 +130,8 @@ types:
     properties:
       - name: className
         type: string
+      - name: classifiers
+        type: "[]string"
       - name: resourceId
         type: string
       - name: package
