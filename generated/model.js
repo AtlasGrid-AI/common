@@ -2734,9 +2734,6 @@ class Edge {
     Expired() { throw new Error("not implemented"); }
     SetExpired(val) { throw new Error("not implemented"); }
     
-    Steps() { throw new Error("not implemented"); }
-    SetSteps(val) { throw new Error("not implemented"); }
-    
 }
 
 function EdgeFactory() {
@@ -2749,8 +2746,6 @@ function EdgeFactory() {
     ret.action_ = "";
     
     ret.expired_ = false;
-    
-    ret.steps_ = [];
     
     return ret;
 }
@@ -2766,8 +2761,6 @@ class _Edge extends Edge {
         this.action_ = "";
         
         this.expired_ = false;
-        
-        this.steps_ = [];
         
     }
 
@@ -2824,19 +2817,6 @@ class _Edge extends Edge {
     }
 
     
-    SetSteps(val) {
-        
-        this.steps_ = val;
-        
-    }
-
-    Steps() {
-        
-        return this.steps_;
-        
-    }
-
-    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -2872,16 +2852,6 @@ class _Edge extends Edge {
         
         data["expired"] = this.expired_;
         
-        
-        
-        
-        const rawListsteps = [];
-        for (const v of (this.steps_ || [])) {
-            
-            rawListsteps.push(v);
-            
-        }
-        data["steps"] = rawListsteps;
         
         
         return data;
@@ -2926,22 +2896,6 @@ class _Edge extends Edge {
                 this.expired_ = rawValue;
                 
 
-                
-            }
-            
-            if (key === "steps") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = 0;
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.steps_ = res;
                 
             }
             

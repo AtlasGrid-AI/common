@@ -1468,12 +1468,6 @@ class Edge:
     def SetExpired(self, val: bool):
         raise Exception("not implemented")
 
-    def Steps(self) -> list:
-        raise Exception("not implemented")
-
-    def SetSteps(self, val: list):
-        raise Exception("not implemented")
-
 
 def EdgeFactory() -> Edge:
     ret = _Edge()
@@ -1481,7 +1475,6 @@ def EdgeFactory() -> Edge:
     ret.component_ = ComponentFactory()
     ret.action_ = ""
     ret.expired_ = False
-    ret.steps_ = []
     return ret
 
 
@@ -1491,7 +1484,6 @@ class _Edge(Edge):
         self.component_ = ComponentFactory()
         self.action_ = ""
         self.expired_ = False
-        self.steps_ = []
 
     def SetTargetScreenIdentifier(self, val):
         self.targetScreenIdentifier_ = str(val)
@@ -1517,12 +1509,6 @@ class _Edge(Edge):
     def Expired(self):
         return self.expired_
 
-    def SetSteps(self, val):
-        self.steps_ = val
-
-    def Steps(self):
-        return self.steps_
-
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -1537,10 +1523,6 @@ class _Edge(Edge):
         data["component"] = self.component_.ToDict()
         data["action"] = self.action_
         data["expired"] = self.expired_
-        rawList = []
-        for v in self.steps_:
-            rawList.append(v)
-        data["steps"] = rawList
         return data
 
     def FromDict(self, data):
@@ -1555,13 +1537,6 @@ class _Edge(Edge):
                 self.action_ = rawValue
             if key == "expired":
                 self.expired_ = rawValue
-            if key == "steps":
-                res = []
-                for rw in rawValue:
-                    ud = 0
-                    ud = rw
-                    res.append(ud)
-                self.steps_ = res
 
 
 class ScreenContent:

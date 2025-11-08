@@ -51,8 +51,6 @@ types:
       - name: expired
         type: bool
         description: the edge may expire if the target screen is no longer reachable via the component/action
-      - name: steps
-        type: "[]int"
   - kind: Struct
     name: ScreenMetadata
     description: AI generated metadata about the screen
