@@ -862,6 +862,18 @@ class JourneyInternal:
     def SetCrawlerVersion(self, val: str):
         raise Exception("not implemented")
 
+    def CurrentScreenIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetCurrentScreenIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def LastScreenIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetLastScreenIdentifier(self, val: str):
+        raise Exception("not implemented")
+
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
@@ -877,6 +889,8 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.actionsPerformed_ = []
     ret.actionsAvoided_ = []
     ret.crawlerVersion_ = ""
+    ret.currentScreenIdentifier_ = ""
+    ret.lastScreenIdentifier_ = ""
     return ret
 
 
@@ -894,6 +908,8 @@ class _JourneyInternal(JourneyInternal):
         self.actionsPerformed_ = []
         self.actionsAvoided_ = []
         self.crawlerVersion_ = ""
+        self.currentScreenIdentifier_ = ""
+        self.lastScreenIdentifier_ = ""
 
     def SetOperSt(self, val):
         self.operSt_ = str(val)
@@ -967,6 +983,18 @@ class _JourneyInternal(JourneyInternal):
     def CrawlerVersion(self):
         return self.crawlerVersion_
 
+    def SetCurrentScreenIdentifier(self, val):
+        self.currentScreenIdentifier_ = str(val)
+
+    def CurrentScreenIdentifier(self):
+        return self.currentScreenIdentifier_
+
+    def SetLastScreenIdentifier(self, val):
+        self.lastScreenIdentifier_ = str(val)
+
+    def LastScreenIdentifier(self):
+        return self.lastScreenIdentifier_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -994,6 +1022,8 @@ class _JourneyInternal(JourneyInternal):
             rawList.append(v)
         data["actionsAvoided"] = rawList
         data["crawlerVersion"] = self.crawlerVersion_
+        data["currentScreenIdentifier"] = self.currentScreenIdentifier_
+        data["lastScreenIdentifier"] = self.lastScreenIdentifier_
         return data
 
     def FromDict(self, data):
@@ -1034,6 +1064,10 @@ class _JourneyInternal(JourneyInternal):
                 self.actionsAvoided_ = res
             if key == "crawlerVersion":
                 self.crawlerVersion_ = rawValue
+            if key == "currentScreenIdentifier":
+                self.currentScreenIdentifier_ = rawValue
+            if key == "lastScreenIdentifier":
+                self.lastScreenIdentifier_ = rawValue
 
 
 class Component:

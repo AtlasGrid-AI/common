@@ -81,3 +81,7 @@ types:
         type: "[]string"
       - name: crawlerVersion
         type: string
+      - name: currentScreenIdentifier
+        type: string
+      - name: lastScreenIdentifier
+        type: string

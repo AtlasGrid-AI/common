@@ -1535,6 +1535,12 @@ class JourneyInternal {
     CrawlerVersion() { throw new Error("not implemented"); }
     SetCrawlerVersion(val) { throw new Error("not implemented"); }
     
+    CurrentScreenIdentifier() { throw new Error("not implemented"); }
+    SetCurrentScreenIdentifier(val) { throw new Error("not implemented"); }
+    
+    LastScreenIdentifier() { throw new Error("not implemented"); }
+    SetLastScreenIdentifier(val) { throw new Error("not implemented"); }
+    
 }
 
 function JourneyInternalFactory() {
@@ -1563,6 +1569,10 @@ function JourneyInternalFactory() {
     ret.actionsAvoided_ = [];
     
     ret.crawlerVersion_ = "";
+    
+    ret.currentScreenIdentifier_ = "";
+    
+    ret.lastScreenIdentifier_ = "";
     
     return ret;
 }
@@ -1594,6 +1604,10 @@ class _JourneyInternal extends JourneyInternal {
         this.actionsAvoided_ = [];
         
         this.crawlerVersion_ = "";
+        
+        this.currentScreenIdentifier_ = "";
+        
+        this.lastScreenIdentifier_ = "";
         
     }
 
@@ -1754,6 +1768,32 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
+    SetCurrentScreenIdentifier(val) {
+        
+        this.currentScreenIdentifier_ = String(val);
+        
+    }
+
+    CurrentScreenIdentifier() {
+        
+        return this.currentScreenIdentifier_;
+        
+    }
+
+    
+    SetLastScreenIdentifier(val) {
+        
+        this.lastScreenIdentifier_ = String(val);
+        
+    }
+
+    LastScreenIdentifier() {
+        
+        return this.lastScreenIdentifier_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -1844,6 +1884,18 @@ class _JourneyInternal extends JourneyInternal {
         
         
         data["crawlerVersion"] = this.crawlerVersion_;
+        
+        
+        
+        
+        
+        data["currentScreenIdentifier"] = this.currentScreenIdentifier_;
+        
+        
+        
+        
+        
+        data["lastScreenIdentifier"] = this.lastScreenIdentifier_;
         
         
         
@@ -1973,6 +2025,24 @@ class _JourneyInternal extends JourneyInternal {
                 
                 
                 this.crawlerVersion_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "currentScreenIdentifier") {
+                
+                
+                this.currentScreenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "lastScreenIdentifier") {
+                
+                
+                this.lastScreenIdentifier_ = rawValue;
                 
 
                 
