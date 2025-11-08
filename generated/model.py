@@ -780,7 +780,7 @@ class _CrawlerConfiguration(CrawlerConfiguration):
                 self.deviceId_ = rawValue
 
 
-class JourneyInternal:
+class ScreenIdentifiers:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
 
@@ -790,210 +790,56 @@ class JourneyInternal:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def OperSt(self) -> str:
+    def First(self) -> str:
         raise Exception("not implemented")
 
-    def SetOperSt(self, val: str):
+    def SetFirst(self, val: str):
         raise Exception("not implemented")
 
-    def ErrorMessage(self) -> str:
+    def Current(self) -> str:
         raise Exception("not implemented")
 
-    def SetErrorMessage(self, val: str):
+    def SetCurrent(self, val: str):
         raise Exception("not implemented")
 
-    def LastRunAt(self) -> datetime:
+    def Previous(self) -> str:
         raise Exception("not implemented")
 
-    def SetLastRunAt(self, val: datetime):
-        raise Exception("not implemented")
-
-    def LastActionAt(self) -> datetime:
-        raise Exception("not implemented")
-
-    def SetLastActionAt(self, val: datetime):
-        raise Exception("not implemented")
-
-    def FinishedAt(self) -> datetime:
-        raise Exception("not implemented")
-
-    def SetFinishedAt(self, val: datetime):
-        raise Exception("not implemented")
-
-    def ScreenCount(self) -> int:
-        raise Exception("not implemented")
-
-    def SetScreenCount(self, val: int):
-        raise Exception("not implemented")
-
-    def EdgeCount(self) -> int:
-        raise Exception("not implemented")
-
-    def SetEdgeCount(self, val: int):
-        raise Exception("not implemented")
-
-    def StepsTaken(self) -> int:
-        raise Exception("not implemented")
-
-    def SetStepsTaken(self, val: int):
-        raise Exception("not implemented")
-
-    def StepsPlanned(self) -> int:
-        raise Exception("not implemented")
-
-    def SetStepsPlanned(self, val: int):
-        raise Exception("not implemented")
-
-    def ActionsPerformed(self) -> list:
-        raise Exception("not implemented")
-
-    def SetActionsPerformed(self, val: list):
-        raise Exception("not implemented")
-
-    def ActionsAvoided(self) -> list:
-        raise Exception("not implemented")
-
-    def SetActionsAvoided(self, val: list):
-        raise Exception("not implemented")
-
-    def CrawlerVersion(self) -> str:
-        raise Exception("not implemented")
-
-    def SetCrawlerVersion(self, val: str):
-        raise Exception("not implemented")
-
-    def CurrentScreenIdentifier(self) -> str:
-        raise Exception("not implemented")
-
-    def SetCurrentScreenIdentifier(self, val: str):
-        raise Exception("not implemented")
-
-    def LastScreenIdentifier(self) -> str:
-        raise Exception("not implemented")
-
-    def SetLastScreenIdentifier(self, val: str):
+    def SetPrevious(self, val: str):
         raise Exception("not implemented")
 
 
-def JourneyInternalFactory() -> JourneyInternal:
-    ret = _JourneyInternal()
-    ret.operSt_ = ""
-    ret.errorMessage_ = ""
-    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
-    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
-    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z"
-    ret.screenCount_ = 0
-    ret.edgeCount_ = 0
-    ret.stepsTaken_ = 0
-    ret.stepsPlanned_ = 0
-    ret.actionsPerformed_ = []
-    ret.actionsAvoided_ = []
-    ret.crawlerVersion_ = ""
-    ret.currentScreenIdentifier_ = ""
-    ret.lastScreenIdentifier_ = ""
+def ScreenIdentifiersFactory() -> ScreenIdentifiers:
+    ret = _ScreenIdentifiers()
+    ret.first_ = ""
+    ret.current_ = ""
+    ret.previous_ = ""
     return ret
 
 
-class _JourneyInternal(JourneyInternal):
+class _ScreenIdentifiers(ScreenIdentifiers):
     def __init__(self):
-        self.operSt_ = ""
-        self.errorMessage_ = ""
-        self.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
-        self.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
-        self.finishedAt_ = "0001-01-01T00:00:00.000000Z"
-        self.screenCount_ = 0
-        self.edgeCount_ = 0
-        self.stepsTaken_ = 0
-        self.stepsPlanned_ = 0
-        self.actionsPerformed_ = []
-        self.actionsAvoided_ = []
-        self.crawlerVersion_ = ""
-        self.currentScreenIdentifier_ = ""
-        self.lastScreenIdentifier_ = ""
+        self.first_ = ""
+        self.current_ = ""
+        self.previous_ = ""
 
-    def SetOperSt(self, val):
-        self.operSt_ = str(val)
+    def SetFirst(self, val):
+        self.first_ = str(val)
 
-    def OperSt(self):
-        return self.operSt_
+    def First(self):
+        return self.first_
 
-    def SetErrorMessage(self, val):
-        self.errorMessage_ = str(val)
+    def SetCurrent(self, val):
+        self.current_ = str(val)
 
-    def ErrorMessage(self):
-        return self.errorMessage_
+    def Current(self):
+        return self.current_
 
-    def SetLastRunAt(self, val):
-        self.lastRunAt_ = store.datetime_string(val)
+    def SetPrevious(self, val):
+        self.previous_ = str(val)
 
-    def LastRunAt(self):
-        return store.datetime_parse(self.lastRunAt_)
-
-    def SetLastActionAt(self, val):
-        self.lastActionAt_ = store.datetime_string(val)
-
-    def LastActionAt(self):
-        return store.datetime_parse(self.lastActionAt_)
-
-    def SetFinishedAt(self, val):
-        self.finishedAt_ = store.datetime_string(val)
-
-    def FinishedAt(self):
-        return store.datetime_parse(self.finishedAt_)
-
-    def SetScreenCount(self, val):
-        self.screenCount_ = int(val)
-
-    def ScreenCount(self):
-        return self.screenCount_
-
-    def SetEdgeCount(self, val):
-        self.edgeCount_ = int(val)
-
-    def EdgeCount(self):
-        return self.edgeCount_
-
-    def SetStepsTaken(self, val):
-        self.stepsTaken_ = int(val)
-
-    def StepsTaken(self):
-        return self.stepsTaken_
-
-    def SetStepsPlanned(self, val):
-        self.stepsPlanned_ = int(val)
-
-    def StepsPlanned(self):
-        return self.stepsPlanned_
-
-    def SetActionsPerformed(self, val):
-        self.actionsPerformed_ = val
-
-    def ActionsPerformed(self):
-        return self.actionsPerformed_
-
-    def SetActionsAvoided(self, val):
-        self.actionsAvoided_ = val
-
-    def ActionsAvoided(self):
-        return self.actionsAvoided_
-
-    def SetCrawlerVersion(self, val):
-        self.crawlerVersion_ = str(val)
-
-    def CrawlerVersion(self):
-        return self.crawlerVersion_
-
-    def SetCurrentScreenIdentifier(self, val):
-        self.currentScreenIdentifier_ = str(val)
-
-    def CurrentScreenIdentifier(self):
-        return self.currentScreenIdentifier_
-
-    def SetLastScreenIdentifier(self, val):
-        self.lastScreenIdentifier_ = str(val)
-
-    def LastScreenIdentifier(self):
-        return self.lastScreenIdentifier_
+    def Previous(self):
+        return self.previous_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -1004,70 +850,21 @@ class _JourneyInternal(JourneyInternal):
 
     def ToDict(self):
         data = {}
-        data["operSt"] = self.operSt_
-        data["errorMessage"] = self.errorMessage_
-        data["lastRunAt"] = self.lastRunAt_
-        data["lastActionAt"] = self.lastActionAt_
-        data["finishedAt"] = self.finishedAt_
-        data["screenCount"] = self.screenCount_
-        data["edgeCount"] = self.edgeCount_
-        data["stepsTaken"] = self.stepsTaken_
-        data["stepsPlanned"] = self.stepsPlanned_
-        rawList = []
-        for v in self.actionsPerformed_:
-            rawList.append(v)
-        data["actionsPerformed"] = rawList
-        rawList = []
-        for v in self.actionsAvoided_:
-            rawList.append(v)
-        data["actionsAvoided"] = rawList
-        data["crawlerVersion"] = self.crawlerVersion_
-        data["currentScreenIdentifier"] = self.currentScreenIdentifier_
-        data["lastScreenIdentifier"] = self.lastScreenIdentifier_
+        data["first"] = self.first_
+        data["current"] = self.current_
+        data["previous"] = self.previous_
         return data
 
     def FromDict(self, data):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
-            if key == "operSt":
-                self.operSt_ = rawValue
-            if key == "errorMessage":
-                self.errorMessage_ = rawValue
-            if key == "lastRunAt":
-                self.lastRunAt_ = rawValue
-            if key == "lastActionAt":
-                self.lastActionAt_ = rawValue
-            if key == "finishedAt":
-                self.finishedAt_ = rawValue
-            if key == "screenCount":
-                self.screenCount_ = rawValue
-            if key == "edgeCount":
-                self.edgeCount_ = rawValue
-            if key == "stepsTaken":
-                self.stepsTaken_ = rawValue
-            if key == "stepsPlanned":
-                self.stepsPlanned_ = rawValue
-            if key == "actionsPerformed":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.actionsPerformed_ = res
-            if key == "actionsAvoided":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.actionsAvoided_ = res
-            if key == "crawlerVersion":
-                self.crawlerVersion_ = rawValue
-            if key == "currentScreenIdentifier":
-                self.currentScreenIdentifier_ = rawValue
-            if key == "lastScreenIdentifier":
-                self.lastScreenIdentifier_ = rawValue
+            if key == "first":
+                self.first_ = rawValue
+            if key == "current":
+                self.current_ = rawValue
+            if key == "previous":
+                self.previous_ = rawValue
 
 
 class Component:
@@ -1361,6 +1158,280 @@ class _JourneyConfiguration(JourneyConfiguration):
                 self.maxStepCount_ = rawValue
             if key == "crawler":
                 self.crawler_.FromDict(rawValue)
+
+
+class JourneyInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def OperSt(self) -> str:
+        raise Exception("not implemented")
+
+    def SetOperSt(self, val: str):
+        raise Exception("not implemented")
+
+    def ErrorMessage(self) -> str:
+        raise Exception("not implemented")
+
+    def SetErrorMessage(self, val: str):
+        raise Exception("not implemented")
+
+    def LastRunAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetLastRunAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def LastActionAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetLastActionAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def FinishedAt(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetFinishedAt(self, val: datetime):
+        raise Exception("not implemented")
+
+    def ScreenCount(self) -> int:
+        raise Exception("not implemented")
+
+    def SetScreenCount(self, val: int):
+        raise Exception("not implemented")
+
+    def EdgeCount(self) -> int:
+        raise Exception("not implemented")
+
+    def SetEdgeCount(self, val: int):
+        raise Exception("not implemented")
+
+    def StepsTaken(self) -> int:
+        raise Exception("not implemented")
+
+    def SetStepsTaken(self, val: int):
+        raise Exception("not implemented")
+
+    def StepsPlanned(self) -> int:
+        raise Exception("not implemented")
+
+    def SetStepsPlanned(self, val: int):
+        raise Exception("not implemented")
+
+    def ActionsPerformed(self) -> list:
+        raise Exception("not implemented")
+
+    def SetActionsPerformed(self, val: list):
+        raise Exception("not implemented")
+
+    def ActionsAvoided(self) -> list:
+        raise Exception("not implemented")
+
+    def SetActionsAvoided(self, val: list):
+        raise Exception("not implemented")
+
+    def CrawlerVersion(self) -> str:
+        raise Exception("not implemented")
+
+    def SetCrawlerVersion(self, val: str):
+        raise Exception("not implemented")
+
+    def ScreenIdentifiers(self) -> ScreenIdentifiers:
+        raise Exception("not implemented")
+
+    def SetScreenIdentifiers(self, val: ScreenIdentifiers):
+        raise Exception("not implemented")
+
+
+def JourneyInternalFactory() -> JourneyInternal:
+    ret = _JourneyInternal()
+    ret.operSt_ = ""
+    ret.errorMessage_ = ""
+    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z"
+    ret.screenCount_ = 0
+    ret.edgeCount_ = 0
+    ret.stepsTaken_ = 0
+    ret.stepsPlanned_ = 0
+    ret.actionsPerformed_ = []
+    ret.actionsAvoided_ = []
+    ret.crawlerVersion_ = ""
+    ret.screenIdentifiers_ = ScreenIdentifiersFactory()
+    return ret
+
+
+class _JourneyInternal(JourneyInternal):
+    def __init__(self):
+        self.operSt_ = ""
+        self.errorMessage_ = ""
+        self.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
+        self.lastActionAt_ = "0001-01-01T00:00:00.000000Z"
+        self.finishedAt_ = "0001-01-01T00:00:00.000000Z"
+        self.screenCount_ = 0
+        self.edgeCount_ = 0
+        self.stepsTaken_ = 0
+        self.stepsPlanned_ = 0
+        self.actionsPerformed_ = []
+        self.actionsAvoided_ = []
+        self.crawlerVersion_ = ""
+        self.screenIdentifiers_ = ScreenIdentifiersFactory()
+
+    def SetOperSt(self, val):
+        self.operSt_ = str(val)
+
+    def OperSt(self):
+        return self.operSt_
+
+    def SetErrorMessage(self, val):
+        self.errorMessage_ = str(val)
+
+    def ErrorMessage(self):
+        return self.errorMessage_
+
+    def SetLastRunAt(self, val):
+        self.lastRunAt_ = store.datetime_string(val)
+
+    def LastRunAt(self):
+        return store.datetime_parse(self.lastRunAt_)
+
+    def SetLastActionAt(self, val):
+        self.lastActionAt_ = store.datetime_string(val)
+
+    def LastActionAt(self):
+        return store.datetime_parse(self.lastActionAt_)
+
+    def SetFinishedAt(self, val):
+        self.finishedAt_ = store.datetime_string(val)
+
+    def FinishedAt(self):
+        return store.datetime_parse(self.finishedAt_)
+
+    def SetScreenCount(self, val):
+        self.screenCount_ = int(val)
+
+    def ScreenCount(self):
+        return self.screenCount_
+
+    def SetEdgeCount(self, val):
+        self.edgeCount_ = int(val)
+
+    def EdgeCount(self):
+        return self.edgeCount_
+
+    def SetStepsTaken(self, val):
+        self.stepsTaken_ = int(val)
+
+    def StepsTaken(self):
+        return self.stepsTaken_
+
+    def SetStepsPlanned(self, val):
+        self.stepsPlanned_ = int(val)
+
+    def StepsPlanned(self):
+        return self.stepsPlanned_
+
+    def SetActionsPerformed(self, val):
+        self.actionsPerformed_ = val
+
+    def ActionsPerformed(self):
+        return self.actionsPerformed_
+
+    def SetActionsAvoided(self, val):
+        self.actionsAvoided_ = val
+
+    def ActionsAvoided(self):
+        return self.actionsAvoided_
+
+    def SetCrawlerVersion(self, val):
+        self.crawlerVersion_ = str(val)
+
+    def CrawlerVersion(self):
+        return self.crawlerVersion_
+
+    def SetScreenIdentifiers(self, val):
+        self.screenIdentifiers_ = val
+
+    def ScreenIdentifiers(self):
+        return self.screenIdentifiers_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["operSt"] = self.operSt_
+        data["errorMessage"] = self.errorMessage_
+        data["lastRunAt"] = self.lastRunAt_
+        data["lastActionAt"] = self.lastActionAt_
+        data["finishedAt"] = self.finishedAt_
+        data["screenCount"] = self.screenCount_
+        data["edgeCount"] = self.edgeCount_
+        data["stepsTaken"] = self.stepsTaken_
+        data["stepsPlanned"] = self.stepsPlanned_
+        rawList = []
+        for v in self.actionsPerformed_:
+            rawList.append(v)
+        data["actionsPerformed"] = rawList
+        rawList = []
+        for v in self.actionsAvoided_:
+            rawList.append(v)
+        data["actionsAvoided"] = rawList
+        data["crawlerVersion"] = self.crawlerVersion_
+        # if self.screenIdentifiers_ is not None:
+        data["screenIdentifiers"] = self.screenIdentifiers_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "operSt":
+                self.operSt_ = rawValue
+            if key == "errorMessage":
+                self.errorMessage_ = rawValue
+            if key == "lastRunAt":
+                self.lastRunAt_ = rawValue
+            if key == "lastActionAt":
+                self.lastActionAt_ = rawValue
+            if key == "finishedAt":
+                self.finishedAt_ = rawValue
+            if key == "screenCount":
+                self.screenCount_ = rawValue
+            if key == "edgeCount":
+                self.edgeCount_ = rawValue
+            if key == "stepsTaken":
+                self.stepsTaken_ = rawValue
+            if key == "stepsPlanned":
+                self.stepsPlanned_ = rawValue
+            if key == "actionsPerformed":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.actionsPerformed_ = res
+            if key == "actionsAvoided":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.actionsAvoided_ = res
+            if key == "crawlerVersion":
+                self.crawlerVersion_ = rawValue
+            if key == "screenIdentifiers":
+                self.screenIdentifiers_.FromDict(rawValue)
 
 
 class Edge:

@@ -81,7 +81,15 @@ types:
         type: "[]string"
       - name: crawlerVersion
         type: string
-      - name: currentScreenIdentifier
+      - name: screenIdentifiers
+        type: ScreenIdentifiers 
+  - kind: Struct
+    name: ScreenIdentifiers
+    properties:
+      - name: first
         type: string
-      - name: lastScreenIdentifier
+      - name: current
         type: string
+      - name: previous
+        type: string
+    
