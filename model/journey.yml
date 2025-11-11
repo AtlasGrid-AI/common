@@ -82,7 +82,9 @@ types:
       - name: crawlerVersion
         type: string
       - name: screenIdentifiers
-        type: ScreenIdentifiers 
+        type: ScreenIdentifiers
+      - name: history
+        type: "[]Action"
   - kind: Struct
     name: ScreenIdentifiers
     properties:
@@ -92,4 +94,22 @@ types:
         type: string
       - name: previous
         type: string
-    
+  - kind: Struct
+    name: Action
+    properties:
+      - name: groupIdentifier
+        type: string
+      - name: screenIdentifier
+        type: string
+      - name: componentIdentifier
+        type: string
+      - name: actionType
+        type: string
+      - name: timestamp
+        type: datetime
+      - name: arguments
+        type: "map[string]int"
+      - name: expectedScreenIdentifier
+        type: string
+      - name: errorMessage
+        type: string

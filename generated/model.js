@@ -1647,6 +1647,351 @@ class _ScreenIdentifiers extends ScreenIdentifiers {
 
 
 
+class Action {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    GroupIdentifier() { throw new Error("not implemented"); }
+    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    
+    ScreenIdentifier() { throw new Error("not implemented"); }
+    SetScreenIdentifier(val) { throw new Error("not implemented"); }
+    
+    ComponentIdentifier() { throw new Error("not implemented"); }
+    SetComponentIdentifier(val) { throw new Error("not implemented"); }
+    
+    ActionType() { throw new Error("not implemented"); }
+    SetActionType(val) { throw new Error("not implemented"); }
+    
+    Timestamp() { throw new Error("not implemented"); }
+    SetTimestamp(val) { throw new Error("not implemented"); }
+    
+    Arguments() { throw new Error("not implemented"); }
+    SetArguments(val) { throw new Error("not implemented"); }
+    
+    ExpectedScreenIdentifier() { throw new Error("not implemented"); }
+    SetExpectedScreenIdentifier(val) { throw new Error("not implemented"); }
+    
+    ErrorMessage() { throw new Error("not implemented"); }
+    SetErrorMessage(val) { throw new Error("not implemented"); }
+    
+}
+
+function ActionFactory() {
+    const ret = new _Action();
+    
+    ret.groupIdentifier_ = "";
+    
+    ret.screenIdentifier_ = "";
+    
+    ret.componentIdentifier_ = "";
+    
+    ret.actionType_ = "";
+    
+    ret.timestamp_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.arguments_ = {};
+    
+    ret.expectedScreenIdentifier_ = "";
+    
+    ret.errorMessage_ = "";
+    
+    return ret;
+}
+
+class _Action extends Action {
+    constructor() {
+        super();
+        
+        this.groupIdentifier_ = "";
+        
+        this.screenIdentifier_ = "";
+        
+        this.componentIdentifier_ = "";
+        
+        this.actionType_ = "";
+        
+        this.timestamp_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.arguments_ = {};
+        
+        this.expectedScreenIdentifier_ = "";
+        
+        this.errorMessage_ = "";
+        
+    }
+
+    
+    SetGroupIdentifier(val) {
+        
+        this.groupIdentifier_ = String(val);
+        
+    }
+
+    GroupIdentifier() {
+        
+        return this.groupIdentifier_;
+        
+    }
+
+    
+    SetScreenIdentifier(val) {
+        
+        this.screenIdentifier_ = String(val);
+        
+    }
+
+    ScreenIdentifier() {
+        
+        return this.screenIdentifier_;
+        
+    }
+
+    
+    SetComponentIdentifier(val) {
+        
+        this.componentIdentifier_ = String(val);
+        
+    }
+
+    ComponentIdentifier() {
+        
+        return this.componentIdentifier_;
+        
+    }
+
+    
+    SetActionType(val) {
+        
+        this.actionType_ = String(val);
+        
+    }
+
+    ActionType() {
+        
+        return this.actionType_;
+        
+    }
+
+    
+    SetTimestamp(val) {
+        
+        this.timestamp_ = val.ToString();
+        
+    }
+
+    Timestamp() {
+        
+        return Date.parse(this.timestamp_);
+        
+    }
+
+    
+    SetArguments(val) {
+        
+        this.arguments_ = val;
+        
+    }
+
+    Arguments() {
+        
+        return this.arguments_;
+        
+    }
+
+    
+    SetExpectedScreenIdentifier(val) {
+        
+        this.expectedScreenIdentifier_ = String(val);
+        
+    }
+
+    ExpectedScreenIdentifier() {
+        
+        return this.expectedScreenIdentifier_;
+        
+    }
+
+    
+    SetErrorMessage(val) {
+        
+        this.errorMessage_ = String(val);
+        
+    }
+
+    ErrorMessage() {
+        
+        return this.errorMessage_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["groupIdentifier"] = this.groupIdentifier_;
+        
+        
+        
+        
+        
+        data["screenIdentifier"] = this.screenIdentifier_;
+        
+        
+        
+        
+        
+        data["componentIdentifier"] = this.componentIdentifier_;
+        
+        
+        
+        
+        
+        data["actionType"] = this.actionType_;
+        
+        
+        
+        
+        
+        data["timestamp"] = this.timestamp_;
+        
+        
+        
+        
+        const rawSubmaparguments = {};
+        for (const k in (this.arguments_ || {})) {
+            const v = this.arguments_[k];
+            
+            rawSubmaparguments[k] = v;
+            
+        }
+        data["arguments"] = rawSubmaparguments;
+        
+        
+        
+        
+        data["expectedScreenIdentifier"] = this.expectedScreenIdentifier_;
+        
+        
+        
+        
+        
+        data["errorMessage"] = this.errorMessage_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "groupIdentifier") {
+                
+                
+                this.groupIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screenIdentifier") {
+                
+                
+                this.screenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "componentIdentifier") {
+                
+                
+                this.componentIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "actionType") {
+                
+                
+                this.actionType_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "timestamp") {
+                
+                
+                this.timestamp_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "arguments") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = 0;
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.arguments_ = res;
+                
+            }
+            
+            if (key === "expectedScreenIdentifier") {
+                
+                
+                this.expectedScreenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "errorMessage") {
+                
+                
+                this.errorMessage_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Component {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -2232,6 +2577,9 @@ class JourneyInternal {
     ScreenIdentifiers() { throw new Error("not implemented"); }
     SetScreenIdentifiers(val) { throw new Error("not implemented"); }
     
+    History() { throw new Error("not implemented"); }
+    SetHistory(val) { throw new Error("not implemented"); }
+    
 }
 
 function JourneyInternalFactory() {
@@ -2262,6 +2610,8 @@ function JourneyInternalFactory() {
     ret.crawlerVersion_ = "";
     
     ret.screenIdentifiers_ = ScreenIdentifiersFactory();
+    
+    ret.history_ = [];
     
     return ret;
 }
@@ -2295,6 +2645,8 @@ class _JourneyInternal extends JourneyInternal {
         this.crawlerVersion_ = "";
         
         this.screenIdentifiers_ = ScreenIdentifiersFactory();
+        
+        this.history_ = [];
         
     }
 
@@ -2468,6 +2820,19 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
+    SetHistory(val) {
+        
+        this.history_ = val;
+        
+    }
+
+    History() {
+        
+        return this.history_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -2565,6 +2930,16 @@ class _JourneyInternal extends JourneyInternal {
         
         data["screenIdentifiers"] = this.screenIdentifiers_ ? this.screenIdentifiers_.ToDict() : null;
         
+        
+        
+        
+        const rawListhistory = [];
+        for (const v of (this.history_ || [])) {
+            
+            rawListhistory.push(v.ToDict());
+            
+        }
+        data["history"] = rawListhistory;
         
         
         return data;
@@ -2704,6 +3079,22 @@ class _JourneyInternal extends JourneyInternal {
                 this.screenIdentifiers_.FromDict(rawValue);
                 
 
+                
+            }
+            
+            if (key === "history") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = ActionFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.history_ = res;
                 
             }
             

@@ -867,6 +867,186 @@ class _ScreenIdentifiers(ScreenIdentifiers):
                 self.previous_ = rawValue
 
 
+class Action:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def GroupIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetGroupIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def ScreenIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetScreenIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def ComponentIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetComponentIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def ActionType(self) -> str:
+        raise Exception("not implemented")
+
+    def SetActionType(self, val: str):
+        raise Exception("not implemented")
+
+    def Timestamp(self) -> datetime:
+        raise Exception("not implemented")
+
+    def SetTimestamp(self, val: datetime):
+        raise Exception("not implemented")
+
+    def Arguments(self) -> dict:
+        raise Exception("not implemented")
+
+    def SetArguments(self, val: dict):
+        raise Exception("not implemented")
+
+    def ExpectedScreenIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetExpectedScreenIdentifier(self, val: str):
+        raise Exception("not implemented")
+
+    def ErrorMessage(self) -> str:
+        raise Exception("not implemented")
+
+    def SetErrorMessage(self, val: str):
+        raise Exception("not implemented")
+
+
+def ActionFactory() -> Action:
+    ret = _Action()
+    ret.groupIdentifier_ = ""
+    ret.screenIdentifier_ = ""
+    ret.componentIdentifier_ = ""
+    ret.actionType_ = ""
+    ret.timestamp_ = "0001-01-01T00:00:00.000000Z"
+    ret.arguments_ = {}
+    ret.expectedScreenIdentifier_ = ""
+    ret.errorMessage_ = ""
+    return ret
+
+
+class _Action(Action):
+    def __init__(self):
+        self.groupIdentifier_ = ""
+        self.screenIdentifier_ = ""
+        self.componentIdentifier_ = ""
+        self.actionType_ = ""
+        self.timestamp_ = "0001-01-01T00:00:00.000000Z"
+        self.arguments_ = {}
+        self.expectedScreenIdentifier_ = ""
+        self.errorMessage_ = ""
+
+    def SetGroupIdentifier(self, val):
+        self.groupIdentifier_ = str(val)
+
+    def GroupIdentifier(self):
+        return self.groupIdentifier_
+
+    def SetScreenIdentifier(self, val):
+        self.screenIdentifier_ = str(val)
+
+    def ScreenIdentifier(self):
+        return self.screenIdentifier_
+
+    def SetComponentIdentifier(self, val):
+        self.componentIdentifier_ = str(val)
+
+    def ComponentIdentifier(self):
+        return self.componentIdentifier_
+
+    def SetActionType(self, val):
+        self.actionType_ = str(val)
+
+    def ActionType(self):
+        return self.actionType_
+
+    def SetTimestamp(self, val):
+        self.timestamp_ = store.datetime_string(val)
+
+    def Timestamp(self):
+        return store.datetime_parse(self.timestamp_)
+
+    def SetArguments(self, val):
+        self.arguments_ = val
+
+    def Arguments(self):
+        return self.arguments_
+
+    def SetExpectedScreenIdentifier(self, val):
+        self.expectedScreenIdentifier_ = str(val)
+
+    def ExpectedScreenIdentifier(self):
+        return self.expectedScreenIdentifier_
+
+    def SetErrorMessage(self, val):
+        self.errorMessage_ = str(val)
+
+    def ErrorMessage(self):
+        return self.errorMessage_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["groupIdentifier"] = self.groupIdentifier_
+        data["screenIdentifier"] = self.screenIdentifier_
+        data["componentIdentifier"] = self.componentIdentifier_
+        data["actionType"] = self.actionType_
+        data["timestamp"] = self.timestamp_
+        rawSubmap = {}
+        for k, v in self.arguments_.items():
+            rawSubmap[k] = v
+        data["arguments"] = rawSubmap
+        data["expectedScreenIdentifier"] = self.expectedScreenIdentifier_
+        data["errorMessage"] = self.errorMessage_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "groupIdentifier":
+                self.groupIdentifier_ = rawValue
+            if key == "screenIdentifier":
+                self.screenIdentifier_ = rawValue
+            if key == "componentIdentifier":
+                self.componentIdentifier_ = rawValue
+            if key == "actionType":
+                self.actionType_ = rawValue
+            if key == "timestamp":
+                self.timestamp_ = rawValue
+            if key == "arguments":
+                res = {}
+                for rk, rw in rawValue.items():
+                    ud = 0
+                    ud = rw
+                    res[rk] = ud
+                self.arguments_ = res
+            if key == "expectedScreenIdentifier":
+                self.expectedScreenIdentifier_ = rawValue
+            if key == "errorMessage":
+                self.errorMessage_ = rawValue
+
+
 class Component:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -1248,6 +1428,12 @@ class JourneyInternal:
     def SetScreenIdentifiers(self, val: ScreenIdentifiers):
         raise Exception("not implemented")
 
+    def History(self) -> list:
+        raise Exception("not implemented")
+
+    def SetHistory(self, val: list):
+        raise Exception("not implemented")
+
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
@@ -1264,6 +1450,7 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.actionsAvoided_ = []
     ret.crawlerVersion_ = ""
     ret.screenIdentifiers_ = ScreenIdentifiersFactory()
+    ret.history_ = []
     return ret
 
 
@@ -1282,6 +1469,7 @@ class _JourneyInternal(JourneyInternal):
         self.actionsAvoided_ = []
         self.crawlerVersion_ = ""
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
+        self.history_ = []
 
     def SetOperSt(self, val):
         self.operSt_ = str(val)
@@ -1361,6 +1549,12 @@ class _JourneyInternal(JourneyInternal):
     def ScreenIdentifiers(self):
         return self.screenIdentifiers_
 
+    def SetHistory(self, val):
+        self.history_ = val
+
+    def History(self):
+        return self.history_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -1390,6 +1584,10 @@ class _JourneyInternal(JourneyInternal):
         data["crawlerVersion"] = self.crawlerVersion_
         # if self.screenIdentifiers_ is not None:
         data["screenIdentifiers"] = self.screenIdentifiers_.ToDict()
+        rawList = []
+        for v in self.history_:
+            rawList.append(v.ToDict())
+        data["history"] = rawList
         return data
 
     def FromDict(self, data):
@@ -1432,6 +1630,13 @@ class _JourneyInternal(JourneyInternal):
                 self.crawlerVersion_ = rawValue
             if key == "screenIdentifiers":
                 self.screenIdentifiers_.FromDict(rawValue)
+            if key == "history":
+                res = []
+                for rw in rawValue:
+                    ud = ActionFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.history_ = res
 
 
 class Edge:
