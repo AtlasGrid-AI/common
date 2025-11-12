@@ -1647,7 +1647,7 @@ class _ScreenIdentifiers extends ScreenIdentifiers {
 
 
 
-class Action {
+class ActionArguments {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
     }
@@ -1656,177 +1656,57 @@ class Action {
     FromDict(data) { throw new Error("not implemented"); }
 
     
-    GroupIdentifier() { throw new Error("not implemented"); }
-    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    Integers() { throw new Error("not implemented"); }
+    SetIntegers(val) { throw new Error("not implemented"); }
     
-    ScreenIdentifier() { throw new Error("not implemented"); }
-    SetScreenIdentifier(val) { throw new Error("not implemented"); }
-    
-    ComponentIdentifier() { throw new Error("not implemented"); }
-    SetComponentIdentifier(val) { throw new Error("not implemented"); }
-    
-    ActionType() { throw new Error("not implemented"); }
-    SetActionType(val) { throw new Error("not implemented"); }
-    
-    Timestamp() { throw new Error("not implemented"); }
-    SetTimestamp(val) { throw new Error("not implemented"); }
-    
-    Arguments() { throw new Error("not implemented"); }
-    SetArguments(val) { throw new Error("not implemented"); }
-    
-    ExpectedScreenIdentifier() { throw new Error("not implemented"); }
-    SetExpectedScreenIdentifier(val) { throw new Error("not implemented"); }
-    
-    ErrorMessage() { throw new Error("not implemented"); }
-    SetErrorMessage(val) { throw new Error("not implemented"); }
+    Strings() { throw new Error("not implemented"); }
+    SetStrings(val) { throw new Error("not implemented"); }
     
 }
 
-function ActionFactory() {
-    const ret = new _Action();
+function ActionArgumentsFactory() {
+    const ret = new _ActionArguments();
     
-    ret.groupIdentifier_ = "";
+    ret.integers_ = {};
     
-    ret.screenIdentifier_ = "";
-    
-    ret.componentIdentifier_ = "";
-    
-    ret.actionType_ = "";
-    
-    ret.timestamp_ = "0001-01-01T00:00:00.000000Z";
-    
-    ret.arguments_ = {};
-    
-    ret.expectedScreenIdentifier_ = "";
-    
-    ret.errorMessage_ = "";
+    ret.strings_ = {};
     
     return ret;
 }
 
-class _Action extends Action {
+class _ActionArguments extends ActionArguments {
     constructor() {
         super();
         
-        this.groupIdentifier_ = "";
+        this.integers_ = {};
         
-        this.screenIdentifier_ = "";
-        
-        this.componentIdentifier_ = "";
-        
-        this.actionType_ = "";
-        
-        this.timestamp_ = "0001-01-01T00:00:00.000000Z";
-        
-        this.arguments_ = {};
-        
-        this.expectedScreenIdentifier_ = "";
-        
-        this.errorMessage_ = "";
+        this.strings_ = {};
         
     }
 
     
-    SetGroupIdentifier(val) {
+    SetIntegers(val) {
         
-        this.groupIdentifier_ = String(val);
-        
-    }
-
-    GroupIdentifier() {
-        
-        return this.groupIdentifier_;
+        this.integers_ = val;
         
     }
 
-    
-    SetScreenIdentifier(val) {
+    Integers() {
         
-        this.screenIdentifier_ = String(val);
-        
-    }
-
-    ScreenIdentifier() {
-        
-        return this.screenIdentifier_;
+        return this.integers_;
         
     }
 
     
-    SetComponentIdentifier(val) {
+    SetStrings(val) {
         
-        this.componentIdentifier_ = String(val);
-        
-    }
-
-    ComponentIdentifier() {
-        
-        return this.componentIdentifier_;
+        this.strings_ = val;
         
     }
 
-    
-    SetActionType(val) {
+    Strings() {
         
-        this.actionType_ = String(val);
-        
-    }
-
-    ActionType() {
-        
-        return this.actionType_;
-        
-    }
-
-    
-    SetTimestamp(val) {
-        
-        this.timestamp_ = val.ToString();
-        
-    }
-
-    Timestamp() {
-        
-        return Date.parse(this.timestamp_);
-        
-    }
-
-    
-    SetArguments(val) {
-        
-        this.arguments_ = val;
-        
-    }
-
-    Arguments() {
-        
-        return this.arguments_;
-        
-    }
-
-    
-    SetExpectedScreenIdentifier(val) {
-        
-        this.expectedScreenIdentifier_ = String(val);
-        
-    }
-
-    ExpectedScreenIdentifier() {
-        
-        return this.expectedScreenIdentifier_;
-        
-    }
-
-    
-    SetErrorMessage(val) {
-        
-        this.errorMessage_ = String(val);
-        
-    }
-
-    ErrorMessage() {
-        
-        return this.errorMessage_;
+        return this.strings_;
         
     }
 
@@ -1845,56 +1725,25 @@ class _Action extends Action {
         const data = {};
         
         
-        
-        data["groupIdentifier"] = this.groupIdentifier_;
-        
-        
-        
-        
-        
-        data["screenIdentifier"] = this.screenIdentifier_;
-        
-        
-        
-        
-        
-        data["componentIdentifier"] = this.componentIdentifier_;
-        
-        
-        
-        
-        
-        data["actionType"] = this.actionType_;
-        
-        
-        
-        
-        
-        data["timestamp"] = this.timestamp_;
-        
-        
-        
-        
-        const rawSubmaparguments = {};
-        for (const k in (this.arguments_ || {})) {
-            const v = this.arguments_[k];
+        const rawSubmapintegers = {};
+        for (const k in (this.integers_ || {})) {
+            const v = this.integers_[k];
             
-            rawSubmaparguments[k] = v;
+            rawSubmapintegers[k] = v;
             
         }
-        data["arguments"] = rawSubmaparguments;
+        data["integers"] = rawSubmapintegers;
         
         
         
-        
-        data["expectedScreenIdentifier"] = this.expectedScreenIdentifier_;
-        
-        
-        
-        
-        
-        data["errorMessage"] = this.errorMessage_;
-        
+        const rawSubmapstrings = {};
+        for (const k in (this.strings_ || {})) {
+            const v = this.strings_[k];
+            
+            rawSubmapstrings[k] = v;
+            
+        }
+        data["strings"] = rawSubmapstrings;
         
         
         return data;
@@ -1906,52 +1755,7 @@ class _Action extends Action {
             if (rawValue === null || rawValue === undefined) continue;
 
             
-            if (key === "groupIdentifier") {
-                
-                
-                this.groupIdentifier_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "screenIdentifier") {
-                
-                
-                this.screenIdentifier_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "componentIdentifier") {
-                
-                
-                this.componentIdentifier_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "actionType") {
-                
-                
-                this.actionType_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "timestamp") {
-                
-                
-                this.timestamp_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "arguments") {
+            if (key === "integers") {
                 
                 const res = {};
 
@@ -1964,25 +1768,24 @@ class _Action extends Action {
                     res[rk] = ud;
                 }
 
-                this.arguments_ = res;
+                this.integers_ = res;
                 
             }
             
-            if (key === "expectedScreenIdentifier") {
+            if (key === "strings") {
                 
-                
-                this.expectedScreenIdentifier_ = rawValue;
-                
+                const res = {};
 
-                
-            }
-            
-            if (key === "errorMessage") {
-                
-                
-                this.errorMessage_ = rawValue;
-                
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
 
+                this.strings_ = res;
                 
             }
             
@@ -2529,7 +2332,7 @@ class _JourneyConfiguration extends JourneyConfiguration {
 
 
 
-class JourneyInternal {
+class Action {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
     }
@@ -2538,128 +2341,164 @@ class JourneyInternal {
     FromDict(data) { throw new Error("not implemented"); }
 
     
-    OperSt() { throw new Error("not implemented"); }
-    SetOperSt(val) { throw new Error("not implemented"); }
+    GroupIdentifier() { throw new Error("not implemented"); }
+    SetGroupIdentifier(val) { throw new Error("not implemented"); }
+    
+    ScreenIdentifier() { throw new Error("not implemented"); }
+    SetScreenIdentifier(val) { throw new Error("not implemented"); }
+    
+    ComponentIdentifier() { throw new Error("not implemented"); }
+    SetComponentIdentifier(val) { throw new Error("not implemented"); }
+    
+    ActionType() { throw new Error("not implemented"); }
+    SetActionType(val) { throw new Error("not implemented"); }
+    
+    Timestamp() { throw new Error("not implemented"); }
+    SetTimestamp(val) { throw new Error("not implemented"); }
+    
+    Arguments() { throw new Error("not implemented"); }
+    SetArguments(val) { throw new Error("not implemented"); }
+    
+    ExpectedScreenIdentifier() { throw new Error("not implemented"); }
+    SetExpectedScreenIdentifier(val) { throw new Error("not implemented"); }
     
     ErrorMessage() { throw new Error("not implemented"); }
     SetErrorMessage(val) { throw new Error("not implemented"); }
     
-    LastRunAt() { throw new Error("not implemented"); }
-    SetLastRunAt(val) { throw new Error("not implemented"); }
-    
-    LastActionAt() { throw new Error("not implemented"); }
-    SetLastActionAt(val) { throw new Error("not implemented"); }
-    
-    FinishedAt() { throw new Error("not implemented"); }
-    SetFinishedAt(val) { throw new Error("not implemented"); }
-    
-    ScreenCount() { throw new Error("not implemented"); }
-    SetScreenCount(val) { throw new Error("not implemented"); }
-    
-    EdgeCount() { throw new Error("not implemented"); }
-    SetEdgeCount(val) { throw new Error("not implemented"); }
-    
-    StepsTaken() { throw new Error("not implemented"); }
-    SetStepsTaken(val) { throw new Error("not implemented"); }
-    
-    StepsPlanned() { throw new Error("not implemented"); }
-    SetStepsPlanned(val) { throw new Error("not implemented"); }
-    
-    ActionsPerformed() { throw new Error("not implemented"); }
-    SetActionsPerformed(val) { throw new Error("not implemented"); }
-    
-    ActionsAvoided() { throw new Error("not implemented"); }
-    SetActionsAvoided(val) { throw new Error("not implemented"); }
-    
-    CrawlerVersion() { throw new Error("not implemented"); }
-    SetCrawlerVersion(val) { throw new Error("not implemented"); }
-    
-    ScreenIdentifiers() { throw new Error("not implemented"); }
-    SetScreenIdentifiers(val) { throw new Error("not implemented"); }
-    
-    History() { throw new Error("not implemented"); }
-    SetHistory(val) { throw new Error("not implemented"); }
-    
 }
 
-function JourneyInternalFactory() {
-    const ret = new _JourneyInternal();
+function ActionFactory() {
+    const ret = new _Action();
     
-    ret.operSt_ = "";
+    ret.groupIdentifier_ = "";
+    
+    ret.screenIdentifier_ = "";
+    
+    ret.componentIdentifier_ = "";
+    
+    ret.actionType_ = "";
+    
+    ret.timestamp_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.arguments_ = ActionArgumentsFactory();
+    
+    ret.expectedScreenIdentifier_ = "";
     
     ret.errorMessage_ = "";
-    
-    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
-    
-    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
-    
-    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z";
-    
-    ret.screenCount_ = 0;
-    
-    ret.edgeCount_ = 0;
-    
-    ret.stepsTaken_ = 0;
-    
-    ret.stepsPlanned_ = 0;
-    
-    ret.actionsPerformed_ = [];
-    
-    ret.actionsAvoided_ = [];
-    
-    ret.crawlerVersion_ = "";
-    
-    ret.screenIdentifiers_ = ScreenIdentifiersFactory();
-    
-    ret.history_ = [];
     
     return ret;
 }
 
-class _JourneyInternal extends JourneyInternal {
+class _Action extends Action {
     constructor() {
         super();
         
-        this.operSt_ = "";
+        this.groupIdentifier_ = "";
+        
+        this.screenIdentifier_ = "";
+        
+        this.componentIdentifier_ = "";
+        
+        this.actionType_ = "";
+        
+        this.timestamp_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.arguments_ = ActionArgumentsFactory();
+        
+        this.expectedScreenIdentifier_ = "";
         
         this.errorMessage_ = "";
-        
-        this.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
-        
-        this.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
-        
-        this.finishedAt_ = "0001-01-01T00:00:00.000000Z";
-        
-        this.screenCount_ = 0;
-        
-        this.edgeCount_ = 0;
-        
-        this.stepsTaken_ = 0;
-        
-        this.stepsPlanned_ = 0;
-        
-        this.actionsPerformed_ = [];
-        
-        this.actionsAvoided_ = [];
-        
-        this.crawlerVersion_ = "";
-        
-        this.screenIdentifiers_ = ScreenIdentifiersFactory();
-        
-        this.history_ = [];
         
     }
 
     
-    SetOperSt(val) {
+    SetGroupIdentifier(val) {
         
-        this.operSt_ = String(val);
+        this.groupIdentifier_ = String(val);
         
     }
 
-    OperSt() {
+    GroupIdentifier() {
         
-        return this.operSt_;
+        return this.groupIdentifier_;
+        
+    }
+
+    
+    SetScreenIdentifier(val) {
+        
+        this.screenIdentifier_ = String(val);
+        
+    }
+
+    ScreenIdentifier() {
+        
+        return this.screenIdentifier_;
+        
+    }
+
+    
+    SetComponentIdentifier(val) {
+        
+        this.componentIdentifier_ = String(val);
+        
+    }
+
+    ComponentIdentifier() {
+        
+        return this.componentIdentifier_;
+        
+    }
+
+    
+    SetActionType(val) {
+        
+        this.actionType_ = String(val);
+        
+    }
+
+    ActionType() {
+        
+        return this.actionType_;
+        
+    }
+
+    
+    SetTimestamp(val) {
+        
+        this.timestamp_ = val.ToString();
+        
+    }
+
+    Timestamp() {
+        
+        return Date.parse(this.timestamp_);
+        
+    }
+
+    
+    SetArguments(val) {
+        
+        this.arguments_ = val;
+        
+    }
+
+    Arguments() {
+        
+        return this.arguments_;
+        
+    }
+
+    
+    SetExpectedScreenIdentifier(val) {
+        
+        this.expectedScreenIdentifier_ = String(val);
+        
+    }
+
+    ExpectedScreenIdentifier() {
+        
+        return this.expectedScreenIdentifier_;
         
     }
 
@@ -2673,162 +2512,6 @@ class _JourneyInternal extends JourneyInternal {
     ErrorMessage() {
         
         return this.errorMessage_;
-        
-    }
-
-    
-    SetLastRunAt(val) {
-        
-        this.lastRunAt_ = val.ToString();
-        
-    }
-
-    LastRunAt() {
-        
-        return Date.parse(this.lastRunAt_);
-        
-    }
-
-    
-    SetLastActionAt(val) {
-        
-        this.lastActionAt_ = val.ToString();
-        
-    }
-
-    LastActionAt() {
-        
-        return Date.parse(this.lastActionAt_);
-        
-    }
-
-    
-    SetFinishedAt(val) {
-        
-        this.finishedAt_ = val.ToString();
-        
-    }
-
-    FinishedAt() {
-        
-        return Date.parse(this.finishedAt_);
-        
-    }
-
-    
-    SetScreenCount(val) {
-        
-        this.screenCount_ = Number.parseInt(val);
-        
-    }
-
-    ScreenCount() {
-        
-        return this.screenCount_;
-        
-    }
-
-    
-    SetEdgeCount(val) {
-        
-        this.edgeCount_ = Number.parseInt(val);
-        
-    }
-
-    EdgeCount() {
-        
-        return this.edgeCount_;
-        
-    }
-
-    
-    SetStepsTaken(val) {
-        
-        this.stepsTaken_ = Number.parseInt(val);
-        
-    }
-
-    StepsTaken() {
-        
-        return this.stepsTaken_;
-        
-    }
-
-    
-    SetStepsPlanned(val) {
-        
-        this.stepsPlanned_ = Number.parseInt(val);
-        
-    }
-
-    StepsPlanned() {
-        
-        return this.stepsPlanned_;
-        
-    }
-
-    
-    SetActionsPerformed(val) {
-        
-        this.actionsPerformed_ = val;
-        
-    }
-
-    ActionsPerformed() {
-        
-        return this.actionsPerformed_;
-        
-    }
-
-    
-    SetActionsAvoided(val) {
-        
-        this.actionsAvoided_ = val;
-        
-    }
-
-    ActionsAvoided() {
-        
-        return this.actionsAvoided_;
-        
-    }
-
-    
-    SetCrawlerVersion(val) {
-        
-        this.crawlerVersion_ = String(val);
-        
-    }
-
-    CrawlerVersion() {
-        
-        return this.crawlerVersion_;
-        
-    }
-
-    
-    SetScreenIdentifiers(val) {
-        
-        this.screenIdentifiers_ = val;
-        
-    }
-
-    ScreenIdentifiers() {
-        
-        return this.screenIdentifiers_;
-        
-    }
-
-    
-    SetHistory(val) {
-        
-        this.history_ = val;
-        
-    }
-
-    History() {
-        
-        return this.history_;
         
     }
 
@@ -2848,7 +2531,43 @@ class _JourneyInternal extends JourneyInternal {
         
         
         
-        data["operSt"] = this.operSt_;
+        data["groupIdentifier"] = this.groupIdentifier_;
+        
+        
+        
+        
+        
+        data["screenIdentifier"] = this.screenIdentifier_;
+        
+        
+        
+        
+        
+        data["componentIdentifier"] = this.componentIdentifier_;
+        
+        
+        
+        
+        
+        data["actionType"] = this.actionType_;
+        
+        
+        
+        
+        
+        data["timestamp"] = this.timestamp_;
+        
+        
+        
+        
+        
+        data["arguments"] = this.arguments_ ? this.arguments_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["expectedScreenIdentifier"] = this.expectedScreenIdentifier_;
         
         
         
@@ -2856,90 +2575,6 @@ class _JourneyInternal extends JourneyInternal {
         
         data["errorMessage"] = this.errorMessage_;
         
-        
-        
-        
-        
-        data["lastRunAt"] = this.lastRunAt_;
-        
-        
-        
-        
-        
-        data["lastActionAt"] = this.lastActionAt_;
-        
-        
-        
-        
-        
-        data["finishedAt"] = this.finishedAt_;
-        
-        
-        
-        
-        
-        data["screenCount"] = this.screenCount_;
-        
-        
-        
-        
-        
-        data["edgeCount"] = this.edgeCount_;
-        
-        
-        
-        
-        
-        data["stepsTaken"] = this.stepsTaken_;
-        
-        
-        
-        
-        
-        data["stepsPlanned"] = this.stepsPlanned_;
-        
-        
-        
-        
-        const rawListactionsPerformed = [];
-        for (const v of (this.actionsPerformed_ || [])) {
-            
-            rawListactionsPerformed.push(v);
-            
-        }
-        data["actionsPerformed"] = rawListactionsPerformed;
-        
-        
-        
-        const rawListactionsAvoided = [];
-        for (const v of (this.actionsAvoided_ || [])) {
-            
-            rawListactionsAvoided.push(v);
-            
-        }
-        data["actionsAvoided"] = rawListactionsAvoided;
-        
-        
-        
-        
-        data["crawlerVersion"] = this.crawlerVersion_;
-        
-        
-        
-        
-        
-        data["screenIdentifiers"] = this.screenIdentifiers_ ? this.screenIdentifiers_.ToDict() : null;
-        
-        
-        
-        
-        const rawListhistory = [];
-        for (const v of (this.history_ || [])) {
-            
-            rawListhistory.push(v.ToDict());
-            
-        }
-        data["history"] = rawListhistory;
         
         
         return data;
@@ -2951,10 +2586,64 @@ class _JourneyInternal extends JourneyInternal {
             if (rawValue === null || rawValue === undefined) continue;
 
             
-            if (key === "operSt") {
+            if (key === "groupIdentifier") {
                 
                 
-                this.operSt_ = rawValue;
+                this.groupIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screenIdentifier") {
+                
+                
+                this.screenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "componentIdentifier") {
+                
+                
+                this.componentIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "actionType") {
+                
+                
+                this.actionType_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "timestamp") {
+                
+                
+                this.timestamp_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "arguments") {
+                
+                
+                this.arguments_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "expectedScreenIdentifier") {
+                
+                
+                this.expectedScreenIdentifier_ = rawValue;
                 
 
                 
@@ -2966,135 +2655,6 @@ class _JourneyInternal extends JourneyInternal {
                 this.errorMessage_ = rawValue;
                 
 
-                
-            }
-            
-            if (key === "lastRunAt") {
-                
-                
-                this.lastRunAt_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "lastActionAt") {
-                
-                
-                this.lastActionAt_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "finishedAt") {
-                
-                
-                this.finishedAt_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "screenCount") {
-                
-                
-                this.screenCount_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "edgeCount") {
-                
-                
-                this.edgeCount_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "stepsTaken") {
-                
-                
-                this.stepsTaken_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "stepsPlanned") {
-                
-                
-                this.stepsPlanned_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "actionsPerformed") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.actionsPerformed_ = res;
-                
-            }
-            
-            if (key === "actionsAvoided") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.actionsAvoided_ = res;
-                
-            }
-            
-            if (key === "crawlerVersion") {
-                
-                
-                this.crawlerVersion_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "screenIdentifiers") {
-                
-                
-                this.screenIdentifiers_.FromDict(rawValue);
-                
-
-                
-            }
-            
-            if (key === "history") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = ActionFactory();
-                    
-                    ud.FromDict(rw);
-                    
-                    res.push(ud);
-                }
-
-                this.history_ = res;
                 
             }
             
@@ -4001,6 +3561,581 @@ class _JourneyExternal extends JourneyExternal {
                 this.deleted_ = rawValue;
                 
 
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    OperSt() { throw new Error("not implemented"); }
+    SetOperSt(val) { throw new Error("not implemented"); }
+    
+    ErrorMessage() { throw new Error("not implemented"); }
+    SetErrorMessage(val) { throw new Error("not implemented"); }
+    
+    LastRunAt() { throw new Error("not implemented"); }
+    SetLastRunAt(val) { throw new Error("not implemented"); }
+    
+    LastActionAt() { throw new Error("not implemented"); }
+    SetLastActionAt(val) { throw new Error("not implemented"); }
+    
+    FinishedAt() { throw new Error("not implemented"); }
+    SetFinishedAt(val) { throw new Error("not implemented"); }
+    
+    ScreenCount() { throw new Error("not implemented"); }
+    SetScreenCount(val) { throw new Error("not implemented"); }
+    
+    EdgeCount() { throw new Error("not implemented"); }
+    SetEdgeCount(val) { throw new Error("not implemented"); }
+    
+    StepsTaken() { throw new Error("not implemented"); }
+    SetStepsTaken(val) { throw new Error("not implemented"); }
+    
+    StepsPlanned() { throw new Error("not implemented"); }
+    SetStepsPlanned(val) { throw new Error("not implemented"); }
+    
+    ActionsPerformed() { throw new Error("not implemented"); }
+    SetActionsPerformed(val) { throw new Error("not implemented"); }
+    
+    ActionsAvoided() { throw new Error("not implemented"); }
+    SetActionsAvoided(val) { throw new Error("not implemented"); }
+    
+    CrawlerVersion() { throw new Error("not implemented"); }
+    SetCrawlerVersion(val) { throw new Error("not implemented"); }
+    
+    ScreenIdentifiers() { throw new Error("not implemented"); }
+    SetScreenIdentifiers(val) { throw new Error("not implemented"); }
+    
+    History() { throw new Error("not implemented"); }
+    SetHistory(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyInternalFactory() {
+    const ret = new _JourneyInternal();
+    
+    ret.operSt_ = "";
+    
+    ret.errorMessage_ = "";
+    
+    ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.finishedAt_ = "0001-01-01T00:00:00.000000Z";
+    
+    ret.screenCount_ = 0;
+    
+    ret.edgeCount_ = 0;
+    
+    ret.stepsTaken_ = 0;
+    
+    ret.stepsPlanned_ = 0;
+    
+    ret.actionsPerformed_ = [];
+    
+    ret.actionsAvoided_ = [];
+    
+    ret.crawlerVersion_ = "";
+    
+    ret.screenIdentifiers_ = ScreenIdentifiersFactory();
+    
+    ret.history_ = [];
+    
+    return ret;
+}
+
+class _JourneyInternal extends JourneyInternal {
+    constructor() {
+        super();
+        
+        this.operSt_ = "";
+        
+        this.errorMessage_ = "";
+        
+        this.lastRunAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.lastActionAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.finishedAt_ = "0001-01-01T00:00:00.000000Z";
+        
+        this.screenCount_ = 0;
+        
+        this.edgeCount_ = 0;
+        
+        this.stepsTaken_ = 0;
+        
+        this.stepsPlanned_ = 0;
+        
+        this.actionsPerformed_ = [];
+        
+        this.actionsAvoided_ = [];
+        
+        this.crawlerVersion_ = "";
+        
+        this.screenIdentifiers_ = ScreenIdentifiersFactory();
+        
+        this.history_ = [];
+        
+    }
+
+    
+    SetOperSt(val) {
+        
+        this.operSt_ = String(val);
+        
+    }
+
+    OperSt() {
+        
+        return this.operSt_;
+        
+    }
+
+    
+    SetErrorMessage(val) {
+        
+        this.errorMessage_ = String(val);
+        
+    }
+
+    ErrorMessage() {
+        
+        return this.errorMessage_;
+        
+    }
+
+    
+    SetLastRunAt(val) {
+        
+        this.lastRunAt_ = val.ToString();
+        
+    }
+
+    LastRunAt() {
+        
+        return Date.parse(this.lastRunAt_);
+        
+    }
+
+    
+    SetLastActionAt(val) {
+        
+        this.lastActionAt_ = val.ToString();
+        
+    }
+
+    LastActionAt() {
+        
+        return Date.parse(this.lastActionAt_);
+        
+    }
+
+    
+    SetFinishedAt(val) {
+        
+        this.finishedAt_ = val.ToString();
+        
+    }
+
+    FinishedAt() {
+        
+        return Date.parse(this.finishedAt_);
+        
+    }
+
+    
+    SetScreenCount(val) {
+        
+        this.screenCount_ = Number.parseInt(val);
+        
+    }
+
+    ScreenCount() {
+        
+        return this.screenCount_;
+        
+    }
+
+    
+    SetEdgeCount(val) {
+        
+        this.edgeCount_ = Number.parseInt(val);
+        
+    }
+
+    EdgeCount() {
+        
+        return this.edgeCount_;
+        
+    }
+
+    
+    SetStepsTaken(val) {
+        
+        this.stepsTaken_ = Number.parseInt(val);
+        
+    }
+
+    StepsTaken() {
+        
+        return this.stepsTaken_;
+        
+    }
+
+    
+    SetStepsPlanned(val) {
+        
+        this.stepsPlanned_ = Number.parseInt(val);
+        
+    }
+
+    StepsPlanned() {
+        
+        return this.stepsPlanned_;
+        
+    }
+
+    
+    SetActionsPerformed(val) {
+        
+        this.actionsPerformed_ = val;
+        
+    }
+
+    ActionsPerformed() {
+        
+        return this.actionsPerformed_;
+        
+    }
+
+    
+    SetActionsAvoided(val) {
+        
+        this.actionsAvoided_ = val;
+        
+    }
+
+    ActionsAvoided() {
+        
+        return this.actionsAvoided_;
+        
+    }
+
+    
+    SetCrawlerVersion(val) {
+        
+        this.crawlerVersion_ = String(val);
+        
+    }
+
+    CrawlerVersion() {
+        
+        return this.crawlerVersion_;
+        
+    }
+
+    
+    SetScreenIdentifiers(val) {
+        
+        this.screenIdentifiers_ = val;
+        
+    }
+
+    ScreenIdentifiers() {
+        
+        return this.screenIdentifiers_;
+        
+    }
+
+    
+    SetHistory(val) {
+        
+        this.history_ = val;
+        
+    }
+
+    History() {
+        
+        return this.history_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["operSt"] = this.operSt_;
+        
+        
+        
+        
+        
+        data["errorMessage"] = this.errorMessage_;
+        
+        
+        
+        
+        
+        data["lastRunAt"] = this.lastRunAt_;
+        
+        
+        
+        
+        
+        data["lastActionAt"] = this.lastActionAt_;
+        
+        
+        
+        
+        
+        data["finishedAt"] = this.finishedAt_;
+        
+        
+        
+        
+        
+        data["screenCount"] = this.screenCount_;
+        
+        
+        
+        
+        
+        data["edgeCount"] = this.edgeCount_;
+        
+        
+        
+        
+        
+        data["stepsTaken"] = this.stepsTaken_;
+        
+        
+        
+        
+        
+        data["stepsPlanned"] = this.stepsPlanned_;
+        
+        
+        
+        
+        const rawListactionsPerformed = [];
+        for (const v of (this.actionsPerformed_ || [])) {
+            
+            rawListactionsPerformed.push(v);
+            
+        }
+        data["actionsPerformed"] = rawListactionsPerformed;
+        
+        
+        
+        const rawListactionsAvoided = [];
+        for (const v of (this.actionsAvoided_ || [])) {
+            
+            rawListactionsAvoided.push(v);
+            
+        }
+        data["actionsAvoided"] = rawListactionsAvoided;
+        
+        
+        
+        
+        data["crawlerVersion"] = this.crawlerVersion_;
+        
+        
+        
+        
+        
+        data["screenIdentifiers"] = this.screenIdentifiers_ ? this.screenIdentifiers_.ToDict() : null;
+        
+        
+        
+        
+        const rawListhistory = [];
+        for (const v of (this.history_ || [])) {
+            
+            rawListhistory.push(v.ToDict());
+            
+        }
+        data["history"] = rawListhistory;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "operSt") {
+                
+                
+                this.operSt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "errorMessage") {
+                
+                
+                this.errorMessage_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "lastRunAt") {
+                
+                
+                this.lastRunAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "lastActionAt") {
+                
+                
+                this.lastActionAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "finishedAt") {
+                
+                
+                this.finishedAt_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screenCount") {
+                
+                
+                this.screenCount_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "edgeCount") {
+                
+                
+                this.edgeCount_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "stepsTaken") {
+                
+                
+                this.stepsTaken_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "stepsPlanned") {
+                
+                
+                this.stepsPlanned_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "actionsPerformed") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.actionsPerformed_ = res;
+                
+            }
+            
+            if (key === "actionsAvoided") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.actionsAvoided_ = res;
+                
+            }
+            
+            if (key === "crawlerVersion") {
+                
+                
+                this.crawlerVersion_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screenIdentifiers") {
+                
+                
+                this.screenIdentifiers_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "history") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = ActionFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.history_ = res;
                 
             }
             

@@ -108,8 +108,15 @@ types:
       - name: timestamp
         type: datetime
       - name: arguments
-        type: "map[string]int"
+        type: ActionArguments
       - name: expectedScreenIdentifier
         type: string
       - name: errorMessage
         type: string
+  - kind: Struct
+    name: ActionArguments
+    properties:
+      - name: integers
+        type: "map[string]int"
+      - name: strings
+        type: "map[string]string"
