@@ -54,13 +54,8 @@ class ComponentType(CaseInsensitiveStringEnum):
     PICKER = "picker"
     DATE_PICKER = "date picker"
     PAGE_INDICATOR = "page indicator"
-    # CELL = "cell"
-    # LINK = "link"
-    # SEARCH_FIELD = "search field"
-    # SWITCH = "switch"
-    # SEGMENTED_CONTROL = "segmented control"
-    # STEPPER = "stepper"
-    # MAP = "map"
+    MAP = "map"
+    LIST = "list"
 
 
 class ActionType(CaseInsensitiveStringEnum):
