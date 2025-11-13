@@ -1441,10 +1441,10 @@ class Edge:
     def SetComponent(self, val: Component):
         raise Exception("not implemented")
 
-    def Action(self) -> str:
+    def Action(self) -> Action:
         raise Exception("not implemented")
 
-    def SetAction(self, val: str):
+    def SetAction(self, val: Action):
         raise Exception("not implemented")
 
     def Expired(self) -> bool:
@@ -1458,7 +1458,7 @@ def EdgeFactory() -> Edge:
     ret = _Edge()
     ret.targetScreenIdentifier_ = ""
     ret.component_ = ComponentFactory()
-    ret.action_ = ""
+    ret.action_ = ActionFactory()
     ret.expired_ = False
     return ret
 
@@ -1467,7 +1467,7 @@ class _Edge(Edge):
     def __init__(self):
         self.targetScreenIdentifier_ = ""
         self.component_ = ComponentFactory()
-        self.action_ = ""
+        self.action_ = ActionFactory()
         self.expired_ = False
 
     def SetTargetScreenIdentifier(self, val):
@@ -1483,7 +1483,7 @@ class _Edge(Edge):
         return self.component_
 
     def SetAction(self, val):
-        self.action_ = str(val)
+        self.action_ = val
 
     def Action(self):
         return self.action_
@@ -1506,7 +1506,8 @@ class _Edge(Edge):
         data["targetScreenIdentifier"] = self.targetScreenIdentifier_
         # if self.component_ is not None:
         data["component"] = self.component_.ToDict()
-        data["action"] = self.action_
+        # if self.action_ is not None:
+        data["action"] = self.action_.ToDict()
         data["expired"] = self.expired_
         return data
 
@@ -1519,7 +1520,7 @@ class _Edge(Edge):
             if key == "component":
                 self.component_.FromDict(rawValue)
             if key == "action":
-                self.action_ = rawValue
+                self.action_.FromDict(rawValue)
             if key == "expired":
                 self.expired_ = rawValue
 

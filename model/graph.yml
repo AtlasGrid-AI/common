@@ -46,7 +46,7 @@ types:
         type: Component
         description: The component triggering the transition
       - name: action
-        type: string
+        type: Action
         description: The action to be taken on the component
       - name: expired
         type: bool

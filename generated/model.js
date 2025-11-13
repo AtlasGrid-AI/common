@@ -2694,7 +2694,7 @@ function EdgeFactory() {
     
     ret.component_ = ComponentFactory();
     
-    ret.action_ = "";
+    ret.action_ = ActionFactory();
     
     ret.expired_ = false;
     
@@ -2709,7 +2709,7 @@ class _Edge extends Edge {
         
         this.component_ = ComponentFactory();
         
-        this.action_ = "";
+        this.action_ = ActionFactory();
         
         this.expired_ = false;
         
@@ -2744,7 +2744,7 @@ class _Edge extends Edge {
     
     SetAction(val) {
         
-        this.action_ = String(val);
+        this.action_ = val;
         
     }
 
@@ -2795,7 +2795,7 @@ class _Edge extends Edge {
         
         
         
-        data["action"] = this.action_;
+        data["action"] = this.action_ ? this.action_.ToDict() : null;
         
         
         
@@ -2835,7 +2835,7 @@ class _Edge extends Edge {
             if (key === "action") {
                 
                 
-                this.action_ = rawValue;
+                this.action_.FromDict(rawValue);
                 
 
                 
