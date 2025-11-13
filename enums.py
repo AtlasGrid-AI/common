@@ -65,13 +65,7 @@ class ComponentType(CaseInsensitiveStringEnum):
 
 class ActionType(CaseInsensitiveStringEnum):
     TAP = "tap"
-    SCROLL_VERTICAL = "vertical scroll"
-    SCROLL_HORIZONTAL = "horizontal scroll"
-    TEXT_INPUT = "text input"
-    SWIPE_LEFT = "swipe left"
-    SWIPE_RIGHT = "swipe right"
-    SWIPE_UP = "swipe up"
-    SWIPE_DOWN = "swipe down"
+    TYPE = "type"
+    SWIPE = "swipe"
     WAIT = "wait"
-    GO_BACK = "go back"
-    LONG_PRESS = "long press"
+    BACK = "go back"
