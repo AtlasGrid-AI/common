@@ -1645,10 +1645,16 @@ class PageNode:
     def SetAttributes(self, val: PageNodeAttributes):
         raise Exception("not implemented")
 
-    def Hash(self) -> str:
+    def HashStrict(self) -> str:
         raise Exception("not implemented")
 
-    def SetHash(self, val: str):
+    def SetHashStrict(self, val: str):
+        raise Exception("not implemented")
+
+    def HashRelaxed(self) -> str:
+        raise Exception("not implemented")
+
+    def SetHashRelaxed(self, val: str):
         raise Exception("not implemented")
 
 
@@ -1658,7 +1664,8 @@ def PageNodeFactory() -> PageNode:
     ret.parent_ = ""
     ret.children_ = []
     ret.attributes_ = PageNodeAttributesFactory()
-    ret.hash_ = ""
+    ret.hashStrict_ = ""
+    ret.hashRelaxed_ = ""
     return ret
 
 
@@ -1668,7 +1675,8 @@ class _PageNode(PageNode):
         self.parent_ = ""
         self.children_ = []
         self.attributes_ = PageNodeAttributesFactory()
-        self.hash_ = ""
+        self.hashStrict_ = ""
+        self.hashRelaxed_ = ""
 
     def SetIdentifier(self, val):
         self.identifier_ = str(val)
@@ -1694,11 +1702,17 @@ class _PageNode(PageNode):
     def Attributes(self):
         return self.attributes_
 
-    def SetHash(self, val):
-        self.hash_ = str(val)
+    def SetHashStrict(self, val):
+        self.hashStrict_ = str(val)
 
-    def Hash(self):
-        return self.hash_
+    def HashStrict(self):
+        return self.hashStrict_
+
+    def SetHashRelaxed(self, val):
+        self.hashRelaxed_ = str(val)
+
+    def HashRelaxed(self):
+        return self.hashRelaxed_
 
     def FromJson(self, jstr):
         data = json.loads(jstr)
@@ -1717,7 +1731,8 @@ class _PageNode(PageNode):
         data["children"] = rawList
         # if self.attributes_ is not None:
         data["attributes"] = self.attributes_.ToDict()
-        data["hash"] = self.hash_
+        data["hashStrict"] = self.hashStrict_
+        data["hashRelaxed"] = self.hashRelaxed_
         return data
 
     def FromDict(self, data):
@@ -1737,8 +1752,10 @@ class _PageNode(PageNode):
                 self.children_ = res
             if key == "attributes":
                 self.attributes_.FromDict(rawValue)
-            if key == "hash":
-                self.hash_ = rawValue
+            if key == "hashStrict":
+                self.hashStrict_ = rawValue
+            if key == "hashRelaxed":
+                self.hashRelaxed_ = rawValue
 
 
 class JourneyExternal:

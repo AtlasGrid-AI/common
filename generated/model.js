@@ -3021,8 +3021,11 @@ class PageNode {
     Attributes() { throw new Error("not implemented"); }
     SetAttributes(val) { throw new Error("not implemented"); }
     
-    Hash() { throw new Error("not implemented"); }
-    SetHash(val) { throw new Error("not implemented"); }
+    HashStrict() { throw new Error("not implemented"); }
+    SetHashStrict(val) { throw new Error("not implemented"); }
+    
+    HashRelaxed() { throw new Error("not implemented"); }
+    SetHashRelaxed(val) { throw new Error("not implemented"); }
     
 }
 
@@ -3037,7 +3040,9 @@ function PageNodeFactory() {
     
     ret.attributes_ = PageNodeAttributesFactory();
     
-    ret.hash_ = "";
+    ret.hashStrict_ = "";
+    
+    ret.hashRelaxed_ = "";
     
     return ret;
 }
@@ -3054,7 +3059,9 @@ class _PageNode extends PageNode {
         
         this.attributes_ = PageNodeAttributesFactory();
         
-        this.hash_ = "";
+        this.hashStrict_ = "";
+        
+        this.hashRelaxed_ = "";
         
     }
 
@@ -3111,15 +3118,28 @@ class _PageNode extends PageNode {
     }
 
     
-    SetHash(val) {
+    SetHashStrict(val) {
         
-        this.hash_ = String(val);
+        this.hashStrict_ = String(val);
         
     }
 
-    Hash() {
+    HashStrict() {
         
-        return this.hash_;
+        return this.hashStrict_;
+        
+    }
+
+    
+    SetHashRelaxed(val) {
+        
+        this.hashRelaxed_ = String(val);
+        
+    }
+
+    HashRelaxed() {
+        
+        return this.hashRelaxed_;
         
     }
 
@@ -3167,7 +3187,13 @@ class _PageNode extends PageNode {
         
         
         
-        data["hash"] = this.hash_;
+        data["hashStrict"] = this.hashStrict_;
+        
+        
+        
+        
+        
+        data["hashRelaxed"] = this.hashRelaxed_;
         
         
         
@@ -3223,10 +3249,19 @@ class _PageNode extends PageNode {
                 
             }
             
-            if (key === "hash") {
+            if (key === "hashStrict") {
                 
                 
-                this.hash_ = rawValue;
+                this.hashStrict_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "hashRelaxed") {
+                
+                
+                this.hashRelaxed_ = rawValue;
                 
 
                 
