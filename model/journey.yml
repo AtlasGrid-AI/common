@@ -76,9 +76,7 @@ types:
       - name: stepsPlanned
         type: int
       - name: actionsPerformed
-        type: "[]string"
-      - name: actionsAvoided
-        type: "[]string"
+        type: "[]Action"
       - name: crawlerVersion
         type: string
       - name: screenIdentifiers
