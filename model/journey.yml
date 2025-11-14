@@ -81,8 +81,6 @@ types:
         type: string
       - name: screenIdentifiers
         type: ScreenIdentifiers
-      - name: history
-        type: "[]Action"
   - kind: Struct
     name: ScreenIdentifiers
     properties:

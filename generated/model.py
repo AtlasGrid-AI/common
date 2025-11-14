@@ -1996,12 +1996,6 @@ class JourneyInternal:
     def SetScreenIdentifiers(self, val: ScreenIdentifiers):
         raise Exception("not implemented")
 
-    def History(self) -> list:
-        raise Exception("not implemented")
-
-    def SetHistory(self, val: list):
-        raise Exception("not implemented")
-
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
@@ -2017,7 +2011,6 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.actionsPerformed_ = []
     ret.crawlerVersion_ = ""
     ret.screenIdentifiers_ = ScreenIdentifiersFactory()
-    ret.history_ = []
     return ret
 
 
@@ -2035,7 +2028,6 @@ class _JourneyInternal(JourneyInternal):
         self.actionsPerformed_ = []
         self.crawlerVersion_ = ""
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
-        self.history_ = []
 
     def SetOperSt(self, val):
         self.operSt_ = str(val)
@@ -2109,12 +2101,6 @@ class _JourneyInternal(JourneyInternal):
     def ScreenIdentifiers(self):
         return self.screenIdentifiers_
 
-    def SetHistory(self, val):
-        self.history_ = val
-
-    def History(self):
-        return self.history_
-
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -2140,10 +2126,6 @@ class _JourneyInternal(JourneyInternal):
         data["crawlerVersion"] = self.crawlerVersion_
         # if self.screenIdentifiers_ is not None:
         data["screenIdentifiers"] = self.screenIdentifiers_.ToDict()
-        rawList = []
-        for v in self.history_:
-            rawList.append(v.ToDict())
-        data["history"] = rawList
         return data
 
     def FromDict(self, data):
@@ -2179,13 +2161,6 @@ class _JourneyInternal(JourneyInternal):
                 self.crawlerVersion_ = rawValue
             if key == "screenIdentifiers":
                 self.screenIdentifiers_.FromDict(rawValue)
-            if key == "history":
-                res = []
-                for rw in rawValue:
-                    ud = ActionFactory()
-                    ud.FromDict(rw)
-                    res.append(ud)
-                self.history_ = res
 
 
 class ScreenInternal:

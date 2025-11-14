@@ -3615,9 +3615,6 @@ class JourneyInternal {
     ScreenIdentifiers() { throw new Error("not implemented"); }
     SetScreenIdentifiers(val) { throw new Error("not implemented"); }
     
-    History() { throw new Error("not implemented"); }
-    SetHistory(val) { throw new Error("not implemented"); }
-    
 }
 
 function JourneyInternalFactory() {
@@ -3646,8 +3643,6 @@ function JourneyInternalFactory() {
     ret.crawlerVersion_ = "";
     
     ret.screenIdentifiers_ = ScreenIdentifiersFactory();
-    
-    ret.history_ = [];
     
     return ret;
 }
@@ -3679,8 +3674,6 @@ class _JourneyInternal extends JourneyInternal {
         this.crawlerVersion_ = "";
         
         this.screenIdentifiers_ = ScreenIdentifiersFactory();
-        
-        this.history_ = [];
         
     }
 
@@ -3841,19 +3834,6 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
-    SetHistory(val) {
-        
-        this.history_ = val;
-        
-    }
-
-    History() {
-        
-        return this.history_;
-        
-    }
-
-    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -3941,16 +3921,6 @@ class _JourneyInternal extends JourneyInternal {
         
         data["screenIdentifiers"] = this.screenIdentifiers_ ? this.screenIdentifiers_.ToDict() : null;
         
-        
-        
-        
-        const rawListhistory = [];
-        for (const v of (this.history_ || [])) {
-            
-            rawListhistory.push(v.ToDict());
-            
-        }
-        data["history"] = rawListhistory;
         
         
         return data;
@@ -4074,22 +4044,6 @@ class _JourneyInternal extends JourneyInternal {
                 this.screenIdentifiers_.FromDict(rawValue);
                 
 
-                
-            }
-            
-            if (key === "history") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = ActionFactory();
-                    
-                    ud.FromDict(rw);
-                    
-                    res.push(ud);
-                }
-
-                this.history_ = res;
                 
             }
             
