@@ -123,9 +123,12 @@ types:
         description: The child nodes of this node
       - name: attributes
         type: PageNodeAttributes
-      - name: hash
+      - name: hashStrict
         type: string
-        description: The hash of the node used for comparison and grouping of similar nodes
+        description: The strict hash of the node used for comparison and grouping of similar nodes
+      - name: hashRelaxed
+        type: string
+        description: The relaxed hash of the node used for comparison and grouping of similar nodes
   - kind: Struct
     name: PageNodeAttributes
     properties:
