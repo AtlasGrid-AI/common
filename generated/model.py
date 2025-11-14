@@ -1984,12 +1984,6 @@ class JourneyInternal:
     def SetActionsPerformed(self, val: list):
         raise Exception("not implemented")
 
-    def ActionsAvoided(self) -> list:
-        raise Exception("not implemented")
-
-    def SetActionsAvoided(self, val: list):
-        raise Exception("not implemented")
-
     def CrawlerVersion(self) -> str:
         raise Exception("not implemented")
 
@@ -2021,7 +2015,6 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.stepsTaken_ = 0
     ret.stepsPlanned_ = 0
     ret.actionsPerformed_ = []
-    ret.actionsAvoided_ = []
     ret.crawlerVersion_ = ""
     ret.screenIdentifiers_ = ScreenIdentifiersFactory()
     ret.history_ = []
@@ -2040,7 +2033,6 @@ class _JourneyInternal(JourneyInternal):
         self.stepsTaken_ = 0
         self.stepsPlanned_ = 0
         self.actionsPerformed_ = []
-        self.actionsAvoided_ = []
         self.crawlerVersion_ = ""
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
         self.history_ = []
@@ -2105,12 +2097,6 @@ class _JourneyInternal(JourneyInternal):
     def ActionsPerformed(self):
         return self.actionsPerformed_
 
-    def SetActionsAvoided(self, val):
-        self.actionsAvoided_ = val
-
-    def ActionsAvoided(self):
-        return self.actionsAvoided_
-
     def SetCrawlerVersion(self, val):
         self.crawlerVersion_ = str(val)
 
@@ -2149,12 +2135,8 @@ class _JourneyInternal(JourneyInternal):
         data["stepsPlanned"] = self.stepsPlanned_
         rawList = []
         for v in self.actionsPerformed_:
-            rawList.append(v)
+            rawList.append(v.ToDict())
         data["actionsPerformed"] = rawList
-        rawList = []
-        for v in self.actionsAvoided_:
-            rawList.append(v)
-        data["actionsAvoided"] = rawList
         data["crawlerVersion"] = self.crawlerVersion_
         # if self.screenIdentifiers_ is not None:
         data["screenIdentifiers"] = self.screenIdentifiers_.ToDict()
@@ -2189,17 +2171,10 @@ class _JourneyInternal(JourneyInternal):
             if key == "actionsPerformed":
                 res = []
                 for rw in rawValue:
-                    ud = ""
-                    ud = rw
+                    ud = ActionFactory()
+                    ud.FromDict(rw)
                     res.append(ud)
                 self.actionsPerformed_ = res
-            if key == "actionsAvoided":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.actionsAvoided_ = res
             if key == "crawlerVersion":
                 self.crawlerVersion_ = rawValue
             if key == "screenIdentifiers":

@@ -3609,9 +3609,6 @@ class JourneyInternal {
     ActionsPerformed() { throw new Error("not implemented"); }
     SetActionsPerformed(val) { throw new Error("not implemented"); }
     
-    ActionsAvoided() { throw new Error("not implemented"); }
-    SetActionsAvoided(val) { throw new Error("not implemented"); }
-    
     CrawlerVersion() { throw new Error("not implemented"); }
     SetCrawlerVersion(val) { throw new Error("not implemented"); }
     
@@ -3646,8 +3643,6 @@ function JourneyInternalFactory() {
     
     ret.actionsPerformed_ = [];
     
-    ret.actionsAvoided_ = [];
-    
     ret.crawlerVersion_ = "";
     
     ret.screenIdentifiers_ = ScreenIdentifiersFactory();
@@ -3680,8 +3675,6 @@ class _JourneyInternal extends JourneyInternal {
         this.stepsPlanned_ = 0;
         
         this.actionsPerformed_ = [];
-        
-        this.actionsAvoided_ = [];
         
         this.crawlerVersion_ = "";
         
@@ -3822,19 +3815,6 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
-    SetActionsAvoided(val) {
-        
-        this.actionsAvoided_ = val;
-        
-    }
-
-    ActionsAvoided() {
-        
-        return this.actionsAvoided_;
-        
-    }
-
-    
     SetCrawlerVersion(val) {
         
         this.crawlerVersion_ = String(val);
@@ -3945,20 +3925,10 @@ class _JourneyInternal extends JourneyInternal {
         const rawListactionsPerformed = [];
         for (const v of (this.actionsPerformed_ || [])) {
             
-            rawListactionsPerformed.push(v);
+            rawListactionsPerformed.push(v.ToDict());
             
         }
         data["actionsPerformed"] = rawListactionsPerformed;
-        
-        
-        
-        const rawListactionsAvoided = [];
-        for (const v of (this.actionsAvoided_ || [])) {
-            
-            rawListactionsAvoided.push(v);
-            
-        }
-        data["actionsAvoided"] = rawListactionsAvoided;
         
         
         
@@ -4078,30 +4048,14 @@ class _JourneyInternal extends JourneyInternal {
                 const res = [];
 
                 for (const rw of rawValue) {
-                    let ud = "";
+                    let ud = ActionFactory();
                     
-                    ud = rw;
+                    ud.FromDict(rw);
                     
                     res.push(ud);
                 }
 
                 this.actionsPerformed_ = res;
-                
-            }
-            
-            if (key === "actionsAvoided") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.actionsAvoided_ = res;
                 
             }
             
