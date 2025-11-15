@@ -1,0 +1,1345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openapi version="3.0.0">
+  <info>
+    <title>Pystorz API</title>
+    <version>1.0.0</version>
+  </info>
+  <servers>
+    <server>
+      <url>http://localhost/</url>
+    </server>
+  </servers>
+  <paths>
+    <path name="/id/{id}">
+      <parameter name="id" in="path" required="true">
+        <schema><type>string</type></schema>
+      </parameter>
+      <get>
+        <responses>
+          <response code="200"/>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    
+    <path name="/screen/">
+      <get>
+        <summary>List Screen</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
+        </parameters>
+        <responses>
+          <response code="200">
+            <content>
+              <mediaType contentType="application/json">
+                <schema>
+                  <type>array</type>
+                  <items><ref>#/components/schemas/Screen</ref></items>
+                </schema>
+              </mediaType>
+            </content>
+          </response>
+        </responses>
+      </get>
+
+      <post>
+        <summary>Create Screen</summary>
+        <requestBody required="true">
+          <content>
+            <mediaType contentType="application/json">
+              <schema><ref>#/components/schemas/Screen</ref></schema>
+            </mediaType>
+          </content>
+        </requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+
+      <delete>
+        <summary>Bulk delete Screen</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+        </parameters>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    <path name="/screen/{pkey}">
+      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
+      <get>
+        <responses>
+          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Screen</ref></schema></mediaType></content></response>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Screen</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Screen</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/><response code="404"/></responses>
+      </delete>
+    </path>
+    
+    <path name="/page/">
+      <get>
+        <summary>List Page</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
+        </parameters>
+        <responses>
+          <response code="200">
+            <content>
+              <mediaType contentType="application/json">
+                <schema>
+                  <type>array</type>
+                  <items><ref>#/components/schemas/Page</ref></items>
+                </schema>
+              </mediaType>
+            </content>
+          </response>
+        </responses>
+      </get>
+
+      <post>
+        <summary>Create Page</summary>
+        <requestBody required="true">
+          <content>
+            <mediaType contentType="application/json">
+              <schema><ref>#/components/schemas/Page</ref></schema>
+            </mediaType>
+          </content>
+        </requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+
+      <delete>
+        <summary>Bulk delete Page</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+        </parameters>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    <path name="/page/{pkey}">
+      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
+      <get>
+        <responses>
+          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Page</ref></schema></mediaType></content></response>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Page</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Page</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/><response code="404"/></responses>
+      </delete>
+    </path>
+    
+    <path name="/journey/">
+      <get>
+        <summary>List Journey</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
+        </parameters>
+        <responses>
+          <response code="200">
+            <content>
+              <mediaType contentType="application/json">
+                <schema>
+                  <type>array</type>
+                  <items><ref>#/components/schemas/Journey</ref></items>
+                </schema>
+              </mediaType>
+            </content>
+          </response>
+        </responses>
+      </get>
+
+      <post>
+        <summary>Create Journey</summary>
+        <requestBody required="true">
+          <content>
+            <mediaType contentType="application/json">
+              <schema><ref>#/components/schemas/Journey</ref></schema>
+            </mediaType>
+          </content>
+        </requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+
+      <delete>
+        <summary>Bulk delete Journey</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+        </parameters>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    <path name="/journey/{pkey}">
+      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
+      <get>
+        <responses>
+          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Journey</ref></schema></mediaType></content></response>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Journey</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Journey</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/><response code="404"/></responses>
+      </delete>
+    </path>
+    
+
+  </paths>
+
+  <components>
+    <schemas>
+      
+      <schema name="ScreenMetadata">
+        <type>object</type>
+        <properties>
+          
+          <property name="title">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="description">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="tags">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="flow">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="Rectangle">
+        <type>object</type>
+        <properties>
+          
+          <property name="x">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="y">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="width">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="height">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="centerX">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="centerY">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="PageNodeAttributes">
+        <type>object</type>
+        <properties>
+          
+          <property name="className">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="classifiers">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="resourceId">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="package">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="text">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="rectangle">
+            
+              
+              <ref>#/components/schemas/"Rectangle"</ref>
+              
+            
+          </property>
+          
+          <property name="index">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="isDisplayed">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isEnabled">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isCheckable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isChecked">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isDialog">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isClickable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isFocusable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isFocused">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isLongClickable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isScrollable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isSelected">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isDismissable">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="hasClickables">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="CrawlerConfiguration">
+        <type>object</type>
+        <properties>
+          
+          <property name="serverUrl">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="directConnection">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="keepAlive">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="ignoreCertificates">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="platformVersion">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="deviceId">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="ScreenIdentifiers">
+        <type>object</type>
+        <properties>
+          
+          <property name="first">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="current">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="previous">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="ActionArguments">
+        <type>object</type>
+        <properties>
+          
+          <property name="integers">
+            
+            <type>object</type>
+            <additionalProperties>
+              
+              <type>string</type>
+              
+            </additionalProperties>
+            
+          </property>
+          
+          <property name="strings">
+            
+            <type>object</type>
+            <additionalProperties>
+              
+              <type>string</type>
+              
+            </additionalProperties>
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="Component">
+        <type>object</type>
+        <properties>
+          
+          <property name="identifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="rectangle">
+            
+              
+              <ref>#/components/schemas/"Rectangle"</ref>
+              
+            
+          </property>
+          
+          <property name="type">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="text">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="JourneyConfiguration">
+        <type>object</type>
+        <properties>
+          
+          <property name="textFields">
+            
+            <type>object</type>
+            <additionalProperties>
+              
+              <type>string</type>
+              
+            </additionalProperties>
+            
+          </property>
+          
+          <property name="avoidComponents">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="deprioritizeComponents">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="additionalFlows">
+            
+            <type>object</type>
+            <additionalProperties>
+              
+              <type>string</type>
+              
+            </additionalProperties>
+            
+          </property>
+          
+          <property name="stepIntervalMs">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="maxStepCount">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="crawler">
+            
+              
+              <ref>#/components/schemas/"CrawlerConfiguration"</ref>
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="Action">
+        <type>object</type>
+        <properties>
+          
+          <property name="groupIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="screenIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="componentIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="actionType">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="timestamp">
+            
+              
+              <type>string</type>
+              <format>date-time</format>
+              
+            
+          </property>
+          
+          <property name="arguments">
+            
+              
+              <ref>#/components/schemas/"ActionArguments"</ref>
+              
+            
+          </property>
+          
+          <property name="expectedScreenIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="errorMessage">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="Edge">
+        <type>object</type>
+        <properties>
+          
+          <property name="targetScreenIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="component">
+            
+              
+              <ref>#/components/schemas/"Component"</ref>
+              
+            
+          </property>
+          
+          <property name="action">
+            
+              
+              <ref>#/components/schemas/"Action"</ref>
+              
+            
+          </property>
+          
+          <property name="expired">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="ScreenContent">
+        <type>object</type>
+        <properties>
+          
+          <property name="components">
+            
+            <type>array</type>
+            <items>
+              
+              <ref>#/components/schemas/typing.List["Component"]</ref>
+              
+            </items>
+            
+          </property>
+          
+          <property name="text">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="PageNode">
+        <type>object</type>
+        <properties>
+          
+          <property name="identifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="parent">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="children">
+            
+            <type>array</type>
+            <items>
+              
+              <ref>#/components/schemas/typing.List["PageNode"]</ref>
+              
+            </items>
+            
+          </property>
+          
+          <property name="attributes">
+            
+              
+              <ref>#/components/schemas/"PageNodeAttributes"</ref>
+              
+            
+          </property>
+          
+          <property name="hashStrict">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="hashRelaxed">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="JourneyExternal">
+        <type>object</type>
+        <properties>
+          
+          <property name="name">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="atlas">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="owner">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="description">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="platform">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="adminSt">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="config">
+            
+              
+              <ref>#/components/schemas/"JourneyConfiguration"</ref>
+              
+            
+          </property>
+          
+          <property name="deleted">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="JourneyInternal">
+        <type>object</type>
+        <properties>
+          
+          <property name="operSt">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="errorMessage">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="lastRunAt">
+            
+              
+              <type>string</type>
+              <format>date-time</format>
+              
+            
+          </property>
+          
+          <property name="lastActionAt">
+            
+              
+              <type>string</type>
+              <format>date-time</format>
+              
+            
+          </property>
+          
+          <property name="finishedAt">
+            
+              
+              <type>string</type>
+              <format>date-time</format>
+              
+            
+          </property>
+          
+          <property name="screenCount">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="edgeCount">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="stepsTaken">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="stepsPlanned">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="actionsPerformed">
+            
+            <type>array</type>
+            <items>
+              
+              <ref>#/components/schemas/typing.List["Action"]</ref>
+              
+            </items>
+            
+          </property>
+          
+          <property name="crawlerVersion">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="screenIdentifiers">
+            
+              
+              <ref>#/components/schemas/"ScreenIdentifiers"</ref>
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="ScreenInternal">
+        <type>object</type>
+        <properties>
+          
+          <property name="journey">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="identifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="groupIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="edges">
+            
+            <type>array</type>
+            <items>
+              
+              <ref>#/components/schemas/typing.List["Edge"]</ref>
+              
+            </items>
+            
+          </property>
+          
+          <property name="image">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="imageLowRes">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="isEntryPoint">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="content">
+            
+              
+              <ref>#/components/schemas/"ScreenContent"</ref>
+              
+            
+          </property>
+          
+          <property name="metadata">
+            
+              
+              <ref>#/components/schemas/"ScreenMetadata"</ref>
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="PageInternal">
+        <type>object</type>
+        <properties>
+          
+          <property name="identifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="journey">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="root">
+            
+              
+              <ref>#/components/schemas/"PageNode"</ref>
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+
+      
+      <schema name="Screen">
+        <type>object</type>
+        <properties>
+          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
+          
+          <property name="internal"><ref>#/components/schemas/ScreenInternal</ref></property>
+        </properties>
+      </schema>
+      
+      <schema name="Page">
+        <type>object</type>
+        <properties>
+          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
+          
+          <property name="internal"><ref>#/components/schemas/PageInternal</ref></property>
+        </properties>
+      </schema>
+      
+      <schema name="Journey">
+        <type>object</type>
+        <properties>
+          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
+          <property name="external"><ref>#/components/schemas/JourneyExternal</ref></property>
+          <property name="internal"><ref>#/components/schemas/JourneyInternal</ref></property>
+        </properties>
+      </schema>
+      
+
+      <!-- Minimal Meta schema used by resources -->
+      <schema name="Meta">
+        <type>object</type>
+        <properties>
+          <property name="kind"><type>string</type></property>
+          <property name="created"><type>string</type><format>date-time</format></property>
+          <property name="updated"><type>string</type><format>date-time</format></property>
+          <property name="version"><type>integer</type></property>
+        </properties>
+      </schema>
+
+    </schemas>
+  </components>
+
+</openapi>

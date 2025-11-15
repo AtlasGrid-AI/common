@@ -1,10 +1,8 @@
 import json
+import typing
 from pystorz.internal import constants
-
-# "from pystorz.store import utils",
 from pystorz.store import store
 from datetime import datetime
-from typing import Type
 
 
 class ScreenMetadata:
@@ -29,10 +27,10 @@ class ScreenMetadata:
     def SetDescription(self, val: str):
         raise Exception("not implemented")
 
-    def Tags(self) -> list:
+    def Tags(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
-    def SetTags(self, val: list):
+    def SetTags(self, val: typing.List["str"]):
         raise Exception("not implemented")
 
     def Flow(self) -> str:
@@ -58,28 +56,28 @@ class _ScreenMetadata(ScreenMetadata):
         self.tags_ = []
         self.flow_ = ""
 
-    def SetTitle(self, val):
+    def SetTitle(self, val: str):
         self.title_ = str(val)
 
-    def Title(self):
+    def Title(self) -> str:
         return self.title_
 
-    def SetDescription(self, val):
+    def SetDescription(self, val: str):
         self.description_ = str(val)
 
-    def Description(self):
+    def Description(self) -> str:
         return self.description_
 
-    def SetTags(self, val):
+    def SetTags(self, val: typing.List["str"]):
         self.tags_ = val
 
-    def Tags(self):
+    def Tags(self) -> typing.List["str"]:
         return self.tags_
 
-    def SetFlow(self, val):
+    def SetFlow(self, val: str):
         self.flow_ = str(val)
 
-    def Flow(self):
+    def Flow(self) -> str:
         return self.flow_
 
     def FromJson(self, jstr):
@@ -186,40 +184,40 @@ class _Rectangle(Rectangle):
         self.centerX_ = 0
         self.centerY_ = 0
 
-    def SetX(self, val):
+    def SetX(self, val: int):
         self.x_ = int(val)
 
-    def X(self):
+    def X(self) -> int:
         return self.x_
 
-    def SetY(self, val):
+    def SetY(self, val: int):
         self.y_ = int(val)
 
-    def Y(self):
+    def Y(self) -> int:
         return self.y_
 
-    def SetWidth(self, val):
+    def SetWidth(self, val: int):
         self.width_ = int(val)
 
-    def Width(self):
+    def Width(self) -> int:
         return self.width_
 
-    def SetHeight(self, val):
+    def SetHeight(self, val: int):
         self.height_ = int(val)
 
-    def Height(self):
+    def Height(self) -> int:
         return self.height_
 
-    def SetCenterX(self, val):
+    def SetCenterX(self, val: int):
         self.centerX_ = int(val)
 
-    def CenterX(self):
+    def CenterX(self) -> int:
         return self.centerX_
 
-    def SetCenterY(self, val):
+    def SetCenterY(self, val: int):
         self.centerY_ = int(val)
 
-    def CenterY(self):
+    def CenterY(self) -> int:
         return self.centerY_
 
     def FromJson(self, jstr):
@@ -273,10 +271,10 @@ class PageNodeAttributes:
     def SetClassName(self, val: str):
         raise Exception("not implemented")
 
-    def Classifiers(self) -> list:
+    def Classifiers(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
-    def SetClassifiers(self, val: list):
+    def SetClassifiers(self, val: typing.List["str"]):
         raise Exception("not implemented")
 
     def ResourceId(self) -> str:
@@ -297,10 +295,10 @@ class PageNodeAttributes:
     def SetText(self, val: str):
         raise Exception("not implemented")
 
-    def Rectangle(self) -> Rectangle:
+    def Rectangle(self) -> "Rectangle":
         raise Exception("not implemented")
 
-    def SetRectangle(self, val: Rectangle):
+    def SetRectangle(self, val: "Rectangle"):
         raise Exception("not implemented")
 
     def Index(self) -> int:
@@ -436,124 +434,124 @@ class _PageNodeAttributes(PageNodeAttributes):
         self.isDismissable_ = False
         self.hasClickables_ = False
 
-    def SetClassName(self, val):
+    def SetClassName(self, val: str):
         self.className_ = str(val)
 
-    def ClassName(self):
+    def ClassName(self) -> str:
         return self.className_
 
-    def SetClassifiers(self, val):
+    def SetClassifiers(self, val: typing.List["str"]):
         self.classifiers_ = val
 
-    def Classifiers(self):
+    def Classifiers(self) -> typing.List["str"]:
         return self.classifiers_
 
-    def SetResourceId(self, val):
+    def SetResourceId(self, val: str):
         self.resourceId_ = str(val)
 
-    def ResourceId(self):
+    def ResourceId(self) -> str:
         return self.resourceId_
 
-    def SetPackage(self, val):
+    def SetPackage(self, val: str):
         self.package_ = str(val)
 
-    def Package(self):
+    def Package(self) -> str:
         return self.package_
 
-    def SetText(self, val):
+    def SetText(self, val: str):
         self.text_ = str(val)
 
-    def Text(self):
+    def Text(self) -> str:
         return self.text_
 
-    def SetRectangle(self, val):
+    def SetRectangle(self, val: "Rectangle"):
         self.rectangle_ = val
 
-    def Rectangle(self):
+    def Rectangle(self) -> "Rectangle":
         return self.rectangle_
 
-    def SetIndex(self, val):
+    def SetIndex(self, val: int):
         self.index_ = int(val)
 
-    def Index(self):
+    def Index(self) -> int:
         return self.index_
 
-    def SetIsDisplayed(self, val):
+    def SetIsDisplayed(self, val: bool):
         self.isDisplayed_ = bool(val)
 
-    def IsDisplayed(self):
+    def IsDisplayed(self) -> bool:
         return self.isDisplayed_
 
-    def SetIsEnabled(self, val):
+    def SetIsEnabled(self, val: bool):
         self.isEnabled_ = bool(val)
 
-    def IsEnabled(self):
+    def IsEnabled(self) -> bool:
         return self.isEnabled_
 
-    def SetIsCheckable(self, val):
+    def SetIsCheckable(self, val: bool):
         self.isCheckable_ = bool(val)
 
-    def IsCheckable(self):
+    def IsCheckable(self) -> bool:
         return self.isCheckable_
 
-    def SetIsChecked(self, val):
+    def SetIsChecked(self, val: bool):
         self.isChecked_ = bool(val)
 
-    def IsChecked(self):
+    def IsChecked(self) -> bool:
         return self.isChecked_
 
-    def SetIsDialog(self, val):
+    def SetIsDialog(self, val: bool):
         self.isDialog_ = bool(val)
 
-    def IsDialog(self):
+    def IsDialog(self) -> bool:
         return self.isDialog_
 
-    def SetIsClickable(self, val):
+    def SetIsClickable(self, val: bool):
         self.isClickable_ = bool(val)
 
-    def IsClickable(self):
+    def IsClickable(self) -> bool:
         return self.isClickable_
 
-    def SetIsFocusable(self, val):
+    def SetIsFocusable(self, val: bool):
         self.isFocusable_ = bool(val)
 
-    def IsFocusable(self):
+    def IsFocusable(self) -> bool:
         return self.isFocusable_
 
-    def SetIsFocused(self, val):
+    def SetIsFocused(self, val: bool):
         self.isFocused_ = bool(val)
 
-    def IsFocused(self):
+    def IsFocused(self) -> bool:
         return self.isFocused_
 
-    def SetIsLongClickable(self, val):
+    def SetIsLongClickable(self, val: bool):
         self.isLongClickable_ = bool(val)
 
-    def IsLongClickable(self):
+    def IsLongClickable(self) -> bool:
         return self.isLongClickable_
 
-    def SetIsScrollable(self, val):
+    def SetIsScrollable(self, val: bool):
         self.isScrollable_ = bool(val)
 
-    def IsScrollable(self):
+    def IsScrollable(self) -> bool:
         return self.isScrollable_
 
-    def SetIsSelected(self, val):
+    def SetIsSelected(self, val: bool):
         self.isSelected_ = bool(val)
 
-    def IsSelected(self):
+    def IsSelected(self) -> bool:
         return self.isSelected_
 
-    def SetIsDismissable(self, val):
+    def SetIsDismissable(self, val: bool):
         self.isDismissable_ = bool(val)
 
-    def IsDismissable(self):
+    def IsDismissable(self) -> bool:
         return self.isDismissable_
 
-    def SetHasClickables(self, val):
+    def SetHasClickables(self, val: bool):
         self.hasClickables_ = bool(val)
 
-    def HasClickables(self):
+    def HasClickables(self) -> bool:
         return self.hasClickables_
 
     def FromJson(self, jstr):
@@ -709,40 +707,40 @@ class _CrawlerConfiguration(CrawlerConfiguration):
         self.platformVersion_ = ""
         self.deviceId_ = ""
 
-    def SetServerUrl(self, val):
+    def SetServerUrl(self, val: str):
         self.serverUrl_ = str(val)
 
-    def ServerUrl(self):
+    def ServerUrl(self) -> str:
         return self.serverUrl_
 
-    def SetDirectConnection(self, val):
+    def SetDirectConnection(self, val: bool):
         self.directConnection_ = bool(val)
 
-    def DirectConnection(self):
+    def DirectConnection(self) -> bool:
         return self.directConnection_
 
-    def SetKeepAlive(self, val):
+    def SetKeepAlive(self, val: bool):
         self.keepAlive_ = bool(val)
 
-    def KeepAlive(self):
+    def KeepAlive(self) -> bool:
         return self.keepAlive_
 
-    def SetIgnoreCertificates(self, val):
+    def SetIgnoreCertificates(self, val: bool):
         self.ignoreCertificates_ = bool(val)
 
-    def IgnoreCertificates(self):
+    def IgnoreCertificates(self) -> bool:
         return self.ignoreCertificates_
 
-    def SetPlatformVersion(self, val):
+    def SetPlatformVersion(self, val: str):
         self.platformVersion_ = str(val)
 
-    def PlatformVersion(self):
+    def PlatformVersion(self) -> str:
         return self.platformVersion_
 
-    def SetDeviceId(self, val):
+    def SetDeviceId(self, val: str):
         self.deviceId_ = str(val)
 
-    def DeviceId(self):
+    def DeviceId(self) -> str:
         return self.deviceId_
 
     def FromJson(self, jstr):
@@ -823,22 +821,22 @@ class _ScreenIdentifiers(ScreenIdentifiers):
         self.current_ = ""
         self.previous_ = ""
 
-    def SetFirst(self, val):
+    def SetFirst(self, val: str):
         self.first_ = str(val)
 
-    def First(self):
+    def First(self) -> str:
         return self.first_
 
-    def SetCurrent(self, val):
+    def SetCurrent(self, val: str):
         self.current_ = str(val)
 
-    def Current(self):
+    def Current(self) -> str:
         return self.current_
 
-    def SetPrevious(self, val):
+    def SetPrevious(self, val: str):
         self.previous_ = str(val)
 
-    def Previous(self):
+    def Previous(self) -> str:
         return self.previous_
 
     def FromJson(self, jstr):
@@ -877,16 +875,16 @@ class ActionArguments:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Integers(self) -> dict:
+    def Integers(self) -> typing.Dict[typing.Any, "int"]:
         raise Exception("not implemented")
 
-    def SetIntegers(self, val: dict):
+    def SetIntegers(self, val: typing.Dict[typing.Any, "int"]):
         raise Exception("not implemented")
 
-    def Strings(self) -> dict:
+    def Strings(self) -> typing.Dict[typing.Any, "str"]:
         raise Exception("not implemented")
 
-    def SetStrings(self, val: dict):
+    def SetStrings(self, val: typing.Dict[typing.Any, "str"]):
         raise Exception("not implemented")
 
 
@@ -902,16 +900,16 @@ class _ActionArguments(ActionArguments):
         self.integers_ = {}
         self.strings_ = {}
 
-    def SetIntegers(self, val):
+    def SetIntegers(self, val: typing.Dict[typing.Any, "int"]):
         self.integers_ = val
 
-    def Integers(self):
+    def Integers(self) -> typing.Dict[typing.Any, "int"]:
         return self.integers_
 
-    def SetStrings(self, val):
+    def SetStrings(self, val: typing.Dict[typing.Any, "str"]):
         self.strings_ = val
 
-    def Strings(self):
+    def Strings(self) -> typing.Dict[typing.Any, "str"]:
         return self.strings_
 
     def FromJson(self, jstr):
@@ -969,10 +967,10 @@ class Component:
     def SetIdentifier(self, val: str):
         raise Exception("not implemented")
 
-    def Rectangle(self) -> Rectangle:
+    def Rectangle(self) -> "Rectangle":
         raise Exception("not implemented")
 
-    def SetRectangle(self, val: Rectangle):
+    def SetRectangle(self, val: "Rectangle"):
         raise Exception("not implemented")
 
     def Type(self) -> str:
@@ -1004,28 +1002,28 @@ class _Component(Component):
         self.type_ = ""
         self.text_ = ""
 
-    def SetIdentifier(self, val):
+    def SetIdentifier(self, val: str):
         self.identifier_ = str(val)
 
-    def Identifier(self):
+    def Identifier(self) -> str:
         return self.identifier_
 
-    def SetRectangle(self, val):
+    def SetRectangle(self, val: "Rectangle"):
         self.rectangle_ = val
 
-    def Rectangle(self):
+    def Rectangle(self) -> "Rectangle":
         return self.rectangle_
 
-    def SetType(self, val):
+    def SetType(self, val: str):
         self.type_ = str(val)
 
-    def Type(self):
+    def Type(self) -> str:
         return self.type_
 
-    def SetText(self, val):
+    def SetText(self, val: str):
         self.text_ = str(val)
 
-    def Text(self):
+    def Text(self) -> str:
         return self.text_
 
     def FromJson(self, jstr):
@@ -1068,28 +1066,28 @@ class JourneyConfiguration:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def TextFields(self) -> dict:
+    def TextFields(self) -> typing.Dict[typing.Any, "str"]:
         raise Exception("not implemented")
 
-    def SetTextFields(self, val: dict):
+    def SetTextFields(self, val: typing.Dict[typing.Any, "str"]):
         raise Exception("not implemented")
 
-    def AvoidComponents(self) -> list:
+    def AvoidComponents(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
-    def SetAvoidComponents(self, val: list):
+    def SetAvoidComponents(self, val: typing.List["str"]):
         raise Exception("not implemented")
 
-    def DeprioritizeComponents(self) -> list:
+    def DeprioritizeComponents(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
-    def SetDeprioritizeComponents(self, val: list):
+    def SetDeprioritizeComponents(self, val: typing.List["str"]):
         raise Exception("not implemented")
 
-    def AdditionalFlows(self) -> dict:
+    def AdditionalFlows(self) -> typing.Dict[typing.Any, "str"]:
         raise Exception("not implemented")
 
-    def SetAdditionalFlows(self, val: dict):
+    def SetAdditionalFlows(self, val: typing.Dict[typing.Any, "str"]):
         raise Exception("not implemented")
 
     def StepIntervalMs(self) -> int:
@@ -1104,10 +1102,10 @@ class JourneyConfiguration:
     def SetMaxStepCount(self, val: int):
         raise Exception("not implemented")
 
-    def Crawler(self) -> CrawlerConfiguration:
+    def Crawler(self) -> "CrawlerConfiguration":
         raise Exception("not implemented")
 
-    def SetCrawler(self, val: CrawlerConfiguration):
+    def SetCrawler(self, val: "CrawlerConfiguration"):
         raise Exception("not implemented")
 
 
@@ -1133,46 +1131,46 @@ class _JourneyConfiguration(JourneyConfiguration):
         self.maxStepCount_ = 0
         self.crawler_ = CrawlerConfigurationFactory()
 
-    def SetTextFields(self, val):
+    def SetTextFields(self, val: typing.Dict[typing.Any, "str"]):
         self.textFields_ = val
 
-    def TextFields(self):
+    def TextFields(self) -> typing.Dict[typing.Any, "str"]:
         return self.textFields_
 
-    def SetAvoidComponents(self, val):
+    def SetAvoidComponents(self, val: typing.List["str"]):
         self.avoidComponents_ = val
 
-    def AvoidComponents(self):
+    def AvoidComponents(self) -> typing.List["str"]:
         return self.avoidComponents_
 
-    def SetDeprioritizeComponents(self, val):
+    def SetDeprioritizeComponents(self, val: typing.List["str"]):
         self.deprioritizeComponents_ = val
 
-    def DeprioritizeComponents(self):
+    def DeprioritizeComponents(self) -> typing.List["str"]:
         return self.deprioritizeComponents_
 
-    def SetAdditionalFlows(self, val):
+    def SetAdditionalFlows(self, val: typing.Dict[typing.Any, "str"]):
         self.additionalFlows_ = val
 
-    def AdditionalFlows(self):
+    def AdditionalFlows(self) -> typing.Dict[typing.Any, "str"]:
         return self.additionalFlows_
 
-    def SetStepIntervalMs(self, val):
+    def SetStepIntervalMs(self, val: int):
         self.stepIntervalMs_ = int(val)
 
-    def StepIntervalMs(self):
+    def StepIntervalMs(self) -> int:
         return self.stepIntervalMs_
 
-    def SetMaxStepCount(self, val):
+    def SetMaxStepCount(self, val: int):
         self.maxStepCount_ = int(val)
 
-    def MaxStepCount(self):
+    def MaxStepCount(self) -> int:
         return self.maxStepCount_
 
-    def SetCrawler(self, val):
+    def SetCrawler(self, val: "CrawlerConfiguration"):
         self.crawler_ = val
 
-    def Crawler(self):
+    def Crawler(self) -> "CrawlerConfiguration":
         return self.crawler_
 
     def FromJson(self, jstr):
@@ -1286,10 +1284,10 @@ class Action:
     def SetTimestamp(self, val: datetime):
         raise Exception("not implemented")
 
-    def Arguments(self) -> ActionArguments:
+    def Arguments(self) -> "ActionArguments":
         raise Exception("not implemented")
 
-    def SetArguments(self, val: ActionArguments):
+    def SetArguments(self, val: "ActionArguments"):
         raise Exception("not implemented")
 
     def ExpectedScreenIdentifier(self) -> str:
@@ -1329,52 +1327,52 @@ class _Action(Action):
         self.expectedScreenIdentifier_ = ""
         self.errorMessage_ = ""
 
-    def SetGroupIdentifier(self, val):
+    def SetGroupIdentifier(self, val: str):
         self.groupIdentifier_ = str(val)
 
-    def GroupIdentifier(self):
+    def GroupIdentifier(self) -> str:
         return self.groupIdentifier_
 
-    def SetScreenIdentifier(self, val):
+    def SetScreenIdentifier(self, val: str):
         self.screenIdentifier_ = str(val)
 
-    def ScreenIdentifier(self):
+    def ScreenIdentifier(self) -> str:
         return self.screenIdentifier_
 
-    def SetComponentIdentifier(self, val):
+    def SetComponentIdentifier(self, val: str):
         self.componentIdentifier_ = str(val)
 
-    def ComponentIdentifier(self):
+    def ComponentIdentifier(self) -> str:
         return self.componentIdentifier_
 
-    def SetActionType(self, val):
+    def SetActionType(self, val: str):
         self.actionType_ = str(val)
 
-    def ActionType(self):
+    def ActionType(self) -> str:
         return self.actionType_
 
-    def SetTimestamp(self, val):
+    def SetTimestamp(self, val: datetime):
         self.timestamp_ = store.datetime_string(val)
 
-    def Timestamp(self):
+    def Timestamp(self) -> datetime:
         return store.datetime_parse(self.timestamp_)
 
-    def SetArguments(self, val):
+    def SetArguments(self, val: "ActionArguments"):
         self.arguments_ = val
 
-    def Arguments(self):
+    def Arguments(self) -> "ActionArguments":
         return self.arguments_
 
-    def SetExpectedScreenIdentifier(self, val):
+    def SetExpectedScreenIdentifier(self, val: str):
         self.expectedScreenIdentifier_ = str(val)
 
-    def ExpectedScreenIdentifier(self):
+    def ExpectedScreenIdentifier(self) -> str:
         return self.expectedScreenIdentifier_
 
-    def SetErrorMessage(self, val):
+    def SetErrorMessage(self, val: str):
         self.errorMessage_ = str(val)
 
-    def ErrorMessage(self):
+    def ErrorMessage(self) -> str:
         return self.errorMessage_
 
     def FromJson(self, jstr):
@@ -1435,16 +1433,16 @@ class Edge:
     def SetTargetScreenIdentifier(self, val: str):
         raise Exception("not implemented")
 
-    def Component(self) -> Component:
+    def Component(self) -> "Component":
         raise Exception("not implemented")
 
-    def SetComponent(self, val: Component):
+    def SetComponent(self, val: "Component"):
         raise Exception("not implemented")
 
-    def Action(self) -> Action:
+    def Action(self) -> "Action":
         raise Exception("not implemented")
 
-    def SetAction(self, val: Action):
+    def SetAction(self, val: "Action"):
         raise Exception("not implemented")
 
     def Expired(self) -> bool:
@@ -1470,28 +1468,28 @@ class _Edge(Edge):
         self.action_ = ActionFactory()
         self.expired_ = False
 
-    def SetTargetScreenIdentifier(self, val):
+    def SetTargetScreenIdentifier(self, val: str):
         self.targetScreenIdentifier_ = str(val)
 
-    def TargetScreenIdentifier(self):
+    def TargetScreenIdentifier(self) -> str:
         return self.targetScreenIdentifier_
 
-    def SetComponent(self, val):
+    def SetComponent(self, val: "Component"):
         self.component_ = val
 
-    def Component(self):
+    def Component(self) -> "Component":
         return self.component_
 
-    def SetAction(self, val):
+    def SetAction(self, val: "Action"):
         self.action_ = val
 
-    def Action(self):
+    def Action(self) -> "Action":
         return self.action_
 
-    def SetExpired(self, val):
+    def SetExpired(self, val: bool):
         self.expired_ = bool(val)
 
-    def Expired(self):
+    def Expired(self) -> bool:
         return self.expired_
 
     def FromJson(self, jstr):
@@ -1535,16 +1533,16 @@ class ScreenContent:
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Components(self) -> list:
+    def Components(self) -> typing.List["Component"]:
         raise Exception("not implemented")
 
-    def SetComponents(self, val: list):
+    def SetComponents(self, val: typing.List["Component"]):
         raise Exception("not implemented")
 
-    def Text(self) -> list:
+    def Text(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
-    def SetText(self, val: list):
+    def SetText(self, val: typing.List["str"]):
         raise Exception("not implemented")
 
 
@@ -1560,16 +1558,16 @@ class _ScreenContent(ScreenContent):
         self.components_ = []
         self.text_ = []
 
-    def SetComponents(self, val):
+    def SetComponents(self, val: typing.List["Component"]):
         self.components_ = val
 
-    def Components(self):
+    def Components(self) -> typing.List["Component"]:
         return self.components_
 
-    def SetText(self, val):
+    def SetText(self, val: typing.List["str"]):
         self.text_ = val
 
-    def Text(self):
+    def Text(self) -> typing.List["str"]:
         return self.text_
 
     def FromJson(self, jstr):
@@ -1633,16 +1631,16 @@ class PageNode:
     def SetParent(self, val: str):
         raise Exception("not implemented")
 
-    def Children(self) -> list:
+    def Children(self) -> typing.List["PageNode"]:
         raise Exception("not implemented")
 
-    def SetChildren(self, val: list):
+    def SetChildren(self, val: typing.List["PageNode"]):
         raise Exception("not implemented")
 
-    def Attributes(self) -> PageNodeAttributes:
+    def Attributes(self) -> "PageNodeAttributes":
         raise Exception("not implemented")
 
-    def SetAttributes(self, val: PageNodeAttributes):
+    def SetAttributes(self, val: "PageNodeAttributes"):
         raise Exception("not implemented")
 
     def HashStrict(self) -> str:
@@ -1678,40 +1676,40 @@ class _PageNode(PageNode):
         self.hashStrict_ = ""
         self.hashRelaxed_ = ""
 
-    def SetIdentifier(self, val):
+    def SetIdentifier(self, val: str):
         self.identifier_ = str(val)
 
-    def Identifier(self):
+    def Identifier(self) -> str:
         return self.identifier_
 
-    def SetParent(self, val):
+    def SetParent(self, val: str):
         self.parent_ = str(val)
 
-    def Parent(self):
+    def Parent(self) -> str:
         return self.parent_
 
-    def SetChildren(self, val):
+    def SetChildren(self, val: typing.List["PageNode"]):
         self.children_ = val
 
-    def Children(self):
+    def Children(self) -> typing.List["PageNode"]:
         return self.children_
 
-    def SetAttributes(self, val):
+    def SetAttributes(self, val: "PageNodeAttributes"):
         self.attributes_ = val
 
-    def Attributes(self):
+    def Attributes(self) -> "PageNodeAttributes":
         return self.attributes_
 
-    def SetHashStrict(self, val):
+    def SetHashStrict(self, val: str):
         self.hashStrict_ = str(val)
 
-    def HashStrict(self):
+    def HashStrict(self) -> str:
         return self.hashStrict_
 
-    def SetHashRelaxed(self, val):
+    def SetHashRelaxed(self, val: str):
         self.hashRelaxed_ = str(val)
 
-    def HashRelaxed(self):
+    def HashRelaxed(self) -> str:
         return self.hashRelaxed_
 
     def FromJson(self, jstr):
@@ -1804,10 +1802,10 @@ class JourneyExternal:
     def SetAdminSt(self, val: str):
         raise Exception("not implemented")
 
-    def Config(self) -> JourneyConfiguration:
+    def Config(self) -> "JourneyConfiguration":
         raise Exception("not implemented")
 
-    def SetConfig(self, val: JourneyConfiguration):
+    def SetConfig(self, val: "JourneyConfiguration"):
         raise Exception("not implemented")
 
     def Deleted(self) -> bool:
@@ -1841,52 +1839,52 @@ class _JourneyExternal(JourneyExternal):
         self.config_ = JourneyConfigurationFactory()
         self.deleted_ = False
 
-    def SetName(self, val):
+    def SetName(self, val: str):
         self.name_ = str(val)
 
-    def Name(self):
+    def Name(self) -> str:
         return self.name_
 
-    def SetAtlas(self, val):
+    def SetAtlas(self, val: str):
         self.atlas_ = str(val)
 
-    def Atlas(self):
+    def Atlas(self) -> str:
         return self.atlas_
 
-    def SetOwner(self, val):
+    def SetOwner(self, val: str):
         self.owner_ = str(val)
 
-    def Owner(self):
+    def Owner(self) -> str:
         return self.owner_
 
-    def SetDescription(self, val):
+    def SetDescription(self, val: str):
         self.description_ = str(val)
 
-    def Description(self):
+    def Description(self) -> str:
         return self.description_
 
-    def SetPlatform(self, val):
+    def SetPlatform(self, val: str):
         self.platform_ = str(val)
 
-    def Platform(self):
+    def Platform(self) -> str:
         return self.platform_
 
-    def SetAdminSt(self, val):
+    def SetAdminSt(self, val: str):
         self.adminSt_ = str(val)
 
-    def AdminSt(self):
+    def AdminSt(self) -> str:
         return self.adminSt_
 
-    def SetConfig(self, val):
+    def SetConfig(self, val: "JourneyConfiguration"):
         self.config_ = val
 
-    def Config(self):
+    def Config(self) -> "JourneyConfiguration":
         return self.config_
 
-    def SetDeleted(self, val):
+    def SetDeleted(self, val: bool):
         self.deleted_ = bool(val)
 
-    def Deleted(self):
+    def Deleted(self) -> bool:
         return self.deleted_
 
     def FromJson(self, jstr):
@@ -1995,10 +1993,10 @@ class JourneyInternal:
     def SetStepsPlanned(self, val: int):
         raise Exception("not implemented")
 
-    def ActionsPerformed(self) -> list:
+    def ActionsPerformed(self) -> typing.List["Action"]:
         raise Exception("not implemented")
 
-    def SetActionsPerformed(self, val: list):
+    def SetActionsPerformed(self, val: typing.List["Action"]):
         raise Exception("not implemented")
 
     def CrawlerVersion(self) -> str:
@@ -2007,10 +2005,10 @@ class JourneyInternal:
     def SetCrawlerVersion(self, val: str):
         raise Exception("not implemented")
 
-    def ScreenIdentifiers(self) -> ScreenIdentifiers:
+    def ScreenIdentifiers(self) -> "ScreenIdentifiers":
         raise Exception("not implemented")
 
-    def SetScreenIdentifiers(self, val: ScreenIdentifiers):
+    def SetScreenIdentifiers(self, val: "ScreenIdentifiers"):
         raise Exception("not implemented")
 
 
@@ -2046,76 +2044,76 @@ class _JourneyInternal(JourneyInternal):
         self.crawlerVersion_ = ""
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
 
-    def SetOperSt(self, val):
+    def SetOperSt(self, val: str):
         self.operSt_ = str(val)
 
-    def OperSt(self):
+    def OperSt(self) -> str:
         return self.operSt_
 
-    def SetErrorMessage(self, val):
+    def SetErrorMessage(self, val: str):
         self.errorMessage_ = str(val)
 
-    def ErrorMessage(self):
+    def ErrorMessage(self) -> str:
         return self.errorMessage_
 
-    def SetLastRunAt(self, val):
+    def SetLastRunAt(self, val: datetime):
         self.lastRunAt_ = store.datetime_string(val)
 
-    def LastRunAt(self):
+    def LastRunAt(self) -> datetime:
         return store.datetime_parse(self.lastRunAt_)
 
-    def SetLastActionAt(self, val):
+    def SetLastActionAt(self, val: datetime):
         self.lastActionAt_ = store.datetime_string(val)
 
-    def LastActionAt(self):
+    def LastActionAt(self) -> datetime:
         return store.datetime_parse(self.lastActionAt_)
 
-    def SetFinishedAt(self, val):
+    def SetFinishedAt(self, val: datetime):
         self.finishedAt_ = store.datetime_string(val)
 
-    def FinishedAt(self):
+    def FinishedAt(self) -> datetime:
         return store.datetime_parse(self.finishedAt_)
 
-    def SetScreenCount(self, val):
+    def SetScreenCount(self, val: int):
         self.screenCount_ = int(val)
 
-    def ScreenCount(self):
+    def ScreenCount(self) -> int:
         return self.screenCount_
 
-    def SetEdgeCount(self, val):
+    def SetEdgeCount(self, val: int):
         self.edgeCount_ = int(val)
 
-    def EdgeCount(self):
+    def EdgeCount(self) -> int:
         return self.edgeCount_
 
-    def SetStepsTaken(self, val):
+    def SetStepsTaken(self, val: int):
         self.stepsTaken_ = int(val)
 
-    def StepsTaken(self):
+    def StepsTaken(self) -> int:
         return self.stepsTaken_
 
-    def SetStepsPlanned(self, val):
+    def SetStepsPlanned(self, val: int):
         self.stepsPlanned_ = int(val)
 
-    def StepsPlanned(self):
+    def StepsPlanned(self) -> int:
         return self.stepsPlanned_
 
-    def SetActionsPerformed(self, val):
+    def SetActionsPerformed(self, val: typing.List["Action"]):
         self.actionsPerformed_ = val
 
-    def ActionsPerformed(self):
+    def ActionsPerformed(self) -> typing.List["Action"]:
         return self.actionsPerformed_
 
-    def SetCrawlerVersion(self, val):
+    def SetCrawlerVersion(self, val: str):
         self.crawlerVersion_ = str(val)
 
-    def CrawlerVersion(self):
+    def CrawlerVersion(self) -> str:
         return self.crawlerVersion_
 
-    def SetScreenIdentifiers(self, val):
+    def SetScreenIdentifiers(self, val: "ScreenIdentifiers"):
         self.screenIdentifiers_ = val
 
-    def ScreenIdentifiers(self):
+    def ScreenIdentifiers(self) -> "ScreenIdentifiers":
         return self.screenIdentifiers_
 
     def FromJson(self, jstr):
@@ -2208,10 +2206,10 @@ class ScreenInternal:
     def SetGroupIdentifier(self, val: str):
         raise Exception("not implemented")
 
-    def Edges(self) -> list:
+    def Edges(self) -> typing.List["Edge"]:
         raise Exception("not implemented")
 
-    def SetEdges(self, val: list):
+    def SetEdges(self, val: typing.List["Edge"]):
         raise Exception("not implemented")
 
     def Image(self) -> str:
@@ -2232,16 +2230,16 @@ class ScreenInternal:
     def SetIsEntryPoint(self, val: bool):
         raise Exception("not implemented")
 
-    def Content(self) -> ScreenContent:
+    def Content(self) -> "ScreenContent":
         raise Exception("not implemented")
 
-    def SetContent(self, val: ScreenContent):
+    def SetContent(self, val: "ScreenContent"):
         raise Exception("not implemented")
 
-    def Metadata(self) -> ScreenMetadata:
+    def Metadata(self) -> "ScreenMetadata":
         raise Exception("not implemented")
 
-    def SetMetadata(self, val: ScreenMetadata):
+    def SetMetadata(self, val: "ScreenMetadata"):
         raise Exception("not implemented")
 
 
@@ -2271,58 +2269,58 @@ class _ScreenInternal(ScreenInternal):
         self.content_ = ScreenContentFactory()
         self.metadata_ = ScreenMetadataFactory()
 
-    def SetJourney(self, val):
+    def SetJourney(self, val: str):
         self.journey_ = str(val)
 
-    def Journey(self):
+    def Journey(self) -> str:
         return self.journey_
 
-    def SetIdentifier(self, val):
+    def SetIdentifier(self, val: str):
         self.identifier_ = str(val)
 
-    def Identifier(self):
+    def Identifier(self) -> str:
         return self.identifier_
 
-    def SetGroupIdentifier(self, val):
+    def SetGroupIdentifier(self, val: str):
         self.groupIdentifier_ = str(val)
 
-    def GroupIdentifier(self):
+    def GroupIdentifier(self) -> str:
         return self.groupIdentifier_
 
-    def SetEdges(self, val):
+    def SetEdges(self, val: typing.List["Edge"]):
         self.edges_ = val
 
-    def Edges(self):
+    def Edges(self) -> typing.List["Edge"]:
         return self.edges_
 
-    def SetImage(self, val):
+    def SetImage(self, val: str):
         self.image_ = str(val)
 
-    def Image(self):
+    def Image(self) -> str:
         return self.image_
 
-    def SetImageLowRes(self, val):
+    def SetImageLowRes(self, val: str):
         self.imageLowRes_ = str(val)
 
-    def ImageLowRes(self):
+    def ImageLowRes(self) -> str:
         return self.imageLowRes_
 
-    def SetIsEntryPoint(self, val):
+    def SetIsEntryPoint(self, val: bool):
         self.isEntryPoint_ = bool(val)
 
-    def IsEntryPoint(self):
+    def IsEntryPoint(self) -> bool:
         return self.isEntryPoint_
 
-    def SetContent(self, val):
+    def SetContent(self, val: "ScreenContent"):
         self.content_ = val
 
-    def Content(self):
+    def Content(self) -> "ScreenContent":
         return self.content_
 
-    def SetMetadata(self, val):
+    def SetMetadata(self, val: "ScreenMetadata"):
         self.metadata_ = val
 
-    def Metadata(self):
+    def Metadata(self) -> "ScreenMetadata":
         return self.metadata_
 
     def FromJson(self, jstr):
@@ -2401,10 +2399,10 @@ class PageInternal:
     def SetJourney(self, val: str):
         raise Exception("not implemented")
 
-    def Root(self) -> PageNode:
+    def Root(self) -> "PageNode":
         raise Exception("not implemented")
 
-    def SetRoot(self, val: PageNode):
+    def SetRoot(self, val: "PageNode"):
         raise Exception("not implemented")
 
 
@@ -2422,22 +2420,22 @@ class _PageInternal(PageInternal):
         self.journey_ = ""
         self.root_ = PageNodeFactory()
 
-    def SetIdentifier(self, val):
+    def SetIdentifier(self, val: str):
         self.identifier_ = str(val)
 
-    def Identifier(self):
+    def Identifier(self) -> str:
         return self.identifier_
 
-    def SetJourney(self, val):
+    def SetJourney(self, val: str):
         self.journey_ = str(val)
 
-    def Journey(self):
+    def Journey(self) -> str:
         return self.journey_
 
-    def SetRoot(self, val):
+    def SetRoot(self, val: "PageNode"):
         self.root_ = val
 
-    def Root(self):
+    def Root(self) -> "PageNode":
         return self.root_
 
     def FromJson(self, jstr):
@@ -2477,7 +2475,7 @@ class Screen(store.Object):
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Clone(self) -> Type["Screen"]:
+    def Clone(self) -> "Screen":
         raise NotImplementedError()
 
     def Meta(self) -> store.Meta:
@@ -2499,7 +2497,7 @@ class _Screen(Screen):
         self.external_ = None
         self.internal_ = None
 
-    def SetInternal(self, val):
+    def SetInternal(self, val: ScreenInternal):
         self.internal_ = val
 
     def Internal(self) -> ScreenInternal:
@@ -2560,7 +2558,7 @@ class Page(store.Object):
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Clone(self) -> Type["Page"]:
+    def Clone(self) -> "Page":
         raise NotImplementedError()
 
     def Meta(self) -> store.Meta:
@@ -2582,7 +2580,7 @@ class _Page(Page):
         self.external_ = None
         self.internal_ = None
 
-    def SetInternal(self, val):
+    def SetInternal(self, val: PageInternal):
         self.internal_ = val
 
     def Internal(self) -> PageInternal:
@@ -2643,7 +2641,7 @@ class Journey(store.ExternalHolder):
     def FromDict(self, data):
         raise Exception("not implemented")
 
-    def Clone(self) -> Type["Journey"]:
+    def Clone(self) -> "Journey":
         raise NotImplementedError()
 
     def Meta(self) -> store.Meta:
@@ -2669,13 +2667,13 @@ class _Journey(Journey):
         self.external_ = None
         self.internal_ = None
 
-    def SetExternal(self, val):
+    def SetExternal(self, val: JourneyExternal):
         self.external_ = val
 
     def External(self) -> JourneyExternal:
         return self.external_
 
-    def SetInternal(self, val):
+    def SetInternal(self, val: JourneyInternal):
         self.internal_ = val
 
     def Internal(self) -> JourneyInternal:
