@@ -2,9 +2,8 @@ import os
 
 from . import config
 
-from pystorz.sql.sqlite import SqliteStoreFactory
-from pystorz.mongo.mongo import MongoStoreFactory
-from pystorz.meta.store import MetaStore
+from pystorz import SqliteStoreFactory, MongoStoreFactory, MetaStore
+
 from functools import lru_cache
 from .generated import model
 

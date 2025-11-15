@@ -1,10 +1,10 @@
 import config
 
-from pystorz.mgen import generator
+from pystorz import Generate
 
 import logging
 
 log = logging.getLogger(__name__)
 log.info("initializing store...")
 
-generator.Generate(config.STORE_MODEL_PATH)
+Generate(config.STORE_MODEL_PATH)
