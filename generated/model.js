@@ -21,6 +21,12 @@ class ScreenMetadata {
     Flow() { throw new Error("not implemented"); }
     SetFlow(val) { throw new Error("not implemented"); }
     
+    IsModalDialog() { throw new Error("not implemented"); }
+    SetIsModalDialog(val) { throw new Error("not implemented"); }
+    
+    IsLoading() { throw new Error("not implemented"); }
+    SetIsLoading(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenMetadataFactory() {
@@ -33,6 +39,10 @@ function ScreenMetadataFactory() {
     ret.tags_ = [];
     
     ret.flow_ = "";
+    
+    ret.isModalDialog_ = false;
+    
+    ret.isLoading_ = false;
     
     return ret;
 }
@@ -48,6 +58,10 @@ class _ScreenMetadata extends ScreenMetadata {
         this.tags_ = [];
         
         this.flow_ = "";
+        
+        this.isModalDialog_ = false;
+        
+        this.isLoading_ = false;
         
     }
 
@@ -104,6 +118,32 @@ class _ScreenMetadata extends ScreenMetadata {
     }
 
     
+    SetIsModalDialog(val) {
+        
+        this.isModalDialog_ = Boolean(val);
+        
+    }
+
+    IsModalDialog() {
+        
+        return this.isModalDialog_;
+        
+    }
+
+    
+    SetIsLoading(val) {
+        
+        this.isLoading_ = Boolean(val);
+        
+    }
+
+    IsLoading() {
+        
+        return this.isLoading_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -142,6 +182,18 @@ class _ScreenMetadata extends ScreenMetadata {
         
         
         data["flow"] = this.flow_;
+        
+        
+        
+        
+        
+        data["isModalDialog"] = this.isModalDialog_;
+        
+        
+        
+        
+        
+        data["isLoading"] = this.isLoading_;
         
         
         
@@ -192,6 +244,24 @@ class _ScreenMetadata extends ScreenMetadata {
                 
                 
                 this.flow_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isModalDialog") {
+                
+                
+                this.isModalDialog_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isLoading") {
+                
+                
+                this.isLoading_ = rawValue;
                 
 
                 

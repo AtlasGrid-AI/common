@@ -278,6 +278,24 @@
             
           </property>
           
+          <property name="isModalDialog">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
+          <property name="isLoading">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
         </properties>
       </schema>
       

@@ -63,6 +63,10 @@ types:
         type: "[]string"
       - name: flow
         type: string
+      - name: isModalDialog
+        type: bool
+      - name: isLoading
+        type: bool
   - kind: Struct
     name: ScreenContent
     properties:

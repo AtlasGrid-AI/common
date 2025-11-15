@@ -39,6 +39,18 @@ class ScreenMetadata:
     def SetFlow(self, val: str):
         raise Exception("not implemented")
 
+    def IsModalDialog(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsModalDialog(self, val: bool):
+        raise Exception("not implemented")
+
+    def IsLoading(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsLoading(self, val: bool):
+        raise Exception("not implemented")
+
 
 def ScreenMetadataFactory() -> ScreenMetadata:
     ret = _ScreenMetadata()
@@ -46,6 +58,8 @@ def ScreenMetadataFactory() -> ScreenMetadata:
     ret.description_ = ""
     ret.tags_ = []
     ret.flow_ = ""
+    ret.isModalDialog_ = False
+    ret.isLoading_ = False
     return ret
 
 
@@ -55,6 +69,8 @@ class _ScreenMetadata(ScreenMetadata):
         self.description_ = ""
         self.tags_ = []
         self.flow_ = ""
+        self.isModalDialog_ = False
+        self.isLoading_ = False
 
     def SetTitle(self, val: str):
         self.title_ = str(val)
@@ -80,6 +96,18 @@ class _ScreenMetadata(ScreenMetadata):
     def Flow(self) -> str:
         return self.flow_
 
+    def SetIsModalDialog(self, val: bool):
+        self.isModalDialog_ = bool(val)
+
+    def IsModalDialog(self) -> bool:
+        return self.isModalDialog_
+
+    def SetIsLoading(self, val: bool):
+        self.isLoading_ = bool(val)
+
+    def IsLoading(self) -> bool:
+        return self.isLoading_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -96,6 +124,8 @@ class _ScreenMetadata(ScreenMetadata):
             rawList.append(v)
         data["tags"] = rawList
         data["flow"] = self.flow_
+        data["isModalDialog"] = self.isModalDialog_
+        data["isLoading"] = self.isLoading_
         return data
 
     def FromDict(self, data):
@@ -115,6 +145,10 @@ class _ScreenMetadata(ScreenMetadata):
                 self.tags_ = res
             if key == "flow":
                 self.flow_ = rawValue
+            if key == "isModalDialog":
+                self.isModalDialog_ = rawValue
+            if key == "isLoading":
+                self.isLoading_ = rawValue
 
 
 class Rectangle:
