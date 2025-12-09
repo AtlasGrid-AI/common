@@ -545,6 +545,15 @@
             
           </property>
           
+          <property name="isLongList">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
         </properties>
       </schema>
       

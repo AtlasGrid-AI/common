@@ -604,6 +604,9 @@ class PageNodeAttributes {
     HasClickables() { throw new Error("not implemented"); }
     SetHasClickables(val) { throw new Error("not implemented"); }
     
+    IsLongList() { throw new Error("not implemented"); }
+    SetIsLongList(val) { throw new Error("not implemented"); }
+    
 }
 
 function PageNodeAttributesFactory() {
@@ -648,6 +651,8 @@ function PageNodeAttributesFactory() {
     ret.isDismissable_ = false;
     
     ret.hasClickables_ = false;
+    
+    ret.isLongList_ = false;
     
     return ret;
 }
@@ -695,6 +700,8 @@ class _PageNodeAttributes extends PageNodeAttributes {
         this.isDismissable_ = false;
         
         this.hasClickables_ = false;
+        
+        this.isLongList_ = false;
         
     }
 
@@ -959,6 +966,19 @@ class _PageNodeAttributes extends PageNodeAttributes {
     }
 
     
+    SetIsLongList(val) {
+        
+        this.isLongList_ = Boolean(val);
+        
+    }
+
+    IsLongList() {
+        
+        return this.isLongList_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -1093,6 +1113,12 @@ class _PageNodeAttributes extends PageNodeAttributes {
         
         
         data["hasClickables"] = this.hasClickables_;
+        
+        
+        
+        
+        
+        data["isLongList"] = this.isLongList_;
         
         
         
@@ -1287,6 +1313,15 @@ class _PageNodeAttributes extends PageNodeAttributes {
                 
                 
                 this.hasClickables_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isLongList") {
+                
+                
+                this.isLongList_ = rawValue;
                 
 
                 

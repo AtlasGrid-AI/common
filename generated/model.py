@@ -419,6 +419,12 @@ class PageNodeAttributes:
     def SetHasClickables(self, val: bool):
         raise Exception("not implemented")
 
+    def IsLongList(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetIsLongList(self, val: bool):
+        raise Exception("not implemented")
+
 
 def PageNodeAttributesFactory() -> PageNodeAttributes:
     ret = _PageNodeAttributes()
@@ -442,6 +448,7 @@ def PageNodeAttributesFactory() -> PageNodeAttributes:
     ret.isSelected_ = False
     ret.isDismissable_ = False
     ret.hasClickables_ = False
+    ret.isLongList_ = False
     return ret
 
 
@@ -467,6 +474,7 @@ class _PageNodeAttributes(PageNodeAttributes):
         self.isSelected_ = False
         self.isDismissable_ = False
         self.hasClickables_ = False
+        self.isLongList_ = False
 
     def SetClassName(self, val: str):
         self.className_ = str(val)
@@ -588,6 +596,12 @@ class _PageNodeAttributes(PageNodeAttributes):
     def HasClickables(self) -> bool:
         return self.hasClickables_
 
+    def SetIsLongList(self, val: bool):
+        self.isLongList_ = bool(val)
+
+    def IsLongList(self) -> bool:
+        return self.isLongList_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -621,6 +635,7 @@ class _PageNodeAttributes(PageNodeAttributes):
         data["isSelected"] = self.isSelected_
         data["isDismissable"] = self.isDismissable_
         data["hasClickables"] = self.hasClickables_
+        data["isLongList"] = self.isLongList_
         return data
 
     def FromDict(self, data):
@@ -672,6 +687,8 @@ class _PageNodeAttributes(PageNodeAttributes):
                 self.isDismissable_ = rawValue
             if key == "hasClickables":
                 self.hasClickables_ = rawValue
+            if key == "isLongList":
+                self.isLongList_ = rawValue
 
 
 class CrawlerConfiguration:
