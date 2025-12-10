@@ -2778,6 +2778,89 @@ JourneyKindIdentity = store.ObjectIdentity("journey/")
 JourneyKind = "Journey"
 
 
+class JourneyState(store.Object):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> "JourneyState":
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def Internal(self) -> JourneyInternal:
+        raise Exception("not implemented")
+
+
+def JourneyStateFactory() -> JourneyState:
+    ret = _JourneyState()
+    ret.internal_ = JourneyInternalFactory()
+    return ret
+
+
+class _JourneyState(JourneyState):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("JourneyState")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetInternal(self, val: JourneyInternal):
+        self.internal_ = val
+
+    def Internal(self) -> JourneyInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> JourneyState:
+        ret = JourneyStateFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def JourneyStateIdentity(pkey):
+    return store.ObjectIdentity("journeystate/" + pkey)
+
+
+JourneyStateKindIdentity = store.ObjectIdentity("journeystate/")
+JourneyStateKind = "JourneyState"
+
+
 class _Schema(store.SchemaHolder):
     def __init__(self, objects):
         self.objects = objects
@@ -2795,6 +2878,10 @@ class _Schema(store.SchemaHolder):
             return JourneyFactory()
         elif kind == "journey":
             return JourneyFactory()
+        if kind == "JourneyState":
+            return JourneyStateFactory()
+        elif kind == "journeystate":
+            return JourneyStateFactory()
         raise Exception(constants.ErrNoSuchObject)
 
     def Types(self):
@@ -2806,5 +2893,6 @@ def Schema():
         "Screen",
         "Page",
         "Journey",
+        "JourneyState",
     ]
     return _Schema(objects)

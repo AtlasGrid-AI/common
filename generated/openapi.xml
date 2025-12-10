@@ -230,6 +230,72 @@
       </delete>
     </path>
     
+    <path name="/journeystate/">
+      <get>
+        <summary>List JourneyState</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
+        </parameters>
+        <responses>
+          <response code="200">
+            <content>
+              <mediaType contentType="application/json">
+                <schema>
+                  <type>array</type>
+                  <items><ref>#/components/schemas/JourneyState</ref></items>
+                </schema>
+              </mediaType>
+            </content>
+          </response>
+        </responses>
+      </get>
+
+      <post>
+        <summary>Create JourneyState</summary>
+        <requestBody required="true">
+          <content>
+            <mediaType contentType="application/json">
+              <schema><ref>#/components/schemas/JourneyState</ref></schema>
+            </mediaType>
+          </content>
+        </requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+
+      <delete>
+        <summary>Bulk delete JourneyState</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+        </parameters>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    <path name="/journeystate/{pkey}">
+      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
+      <get>
+        <responses>
+          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyState</ref></schema></mediaType></content></response>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyState</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyState</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/><response code="404"/></responses>
+      </delete>
+    </path>
+    
 
   </paths>
 
@@ -1350,6 +1416,15 @@
         <properties>
           <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
           <property name="external"><ref>#/components/schemas/JourneyExternal</ref></property>
+          <property name="internal"><ref>#/components/schemas/JourneyInternal</ref></property>
+        </properties>
+      </schema>
+      
+      <schema name="JourneyState">
+        <type>object</type>
+        <properties>
+          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
+          
           <property name="internal"><ref>#/components/schemas/JourneyInternal</ref></property>
         </properties>
       </schema>

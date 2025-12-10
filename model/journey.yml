@@ -3,6 +3,9 @@ types:
     name: Journey
     external: JourneyExternal
     internal: JourneyInternal
+  - kind: Object
+    name: JourneyState
+    internal: JourneyInternal
   - kind: Struct
     name: JourneyExternal
     properties:

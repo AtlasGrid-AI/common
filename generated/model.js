@@ -5038,6 +5038,105 @@ const JourneyKind = "Journey";
 
 
 
+class JourneyState {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function JourneyStateFactory() {
+    const ret = new _JourneyState();
+
+    
+    
+    ret.internal_ = JourneyInternalFactory();
+    
+
+    return ret;
+}
+
+class _JourneyState extends JourneyState {
+    constructor() {
+        super();
+        this.meta_ = [];
+        this.meta_["kind"] = "JourneyState";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = JourneyStateFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function JourneyStateIdentity(pkey) {
+    return "journeystate/" + pkey;
+}
+
+const JourneyStateKindIdentity = "journeystate/";
+
+const JourneyStateKind = "JourneyState";
+
+
+
+
 
 class _Schema {
     constructor(objects) {
@@ -5055,6 +5154,9 @@ class _Schema {
         if (kind === "Journey") return JourneyFactory();
         else if (kind === "journey") return JourneyFactory();
         
+        if (kind === "JourneyState") return JourneyStateFactory();
+        else if (kind === "journeystate") return JourneyStateFactory();
+        
         throw new Error("object does not exist");
     }
 
@@ -5069,6 +5171,8 @@ function Schema() {
         "Page",
         
         "Journey",
+        
+        "JourneyState",
         
     ];
     return new _Schema(objects);
