@@ -607,6 +607,9 @@ class PageNodeAttributes {
     IsLongList() { throw new Error("not implemented"); }
     SetIsLongList(val) { throw new Error("not implemented"); }
     
+    IsNavbarContainer() { throw new Error("not implemented"); }
+    SetIsNavbarContainer(val) { throw new Error("not implemented"); }
+    
 }
 
 function PageNodeAttributesFactory() {
@@ -653,6 +656,8 @@ function PageNodeAttributesFactory() {
     ret.hasClickables_ = false;
     
     ret.isLongList_ = false;
+    
+    ret.isNavbarContainer_ = false;
     
     return ret;
 }
@@ -702,6 +707,8 @@ class _PageNodeAttributes extends PageNodeAttributes {
         this.hasClickables_ = false;
         
         this.isLongList_ = false;
+        
+        this.isNavbarContainer_ = false;
         
     }
 
@@ -979,6 +986,19 @@ class _PageNodeAttributes extends PageNodeAttributes {
     }
 
     
+    SetIsNavbarContainer(val) {
+        
+        this.isNavbarContainer_ = Boolean(val);
+        
+    }
+
+    IsNavbarContainer() {
+        
+        return this.isNavbarContainer_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -1119,6 +1139,12 @@ class _PageNodeAttributes extends PageNodeAttributes {
         
         
         data["isLongList"] = this.isLongList_;
+        
+        
+        
+        
+        
+        data["isNavbarContainer"] = this.isNavbarContainer_;
         
         
         
@@ -1322,6 +1348,15 @@ class _PageNodeAttributes extends PageNodeAttributes {
                 
                 
                 this.isLongList_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "isNavbarContainer") {
+                
+                
+                this.isNavbarContainer_ = rawValue;
                 
 
                 

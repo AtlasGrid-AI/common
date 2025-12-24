@@ -180,3 +180,7 @@ types:
       - name: isLongList
         type: bool
         description: true if node is a container and has a large number of similar children
+      - name: isNavbarContainer
+        type: bool
+        description: true if node is a container and is identified as a navbar
+    

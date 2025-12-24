@@ -620,6 +620,15 @@
             
           </property>
           
+          <property name="isNavbarContainer">
+            
+              
+              <type>boolean</type>
+              
+              
+            
+          </property>
+          
         </properties>
       </schema>
       
