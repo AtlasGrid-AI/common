@@ -2502,6 +2502,9 @@ class Action {
     ExpectedScreenIdentifier() { throw new Error("not implemented"); }
     SetExpectedScreenIdentifier(val) { throw new Error("not implemented"); }
     
+    ExpectedGroupIdentifier() { throw new Error("not implemented"); }
+    SetExpectedGroupIdentifier(val) { throw new Error("not implemented"); }
+    
     ErrorMessage() { throw new Error("not implemented"); }
     SetErrorMessage(val) { throw new Error("not implemented"); }
     
@@ -2523,6 +2526,8 @@ function ActionFactory() {
     ret.arguments_ = ActionArgumentsFactory();
     
     ret.expectedScreenIdentifier_ = "";
+    
+    ret.expectedGroupIdentifier_ = "";
     
     ret.errorMessage_ = "";
     
@@ -2546,6 +2551,8 @@ class _Action extends Action {
         this.arguments_ = ActionArgumentsFactory();
         
         this.expectedScreenIdentifier_ = "";
+        
+        this.expectedGroupIdentifier_ = "";
         
         this.errorMessage_ = "";
         
@@ -2643,6 +2650,19 @@ class _Action extends Action {
     }
 
     
+    SetExpectedGroupIdentifier(val) {
+        
+        this.expectedGroupIdentifier_ = String(val);
+        
+    }
+
+    ExpectedGroupIdentifier() {
+        
+        return this.expectedGroupIdentifier_;
+        
+    }
+
+    
     SetErrorMessage(val) {
         
         this.errorMessage_ = String(val);
@@ -2708,6 +2728,12 @@ class _Action extends Action {
         
         
         data["expectedScreenIdentifier"] = this.expectedScreenIdentifier_;
+        
+        
+        
+        
+        
+        data["expectedGroupIdentifier"] = this.expectedGroupIdentifier_;
         
         
         
@@ -2784,6 +2810,15 @@ class _Action extends Action {
                 
                 
                 this.expectedScreenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "expectedGroupIdentifier") {
+                
+                
+                this.expectedGroupIdentifier_ = rawValue;
                 
 
                 

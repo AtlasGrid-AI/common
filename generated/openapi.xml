@@ -941,6 +941,15 @@
             
           </property>
           
+          <property name="expectedGroupIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
           <property name="errorMessage">
             
               

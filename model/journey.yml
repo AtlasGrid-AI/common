@@ -110,6 +110,8 @@ types:
         type: ActionArguments
       - name: expectedScreenIdentifier
         type: string
+      - name: expectedGroupIdentifier
+        type: string
       - name: errorMessage
         type: string
   - kind: Struct

@@ -1364,6 +1364,12 @@ class Action:
     def SetExpectedScreenIdentifier(self, val: str):
         raise Exception("not implemented")
 
+    def ExpectedGroupIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetExpectedGroupIdentifier(self, val: str):
+        raise Exception("not implemented")
+
     def ErrorMessage(self) -> str:
         raise Exception("not implemented")
 
@@ -1380,6 +1386,7 @@ def ActionFactory() -> Action:
     ret.timestamp_ = "0001-01-01T00:00:00.000000Z"
     ret.arguments_ = ActionArgumentsFactory()
     ret.expectedScreenIdentifier_ = ""
+    ret.expectedGroupIdentifier_ = ""
     ret.errorMessage_ = ""
     return ret
 
@@ -1393,6 +1400,7 @@ class _Action(Action):
         self.timestamp_ = "0001-01-01T00:00:00.000000Z"
         self.arguments_ = ActionArgumentsFactory()
         self.expectedScreenIdentifier_ = ""
+        self.expectedGroupIdentifier_ = ""
         self.errorMessage_ = ""
 
     def SetGroupIdentifier(self, val: str):
@@ -1437,6 +1445,12 @@ class _Action(Action):
     def ExpectedScreenIdentifier(self) -> str:
         return self.expectedScreenIdentifier_
 
+    def SetExpectedGroupIdentifier(self, val: str):
+        self.expectedGroupIdentifier_ = str(val)
+
+    def ExpectedGroupIdentifier(self) -> str:
+        return self.expectedGroupIdentifier_
+
     def SetErrorMessage(self, val: str):
         self.errorMessage_ = str(val)
 
@@ -1460,6 +1474,7 @@ class _Action(Action):
         # if self.arguments_ is not None:
         data["arguments"] = self.arguments_.ToDict()
         data["expectedScreenIdentifier"] = self.expectedScreenIdentifier_
+        data["expectedGroupIdentifier"] = self.expectedGroupIdentifier_
         data["errorMessage"] = self.errorMessage_
         return data
 
@@ -1481,6 +1496,8 @@ class _Action(Action):
                 self.arguments_.FromDict(rawValue)
             if key == "expectedScreenIdentifier":
                 self.expectedScreenIdentifier_ = rawValue
+            if key == "expectedGroupIdentifier":
+                self.expectedGroupIdentifier_ = rawValue
             if key == "errorMessage":
                 self.errorMessage_ = rawValue
 
