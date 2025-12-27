@@ -2851,6 +2851,9 @@ class Edge {
     TargetScreenIdentifier() { throw new Error("not implemented"); }
     SetTargetScreenIdentifier(val) { throw new Error("not implemented"); }
     
+    TargetGroupIdentifier() { throw new Error("not implemented"); }
+    SetTargetGroupIdentifier(val) { throw new Error("not implemented"); }
+    
     Component() { throw new Error("not implemented"); }
     SetComponent(val) { throw new Error("not implemented"); }
     
@@ -2867,6 +2870,8 @@ function EdgeFactory() {
     
     ret.targetScreenIdentifier_ = "";
     
+    ret.targetGroupIdentifier_ = "";
+    
     ret.component_ = ComponentFactory();
     
     ret.action_ = ActionFactory();
@@ -2881,6 +2886,8 @@ class _Edge extends Edge {
         super();
         
         this.targetScreenIdentifier_ = "";
+        
+        this.targetGroupIdentifier_ = "";
         
         this.component_ = ComponentFactory();
         
@@ -2900,6 +2907,19 @@ class _Edge extends Edge {
     TargetScreenIdentifier() {
         
         return this.targetScreenIdentifier_;
+        
+    }
+
+    
+    SetTargetGroupIdentifier(val) {
+        
+        this.targetGroupIdentifier_ = String(val);
+        
+    }
+
+    TargetGroupIdentifier() {
+        
+        return this.targetGroupIdentifier_;
         
     }
 
@@ -2964,6 +2984,12 @@ class _Edge extends Edge {
         
         
         
+        data["targetGroupIdentifier"] = this.targetGroupIdentifier_;
+        
+        
+        
+        
+        
         data["component"] = this.component_ ? this.component_.ToDict() : null;
         
         
@@ -2993,6 +3019,15 @@ class _Edge extends Edge {
                 
                 
                 this.targetScreenIdentifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "targetGroupIdentifier") {
+                
+                
+                this.targetGroupIdentifier_ = rawValue;
                 
 
                 

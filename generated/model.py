@@ -1518,6 +1518,12 @@ class Edge:
     def SetTargetScreenIdentifier(self, val: str):
         raise Exception("not implemented")
 
+    def TargetGroupIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetTargetGroupIdentifier(self, val: str):
+        raise Exception("not implemented")
+
     def Component(self) -> "Component":
         raise Exception("not implemented")
 
@@ -1540,6 +1546,7 @@ class Edge:
 def EdgeFactory() -> Edge:
     ret = _Edge()
     ret.targetScreenIdentifier_ = ""
+    ret.targetGroupIdentifier_ = ""
     ret.component_ = ComponentFactory()
     ret.action_ = ActionFactory()
     ret.expired_ = False
@@ -1549,6 +1556,7 @@ def EdgeFactory() -> Edge:
 class _Edge(Edge):
     def __init__(self):
         self.targetScreenIdentifier_ = ""
+        self.targetGroupIdentifier_ = ""
         self.component_ = ComponentFactory()
         self.action_ = ActionFactory()
         self.expired_ = False
@@ -1558,6 +1566,12 @@ class _Edge(Edge):
 
     def TargetScreenIdentifier(self) -> str:
         return self.targetScreenIdentifier_
+
+    def SetTargetGroupIdentifier(self, val: str):
+        self.targetGroupIdentifier_ = str(val)
+
+    def TargetGroupIdentifier(self) -> str:
+        return self.targetGroupIdentifier_
 
     def SetComponent(self, val: "Component"):
         self.component_ = val
@@ -1587,6 +1601,7 @@ class _Edge(Edge):
     def ToDict(self):
         data = {}
         data["targetScreenIdentifier"] = self.targetScreenIdentifier_
+        data["targetGroupIdentifier"] = self.targetGroupIdentifier_
         # if self.component_ is not None:
         data["component"] = self.component_.ToDict()
         # if self.action_ is not None:
@@ -1600,6 +1615,8 @@ class _Edge(Edge):
                 continue
             if key == "targetScreenIdentifier":
                 self.targetScreenIdentifier_ = rawValue
+            if key == "targetGroupIdentifier":
+                self.targetGroupIdentifier_ = rawValue
             if key == "component":
                 self.component_.FromDict(rawValue)
             if key == "action":

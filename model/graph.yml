@@ -42,6 +42,9 @@ types:
       - name: targetScreenIdentifier
         type: string
         description: The identifier of the target screen
+      - name: targetGroupIdentifier
+        type: string
+        description: The identifier of the target variant group
       - name: component
         type: Component
         description: The component triggering the transition
