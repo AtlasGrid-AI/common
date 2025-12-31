@@ -1579,12 +1579,6 @@ class JourneyTestSuite:
     def SetName(self, val: str):
         raise Exception("not implemented")
 
-    def Screens(self) -> typing.List["str"]:
-        raise Exception("not implemented")
-
-    def SetScreens(self, val: typing.List["str"]):
-        raise Exception("not implemented")
-
     def HasNavBar(self) -> typing.List["str"]:
         raise Exception("not implemented")
 
@@ -1607,7 +1601,6 @@ class JourneyTestSuite:
 def JourneyTestSuiteFactory() -> JourneyTestSuite:
     ret = _JourneyTestSuite()
     ret.name_ = ""
-    ret.screens_ = []
     ret.hasNavBar_ = []
     ret.hasLongList_ = []
     ret.groups_ = []
@@ -1617,7 +1610,6 @@ def JourneyTestSuiteFactory() -> JourneyTestSuite:
 class _JourneyTestSuite(JourneyTestSuite):
     def __init__(self):
         self.name_ = ""
-        self.screens_ = []
         self.hasNavBar_ = []
         self.hasLongList_ = []
         self.groups_ = []
@@ -1627,12 +1619,6 @@ class _JourneyTestSuite(JourneyTestSuite):
 
     def Name(self) -> str:
         return self.name_
-
-    def SetScreens(self, val: typing.List["str"]):
-        self.screens_ = val
-
-    def Screens(self) -> typing.List["str"]:
-        return self.screens_
 
     def SetHasNavBar(self, val: typing.List["str"]):
         self.hasNavBar_ = val
@@ -1663,10 +1649,6 @@ class _JourneyTestSuite(JourneyTestSuite):
         data = {}
         data["name"] = self.name_
         rawList = []
-        for v in self.screens_:
-            rawList.append(v)
-        data["screens"] = rawList
-        rawList = []
         for v in self.hasNavBar_:
             rawList.append(v)
         data["hasNavBar"] = rawList
@@ -1686,13 +1668,6 @@ class _JourneyTestSuite(JourneyTestSuite):
                 continue
             if key == "name":
                 self.name_ = rawValue
-            if key == "screens":
-                res = []
-                for rw in rawValue:
-                    ud = ""
-                    ud = rw
-                    res.append(ud)
-                self.screens_ = res
             if key == "hasNavBar":
                 res = []
                 for rw in rawValue:

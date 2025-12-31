@@ -993,17 +993,6 @@
             
           </property>
           
-          <property name="screens">
-            
-            <type>array</type>
-            <items>
-              
-              <type>string</type>
-              
-            </items>
-            
-          </property>
-          
           <property name="hasNavBar">
             
             <type>array</type>

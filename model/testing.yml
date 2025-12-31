@@ -4,8 +4,6 @@ types:
     properties:
       - name: name
         type: string
-      - name: screens
-        type: "[]string"
       - name: hasNavBar
         type: "[]string"
       - name: hasLongList

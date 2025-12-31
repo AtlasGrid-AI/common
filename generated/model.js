@@ -2949,9 +2949,6 @@ class JourneyTestSuite {
     Name() { throw new Error("not implemented"); }
     SetName(val) { throw new Error("not implemented"); }
     
-    Screens() { throw new Error("not implemented"); }
-    SetScreens(val) { throw new Error("not implemented"); }
-    
     HasNavBar() { throw new Error("not implemented"); }
     SetHasNavBar(val) { throw new Error("not implemented"); }
     
@@ -2968,8 +2965,6 @@ function JourneyTestSuiteFactory() {
     
     ret.name_ = "";
     
-    ret.screens_ = [];
-    
     ret.hasNavBar_ = [];
     
     ret.hasLongList_ = [];
@@ -2984,8 +2979,6 @@ class _JourneyTestSuite extends JourneyTestSuite {
         super();
         
         this.name_ = "";
-        
-        this.screens_ = [];
         
         this.hasNavBar_ = [];
         
@@ -3005,19 +2998,6 @@ class _JourneyTestSuite extends JourneyTestSuite {
     Name() {
         
         return this.name_;
-        
-    }
-
-    
-    SetScreens(val) {
-        
-        this.screens_ = val;
-        
-    }
-
-    Screens() {
-        
-        return this.screens_;
         
     }
 
@@ -3081,16 +3061,6 @@ class _JourneyTestSuite extends JourneyTestSuite {
         
         
         
-        const rawListscreens = [];
-        for (const v of (this.screens_ || [])) {
-            
-            rawListscreens.push(v);
-            
-        }
-        data["screens"] = rawListscreens;
-        
-        
-        
         const rawListhasNavBar = [];
         for (const v of (this.hasNavBar_ || [])) {
             
@@ -3135,22 +3105,6 @@ class _JourneyTestSuite extends JourneyTestSuite {
                 this.name_ = rawValue;
                 
 
-                
-            }
-            
-            if (key === "screens") {
-                
-                const res = [];
-
-                for (const rw of rawValue) {
-                    let ud = "";
-                    
-                    ud = rw;
-                    
-                    res.push(ud);
-                }
-
-                this.screens_ = res;
                 
             }
             
