@@ -1,25 +1,17 @@
 types:
-  - kind: Object
-    name: JourneyTestSuite
-    external: JourneyTestSuiteExternal
   - kind: Struct
-    name: JourneyTestSuiteExternal
+    name: JourneyTestSuite
     properties:
       - name: name
         type: string
       - name: screens
-        type: "[]JourneyScreenTest"
-      - name: groups
-        type: "[]JourneyGroupTest"
-  - kind: Struct
-    name: JourneyScreenTest
-    properties:
-      - name: filename
-        type: string
+        type: "[]string"
       - name: hasNavBar
-        type: bool
+        type: "[]string"
       - name: hasLongList
-        type: bool
+        type: "[]string"
+      - name: groups
+        type: "[]JourneyGroupTest"    
   - kind: Struct
     name: JourneyGroupTest
     properties:

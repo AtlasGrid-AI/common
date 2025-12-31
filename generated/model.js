@@ -1935,163 +1935,6 @@ class _ActionArguments extends ActionArguments {
 
 
 
-class JourneyScreenTest {
-    constructor() {
-        // throw new Error("cannot initialize like this. use the factory method");
-    }
-
-    ToDict() { throw new Error("not implemented"); }
-    FromDict(data) { throw new Error("not implemented"); }
-
-    
-    Filename() { throw new Error("not implemented"); }
-    SetFilename(val) { throw new Error("not implemented"); }
-    
-    HasNavBar() { throw new Error("not implemented"); }
-    SetHasNavBar(val) { throw new Error("not implemented"); }
-    
-    HasLongList() { throw new Error("not implemented"); }
-    SetHasLongList(val) { throw new Error("not implemented"); }
-    
-}
-
-function JourneyScreenTestFactory() {
-    const ret = new _JourneyScreenTest();
-    
-    ret.filename_ = "";
-    
-    ret.hasNavBar_ = false;
-    
-    ret.hasLongList_ = false;
-    
-    return ret;
-}
-
-class _JourneyScreenTest extends JourneyScreenTest {
-    constructor() {
-        super();
-        
-        this.filename_ = "";
-        
-        this.hasNavBar_ = false;
-        
-        this.hasLongList_ = false;
-        
-    }
-
-    
-    SetFilename(val) {
-        
-        this.filename_ = String(val);
-        
-    }
-
-    Filename() {
-        
-        return this.filename_;
-        
-    }
-
-    
-    SetHasNavBar(val) {
-        
-        this.hasNavBar_ = Boolean(val);
-        
-    }
-
-    HasNavBar() {
-        
-        return this.hasNavBar_;
-        
-    }
-
-    
-    SetHasLongList(val) {
-        
-        this.hasLongList_ = Boolean(val);
-        
-    }
-
-    HasLongList() {
-        
-        return this.hasLongList_;
-        
-    }
-
-    
-
-    FromJson(jstr) {
-        const data = JSON.parse(jstr);
-        return this.FromDict(data);
-    }
-
-    ToJson() {
-        return JSON.stringify(this.ToDict());
-    }
-
-    ToDict() {
-        const data = {};
-        
-        
-        
-        data["filename"] = this.filename_;
-        
-        
-        
-        
-        
-        data["hasNavBar"] = this.hasNavBar_;
-        
-        
-        
-        
-        
-        data["hasLongList"] = this.hasLongList_;
-        
-        
-        
-        return data;
-    }
-
-    FromDict(data) {
-        for (const key in data) {
-            const rawValue = data[key];
-            if (rawValue === null || rawValue === undefined) continue;
-
-            
-            if (key === "filename") {
-                
-                
-                this.filename_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "hasNavBar") {
-                
-                
-                this.hasNavBar_ = rawValue;
-                
-
-                
-            }
-            
-            if (key === "hasLongList") {
-                
-                
-                this.hasLongList_ = rawValue;
-                
-
-                
-            }
-            
-        }
-    }
-}
-
-
-
 class JourneyGroupTest {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -3094,7 +2937,7 @@ class _Action extends Action {
 
 
 
-class JourneyTestSuiteExternal {
+class JourneyTestSuite {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
     }
@@ -3109,30 +2952,44 @@ class JourneyTestSuiteExternal {
     Screens() { throw new Error("not implemented"); }
     SetScreens(val) { throw new Error("not implemented"); }
     
+    HasNavBar() { throw new Error("not implemented"); }
+    SetHasNavBar(val) { throw new Error("not implemented"); }
+    
+    HasLongList() { throw new Error("not implemented"); }
+    SetHasLongList(val) { throw new Error("not implemented"); }
+    
     Groups() { throw new Error("not implemented"); }
     SetGroups(val) { throw new Error("not implemented"); }
     
 }
 
-function JourneyTestSuiteExternalFactory() {
-    const ret = new _JourneyTestSuiteExternal();
+function JourneyTestSuiteFactory() {
+    const ret = new _JourneyTestSuite();
     
     ret.name_ = "";
     
     ret.screens_ = [];
+    
+    ret.hasNavBar_ = [];
+    
+    ret.hasLongList_ = [];
     
     ret.groups_ = [];
     
     return ret;
 }
 
-class _JourneyTestSuiteExternal extends JourneyTestSuiteExternal {
+class _JourneyTestSuite extends JourneyTestSuite {
     constructor() {
         super();
         
         this.name_ = "";
         
         this.screens_ = [];
+        
+        this.hasNavBar_ = [];
+        
+        this.hasLongList_ = [];
         
         this.groups_ = [];
         
@@ -3161,6 +3018,32 @@ class _JourneyTestSuiteExternal extends JourneyTestSuiteExternal {
     Screens() {
         
         return this.screens_;
+        
+    }
+
+    
+    SetHasNavBar(val) {
+        
+        this.hasNavBar_ = val;
+        
+    }
+
+    HasNavBar() {
+        
+        return this.hasNavBar_;
+        
+    }
+
+    
+    SetHasLongList(val) {
+        
+        this.hasLongList_ = val;
+        
+    }
+
+    HasLongList() {
+        
+        return this.hasLongList_;
         
     }
 
@@ -3201,10 +3084,30 @@ class _JourneyTestSuiteExternal extends JourneyTestSuiteExternal {
         const rawListscreens = [];
         for (const v of (this.screens_ || [])) {
             
-            rawListscreens.push(v.ToDict());
+            rawListscreens.push(v);
             
         }
         data["screens"] = rawListscreens;
+        
+        
+        
+        const rawListhasNavBar = [];
+        for (const v of (this.hasNavBar_ || [])) {
+            
+            rawListhasNavBar.push(v);
+            
+        }
+        data["hasNavBar"] = rawListhasNavBar;
+        
+        
+        
+        const rawListhasLongList = [];
+        for (const v of (this.hasLongList_ || [])) {
+            
+            rawListhasLongList.push(v);
+            
+        }
+        data["hasLongList"] = rawListhasLongList;
         
         
         
@@ -3240,14 +3143,46 @@ class _JourneyTestSuiteExternal extends JourneyTestSuiteExternal {
                 const res = [];
 
                 for (const rw of rawValue) {
-                    let ud = JourneyScreenTestFactory();
+                    let ud = "";
                     
-                    ud.FromDict(rw);
+                    ud = rw;
                     
                     res.push(ud);
                 }
 
                 this.screens_ = res;
+                
+            }
+            
+            if (key === "hasNavBar") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.hasNavBar_ = res;
+                
+            }
+            
+            if (key === "hasLongList") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.hasLongList_ = res;
                 
             }
             
@@ -5676,105 +5611,6 @@ const JourneyStateKind = "JourneyState";
 
 
 
-class JourneyTestSuite {
-
-    constructor() {
-        // throw new Error("cannot initialize like this. use the factory method");
-    }
-
-    ToDict() { throw new Error("not implemented"); }
-    FromDict(data) { throw new Error("not implemented"); }
-
-    Clone() { throw new Error("not implemented"); }
-    Meta() { throw new Error("not implemented"); }
-
-    
-    External() { throw new Error("not implemented"); }
-    
-
-    
-}
-
-function JourneyTestSuiteFactory() {
-    const ret = new _JourneyTestSuite();
-
-    
-    ret.external_ = JourneyTestSuiteExternalFactory();
-    
-    
-
-    return ret;
-}
-
-class _JourneyTestSuite extends JourneyTestSuite {
-    constructor() {
-        super();
-        this.meta_ = [];
-        this.meta_["kind"] = "JourneyTestSuite";
-        this.external_ = null;
-        this.internal_ = null;
-    }
-
-    
-    SetExternal(val) { this.external_ = val; }
-    External() { return this.external_; }
-    
-
-    
-
-    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
-    ToJson() { return JSON.stringify(this.ToDict()); }
-
-    ToDict() {
-        const data = {};
-        data["metadata"] = this.meta_;
-        data["external"] = this.external_.ToDict(); 
-        
-        return data;
-    }
-
-    FromDict(data) {
-        for (const key in data) {
-            const rawValue = data[key];
-            if (rawValue === null || rawValue === undefined) continue;
-
-            if (key === "metadata") {
-                this.meta_ = rawValue;
-            }
-
-            
-            if (key === "external") { this.external_.FromDict(rawValue); }
-            
-
-            
-        }
-    }
-
-    Clone() {
-        const ret = JourneyTestSuiteFactory();
-        ret.FromJson(this.ToJson());
-        return ret;
-    }
-
-    Metadata() { return this.meta_; }
-    SetMetadata(val) { this.meta_ = val; }
-
-    PrimaryKey() {
-        return String(this.Metadata().Identity());
-    }
-}
-
-function JourneyTestSuiteIdentity(pkey) {
-    return "journeytestsuite/" + pkey;
-}
-
-const JourneyTestSuiteKindIdentity = "journeytestsuite/";
-
-const JourneyTestSuiteKind = "JourneyTestSuite";
-
-
-
-
 
 class _Schema {
     constructor(objects) {
@@ -5795,9 +5631,6 @@ class _Schema {
         if (kind === "JourneyState") return JourneyStateFactory();
         else if (kind === "journeystate") return JourneyStateFactory();
         
-        if (kind === "JourneyTestSuite") return JourneyTestSuiteFactory();
-        else if (kind === "journeytestsuite") return JourneyTestSuiteFactory();
-        
         throw new Error("object does not exist");
     }
 
@@ -5814,8 +5647,6 @@ function Schema() {
         "Journey",
         
         "JourneyState",
-        
-        "JourneyTestSuite",
         
     ];
     return new _Schema(objects);
