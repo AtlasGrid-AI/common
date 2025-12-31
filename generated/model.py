@@ -1019,6 +1019,154 @@ class _ActionArguments(ActionArguments):
                 self.strings_ = res
 
 
+class JourneyScreenTest:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Filename(self) -> str:
+        raise Exception("not implemented")
+
+    def SetFilename(self, val: str):
+        raise Exception("not implemented")
+
+    def HasNavBar(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetHasNavBar(self, val: bool):
+        raise Exception("not implemented")
+
+    def HasLongList(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetHasLongList(self, val: bool):
+        raise Exception("not implemented")
+
+
+def JourneyScreenTestFactory() -> JourneyScreenTest:
+    ret = _JourneyScreenTest()
+    ret.filename_ = ""
+    ret.hasNavBar_ = False
+    ret.hasLongList_ = False
+    return ret
+
+
+class _JourneyScreenTest(JourneyScreenTest):
+    def __init__(self):
+        self.filename_ = ""
+        self.hasNavBar_ = False
+        self.hasLongList_ = False
+
+    def SetFilename(self, val: str):
+        self.filename_ = str(val)
+
+    def Filename(self) -> str:
+        return self.filename_
+
+    def SetHasNavBar(self, val: bool):
+        self.hasNavBar_ = bool(val)
+
+    def HasNavBar(self) -> bool:
+        return self.hasNavBar_
+
+    def SetHasLongList(self, val: bool):
+        self.hasLongList_ = bool(val)
+
+    def HasLongList(self) -> bool:
+        return self.hasLongList_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["filename"] = self.filename_
+        data["hasNavBar"] = self.hasNavBar_
+        data["hasLongList"] = self.hasLongList_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "filename":
+                self.filename_ = rawValue
+            if key == "hasNavBar":
+                self.hasNavBar_ = rawValue
+            if key == "hasLongList":
+                self.hasLongList_ = rawValue
+
+
+class JourneyGroupTest:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Screens(self) -> typing.List["str"]:
+        raise Exception("not implemented")
+
+    def SetScreens(self, val: typing.List["str"]):
+        raise Exception("not implemented")
+
+
+def JourneyGroupTestFactory() -> JourneyGroupTest:
+    ret = _JourneyGroupTest()
+    ret.screens_ = []
+    return ret
+
+
+class _JourneyGroupTest(JourneyGroupTest):
+    def __init__(self):
+        self.screens_ = []
+
+    def SetScreens(self, val: typing.List["str"]):
+        self.screens_ = val
+
+    def Screens(self) -> typing.List["str"]:
+        return self.screens_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawList = []
+        for v in self.screens_:
+            rawList.append(v)
+        data["screens"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "screens":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.screens_ = res
+
+
 class Component:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -1500,6 +1648,109 @@ class _Action(Action):
                 self.expectedGroupIdentifier_ = rawValue
             if key == "errorMessage":
                 self.errorMessage_ = rawValue
+
+
+class JourneyTestSuiteExternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Name(self) -> str:
+        raise Exception("not implemented")
+
+    def SetName(self, val: str):
+        raise Exception("not implemented")
+
+    def Screens(self) -> typing.List["JourneyScreenTest"]:
+        raise Exception("not implemented")
+
+    def SetScreens(self, val: typing.List["JourneyScreenTest"]):
+        raise Exception("not implemented")
+
+    def Groups(self) -> typing.List["JourneyGroupTest"]:
+        raise Exception("not implemented")
+
+    def SetGroups(self, val: typing.List["JourneyGroupTest"]):
+        raise Exception("not implemented")
+
+
+def JourneyTestSuiteExternalFactory() -> JourneyTestSuiteExternal:
+    ret = _JourneyTestSuiteExternal()
+    ret.name_ = ""
+    ret.screens_ = []
+    ret.groups_ = []
+    return ret
+
+
+class _JourneyTestSuiteExternal(JourneyTestSuiteExternal):
+    def __init__(self):
+        self.name_ = ""
+        self.screens_ = []
+        self.groups_ = []
+
+    def SetName(self, val: str):
+        self.name_ = str(val)
+
+    def Name(self) -> str:
+        return self.name_
+
+    def SetScreens(self, val: typing.List["JourneyScreenTest"]):
+        self.screens_ = val
+
+    def Screens(self) -> typing.List["JourneyScreenTest"]:
+        return self.screens_
+
+    def SetGroups(self, val: typing.List["JourneyGroupTest"]):
+        self.groups_ = val
+
+    def Groups(self) -> typing.List["JourneyGroupTest"]:
+        return self.groups_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["name"] = self.name_
+        rawList = []
+        for v in self.screens_:
+            rawList.append(v.ToDict())
+        data["screens"] = rawList
+        rawList = []
+        for v in self.groups_:
+            rawList.append(v.ToDict())
+        data["groups"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "name":
+                self.name_ = rawValue
+            if key == "screens":
+                res = []
+                for rw in rawValue:
+                    ud = JourneyScreenTestFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.screens_ = res
+            if key == "groups":
+                res = []
+                for rw in rawValue:
+                    ud = JourneyGroupTestFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.groups_ = res
 
 
 class Edge:
@@ -2912,6 +3163,89 @@ JourneyStateKindIdentity = store.ObjectIdentity("journeystate/")
 JourneyStateKind = "JourneyState"
 
 
+class JourneyTestSuite(store.ExternalHolder):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> "JourneyTestSuite":
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def External() -> JourneyTestSuiteExternal:
+        raise Exception("not implemented")
+
+
+def JourneyTestSuiteFactory() -> JourneyTestSuite:
+    ret = _JourneyTestSuite()
+    ret.external_ = JourneyTestSuiteExternalFactory()
+    return ret
+
+
+class _JourneyTestSuite(JourneyTestSuite):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("JourneyTestSuite")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetExternal(self, val: JourneyTestSuiteExternal):
+        self.external_ = val
+
+    def External(self) -> JourneyTestSuiteExternal:
+        return self.external_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["external"] = self.external_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "external":
+                self.external_.FromDict(rawValue)
+
+    def Clone(self) -> JourneyTestSuite:
+        ret = JourneyTestSuiteFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def JourneyTestSuiteIdentity(pkey):
+    return store.ObjectIdentity("journeytestsuite/" + pkey)
+
+
+JourneyTestSuiteKindIdentity = store.ObjectIdentity("journeytestsuite/")
+JourneyTestSuiteKind = "JourneyTestSuite"
+
+
 class _Schema(store.SchemaHolder):
     def __init__(self, objects):
         self.objects = objects
@@ -2933,6 +3267,10 @@ class _Schema(store.SchemaHolder):
             return JourneyStateFactory()
         elif kind == "journeystate":
             return JourneyStateFactory()
+        if kind == "JourneyTestSuite":
+            return JourneyTestSuiteFactory()
+        elif kind == "journeytestsuite":
+            return JourneyTestSuiteFactory()
         raise Exception(constants.ErrNoSuchObject)
 
     def Types(self):
@@ -2945,5 +3283,6 @@ def Schema():
         "Page",
         "Journey",
         "JourneyState",
+        "JourneyTestSuite",
     ]
     return _Schema(objects)

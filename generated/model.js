@@ -1935,6 +1935,261 @@ class _ActionArguments extends ActionArguments {
 
 
 
+class JourneyScreenTest {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Filename() { throw new Error("not implemented"); }
+    SetFilename(val) { throw new Error("not implemented"); }
+    
+    HasNavBar() { throw new Error("not implemented"); }
+    SetHasNavBar(val) { throw new Error("not implemented"); }
+    
+    HasLongList() { throw new Error("not implemented"); }
+    SetHasLongList(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyScreenTestFactory() {
+    const ret = new _JourneyScreenTest();
+    
+    ret.filename_ = "";
+    
+    ret.hasNavBar_ = false;
+    
+    ret.hasLongList_ = false;
+    
+    return ret;
+}
+
+class _JourneyScreenTest extends JourneyScreenTest {
+    constructor() {
+        super();
+        
+        this.filename_ = "";
+        
+        this.hasNavBar_ = false;
+        
+        this.hasLongList_ = false;
+        
+    }
+
+    
+    SetFilename(val) {
+        
+        this.filename_ = String(val);
+        
+    }
+
+    Filename() {
+        
+        return this.filename_;
+        
+    }
+
+    
+    SetHasNavBar(val) {
+        
+        this.hasNavBar_ = Boolean(val);
+        
+    }
+
+    HasNavBar() {
+        
+        return this.hasNavBar_;
+        
+    }
+
+    
+    SetHasLongList(val) {
+        
+        this.hasLongList_ = Boolean(val);
+        
+    }
+
+    HasLongList() {
+        
+        return this.hasLongList_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["filename"] = this.filename_;
+        
+        
+        
+        
+        
+        data["hasNavBar"] = this.hasNavBar_;
+        
+        
+        
+        
+        
+        data["hasLongList"] = this.hasLongList_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "filename") {
+                
+                
+                this.filename_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "hasNavBar") {
+                
+                
+                this.hasNavBar_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "hasLongList") {
+                
+                
+                this.hasLongList_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyGroupTest {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Screens() { throw new Error("not implemented"); }
+    SetScreens(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyGroupTestFactory() {
+    const ret = new _JourneyGroupTest();
+    
+    ret.screens_ = [];
+    
+    return ret;
+}
+
+class _JourneyGroupTest extends JourneyGroupTest {
+    constructor() {
+        super();
+        
+        this.screens_ = [];
+        
+    }
+
+    
+    SetScreens(val) {
+        
+        this.screens_ = val;
+        
+    }
+
+    Screens() {
+        
+        return this.screens_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawListscreens = [];
+        for (const v of (this.screens_ || [])) {
+            
+            rawListscreens.push(v);
+            
+        }
+        data["screens"] = rawListscreens;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "screens") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.screens_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class Component {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -2830,6 +3085,185 @@ class _Action extends Action {
                 this.errorMessage_ = rawValue;
                 
 
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyTestSuiteExternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Name() { throw new Error("not implemented"); }
+    SetName(val) { throw new Error("not implemented"); }
+    
+    Screens() { throw new Error("not implemented"); }
+    SetScreens(val) { throw new Error("not implemented"); }
+    
+    Groups() { throw new Error("not implemented"); }
+    SetGroups(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyTestSuiteExternalFactory() {
+    const ret = new _JourneyTestSuiteExternal();
+    
+    ret.name_ = "";
+    
+    ret.screens_ = [];
+    
+    ret.groups_ = [];
+    
+    return ret;
+}
+
+class _JourneyTestSuiteExternal extends JourneyTestSuiteExternal {
+    constructor() {
+        super();
+        
+        this.name_ = "";
+        
+        this.screens_ = [];
+        
+        this.groups_ = [];
+        
+    }
+
+    
+    SetName(val) {
+        
+        this.name_ = String(val);
+        
+    }
+
+    Name() {
+        
+        return this.name_;
+        
+    }
+
+    
+    SetScreens(val) {
+        
+        this.screens_ = val;
+        
+    }
+
+    Screens() {
+        
+        return this.screens_;
+        
+    }
+
+    
+    SetGroups(val) {
+        
+        this.groups_ = val;
+        
+    }
+
+    Groups() {
+        
+        return this.groups_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["name"] = this.name_;
+        
+        
+        
+        
+        const rawListscreens = [];
+        for (const v of (this.screens_ || [])) {
+            
+            rawListscreens.push(v.ToDict());
+            
+        }
+        data["screens"] = rawListscreens;
+        
+        
+        
+        const rawListgroups = [];
+        for (const v of (this.groups_ || [])) {
+            
+            rawListgroups.push(v.ToDict());
+            
+        }
+        data["groups"] = rawListgroups;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "name") {
+                
+                
+                this.name_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "screens") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = JourneyScreenTestFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.screens_ = res;
+                
+            }
+            
+            if (key === "groups") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = JourneyGroupTestFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.groups_ = res;
                 
             }
             
@@ -5242,6 +5676,105 @@ const JourneyStateKind = "JourneyState";
 
 
 
+class JourneyTestSuite {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+    External() { throw new Error("not implemented"); }
+    
+
+    
+}
+
+function JourneyTestSuiteFactory() {
+    const ret = new _JourneyTestSuite();
+
+    
+    ret.external_ = JourneyTestSuiteExternalFactory();
+    
+    
+
+    return ret;
+}
+
+class _JourneyTestSuite extends JourneyTestSuite {
+    constructor() {
+        super();
+        this.meta_ = [];
+        this.meta_["kind"] = "JourneyTestSuite";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+    SetExternal(val) { this.external_ = val; }
+    External() { return this.external_; }
+    
+
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        data["external"] = this.external_.ToDict(); 
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+            if (key === "external") { this.external_.FromDict(rawValue); }
+            
+
+            
+        }
+    }
+
+    Clone() {
+        const ret = JourneyTestSuiteFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function JourneyTestSuiteIdentity(pkey) {
+    return "journeytestsuite/" + pkey;
+}
+
+const JourneyTestSuiteKindIdentity = "journeytestsuite/";
+
+const JourneyTestSuiteKind = "JourneyTestSuite";
+
+
+
+
 
 class _Schema {
     constructor(objects) {
@@ -5262,6 +5795,9 @@ class _Schema {
         if (kind === "JourneyState") return JourneyStateFactory();
         else if (kind === "journeystate") return JourneyStateFactory();
         
+        if (kind === "JourneyTestSuite") return JourneyTestSuiteFactory();
+        else if (kind === "journeytestsuite") return JourneyTestSuiteFactory();
+        
         throw new Error("object does not exist");
     }
 
@@ -5278,6 +5814,8 @@ function Schema() {
         "Journey",
         
         "JourneyState",
+        
+        "JourneyTestSuite",
         
     ];
     return new _Schema(objects);
