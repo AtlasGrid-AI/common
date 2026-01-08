@@ -5498,7 +5498,7 @@ function ScreenFactory() {
 class _Screen extends Screen {
     constructor() {
         super();
-        this.meta_ = [];
+        this.meta_ = {};
         this.meta_["kind"] = "Screen";
         this.external_ = null;
         this.internal_ = null;
@@ -5597,7 +5597,7 @@ function PageFactory() {
 class _Page extends Page {
     constructor() {
         super();
-        this.meta_ = [];
+        this.meta_ = {};
         this.meta_["kind"] = "Page";
         this.external_ = null;
         this.internal_ = null;
@@ -5696,7 +5696,7 @@ function EventFactory() {
 class _Event extends Event {
     constructor() {
         super();
-        this.meta_ = [];
+        this.meta_ = {};
         this.meta_["kind"] = "Event";
         this.external_ = null;
         this.internal_ = null;
@@ -5799,7 +5799,7 @@ function JourneyFactory() {
 class _Journey extends Journey {
     constructor() {
         super();
-        this.meta_ = [];
+        this.meta_ = {};
         this.meta_["kind"] = "Journey";
         this.external_ = null;
         this.internal_ = null;
@@ -5903,7 +5903,7 @@ function JourneyStateFactory() {
 class _JourneyState extends JourneyState {
     constructor() {
         super();
-        this.meta_ = [];
+        this.meta_ = {};
         this.meta_["kind"] = "JourneyState";
         this.external_ = null;
         this.internal_ = null;
