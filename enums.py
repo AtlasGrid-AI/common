@@ -17,7 +17,6 @@ class CaseInsensitiveStringEnum(Enum):
 class AdminState(CaseInsensitiveStringEnum):
     RUN = "run"
     STOP = "stop"
-    RESTART = "restart"
 
 
 class OperState(CaseInsensitiveStringEnum):
