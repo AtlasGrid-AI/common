@@ -5500,6 +5500,10 @@ class _Screen extends Screen {
         super();
         this.meta_ = {};
         this.meta_["kind"] = "Screen";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
         this.external_ = null;
         this.internal_ = null;
     }
@@ -5599,6 +5603,10 @@ class _Page extends Page {
         super();
         this.meta_ = {};
         this.meta_["kind"] = "Page";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
         this.external_ = null;
         this.internal_ = null;
     }
@@ -5698,6 +5706,10 @@ class _Event extends Event {
         super();
         this.meta_ = {};
         this.meta_["kind"] = "Event";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
         this.external_ = null;
         this.internal_ = null;
     }
@@ -5801,6 +5813,10 @@ class _Journey extends Journey {
         super();
         this.meta_ = {};
         this.meta_["kind"] = "Journey";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
         this.external_ = null;
         this.internal_ = null;
     }
@@ -5905,6 +5921,10 @@ class _JourneyState extends JourneyState {
         super();
         this.meta_ = {};
         this.meta_["kind"] = "JourneyState";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
         this.external_ = null;
         this.internal_ = null;
     }
