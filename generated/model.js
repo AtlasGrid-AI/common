@@ -1368,6 +1368,276 @@ class _PageNodeAttributes extends PageNodeAttributes {
 
 
 
+class EventExternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    NumericColumns() { throw new Error("not implemented"); }
+    SetNumericColumns(val) { throw new Error("not implemented"); }
+    
+    StringColumns() { throw new Error("not implemented"); }
+    SetStringColumns(val) { throw new Error("not implemented"); }
+    
+}
+
+function EventExternalFactory() {
+    const ret = new _EventExternal();
+    
+    ret.numericColumns_ = {};
+    
+    ret.stringColumns_ = {};
+    
+    return ret;
+}
+
+class _EventExternal extends EventExternal {
+    constructor() {
+        super();
+        
+        this.numericColumns_ = {};
+        
+        this.stringColumns_ = {};
+        
+    }
+
+    
+    SetNumericColumns(val) {
+        
+        this.numericColumns_ = val;
+        
+    }
+
+    NumericColumns() {
+        
+        return this.numericColumns_;
+        
+    }
+
+    
+    SetStringColumns(val) {
+        
+        this.stringColumns_ = val;
+        
+    }
+
+    StringColumns() {
+        
+        return this.stringColumns_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        const rawSubmapnumericColumns = {};
+        for (const k in (this.numericColumns_ || {})) {
+            const v = this.numericColumns_[k];
+            
+            rawSubmapnumericColumns[k] = v;
+            
+        }
+        data["numericColumns"] = rawSubmapnumericColumns;
+        
+        
+        
+        const rawSubmapstringColumns = {};
+        for (const k in (this.stringColumns_ || {})) {
+            const v = this.stringColumns_[k];
+            
+            rawSubmapstringColumns[k] = v;
+            
+        }
+        data["stringColumns"] = rawSubmapstringColumns;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "numericColumns") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = 0.0;
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.numericColumns_ = res;
+                
+            }
+            
+            if (key === "stringColumns") {
+                
+                const res = {};
+
+                for (const rk in rawValue) {
+                    const rw = rawValue[rk];
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res[rk] = ud;
+                }
+
+                this.stringColumns_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class EventInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Source() { throw new Error("not implemented"); }
+    SetSource(val) { throw new Error("not implemented"); }
+    
+    EpochTime() { throw new Error("not implemented"); }
+    SetEpochTime(val) { throw new Error("not implemented"); }
+    
+}
+
+function EventInternalFactory() {
+    const ret = new _EventInternal();
+    
+    ret.source_ = "";
+    
+    ret.epochTime_ = 0;
+    
+    return ret;
+}
+
+class _EventInternal extends EventInternal {
+    constructor() {
+        super();
+        
+        this.source_ = "";
+        
+        this.epochTime_ = 0;
+        
+    }
+
+    
+    SetSource(val) {
+        
+        this.source_ = String(val);
+        
+    }
+
+    Source() {
+        
+        return this.source_;
+        
+    }
+
+    
+    SetEpochTime(val) {
+        
+        this.epochTime_ = Number.parseInt(val);
+        
+    }
+
+    EpochTime() {
+        
+        return this.epochTime_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["source"] = this.source_;
+        
+        
+        
+        
+        
+        data["epochTime"] = this.epochTime_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "source") {
+                
+                
+                this.source_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "epochTime") {
+                
+                
+                this.epochTime_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class CrawlerConfiguration {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -4147,6 +4417,9 @@ class JourneyInternal {
     FromDict(data) { throw new Error("not implemented"); }
 
     
+    Journey() { throw new Error("not implemented"); }
+    SetJourney(val) { throw new Error("not implemented"); }
+    
     OperSt() { throw new Error("not implemented"); }
     SetOperSt(val) { throw new Error("not implemented"); }
     
@@ -4188,6 +4461,8 @@ class JourneyInternal {
 function JourneyInternalFactory() {
     const ret = new _JourneyInternal();
     
+    ret.journey_ = "";
+    
     ret.operSt_ = "";
     
     ret.errorMessage_ = "";
@@ -4219,6 +4494,8 @@ class _JourneyInternal extends JourneyInternal {
     constructor() {
         super();
         
+        this.journey_ = "";
+        
         this.operSt_ = "";
         
         this.errorMessage_ = "";
@@ -4242,6 +4519,19 @@ class _JourneyInternal extends JourneyInternal {
         this.crawlerVersion_ = "";
         
         this.screenIdentifiers_ = ScreenIdentifiersFactory();
+        
+    }
+
+    
+    SetJourney(val) {
+        
+        this.journey_ = String(val);
+        
+    }
+
+    Journey() {
+        
+        return this.journey_;
         
     }
 
@@ -4417,6 +4707,12 @@ class _JourneyInternal extends JourneyInternal {
         
         
         
+        data["journey"] = this.journey_;
+        
+        
+        
+        
+        
         data["operSt"] = this.operSt_;
         
         
@@ -4499,6 +4795,15 @@ class _JourneyInternal extends JourneyInternal {
             const rawValue = data[key];
             if (rawValue === null || rawValue === undefined) continue;
 
+            
+            if (key === "journey") {
+                
+                
+                this.journey_ = rawValue;
+                
+
+                
+            }
             
             if (key === "operSt") {
                 
@@ -5358,6 +5663,105 @@ const PageKind = "Page";
 
 
 
+class Event {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function EventFactory() {
+    const ret = new _Event();
+
+    
+    
+    ret.internal_ = EventInternalFactory();
+    
+
+    return ret;
+}
+
+class _Event extends Event {
+    constructor() {
+        super();
+        this.meta_ = [];
+        this.meta_["kind"] = "Event";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = EventFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function EventIdentity(pkey) {
+    return "event/" + pkey;
+}
+
+const EventKindIdentity = "event/";
+
+const EventKind = "Event";
+
+
+
+
 class Journey {
 
     constructor() {
@@ -5579,6 +5983,9 @@ class _Schema {
         if (kind === "Page") return PageFactory();
         else if (kind === "page") return PageFactory();
         
+        if (kind === "Event") return EventFactory();
+        else if (kind === "event") return EventFactory();
+        
         if (kind === "Journey") return JourneyFactory();
         else if (kind === "journey") return JourneyFactory();
         
@@ -5597,6 +6004,8 @@ function Schema() {
         "Screen",
         
         "Page",
+        
+        "Event",
         
         "Journey",
         

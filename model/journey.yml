@@ -6,6 +6,7 @@ types:
   - kind: Object
     name: JourneyState
     internal: JourneyInternal
+    pkey: internal.journey
   - kind: Struct
     name: JourneyExternal
     properties:
@@ -60,6 +61,8 @@ types:
   - kind: Struct
     name: JourneyInternal
     properties:
+      - name: journey
+        type: string
       - name: operSt
         type: string
       - name: errorMessage

@@ -708,6 +708,162 @@ class _PageNodeAttributes(PageNodeAttributes):
                 self.isNavbarContainer_ = rawValue
 
 
+class EventExternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def NumericColumns(self) -> typing.Dict[typing.Any, "float"]:
+        raise Exception("not implemented")
+
+    def SetNumericColumns(self, val: typing.Dict[typing.Any, "float"]):
+        raise Exception("not implemented")
+
+    def StringColumns(self) -> typing.Dict[typing.Any, "str"]:
+        raise Exception("not implemented")
+
+    def SetStringColumns(self, val: typing.Dict[typing.Any, "str"]):
+        raise Exception("not implemented")
+
+
+def EventExternalFactory() -> EventExternal:
+    ret = _EventExternal()
+    ret.numericColumns_ = {}
+    ret.stringColumns_ = {}
+    return ret
+
+
+class _EventExternal(EventExternal):
+    def __init__(self):
+        self.numericColumns_ = {}
+        self.stringColumns_ = {}
+
+    def SetNumericColumns(self, val: typing.Dict[typing.Any, "float"]):
+        self.numericColumns_ = val
+
+    def NumericColumns(self) -> typing.Dict[typing.Any, "float"]:
+        return self.numericColumns_
+
+    def SetStringColumns(self, val: typing.Dict[typing.Any, "str"]):
+        self.stringColumns_ = val
+
+    def StringColumns(self) -> typing.Dict[typing.Any, "str"]:
+        return self.stringColumns_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        rawSubmap = {}
+        for k, v in self.numericColumns_.items():
+            rawSubmap[k] = v
+        data["numericColumns"] = rawSubmap
+        rawSubmap = {}
+        for k, v in self.stringColumns_.items():
+            rawSubmap[k] = v
+        data["stringColumns"] = rawSubmap
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "numericColumns":
+                res = {}
+                for rk, rw in rawValue.items():
+                    ud = 0.0
+                    ud = rw
+                    res[rk] = ud
+                self.numericColumns_ = res
+            if key == "stringColumns":
+                res = {}
+                for rk, rw in rawValue.items():
+                    ud = ""
+                    ud = rw
+                    res[rk] = ud
+                self.stringColumns_ = res
+
+
+class EventInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Source(self) -> str:
+        raise Exception("not implemented")
+
+    def SetSource(self, val: str):
+        raise Exception("not implemented")
+
+    def EpochTime(self) -> int:
+        raise Exception("not implemented")
+
+    def SetEpochTime(self, val: int):
+        raise Exception("not implemented")
+
+
+def EventInternalFactory() -> EventInternal:
+    ret = _EventInternal()
+    ret.source_ = ""
+    ret.epochTime_ = 0
+    return ret
+
+
+class _EventInternal(EventInternal):
+    def __init__(self):
+        self.source_ = ""
+        self.epochTime_ = 0
+
+    def SetSource(self, val: str):
+        self.source_ = str(val)
+
+    def Source(self) -> str:
+        return self.source_
+
+    def SetEpochTime(self, val: int):
+        self.epochTime_ = int(val)
+
+    def EpochTime(self) -> int:
+        return self.epochTime_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["source"] = self.source_
+        data["epochTime"] = self.epochTime_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "source":
+                self.source_ = rawValue
+            if key == "epochTime":
+                self.epochTime_ = rawValue
+
+
 class CrawlerConfiguration:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -2230,6 +2386,12 @@ class JourneyInternal:
     def FromDict(self, data):
         raise Exception("not implemented")
 
+    def Journey(self) -> str:
+        raise Exception("not implemented")
+
+    def SetJourney(self, val: str):
+        raise Exception("not implemented")
+
     def OperSt(self) -> str:
         raise Exception("not implemented")
 
@@ -2305,6 +2467,7 @@ class JourneyInternal:
 
 def JourneyInternalFactory() -> JourneyInternal:
     ret = _JourneyInternal()
+    ret.journey_ = ""
     ret.operSt_ = ""
     ret.errorMessage_ = ""
     ret.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
@@ -2322,6 +2485,7 @@ def JourneyInternalFactory() -> JourneyInternal:
 
 class _JourneyInternal(JourneyInternal):
     def __init__(self):
+        self.journey_ = ""
         self.operSt_ = ""
         self.errorMessage_ = ""
         self.lastRunAt_ = "0001-01-01T00:00:00.000000Z"
@@ -2334,6 +2498,12 @@ class _JourneyInternal(JourneyInternal):
         self.actionsPerformed_ = []
         self.crawlerVersion_ = ""
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
+
+    def SetJourney(self, val: str):
+        self.journey_ = str(val)
+
+    def Journey(self) -> str:
+        return self.journey_
 
     def SetOperSt(self, val: str):
         self.operSt_ = str(val)
@@ -2416,6 +2586,7 @@ class _JourneyInternal(JourneyInternal):
 
     def ToDict(self):
         data = {}
+        data["journey"] = self.journey_
         data["operSt"] = self.operSt_
         data["errorMessage"] = self.errorMessage_
         data["lastRunAt"] = self.lastRunAt_
@@ -2438,6 +2609,8 @@ class _JourneyInternal(JourneyInternal):
         for key, rawValue in data.items():
             if rawValue is None:
                 continue
+            if key == "journey":
+                self.journey_ = rawValue
             if key == "operSt":
                 self.operSt_ = rawValue
             if key == "errorMessage":
@@ -2922,6 +3095,89 @@ PageKindIdentity = store.ObjectIdentity("page/")
 PageKind = "Page"
 
 
+class Event(store.Object):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> "Event":
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def Internal(self) -> EventInternal:
+        raise Exception("not implemented")
+
+
+def EventFactory() -> Event:
+    ret = _Event()
+    ret.internal_ = EventInternalFactory()
+    return ret
+
+
+class _Event(Event):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("Event")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetInternal(self, val: EventInternal):
+        self.internal_ = val
+
+    def Internal(self) -> EventInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> Event:
+        ret = EventFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def EventIdentity(pkey):
+    return store.ObjectIdentity("event/" + pkey)
+
+
+EventKindIdentity = store.ObjectIdentity("event/")
+EventKind = "Event"
+
+
 class Journey(store.ExternalHolder):
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -3114,6 +3370,10 @@ class _Schema(store.SchemaHolder):
             return PageFactory()
         elif kind == "page":
             return PageFactory()
+        if kind == "Event":
+            return EventFactory()
+        elif kind == "event":
+            return EventFactory()
         if kind == "Journey":
             return JourneyFactory()
         elif kind == "journey":
@@ -3132,6 +3392,7 @@ def Schema():
     objects = [
         "Screen",
         "Page",
+        "Event",
         "Journey",
         "JourneyState",
     ]
