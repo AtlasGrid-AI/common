@@ -3346,7 +3346,7 @@ class _JourneyState(JourneyState):
         self.meta_ = val
 
     def PrimaryKey(self):
-        return str(self.Metadata().Identity())
+        return str(self.Internal().Journey())
 
 
 def JourneyStateIdentity(pkey):

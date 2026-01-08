@@ -5954,7 +5954,7 @@ class _JourneyState extends JourneyState {
     SetMetadata(val) { this.meta_ = val; }
 
     PrimaryKey() {
-        return String(this.Metadata().Identity());
+        return String(this.Internal().Journey());
     }
 }
 
