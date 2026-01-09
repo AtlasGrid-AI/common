@@ -1175,6 +1175,59 @@ class _ActionArguments(ActionArguments):
                 self.strings_ = res
 
 
+class UserActionInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Acknowledged(self) -> bool:
+        raise Exception("not implemented")
+
+    def SetAcknowledged(self, val: bool):
+        raise Exception("not implemented")
+
+
+def UserActionInternalFactory() -> UserActionInternal:
+    ret = _UserActionInternal()
+    ret.acknowledged_ = False
+    return ret
+
+
+class _UserActionInternal(UserActionInternal):
+    def __init__(self):
+        self.acknowledged_ = False
+
+    def SetAcknowledged(self, val: bool):
+        self.acknowledged_ = bool(val)
+
+    def Acknowledged(self) -> bool:
+        return self.acknowledged_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["acknowledged"] = self.acknowledged_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "acknowledged":
+                self.acknowledged_ = rawValue
+
+
 class JourneyGroupTest:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -1717,6 +1770,77 @@ class _Action(Action):
                 self.expectedGroupIdentifier_ = rawValue
             if key == "errorMessage":
                 self.errorMessage_ = rawValue
+
+
+class UserActionExternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Action(self) -> "Action":
+        raise Exception("not implemented")
+
+    def SetAction(self, val: "Action"):
+        raise Exception("not implemented")
+
+    def Journey(self) -> str:
+        raise Exception("not implemented")
+
+    def SetJourney(self, val: str):
+        raise Exception("not implemented")
+
+
+def UserActionExternalFactory() -> UserActionExternal:
+    ret = _UserActionExternal()
+    ret.action_ = ActionFactory()
+    ret.journey_ = ""
+    return ret
+
+
+class _UserActionExternal(UserActionExternal):
+    def __init__(self):
+        self.action_ = ActionFactory()
+        self.journey_ = ""
+
+    def SetAction(self, val: "Action"):
+        self.action_ = val
+
+    def Action(self) -> "Action":
+        return self.action_
+
+    def SetJourney(self, val: str):
+        self.journey_ = str(val)
+
+    def Journey(self) -> str:
+        return self.journey_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        # if self.action_ is not None:
+        data["action"] = self.action_.ToDict()
+        data["journey"] = self.journey_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "action":
+                self.action_.FromDict(rawValue)
+            if key == "journey":
+                self.journey_ = rawValue
 
 
 class JourneyTestSuite:
@@ -3357,6 +3481,102 @@ JourneyStateKindIdentity = store.ObjectIdentity("journeystate/")
 JourneyStateKind = "JourneyState"
 
 
+class UserAction(store.ExternalHolder):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> "UserAction":
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def External() -> UserActionExternal:
+        raise Exception("not implemented")
+
+    def Internal(self) -> UserActionInternal:
+        raise Exception("not implemented")
+
+
+def UserActionFactory() -> UserAction:
+    ret = _UserAction()
+    ret.external_ = UserActionExternalFactory()
+    ret.internal_ = UserActionInternalFactory()
+    return ret
+
+
+class _UserAction(UserAction):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("UserAction")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetExternal(self, val: UserActionExternal):
+        self.external_ = val
+
+    def External(self) -> UserActionExternal:
+        return self.external_
+
+    def SetInternal(self, val: UserActionInternal):
+        self.internal_ = val
+
+    def Internal(self) -> UserActionInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["external"] = self.external_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "external":
+                self.external_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> UserAction:
+        ret = UserActionFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Metadata().Identity())
+
+
+def UserActionIdentity(pkey):
+    return store.ObjectIdentity("useraction/" + pkey)
+
+
+UserActionKindIdentity = store.ObjectIdentity("useraction/")
+UserActionKind = "UserAction"
+
+
 class _Schema(store.SchemaHolder):
     def __init__(self, objects):
         self.objects = objects
@@ -3382,6 +3602,10 @@ class _Schema(store.SchemaHolder):
             return JourneyStateFactory()
         elif kind == "journeystate":
             return JourneyStateFactory()
+        if kind == "UserAction":
+            return UserActionFactory()
+        elif kind == "useraction":
+            return UserActionFactory()
         raise Exception(constants.ErrNoSuchObject)
 
     def Types(self):
@@ -3395,5 +3619,6 @@ def Schema():
         "Event",
         "Journey",
         "JourneyState",
+        "UserAction",
     ]
     return _Schema(objects)

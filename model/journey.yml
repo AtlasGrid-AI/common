@@ -7,6 +7,10 @@ types:
     name: JourneyState
     internal: JourneyInternal
     primarykey: internal.journey
+  - kind: Object
+    name: UserAction
+    external: UserActionExternal
+    internal: UserActionInternal
   - kind: Struct
     name: JourneyExternal
     properties:
@@ -124,3 +128,15 @@ types:
         type: "map[string]int"
       - name: strings
         type: "map[string]string"
+  - kind: Struct
+    name: UserActionExternal
+    properties:
+      - name: action
+        type: Action
+      - name: journey
+        type: string
+  - kind: Struct
+    name: UserActionInternal
+    properties:
+      - name: acknowledged
+        type: bool

@@ -2205,6 +2205,93 @@ class _ActionArguments extends ActionArguments {
 
 
 
+class UserActionInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Acknowledged() { throw new Error("not implemented"); }
+    SetAcknowledged(val) { throw new Error("not implemented"); }
+    
+}
+
+function UserActionInternalFactory() {
+    const ret = new _UserActionInternal();
+    
+    ret.acknowledged_ = false;
+    
+    return ret;
+}
+
+class _UserActionInternal extends UserActionInternal {
+    constructor() {
+        super();
+        
+        this.acknowledged_ = false;
+        
+    }
+
+    
+    SetAcknowledged(val) {
+        
+        this.acknowledged_ = Boolean(val);
+        
+    }
+
+    Acknowledged() {
+        
+        return this.acknowledged_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["acknowledged"] = this.acknowledged_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "acknowledged") {
+                
+                
+                this.acknowledged_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class JourneyGroupTest {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -3196,6 +3283,128 @@ class _Action extends Action {
                 
                 
                 this.errorMessage_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class UserActionExternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Action() { throw new Error("not implemented"); }
+    SetAction(val) { throw new Error("not implemented"); }
+    
+    Journey() { throw new Error("not implemented"); }
+    SetJourney(val) { throw new Error("not implemented"); }
+    
+}
+
+function UserActionExternalFactory() {
+    const ret = new _UserActionExternal();
+    
+    ret.action_ = ActionFactory();
+    
+    ret.journey_ = "";
+    
+    return ret;
+}
+
+class _UserActionExternal extends UserActionExternal {
+    constructor() {
+        super();
+        
+        this.action_ = ActionFactory();
+        
+        this.journey_ = "";
+        
+    }
+
+    
+    SetAction(val) {
+        
+        this.action_ = val;
+        
+    }
+
+    Action() {
+        
+        return this.action_;
+        
+    }
+
+    
+    SetJourney(val) {
+        
+        this.journey_ = String(val);
+        
+    }
+
+    Journey() {
+        
+        return this.journey_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["action"] = this.action_ ? this.action_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["journey"] = this.journey_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "action") {
+                
+                
+                this.action_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "journey") {
+                
+                
+                this.journey_ = rawValue;
                 
 
                 
@@ -5989,6 +6198,118 @@ const JourneyStateKind = "JourneyState";
 
 
 
+class UserAction {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+    External() { throw new Error("not implemented"); }
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function UserActionFactory() {
+    const ret = new _UserAction();
+
+    
+    ret.external_ = UserActionExternalFactory();
+    
+    
+    ret.internal_ = UserActionInternalFactory();
+    
+
+    return ret;
+}
+
+class _UserAction extends UserAction {
+    constructor() {
+        super();
+        this.meta_ = {};
+        this.meta_["kind"] = "UserAction";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+    SetExternal(val) { this.external_ = val; }
+    External() { return this.external_; }
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        data["external"] = this.external_.ToDict(); 
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+            if (key === "external") { this.external_.FromDict(rawValue); }
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = UserActionFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Metadata().Identity());
+    }
+}
+
+function UserActionIdentity(pkey) {
+    return "useraction/" + pkey;
+}
+
+const UserActionKindIdentity = "useraction/";
+
+const UserActionKind = "UserAction";
+
+
+
+
 
 class _Schema {
     constructor(objects) {
@@ -6012,6 +6333,9 @@ class _Schema {
         if (kind === "JourneyState") return JourneyStateFactory();
         else if (kind === "journeystate") return JourneyStateFactory();
         
+        if (kind === "UserAction") return UserActionFactory();
+        else if (kind === "useraction") return UserActionFactory();
+        
         throw new Error("object does not exist");
     }
 
@@ -6030,6 +6354,8 @@ function Schema() {
         "Journey",
         
         "JourneyState",
+        
+        "UserAction",
         
     ];
     return new _Schema(objects);
