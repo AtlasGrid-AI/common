@@ -164,72 +164,6 @@
       </delete>
     </path>
     
-    <path name="/event/">
-      <get>
-        <summary>List Event</summary>
-        <parameters>
-          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
-          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
-          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
-          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
-          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
-        </parameters>
-        <responses>
-          <response code="200">
-            <content>
-              <mediaType contentType="application/json">
-                <schema>
-                  <type>array</type>
-                  <items><ref>#/components/schemas/Event</ref></items>
-                </schema>
-              </mediaType>
-            </content>
-          </response>
-        </responses>
-      </get>
-
-      <post>
-        <summary>Create Event</summary>
-        <requestBody required="true">
-          <content>
-            <mediaType contentType="application/json">
-              <schema><ref>#/components/schemas/Event</ref></schema>
-            </mediaType>
-          </content>
-        </requestBody>
-        <responses><response code="200"/></responses>
-      </post>
-
-      <delete>
-        <summary>Bulk delete Event</summary>
-        <parameters>
-          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
-        </parameters>
-        <responses><response code="200"/></responses>
-      </delete>
-    </path>
-
-    <path name="/event/{pkey}">
-      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
-      <get>
-        <responses>
-          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Event</ref></schema></mediaType></content></response>
-          <response code="404"/>
-        </responses>
-      </get>
-      <post>
-        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Event</ref></schema></mediaType></content></requestBody>
-        <responses><response code="200"/></responses>
-      </post>
-      <put>
-        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/Event</ref></schema></mediaType></content></requestBody>
-        <responses><response code="200"/></responses>
-      </put>
-      <delete>
-        <responses><response code="200"/><response code="404"/></responses>
-      </delete>
-    </path>
-    
     <path name="/journey/">
       <get>
         <summary>List Journey</summary>
@@ -756,60 +690,6 @@
             
               
               <type>boolean</type>
-              
-              
-            
-          </property>
-          
-        </properties>
-      </schema>
-      
-      <schema name="EventExternal">
-        <type>object</type>
-        <properties>
-          
-          <property name="numericColumns">
-            
-            <type>object</type>
-            <additionalProperties>
-              
-              <type>string</type>
-              
-            </additionalProperties>
-            
-          </property>
-          
-          <property name="stringColumns">
-            
-            <type>object</type>
-            <additionalProperties>
-              
-              <type>string</type>
-              
-            </additionalProperties>
-            
-          </property>
-          
-        </properties>
-      </schema>
-      
-      <schema name="EventInternal">
-        <type>object</type>
-        <properties>
-          
-          <property name="source">
-            
-              
-              <type>string</type>
-              
-              
-            
-          </property>
-          
-          <property name="epochTime">
-            
-              
-              <type>integer</type>
               
               
             
@@ -1737,15 +1617,6 @@
           <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
           
           <property name="internal"><ref>#/components/schemas/PageInternal</ref></property>
-        </properties>
-      </schema>
-      
-      <schema name="Event">
-        <type>object</type>
-        <properties>
-          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
-          
-          <property name="internal"><ref>#/components/schemas/EventInternal</ref></property>
         </properties>
       </schema>
       
