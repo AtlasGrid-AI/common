@@ -8,6 +8,10 @@ types:
     internal: JourneyInternal
     primarykey: internal.journey
   - kind: Object
+    name: JourneyReport
+    internal: JourneyReportInternal
+    primarykey: internal.journey
+  - kind: Object
     name: UserAction
     external: UserActionExternal
     internal: UserActionInternal
@@ -140,3 +144,21 @@ types:
     properties:
       - name: acknowledged
         type: bool
+  - kind: Struct
+    name: JourneyReportInternal
+    properties:
+      - name: journey
+        type: string
+      - name: content
+        type: "[]JourneyReportContent"
+  - kind: Struct
+    name: JourneyReportContent
+    properties:
+      - name: title
+        type: string
+      - name: infos
+        type: "[]string"
+      - name: warnings
+        type: "[]string"
+      - name: errors
+        type: "[]string"

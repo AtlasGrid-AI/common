@@ -1072,6 +1072,134 @@ class _UserActionInternal(UserActionInternal):
                 self.acknowledged_ = rawValue
 
 
+class JourneyReportContent:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Title(self) -> str:
+        raise Exception("not implemented")
+
+    def SetTitle(self, val: str):
+        raise Exception("not implemented")
+
+    def Infos(self) -> typing.List["str"]:
+        raise Exception("not implemented")
+
+    def SetInfos(self, val: typing.List["str"]):
+        raise Exception("not implemented")
+
+    def Warnings(self) -> typing.List["str"]:
+        raise Exception("not implemented")
+
+    def SetWarnings(self, val: typing.List["str"]):
+        raise Exception("not implemented")
+
+    def Errors(self) -> typing.List["str"]:
+        raise Exception("not implemented")
+
+    def SetErrors(self, val: typing.List["str"]):
+        raise Exception("not implemented")
+
+
+def JourneyReportContentFactory() -> JourneyReportContent:
+    ret = _JourneyReportContent()
+    ret.title_ = ""
+    ret.infos_ = []
+    ret.warnings_ = []
+    ret.errors_ = []
+    return ret
+
+
+class _JourneyReportContent(JourneyReportContent):
+    def __init__(self):
+        self.title_ = ""
+        self.infos_ = []
+        self.warnings_ = []
+        self.errors_ = []
+
+    def SetTitle(self, val: str):
+        self.title_ = str(val)
+
+    def Title(self) -> str:
+        return self.title_
+
+    def SetInfos(self, val: typing.List["str"]):
+        self.infos_ = val
+
+    def Infos(self) -> typing.List["str"]:
+        return self.infos_
+
+    def SetWarnings(self, val: typing.List["str"]):
+        self.warnings_ = val
+
+    def Warnings(self) -> typing.List["str"]:
+        return self.warnings_
+
+    def SetErrors(self, val: typing.List["str"]):
+        self.errors_ = val
+
+    def Errors(self) -> typing.List["str"]:
+        return self.errors_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["title"] = self.title_
+        rawList = []
+        for v in self.infos_:
+            rawList.append(v)
+        data["infos"] = rawList
+        rawList = []
+        for v in self.warnings_:
+            rawList.append(v)
+        data["warnings"] = rawList
+        rawList = []
+        for v in self.errors_:
+            rawList.append(v)
+        data["errors"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "title":
+                self.title_ = rawValue
+            if key == "infos":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.infos_ = res
+            if key == "warnings":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.warnings_ = res
+            if key == "errors":
+                res = []
+                for rw in rawValue:
+                    ud = ""
+                    ud = rw
+                    res.append(ud)
+                self.errors_ = res
+
+
 class JourneyGroupTest:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -1685,6 +1813,84 @@ class _UserActionExternal(UserActionExternal):
                 self.action_.FromDict(rawValue)
             if key == "journey":
                 self.journey_ = rawValue
+
+
+class JourneyReportInternal:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Journey(self) -> str:
+        raise Exception("not implemented")
+
+    def SetJourney(self, val: str):
+        raise Exception("not implemented")
+
+    def Content(self) -> typing.List["JourneyReportContent"]:
+        raise Exception("not implemented")
+
+    def SetContent(self, val: typing.List["JourneyReportContent"]):
+        raise Exception("not implemented")
+
+
+def JourneyReportInternalFactory() -> JourneyReportInternal:
+    ret = _JourneyReportInternal()
+    ret.journey_ = ""
+    ret.content_ = []
+    return ret
+
+
+class _JourneyReportInternal(JourneyReportInternal):
+    def __init__(self):
+        self.journey_ = ""
+        self.content_ = []
+
+    def SetJourney(self, val: str):
+        self.journey_ = str(val)
+
+    def Journey(self) -> str:
+        return self.journey_
+
+    def SetContent(self, val: typing.List["JourneyReportContent"]):
+        self.content_ = val
+
+    def Content(self) -> typing.List["JourneyReportContent"]:
+        return self.content_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["journey"] = self.journey_
+        rawList = []
+        for v in self.content_:
+            rawList.append(v.ToDict())
+        data["content"] = rawList
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "journey":
+                self.journey_ = rawValue
+            if key == "content":
+                res = []
+                for rw in rawValue:
+                    ud = JourneyReportContentFactory()
+                    ud.FromDict(rw)
+                    res.append(ud)
+                self.content_ = res
 
 
 class JourneyTestSuite:
@@ -3242,6 +3448,89 @@ JourneyStateKindIdentity = store.ObjectIdentity("journeystate/")
 JourneyStateKind = "JourneyState"
 
 
+class JourneyReport(store.Object):
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Clone(self) -> "JourneyReport":
+        raise NotImplementedError()
+
+    def Meta(self) -> store.Meta:
+        raise Exception("not implemented")
+
+    def Internal(self) -> JourneyReportInternal:
+        raise Exception("not implemented")
+
+
+def JourneyReportFactory() -> JourneyReport:
+    ret = _JourneyReport()
+    ret.internal_ = JourneyReportInternalFactory()
+    return ret
+
+
+class _JourneyReport(JourneyReport):
+    def __init__(self):
+        self.meta_ = store.MetaFactory("JourneyReport")
+        self.external_ = None
+        self.internal_ = None
+
+    def SetInternal(self, val: JourneyReportInternal):
+        self.internal_ = val
+
+    def Internal(self) -> JourneyReportInternal:
+        return self.internal_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["metadata"] = self.meta_.ToDict()
+        data["internal"] = self.internal_.ToDict()
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "metadata":
+                self.meta_.FromDict(rawValue)
+            if key == "internal":
+                self.internal_.FromDict(rawValue)
+
+    def Clone(self) -> JourneyReport:
+        ret = JourneyReportFactory()
+        ret.FromJson(self.ToJson())
+        return ret
+
+    def Metadata(self) -> store.Meta:
+        return self.meta_
+
+    def SetMetadata(self, val: store.Meta):
+        self.meta_ = val
+
+    def PrimaryKey(self):
+        return str(self.Internal().Journey())
+
+
+def JourneyReportIdentity(pkey):
+    return store.ObjectIdentity("journeyreport/" + pkey)
+
+
+JourneyReportKindIdentity = store.ObjectIdentity("journeyreport/")
+JourneyReportKind = "JourneyReport"
+
+
 class UserAction(store.ExternalHolder):
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -3359,6 +3648,10 @@ class _Schema(store.SchemaHolder):
             return JourneyStateFactory()
         elif kind == "journeystate":
             return JourneyStateFactory()
+        if kind == "JourneyReport":
+            return JourneyReportFactory()
+        elif kind == "journeyreport":
+            return JourneyReportFactory()
         if kind == "UserAction":
             return UserActionFactory()
         elif kind == "useraction":
@@ -3375,6 +3668,7 @@ def Schema():
         "Page",
         "Journey",
         "JourneyState",
+        "JourneyReport",
         "UserAction",
     ]
     return _Schema(objects)

@@ -296,6 +296,72 @@
       </delete>
     </path>
     
+    <path name="/journeyreport/">
+      <get>
+        <summary>List JourneyReport</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="ps" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="po" in="query"><schema><type>integer</type></schema></parameter>
+          <parameter name="ob" in="query"><schema><type>string</type></schema></parameter>
+          <parameter name="inc" in="query"><schema><type>boolean</type></schema></parameter>
+        </parameters>
+        <responses>
+          <response code="200">
+            <content>
+              <mediaType contentType="application/json">
+                <schema>
+                  <type>array</type>
+                  <items><ref>#/components/schemas/JourneyReport</ref></items>
+                </schema>
+              </mediaType>
+            </content>
+          </response>
+        </responses>
+      </get>
+
+      <post>
+        <summary>Create JourneyReport</summary>
+        <requestBody required="true">
+          <content>
+            <mediaType contentType="application/json">
+              <schema><ref>#/components/schemas/JourneyReport</ref></schema>
+            </mediaType>
+          </content>
+        </requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+
+      <delete>
+        <summary>Bulk delete JourneyReport</summary>
+        <parameters>
+          <parameter name="pf" in="query"><schema><type>string</type></schema></parameter>
+        </parameters>
+        <responses><response code="200"/></responses>
+      </delete>
+    </path>
+
+    <path name="/journeyreport/{pkey}">
+      <parameter name="pkey" in="path" required="true"><schema><type>string</type></schema></parameter>
+      <get>
+        <responses>
+          <response code="200"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyReport</ref></schema></mediaType></content></response>
+          <response code="404"/>
+        </responses>
+      </get>
+      <post>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyReport</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </post>
+      <put>
+        <requestBody required="true"><content><mediaType contentType="application/json"><schema><ref>#/components/schemas/JourneyReport</ref></schema></mediaType></content></requestBody>
+        <responses><response code="200"/></responses>
+      </put>
+      <delete>
+        <responses><response code="200"/><response code="404"/></responses>
+      </delete>
+    </path>
+    
     <path name="/useraction/">
       <get>
         <summary>List UserAction</summary>
@@ -838,6 +904,55 @@
         </properties>
       </schema>
       
+      <schema name="JourneyReportContent">
+        <type>object</type>
+        <properties>
+          
+          <property name="title">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="infos">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="warnings">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+          <property name="errors">
+            
+            <type>array</type>
+            <items>
+              
+              <type>string</type>
+              
+            </items>
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
       <schema name="JourneyGroupTest">
         <type>object</type>
         <properties>
@@ -1080,6 +1195,33 @@
               <type>string</type>
               
               
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
+      <schema name="JourneyReportInternal">
+        <type>object</type>
+        <properties>
+          
+          <property name="journey">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="content">
+            
+            <type>array</type>
+            <items>
+              
+              <ref>#/components/schemas/typing.List["JourneyReportContent"]</ref>
+              
+            </items>
             
           </property>
           
@@ -1635,6 +1777,15 @@
           <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
           
           <property name="internal"><ref>#/components/schemas/JourneyInternal</ref></property>
+        </properties>
+      </schema>
+      
+      <schema name="JourneyReport">
+        <type>object</type>
+        <properties>
+          <property name="metadata"><ref>#/components/schemas/Meta</ref></property>
+          
+          <property name="internal"><ref>#/components/schemas/JourneyReportInternal</ref></property>
         </properties>
       </schema>
       

@@ -2022,6 +2022,231 @@ class _UserActionInternal extends UserActionInternal {
 
 
 
+class JourneyReportContent {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Title() { throw new Error("not implemented"); }
+    SetTitle(val) { throw new Error("not implemented"); }
+    
+    Infos() { throw new Error("not implemented"); }
+    SetInfos(val) { throw new Error("not implemented"); }
+    
+    Warnings() { throw new Error("not implemented"); }
+    SetWarnings(val) { throw new Error("not implemented"); }
+    
+    Errors() { throw new Error("not implemented"); }
+    SetErrors(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyReportContentFactory() {
+    const ret = new _JourneyReportContent();
+    
+    ret.title_ = "";
+    
+    ret.infos_ = [];
+    
+    ret.warnings_ = [];
+    
+    ret.errors_ = [];
+    
+    return ret;
+}
+
+class _JourneyReportContent extends JourneyReportContent {
+    constructor() {
+        super();
+        
+        this.title_ = "";
+        
+        this.infos_ = [];
+        
+        this.warnings_ = [];
+        
+        this.errors_ = [];
+        
+    }
+
+    
+    SetTitle(val) {
+        
+        this.title_ = String(val);
+        
+    }
+
+    Title() {
+        
+        return this.title_;
+        
+    }
+
+    
+    SetInfos(val) {
+        
+        this.infos_ = val;
+        
+    }
+
+    Infos() {
+        
+        return this.infos_;
+        
+    }
+
+    
+    SetWarnings(val) {
+        
+        this.warnings_ = val;
+        
+    }
+
+    Warnings() {
+        
+        return this.warnings_;
+        
+    }
+
+    
+    SetErrors(val) {
+        
+        this.errors_ = val;
+        
+    }
+
+    Errors() {
+        
+        return this.errors_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["title"] = this.title_;
+        
+        
+        
+        
+        const rawListinfos = [];
+        for (const v of (this.infos_ || [])) {
+            
+            rawListinfos.push(v);
+            
+        }
+        data["infos"] = rawListinfos;
+        
+        
+        
+        const rawListwarnings = [];
+        for (const v of (this.warnings_ || [])) {
+            
+            rawListwarnings.push(v);
+            
+        }
+        data["warnings"] = rawListwarnings;
+        
+        
+        
+        const rawListerrors = [];
+        for (const v of (this.errors_ || [])) {
+            
+            rawListerrors.push(v);
+            
+        }
+        data["errors"] = rawListerrors;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "title") {
+                
+                
+                this.title_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "infos") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.infos_ = res;
+                
+            }
+            
+            if (key === "warnings") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.warnings_ = res;
+                
+            }
+            
+            if (key === "errors") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = "";
+                    
+                    ud = rw;
+                    
+                    res.push(ud);
+                }
+
+                this.errors_ = res;
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class JourneyGroupTest {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -3137,6 +3362,139 @@ class _UserActionExternal extends UserActionExternal {
                 this.journey_ = rawValue;
                 
 
+                
+            }
+            
+        }
+    }
+}
+
+
+
+class JourneyReportInternal {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Journey() { throw new Error("not implemented"); }
+    SetJourney(val) { throw new Error("not implemented"); }
+    
+    Content() { throw new Error("not implemented"); }
+    SetContent(val) { throw new Error("not implemented"); }
+    
+}
+
+function JourneyReportInternalFactory() {
+    const ret = new _JourneyReportInternal();
+    
+    ret.journey_ = "";
+    
+    ret.content_ = [];
+    
+    return ret;
+}
+
+class _JourneyReportInternal extends JourneyReportInternal {
+    constructor() {
+        super();
+        
+        this.journey_ = "";
+        
+        this.content_ = [];
+        
+    }
+
+    
+    SetJourney(val) {
+        
+        this.journey_ = String(val);
+        
+    }
+
+    Journey() {
+        
+        return this.journey_;
+        
+    }
+
+    
+    SetContent(val) {
+        
+        this.content_ = val;
+        
+    }
+
+    Content() {
+        
+        return this.content_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["journey"] = this.journey_;
+        
+        
+        
+        
+        const rawListcontent = [];
+        for (const v of (this.content_ || [])) {
+            
+            rawListcontent.push(v.ToDict());
+            
+        }
+        data["content"] = rawListcontent;
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "journey") {
+                
+                
+                this.journey_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "content") {
+                
+                const res = [];
+
+                for (const rw of rawValue) {
+                    let ud = JourneyReportContentFactory();
+                    
+                    ud.FromDict(rw);
+                    
+                    res.push(ud);
+                }
+
+                this.content_ = res;
                 
             }
             
@@ -5825,6 +6183,109 @@ const JourneyStateKind = "JourneyState";
 
 
 
+class JourneyReport {
+
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    Clone() { throw new Error("not implemented"); }
+    Meta() { throw new Error("not implemented"); }
+
+    
+
+    
+    Internal() { throw new Error("not implemented"); }
+    
+}
+
+function JourneyReportFactory() {
+    const ret = new _JourneyReport();
+
+    
+    
+    ret.internal_ = JourneyReportInternalFactory();
+    
+
+    return ret;
+}
+
+class _JourneyReport extends JourneyReport {
+    constructor() {
+        super();
+        this.meta_ = {};
+        this.meta_["kind"] = "JourneyReport";
+        this.meta_["identity"] = "";
+        this.meta_["created"] = "";
+        this.meta_["updated"] = "";
+        this.meta_["revision"] = "";
+        this.external_ = null;
+        this.internal_ = null;
+    }
+
+    
+
+    
+    SetInternal(val) { this.internal_ = val; }
+    Internal() { return this.internal_; }
+    
+
+    FromJson(jstr) { const data = JSON.parse(jstr); return this.FromDict(data); }
+    ToJson() { return JSON.stringify(this.ToDict()); }
+
+    ToDict() {
+        const data = {};
+        data["metadata"] = this.meta_;
+        
+        data["internal"] = this.internal_.ToDict(); 
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            if (key === "metadata") {
+                this.meta_ = rawValue;
+            }
+
+            
+
+            
+            if (key === "internal") { this.internal_.FromDict(rawValue); }
+            
+        }
+    }
+
+    Clone() {
+        const ret = JourneyReportFactory();
+        ret.FromJson(this.ToJson());
+        return ret;
+    }
+
+    Metadata() { return this.meta_; }
+    SetMetadata(val) { this.meta_ = val; }
+
+    PrimaryKey() {
+        return String(this.Internal().Journey());
+    }
+}
+
+function JourneyReportIdentity(pkey) {
+    return "journeyreport/" + pkey;
+}
+
+const JourneyReportKindIdentity = "journeyreport/";
+
+const JourneyReportKind = "JourneyReport";
+
+
+
+
 class UserAction {
 
     constructor() {
@@ -5957,6 +6418,9 @@ class _Schema {
         if (kind === "JourneyState") return JourneyStateFactory();
         else if (kind === "journeystate") return JourneyStateFactory();
         
+        if (kind === "JourneyReport") return JourneyReportFactory();
+        else if (kind === "journeyreport") return JourneyReportFactory();
+        
         if (kind === "UserAction") return UserActionFactory();
         else if (kind === "useraction") return UserActionFactory();
         
@@ -5976,6 +6440,8 @@ function Schema() {
         "Journey",
         
         "JourneyState",
+        
+        "JourneyReport",
         
         "UserAction",
         
