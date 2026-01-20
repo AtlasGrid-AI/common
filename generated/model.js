@@ -1368,6 +1368,198 @@ class _PageNodeAttributes extends PageNodeAttributes {
 
 
 
+class ScreenResolution {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Width() { throw new Error("not implemented"); }
+    SetWidth(val) { throw new Error("not implemented"); }
+    
+    Height() { throw new Error("not implemented"); }
+    SetHeight(val) { throw new Error("not implemented"); }
+    
+    WidthLowRes() { throw new Error("not implemented"); }
+    SetWidthLowRes(val) { throw new Error("not implemented"); }
+    
+    HeightLowRes() { throw new Error("not implemented"); }
+    SetHeightLowRes(val) { throw new Error("not implemented"); }
+    
+}
+
+function ScreenResolutionFactory() {
+    const ret = new _ScreenResolution();
+    
+    ret.width_ = 0;
+    
+    ret.height_ = 0;
+    
+    ret.widthLowRes_ = 0;
+    
+    ret.heightLowRes_ = 0;
+    
+    return ret;
+}
+
+class _ScreenResolution extends ScreenResolution {
+    constructor() {
+        super();
+        
+        this.width_ = 0;
+        
+        this.height_ = 0;
+        
+        this.widthLowRes_ = 0;
+        
+        this.heightLowRes_ = 0;
+        
+    }
+
+    
+    SetWidth(val) {
+        
+        this.width_ = Number.parseInt(val);
+        
+    }
+
+    Width() {
+        
+        return this.width_;
+        
+    }
+
+    
+    SetHeight(val) {
+        
+        this.height_ = Number.parseInt(val);
+        
+    }
+
+    Height() {
+        
+        return this.height_;
+        
+    }
+
+    
+    SetWidthLowRes(val) {
+        
+        this.widthLowRes_ = Number.parseInt(val);
+        
+    }
+
+    WidthLowRes() {
+        
+        return this.widthLowRes_;
+        
+    }
+
+    
+    SetHeightLowRes(val) {
+        
+        this.heightLowRes_ = Number.parseInt(val);
+        
+    }
+
+    HeightLowRes() {
+        
+        return this.heightLowRes_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["width"] = this.width_;
+        
+        
+        
+        
+        
+        data["height"] = this.height_;
+        
+        
+        
+        
+        
+        data["widthLowRes"] = this.widthLowRes_;
+        
+        
+        
+        
+        
+        data["heightLowRes"] = this.heightLowRes_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "width") {
+                
+                
+                this.width_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "height") {
+                
+                
+                this.height_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "widthLowRes") {
+                
+                
+                this.widthLowRes_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "heightLowRes") {
+                
+                
+                this.heightLowRes_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class CrawlerConfiguration {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -5259,6 +5451,9 @@ class ScreenInternal {
     Metadata() { throw new Error("not implemented"); }
     SetMetadata(val) { throw new Error("not implemented"); }
     
+    Resolution() { throw new Error("not implemented"); }
+    SetResolution(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenInternalFactory() {
@@ -5281,6 +5476,8 @@ function ScreenInternalFactory() {
     ret.content_ = ScreenContentFactory();
     
     ret.metadata_ = ScreenMetadataFactory();
+    
+    ret.resolution_ = ScreenResolutionFactory();
     
     return ret;
 }
@@ -5306,6 +5503,8 @@ class _ScreenInternal extends ScreenInternal {
         this.content_ = ScreenContentFactory();
         
         this.metadata_ = ScreenMetadataFactory();
+        
+        this.resolution_ = ScreenResolutionFactory();
         
     }
 
@@ -5427,6 +5626,19 @@ class _ScreenInternal extends ScreenInternal {
     }
 
     
+    SetResolution(val) {
+        
+        this.resolution_ = val;
+        
+    }
+
+    Resolution() {
+        
+        return this.resolution_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -5495,6 +5707,12 @@ class _ScreenInternal extends ScreenInternal {
         
         
         data["metadata"] = this.metadata_ ? this.metadata_.ToDict() : null;
+        
+        
+        
+        
+        
+        data["resolution"] = this.resolution_ ? this.resolution_.ToDict() : null;
         
         
         
@@ -5590,6 +5808,15 @@ class _ScreenInternal extends ScreenInternal {
                 
                 
                 this.metadata_.FromDict(rawValue);
+                
+
+                
+            }
+            
+            if (key === "resolution") {
+                
+                
+                this.resolution_.FromDict(rawValue);
                 
 
                 

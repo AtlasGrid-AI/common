@@ -708,6 +708,110 @@ class _PageNodeAttributes(PageNodeAttributes):
                 self.isNavbarContainer_ = rawValue
 
 
+class ScreenResolution:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Width(self) -> int:
+        raise Exception("not implemented")
+
+    def SetWidth(self, val: int):
+        raise Exception("not implemented")
+
+    def Height(self) -> int:
+        raise Exception("not implemented")
+
+    def SetHeight(self, val: int):
+        raise Exception("not implemented")
+
+    def WidthLowRes(self) -> int:
+        raise Exception("not implemented")
+
+    def SetWidthLowRes(self, val: int):
+        raise Exception("not implemented")
+
+    def HeightLowRes(self) -> int:
+        raise Exception("not implemented")
+
+    def SetHeightLowRes(self, val: int):
+        raise Exception("not implemented")
+
+
+def ScreenResolutionFactory() -> ScreenResolution:
+    ret = _ScreenResolution()
+    ret.width_ = 0
+    ret.height_ = 0
+    ret.widthLowRes_ = 0
+    ret.heightLowRes_ = 0
+    return ret
+
+
+class _ScreenResolution(ScreenResolution):
+    def __init__(self):
+        self.width_ = 0
+        self.height_ = 0
+        self.widthLowRes_ = 0
+        self.heightLowRes_ = 0
+
+    def SetWidth(self, val: int):
+        self.width_ = int(val)
+
+    def Width(self) -> int:
+        return self.width_
+
+    def SetHeight(self, val: int):
+        self.height_ = int(val)
+
+    def Height(self) -> int:
+        return self.height_
+
+    def SetWidthLowRes(self, val: int):
+        self.widthLowRes_ = int(val)
+
+    def WidthLowRes(self) -> int:
+        return self.widthLowRes_
+
+    def SetHeightLowRes(self, val: int):
+        self.heightLowRes_ = int(val)
+
+    def HeightLowRes(self) -> int:
+        return self.heightLowRes_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["width"] = self.width_
+        data["height"] = self.height_
+        data["widthLowRes"] = self.widthLowRes_
+        data["heightLowRes"] = self.heightLowRes_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "width":
+                self.width_ = rawValue
+            if key == "height":
+                self.height_ = rawValue
+            if key == "widthLowRes":
+                self.widthLowRes_ = rawValue
+            if key == "heightLowRes":
+                self.heightLowRes_ = rawValue
+
+
 class CrawlerConfiguration:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -2880,6 +2984,12 @@ class ScreenInternal:
     def SetMetadata(self, val: "ScreenMetadata"):
         raise Exception("not implemented")
 
+    def Resolution(self) -> "ScreenResolution":
+        raise Exception("not implemented")
+
+    def SetResolution(self, val: "ScreenResolution"):
+        raise Exception("not implemented")
+
 
 def ScreenInternalFactory() -> ScreenInternal:
     ret = _ScreenInternal()
@@ -2892,6 +3002,7 @@ def ScreenInternalFactory() -> ScreenInternal:
     ret.isEntryPoint_ = False
     ret.content_ = ScreenContentFactory()
     ret.metadata_ = ScreenMetadataFactory()
+    ret.resolution_ = ScreenResolutionFactory()
     return ret
 
 
@@ -2906,6 +3017,7 @@ class _ScreenInternal(ScreenInternal):
         self.isEntryPoint_ = False
         self.content_ = ScreenContentFactory()
         self.metadata_ = ScreenMetadataFactory()
+        self.resolution_ = ScreenResolutionFactory()
 
     def SetJourney(self, val: str):
         self.journey_ = str(val)
@@ -2961,6 +3073,12 @@ class _ScreenInternal(ScreenInternal):
     def Metadata(self) -> "ScreenMetadata":
         return self.metadata_
 
+    def SetResolution(self, val: "ScreenResolution"):
+        self.resolution_ = val
+
+    def Resolution(self) -> "ScreenResolution":
+        return self.resolution_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -2984,6 +3102,8 @@ class _ScreenInternal(ScreenInternal):
         data["content"] = self.content_.ToDict()
         # if self.metadata_ is not None:
         data["metadata"] = self.metadata_.ToDict()
+        # if self.resolution_ is not None:
+        data["resolution"] = self.resolution_.ToDict()
         return data
 
     def FromDict(self, data):
@@ -3013,6 +3133,8 @@ class _ScreenInternal(ScreenInternal):
                 self.content_.FromDict(rawValue)
             if key == "metadata":
                 self.metadata_.FromDict(rawValue)
+            if key == "resolution":
+                self.resolution_.FromDict(rawValue)
 
 
 class PageInternal:

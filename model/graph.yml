@@ -35,6 +35,9 @@ types:
       - name: metadata
         type: ScreenMetadata
         description: AI generated metadata about the screen
+      - name: resolution
+        type: ScreenResolution
+        description: Screen resolution information
   - kind: Struct
     name: Edge
     description: An edge representing a transition from one screen to another via a component and action.
@@ -186,4 +189,19 @@ types:
       - name: isNavbarContainer
         type: bool
         description: true if node is a container and is identified as a navbar
-    
+  - kind: Struct
+    name: ScreenResolution
+    description: Screen resolution information
+    properties:
+      - name: width
+        type: int
+        description: The width of the screen in pixels
+      - name: height
+        type: int
+        description: The height of the screen in pixels
+      - name: widthLowRes
+        type: int
+        description: The width of the screen low resolution image in pixels
+      - name: heightLowRes
+        type: int
+        description: The height of the screen low resolution image in pixels

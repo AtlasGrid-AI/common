@@ -764,6 +764,49 @@
         </properties>
       </schema>
       
+      <schema name="ScreenResolution">
+        <type>object</type>
+        <properties>
+          
+          <property name="width">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="height">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="widthLowRes">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="heightLowRes">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
       <schema name="CrawlerConfiguration">
         <type>object</type>
         <properties>
@@ -1702,6 +1745,14 @@
             
               
               <ref>#/components/schemas/"ScreenMetadata"</ref>
+              
+            
+          </property>
+          
+          <property name="resolution">
+            
+              
+              <ref>#/components/schemas/"ScreenResolution"</ref>
               
             
           </property>
