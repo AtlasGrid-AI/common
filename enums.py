@@ -63,3 +63,6 @@ class ActionType(CaseInsensitiveStringEnum):
     SWIPE = "swipe"
     WAIT = "wait"
     BACK = "go back"
+    HOME = "go home"
+    LAUNCH = "launch app"
+    UPLOAD = "upload app"
