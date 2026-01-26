@@ -868,6 +868,40 @@
         </properties>
       </schema>
       
+      <schema name="VMInfo">
+        <type>object</type>
+        <properties>
+          
+          <property name="address">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+          <property name="port">
+            
+              
+              <type>integer</type>
+              
+              
+            
+          </property>
+          
+          <property name="pwd">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
+        </properties>
+      </schema>
+      
       <schema name="ScreenIdentifiers">
         <type>object</type>
         <properties>
@@ -1649,6 +1683,14 @@
               
               <type>string</type>
               
+              
+            
+          </property>
+          
+          <property name="vminfo">
+            
+              
+              <ref>#/components/schemas/"VMInfo"</ref>
               
             
           </property>

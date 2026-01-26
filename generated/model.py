@@ -950,6 +950,93 @@ class _CrawlerConfiguration(CrawlerConfiguration):
                 self.deviceId_ = rawValue
 
 
+class VMInfo:
+    def __init__(self):
+        raise Exception("cannot initialize like this. use the factory method")
+
+    def ToDict(self):
+        raise Exception("not implemented")
+
+    def FromDict(self, data):
+        raise Exception("not implemented")
+
+    def Address(self) -> str:
+        raise Exception("not implemented")
+
+    def SetAddress(self, val: str):
+        raise Exception("not implemented")
+
+    def Port(self) -> int:
+        raise Exception("not implemented")
+
+    def SetPort(self, val: int):
+        raise Exception("not implemented")
+
+    def Pwd(self) -> str:
+        raise Exception("not implemented")
+
+    def SetPwd(self, val: str):
+        raise Exception("not implemented")
+
+
+def VMInfoFactory() -> VMInfo:
+    ret = _VMInfo()
+    ret.address_ = ""
+    ret.port_ = 0
+    ret.pwd_ = ""
+    return ret
+
+
+class _VMInfo(VMInfo):
+    def __init__(self):
+        self.address_ = ""
+        self.port_ = 0
+        self.pwd_ = ""
+
+    def SetAddress(self, val: str):
+        self.address_ = str(val)
+
+    def Address(self) -> str:
+        return self.address_
+
+    def SetPort(self, val: int):
+        self.port_ = int(val)
+
+    def Port(self) -> int:
+        return self.port_
+
+    def SetPwd(self, val: str):
+        self.pwd_ = str(val)
+
+    def Pwd(self) -> str:
+        return self.pwd_
+
+    def FromJson(self, jstr):
+        data = json.loads(jstr)
+        return self.FromDict(data)
+
+    def ToJson(self):
+        return json.dumps(self.ToDict())
+
+    def ToDict(self):
+        data = {}
+        data["address"] = self.address_
+        data["port"] = self.port_
+        data["pwd"] = self.pwd_
+        return data
+
+    def FromDict(self, data):
+        for key, rawValue in data.items():
+            if rawValue is None:
+                continue
+            if key == "address":
+                self.address_ = rawValue
+            if key == "port":
+                self.port_ = rawValue
+            if key == "pwd":
+                self.pwd_ = rawValue
+
+
 class ScreenIdentifiers:
     def __init__(self):
         raise Exception("cannot initialize like this. use the factory method")
@@ -2736,6 +2823,12 @@ class JourneyInternal:
     def SetCrawlerVersion(self, val: str):
         raise Exception("not implemented")
 
+    def Vminfo(self) -> "VMInfo":
+        raise Exception("not implemented")
+
+    def SetVminfo(self, val: "VMInfo"):
+        raise Exception("not implemented")
+
     def ScreenIdentifiers(self) -> "ScreenIdentifiers":
         raise Exception("not implemented")
 
@@ -2757,6 +2850,7 @@ def JourneyInternalFactory() -> JourneyInternal:
     ret.stepsPlanned_ = 0
     ret.actionsPerformed_ = []
     ret.crawlerVersion_ = ""
+    ret.vminfo_ = VMInfoFactory()
     ret.screenIdentifiers_ = ScreenIdentifiersFactory()
     return ret
 
@@ -2775,6 +2869,7 @@ class _JourneyInternal(JourneyInternal):
         self.stepsPlanned_ = 0
         self.actionsPerformed_ = []
         self.crawlerVersion_ = ""
+        self.vminfo_ = VMInfoFactory()
         self.screenIdentifiers_ = ScreenIdentifiersFactory()
 
     def SetJourney(self, val: str):
@@ -2849,6 +2944,12 @@ class _JourneyInternal(JourneyInternal):
     def CrawlerVersion(self) -> str:
         return self.crawlerVersion_
 
+    def SetVminfo(self, val: "VMInfo"):
+        self.vminfo_ = val
+
+    def Vminfo(self) -> "VMInfo":
+        return self.vminfo_
+
     def SetScreenIdentifiers(self, val: "ScreenIdentifiers"):
         self.screenIdentifiers_ = val
 
@@ -2879,6 +2980,8 @@ class _JourneyInternal(JourneyInternal):
             rawList.append(v.ToDict())
         data["actionsPerformed"] = rawList
         data["crawlerVersion"] = self.crawlerVersion_
+        # if self.vminfo_ is not None:
+        data["vminfo"] = self.vminfo_.ToDict()
         # if self.screenIdentifiers_ is not None:
         data["screenIdentifiers"] = self.screenIdentifiers_.ToDict()
         return data
@@ -2916,6 +3019,8 @@ class _JourneyInternal(JourneyInternal):
                 self.actionsPerformed_ = res
             if key == "crawlerVersion":
                 self.crawlerVersion_ = rawValue
+            if key == "vminfo":
+                self.vminfo_.FromDict(rawValue)
             if key == "screenIdentifiers":
                 self.screenIdentifiers_.FromDict(rawValue)
 

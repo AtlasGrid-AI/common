@@ -93,8 +93,19 @@ types:
         type: "[]Action"
       - name: crawlerVersion
         type: string
+      - name: vminfo
+        type: VMInfo
       - name: screenIdentifiers
         type: ScreenIdentifiers
+  - kind: Struct
+    name: VMInfo
+    properties:
+      - name: address
+        type: string
+      - name: port
+        type: int
+      - name: pwd
+        type: string
   - kind: Struct
     name: ScreenIdentifiers
     properties:

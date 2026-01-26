@@ -1822,6 +1822,163 @@ class _CrawlerConfiguration extends CrawlerConfiguration {
 
 
 
+class VMInfo {
+    constructor() {
+        // throw new Error("cannot initialize like this. use the factory method");
+    }
+
+    ToDict() { throw new Error("not implemented"); }
+    FromDict(data) { throw new Error("not implemented"); }
+
+    
+    Address() { throw new Error("not implemented"); }
+    SetAddress(val) { throw new Error("not implemented"); }
+    
+    Port() { throw new Error("not implemented"); }
+    SetPort(val) { throw new Error("not implemented"); }
+    
+    Pwd() { throw new Error("not implemented"); }
+    SetPwd(val) { throw new Error("not implemented"); }
+    
+}
+
+function VMInfoFactory() {
+    const ret = new _VMInfo();
+    
+    ret.address_ = "";
+    
+    ret.port_ = 0;
+    
+    ret.pwd_ = "";
+    
+    return ret;
+}
+
+class _VMInfo extends VMInfo {
+    constructor() {
+        super();
+        
+        this.address_ = "";
+        
+        this.port_ = 0;
+        
+        this.pwd_ = "";
+        
+    }
+
+    
+    SetAddress(val) {
+        
+        this.address_ = String(val);
+        
+    }
+
+    Address() {
+        
+        return this.address_;
+        
+    }
+
+    
+    SetPort(val) {
+        
+        this.port_ = Number.parseInt(val);
+        
+    }
+
+    Port() {
+        
+        return this.port_;
+        
+    }
+
+    
+    SetPwd(val) {
+        
+        this.pwd_ = String(val);
+        
+    }
+
+    Pwd() {
+        
+        return this.pwd_;
+        
+    }
+
+    
+
+    FromJson(jstr) {
+        const data = JSON.parse(jstr);
+        return this.FromDict(data);
+    }
+
+    ToJson() {
+        return JSON.stringify(this.ToDict());
+    }
+
+    ToDict() {
+        const data = {};
+        
+        
+        
+        data["address"] = this.address_;
+        
+        
+        
+        
+        
+        data["port"] = this.port_;
+        
+        
+        
+        
+        
+        data["pwd"] = this.pwd_;
+        
+        
+        
+        return data;
+    }
+
+    FromDict(data) {
+        for (const key in data) {
+            const rawValue = data[key];
+            if (rawValue === null || rawValue === undefined) continue;
+
+            
+            if (key === "address") {
+                
+                
+                this.address_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "port") {
+                
+                
+                this.port_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "pwd") {
+                
+                
+                this.pwd_ = rawValue;
+                
+
+                
+            }
+            
+        }
+    }
+}
+
+
+
 class ScreenIdentifiers {
     constructor() {
         // throw new Error("cannot initialize like this. use the factory method");
@@ -4942,6 +5099,9 @@ class JourneyInternal {
     CrawlerVersion() { throw new Error("not implemented"); }
     SetCrawlerVersion(val) { throw new Error("not implemented"); }
     
+    Vminfo() { throw new Error("not implemented"); }
+    SetVminfo(val) { throw new Error("not implemented"); }
+    
     ScreenIdentifiers() { throw new Error("not implemented"); }
     SetScreenIdentifiers(val) { throw new Error("not implemented"); }
     
@@ -4973,6 +5133,8 @@ function JourneyInternalFactory() {
     ret.actionsPerformed_ = [];
     
     ret.crawlerVersion_ = "";
+    
+    ret.vminfo_ = VMInfoFactory();
     
     ret.screenIdentifiers_ = ScreenIdentifiersFactory();
     
@@ -5006,6 +5168,8 @@ class _JourneyInternal extends JourneyInternal {
         this.actionsPerformed_ = [];
         
         this.crawlerVersion_ = "";
+        
+        this.vminfo_ = VMInfoFactory();
         
         this.screenIdentifiers_ = ScreenIdentifiersFactory();
         
@@ -5168,6 +5332,19 @@ class _JourneyInternal extends JourneyInternal {
     }
 
     
+    SetVminfo(val) {
+        
+        this.vminfo_ = val;
+        
+    }
+
+    Vminfo() {
+        
+        return this.vminfo_;
+        
+    }
+
+    
     SetScreenIdentifiers(val) {
         
         this.screenIdentifiers_ = val;
@@ -5267,6 +5444,12 @@ class _JourneyInternal extends JourneyInternal {
         
         
         data["crawlerVersion"] = this.crawlerVersion_;
+        
+        
+        
+        
+        
+        data["vminfo"] = this.vminfo_ ? this.vminfo_.ToDict() : null;
         
         
         
@@ -5395,6 +5578,15 @@ class _JourneyInternal extends JourneyInternal {
                 
                 
                 this.crawlerVersion_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "vminfo") {
+                
+                
+                this.vminfo_.FromDict(rawValue);
                 
 
                 
