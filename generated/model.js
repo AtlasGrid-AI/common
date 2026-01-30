@@ -5622,6 +5622,9 @@ class ScreenInternal {
     Identifier() { throw new Error("not implemented"); }
     SetIdentifier(val) { throw new Error("not implemented"); }
     
+    PageIdentifier() { throw new Error("not implemented"); }
+    SetPageIdentifier(val) { throw new Error("not implemented"); }
+    
     GroupIdentifier() { throw new Error("not implemented"); }
     SetGroupIdentifier(val) { throw new Error("not implemented"); }
     
@@ -5655,6 +5658,8 @@ function ScreenInternalFactory() {
     
     ret.identifier_ = "";
     
+    ret.pageIdentifier_ = "";
+    
     ret.groupIdentifier_ = "";
     
     ret.edges_ = [];
@@ -5681,6 +5686,8 @@ class _ScreenInternal extends ScreenInternal {
         this.journey_ = "";
         
         this.identifier_ = "";
+        
+        this.pageIdentifier_ = "";
         
         this.groupIdentifier_ = "";
         
@@ -5723,6 +5730,19 @@ class _ScreenInternal extends ScreenInternal {
     Identifier() {
         
         return this.identifier_;
+        
+    }
+
+    
+    SetPageIdentifier(val) {
+        
+        this.pageIdentifier_ = String(val);
+        
+    }
+
+    PageIdentifier() {
+        
+        return this.pageIdentifier_;
         
     }
 
@@ -5858,6 +5878,12 @@ class _ScreenInternal extends ScreenInternal {
         
         
         
+        data["pageIdentifier"] = this.pageIdentifier_;
+        
+        
+        
+        
+        
         data["groupIdentifier"] = this.groupIdentifier_;
         
         
@@ -5930,6 +5956,15 @@ class _ScreenInternal extends ScreenInternal {
                 
                 
                 this.identifier_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "pageIdentifier") {
+                
+                
+                this.pageIdentifier_ = rawValue;
                 
 
                 

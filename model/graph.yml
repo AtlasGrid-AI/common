@@ -14,6 +14,9 @@ types:
       - name: identifier
         type: string
         description: The unique identifier for this screen
+      - name: pageIdentifier
+        type: string
+        description: The unique identifier for the page this screen belongs to
       - name: groupIdentifier
         type: string
         description: The group identifier this screen belongs to

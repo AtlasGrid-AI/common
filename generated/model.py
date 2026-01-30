@@ -3047,6 +3047,12 @@ class ScreenInternal:
     def SetIdentifier(self, val: str):
         raise Exception("not implemented")
 
+    def PageIdentifier(self) -> str:
+        raise Exception("not implemented")
+
+    def SetPageIdentifier(self, val: str):
+        raise Exception("not implemented")
+
     def GroupIdentifier(self) -> str:
         raise Exception("not implemented")
 
@@ -3100,6 +3106,7 @@ def ScreenInternalFactory() -> ScreenInternal:
     ret = _ScreenInternal()
     ret.journey_ = ""
     ret.identifier_ = ""
+    ret.pageIdentifier_ = ""
     ret.groupIdentifier_ = ""
     ret.edges_ = []
     ret.image_ = ""
@@ -3115,6 +3122,7 @@ class _ScreenInternal(ScreenInternal):
     def __init__(self):
         self.journey_ = ""
         self.identifier_ = ""
+        self.pageIdentifier_ = ""
         self.groupIdentifier_ = ""
         self.edges_ = []
         self.image_ = ""
@@ -3135,6 +3143,12 @@ class _ScreenInternal(ScreenInternal):
 
     def Identifier(self) -> str:
         return self.identifier_
+
+    def SetPageIdentifier(self, val: str):
+        self.pageIdentifier_ = str(val)
+
+    def PageIdentifier(self) -> str:
+        return self.pageIdentifier_
 
     def SetGroupIdentifier(self, val: str):
         self.groupIdentifier_ = str(val)
@@ -3195,6 +3209,7 @@ class _ScreenInternal(ScreenInternal):
         data = {}
         data["journey"] = self.journey_
         data["identifier"] = self.identifier_
+        data["pageIdentifier"] = self.pageIdentifier_
         data["groupIdentifier"] = self.groupIdentifier_
         rawList = []
         for v in self.edges_:
@@ -3219,6 +3234,8 @@ class _ScreenInternal(ScreenInternal):
                 self.journey_ = rawValue
             if key == "identifier":
                 self.identifier_ = rawValue
+            if key == "pageIdentifier":
+                self.pageIdentifier_ = rawValue
             if key == "groupIdentifier":
                 self.groupIdentifier_ = rawValue
             if key == "edges":

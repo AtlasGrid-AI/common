@@ -1728,6 +1728,15 @@
             
           </property>
           
+          <property name="pageIdentifier">
+            
+              
+              <type>string</type>
+              
+              
+            
+          </property>
+          
           <property name="groupIdentifier">
             
               
