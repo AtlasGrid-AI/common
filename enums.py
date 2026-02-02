@@ -45,6 +45,7 @@ class ComponentType(CaseInsensitiveStringEnum):
     TAB_BAR = "tab bar"
     TOOL_BAR = "toolbar"
     SCROLL_VIEW = "scroll view"
+    SCROLL_BAR = "scroll bar"
     CHECKBOX = "checkbox"
     RADIO_BUTTON = "radio button"
     TOGGLE = "toggle"
@@ -66,3 +67,10 @@ class ActionType(CaseInsensitiveStringEnum):
     HOME = "go home"
     LAUNCH = "launch app"
     UPLOAD = "upload app"
+
+
+class SwipeDirection(CaseInsensitiveStringEnum):
+    LEFT = "left"
+    RIGHT = "right"
+    UP = "up"
+    DOWN = "down"
