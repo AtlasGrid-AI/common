@@ -742,6 +742,12 @@ class ScreenResolution:
     def SetHeightLowRes(self, val: int):
         raise Exception("not implemented")
 
+    def Density(self) -> float:
+        raise Exception("not implemented")
+
+    def SetDensity(self, val: float):
+        raise Exception("not implemented")
+
 
 def ScreenResolutionFactory() -> ScreenResolution:
     ret = _ScreenResolution()
@@ -749,6 +755,7 @@ def ScreenResolutionFactory() -> ScreenResolution:
     ret.height_ = 0
     ret.widthLowRes_ = 0
     ret.heightLowRes_ = 0
+    ret.density_ = 0.0
     return ret
 
 
@@ -758,6 +765,7 @@ class _ScreenResolution(ScreenResolution):
         self.height_ = 0
         self.widthLowRes_ = 0
         self.heightLowRes_ = 0
+        self.density_ = 0.0
 
     def SetWidth(self, val: int):
         self.width_ = int(val)
@@ -783,6 +791,12 @@ class _ScreenResolution(ScreenResolution):
     def HeightLowRes(self) -> int:
         return self.heightLowRes_
 
+    def SetDensity(self, val: float):
+        self.density_ = float(val)
+
+    def Density(self) -> float:
+        return self.density_
+
     def FromJson(self, jstr):
         data = json.loads(jstr)
         return self.FromDict(data)
@@ -796,6 +810,7 @@ class _ScreenResolution(ScreenResolution):
         data["height"] = self.height_
         data["widthLowRes"] = self.widthLowRes_
         data["heightLowRes"] = self.heightLowRes_
+        data["density"] = self.density_
         return data
 
     def FromDict(self, data):
@@ -810,6 +825,8 @@ class _ScreenResolution(ScreenResolution):
                 self.widthLowRes_ = rawValue
             if key == "heightLowRes":
                 self.heightLowRes_ = rawValue
+            if key == "density":
+                self.density_ = rawValue
 
 
 class CrawlerConfiguration:

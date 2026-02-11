@@ -1389,6 +1389,9 @@ class ScreenResolution {
     HeightLowRes() { throw new Error("not implemented"); }
     SetHeightLowRes(val) { throw new Error("not implemented"); }
     
+    Density() { throw new Error("not implemented"); }
+    SetDensity(val) { throw new Error("not implemented"); }
+    
 }
 
 function ScreenResolutionFactory() {
@@ -1401,6 +1404,8 @@ function ScreenResolutionFactory() {
     ret.widthLowRes_ = 0;
     
     ret.heightLowRes_ = 0;
+    
+    ret.density_ = 0.0;
     
     return ret;
 }
@@ -1416,6 +1421,8 @@ class _ScreenResolution extends ScreenResolution {
         this.widthLowRes_ = 0;
         
         this.heightLowRes_ = 0;
+        
+        this.density_ = 0.0;
         
     }
 
@@ -1472,6 +1479,19 @@ class _ScreenResolution extends ScreenResolution {
     }
 
     
+    SetDensity(val) {
+        
+        this.density_ = Number(val);
+        
+    }
+
+    Density() {
+        
+        return this.density_;
+        
+    }
+
+    
 
     FromJson(jstr) {
         const data = JSON.parse(jstr);
@@ -1506,6 +1526,12 @@ class _ScreenResolution extends ScreenResolution {
         
         
         data["heightLowRes"] = this.heightLowRes_;
+        
+        
+        
+        
+        
+        data["density"] = this.density_;
         
         
         
@@ -1549,6 +1575,15 @@ class _ScreenResolution extends ScreenResolution {
                 
                 
                 this.heightLowRes_ = rawValue;
+                
+
+                
+            }
+            
+            if (key === "density") {
+                
+                
+                this.density_ = rawValue;
                 
 
                 

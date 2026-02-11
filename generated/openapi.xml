@@ -804,6 +804,15 @@
             
           </property>
           
+          <property name="density">
+            
+              
+              <type>number</type>
+              
+              
+            
+          </property>
+          
         </properties>
       </schema>
       

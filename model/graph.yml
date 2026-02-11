@@ -208,3 +208,6 @@ types:
       - name: heightLowRes
         type: int
         description: The height of the screen low resolution image in pixels
+      - name: density
+        type: float
+        description: The pixel density of the screen. Multiply coordinates by this factor to normalize.
