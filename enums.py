@@ -34,7 +34,6 @@ class Platform(CaseInsensitiveStringEnum):
 class ComponentType(CaseInsensitiveStringEnum):
     BUTTON = "button"
     TEXT_FIELD = "text field"
-    TEXT_INPUT = "text input"
     DIALOG = "dialog"
     KEYBOARD = "keyboard"
     ICON = "icon"
