@@ -66,6 +66,8 @@ class ActionType(CaseInsensitiveStringEnum):
     HOME = "go home"
     LAUNCH = "launch app"
     UPLOAD = "upload app"
+    ROTATE = "rotate"
+    ZOOM = "zoom"
 
 
 class SwipeDirection(CaseInsensitiveStringEnum):
